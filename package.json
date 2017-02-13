@@ -1,0 +1,24 @@
+{
+  "name": "boilermaker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-server": "nodemon server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "connect-session-sequelize": "^4.1.0",
+    "express": "^4.14.1",
+    "express-session": "^1.15.1",
+    "morgan": "^1.8.1",
+    "passport": "^0.3.2",
+    "passport-google-oauth": "^1.0.0",
+    "pg": "^6.1.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.30.2"
+  }
+}
