@@ -22,7 +22,7 @@ module.exports = router
   })
   .post('/logout', (req, res, next) => {
     req.logout();
-    res.status(200).end();
+    res.redirect('/');
   })
   .get('/me', (req, res, next) => {
     res.json(req.user);

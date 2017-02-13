@@ -23,7 +23,7 @@ passport.deserializeUser((id, done) =>
     .catch(done));
 
 store.sync()
-  .then(() => db.sync({ force: true })
+  .then(() => db.sync()
   .then(() => app
     .use(morgan('dev'))
     .use(express.static(path.join(__dirname, '..', 'public')))

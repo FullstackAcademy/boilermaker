@@ -20,7 +20,7 @@ const strategy = new GoogleStrategy(googleConfig, (token, refreshToken, profile,
       User.create({ name, email, googleId })
         .then(user => done(null, user))
     )
-    .catch(done)
+    .catch(done);
 });
 
 passport.use(strategy);
