@@ -39,6 +39,8 @@ store.sync()
     .use(passport.session())
     .use('/auth', require('./auth'))
     .use('/api', require('./api'))
+    .use((req, res, next) =>
+      path.extname(req.path).length > 0 ? res.status(404).send('Not found') : next())
     .use('*', (req, res, next) =>
       res.sendFile(path.join(__dirname, '..', 'public/index.html')))
     .use((err, req, res, next) =>

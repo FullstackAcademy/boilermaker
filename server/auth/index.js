@@ -24,7 +24,7 @@ module.exports = router
     req.logout();
     res.status(200).end();
   })
-  .post('/me', (req, res, next) => {
+  .get('/me', (req, res, next) => {
     res.json(req.user);
   })
   .use('/google', require('./google'));
