@@ -18,7 +18,11 @@ module.exports = router
     User.create(req.body)
       .then(user =>
         req.login(user, err => err ? next(err) : res.json(user)))
-      .catch(next);
+      .catch(err => {
+        if (err.name === 'SequelizeUniqueConstraintError')
+          res.status(401).send('User already exists');
+        else next(err)
+      });
   })
   .post('/logout', (req, res, next) => {
     req.logout();

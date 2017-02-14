@@ -21,7 +21,9 @@ export const auth = (email, password, method) =>
       .then(res => {
         dispatch(getUser(res.data));
         browserHistory.push('/home');
-      });
+      })
+      .catch(error =>
+        dispatch(getUser({ error })));
 
 export const logout = () =>
   dispatch =>
@@ -29,7 +31,8 @@ export const logout = () =>
       .then(res => {
         dispatch(removeUser());
         browserHistory.push('/login');
-      });
+      })
+      .catch(err => console.log(err));
 
 export default function (state = defaultUser, action) {
   switch (action.type) {

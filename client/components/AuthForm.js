@@ -2,7 +2,7 @@ import React from 'react';
 
 export default props => {
 
-  const { name, displayName, handleSubmit } = props;
+  const { name, displayName, handleSubmit, error } = props;
 
   return (
     <div>
@@ -18,6 +18,7 @@ export default props => {
         <div>
           <button type="submit">{ displayName }</button>
         </div>
+        { error &&  <div> { error.response.data } </div> }
       </form>
       <a href="/auth/google">{ displayName } with Google</a>
     </div>

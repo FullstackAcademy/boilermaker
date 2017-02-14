@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 import AuthForm from './AuthForm';
 import { auth } from '../reducer/user';
 
-const mapLogin = () => ({
+const mapLogin = ({ user }) => ({
   name: 'login',
-  displayName: 'Login'
+  displayName: 'Login',
+  error: user.error
 });
 
-const mapSignup = () => ({
+const mapSignup = ({ user }) => ({
   name: 'signup',
-  displayName: 'Sign Up'
+  displayName: 'Sign Up',
+  error: user.error
 });
 
 const mapDispatch = dispatch => ({

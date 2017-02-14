@@ -6,16 +6,21 @@ import { logout } from '../reducer/user';
 const Main = props => {
 
   const { children, handleClick, user } = props;
+  const loggedIn = !!user.id;
 
   return (
     <div>
       <h1>BOILERMAKER</h1>
-      <nav>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Sign Up</Link>
-        { user.id && <Link to="/home">Home</Link> }
-        { user.id && <a href="" onClick={handleClick}>Logout</a> }
-      </nav>
+      { loggedIn ?
+          <nav>
+            <Link to="/home">Home</Link>
+            <a href="" onClick={handleClick}>Logout</a>
+          </nav> :
+          <nav>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </nav>
+      }
       <hr />
       { children }
     </div>

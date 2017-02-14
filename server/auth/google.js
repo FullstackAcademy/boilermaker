@@ -28,6 +28,6 @@ passport.use(strategy);
 module.exports = router
   .get('/', passport.authenticate('google', { scope: 'email' }))
   .get('/callback', passport.authenticate('google', {
-    successRedirect: '/',
+    successRedirect: '/home',
     failureRedirect: '/login'
   }));
