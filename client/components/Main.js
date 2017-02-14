@@ -10,18 +10,12 @@ const Main = props => {
   return (
     <div>
       <h1>BOILERMAKER</h1>
-      <Link to="/login">Login</Link>
-      <br />
-      <Link to="/signup">Signup</Link>
-      {
-        user.email ?
-          <div>
-            <br />
-            <Link to="/home">Home</Link>
-            <br />
-            <a href="" onClick={handleClick}>Logout</a>
-          </div> : null
-      }
+      <nav>
+        <Link to="/login">Login</Link>
+        <Link to="/signup">Sign Up</Link>
+        { user.id && <Link to="/home">Home</Link> }
+        { user.id && <a href="" onClick={handleClick}>Logout</a> }
+      </nav>
       <hr />
       { children }
     </div>

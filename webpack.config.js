@@ -4,6 +4,7 @@ module.exports = {
     path: __dirname,
     filename: './public/bundle.js'
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -13,6 +14,14 @@ module.exports = {
         options: {
           presets: ['react', 'es2015']
         }
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   }

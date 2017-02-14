@@ -8,11 +8,11 @@ export default props => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email"><small>Email</small></label>
           <input name="email" type="text" />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password"><small>Password</small></label>
           <input name="password" type="password" />
         </div>
         <div>

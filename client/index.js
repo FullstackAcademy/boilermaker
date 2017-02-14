@@ -1,3 +1,5 @@
+import './index.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -12,7 +14,7 @@ const requireLogin = (nextRouterState, replace, next) =>
   whoAmI
     .then(() => {
       const { user } = store.getState();
-      if (!user.id) replace('/signup');
+      if (!user.id) replace('/login');
       next();
     })
     .catch(err => console.log(err));
