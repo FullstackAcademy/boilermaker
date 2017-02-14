@@ -29,11 +29,11 @@ const Main = props => {
 };
 
 const mapState = ({ user }) => ({ user });
-const mapDispatch = dispatch => {
-  return {
-    handleClick () {
-      dispatch(logout());
-    }
-  };
-};
+
+const mapDispatch = dispatch => ({
+  handleClick () {
+    dispatch(logout());
+  }
+});
+
 export default connect(mapState, mapDispatch)(Main);

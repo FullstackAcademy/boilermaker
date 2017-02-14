@@ -4,7 +4,7 @@ import AuthForm from './AuthForm';
 import { signup } from '../reducer/user';
 
 const mapState = state => ({
-  type: 'Signup'
+  type: 'Sign Up'
 });
 
 const mapDispatch = dispatch => ({

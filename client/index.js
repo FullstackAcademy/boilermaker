@@ -13,7 +13,7 @@ const requireLogin = (nextRouterState, replace, next) =>
     .then(() => {
       const { user } = store.getState();
       if (!user.id) replace('/signup');
-      else next();
+      next();
     })
     .catch(err => console.log(err));
 

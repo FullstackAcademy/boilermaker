@@ -9,20 +9,21 @@ const defaultUser = {};
 const getUser = user => ({ type: GET_USER, user });
 const removeUser = () => ({ type: REMOVE_USER });
 
-const _getUser = (dispatch, uri, body, method = 'post') =>
-  axios[method](uri, body).then(res => dispatch(getUser(res.data)));
-
 export const me = () =>
   dispatch =>
-    _getUser(dispatch, '/auth/me', {}, 'get');
+    axios.get('/auth/me')
+      .then(res =>
+        dispatch(getUser(res.data || defaultUser)));
 
 export const login = (email, password) =>
   dispatch =>
-    _getUser(dispatch, '/auth/login', { email, password });
+    axios.post('/auth/login', { email, password })
+      .then(res => dispatch(getUser(res.data)));
 
 export const signup = (email, password) =>
   dispatch =>
-    _getUser(dispatch, '/auth/signup', { email, password });
+    axios.post('/auth/signup', { email, password })
+      .then(res => dispatch(getUser(res.data)))
 
 export const logout = () =>
   dispatch =>
