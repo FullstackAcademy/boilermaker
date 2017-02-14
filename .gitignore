@@ -2,3 +2,6 @@ node_modules
 public/bundle.js
 public/bundle.js.map
 secrets.js
+yarn.lock
+.DS_Store
+npm-debug.log
