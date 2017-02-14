@@ -15,15 +15,13 @@ export const me = () =>
       .then(res =>
         dispatch(getUser(res.data || defaultUser)));
 
-export const login = (email, password) =>
+export const auth = (email, password, method) =>
   dispatch =>
-    axios.post('/auth/login', { email, password })
-      .then(res => dispatch(getUser(res.data)));
-
-export const signup = (email, password) =>
-  dispatch =>
-    axios.post('/auth/signup', { email, password })
-      .then(res => dispatch(getUser(res.data)))
+    axios.post(`/auth/${method}`, { email, password })
+      .then(res => {
+        dispatch(getUser(res.data));
+        browserHistory.push('/home');
+      });
 
 export const logout = () =>
   dispatch =>
