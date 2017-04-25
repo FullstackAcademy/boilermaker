@@ -7,7 +7,7 @@
     "start": "webpack -w & nodemon server",
     "start-server": "nodemon server",
     "build-client": "webpack",
-    "test": "mocha ./**/*.spec.js --compilers js:babel-register"
+    "test": "DATABASE_URL='postgres://localhost:5432/boilermaker-test' mocha ./**/*.spec.js --compilers js:babel-register"
   },
   "author": "",
   "license": "ISC",
