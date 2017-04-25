@@ -7,7 +7,7 @@ const setSaltAndPassword = user => {
     user.salt = user.Model.generateSalt();
     user.password = user.Model.encryptPassword(user.password, user.salt);
   }
-}
+};
 
 module.exports = db.define('user', {
   email: {
