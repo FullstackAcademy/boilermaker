@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default props => {
+const AuthForm = props => {
 
   const { name, displayName, handleSubmit, error } = props;
 
@@ -23,4 +24,13 @@ export default props => {
       <a href="/auth/google">{ displayName } with Google</a>
     </div>
   );
+};
+
+export default AuthForm;
+
+AuthForm.propTypes = {
+  name: PropTypes.string.isRequired,
+  displayName: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  error: PropTypes.object
 };

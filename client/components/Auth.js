@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import AuthForm from './AuthForm';
 import { auth } from '../reducer/user';

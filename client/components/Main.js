@@ -1,12 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { logout } from '../reducer/user';
 
+// Component //
+
 const Main = props => {
 
-  const { children, handleClick, user } = props;
-  const loggedIn = !!user.id;
+  const { children, handleClick, loggedIn } = props;
 
   return (
     <div>
@@ -27,7 +29,17 @@ const Main = props => {
   );
 };
 
-const mapState = ({ user }) => ({ user });
+Main.propTypes = {
+  children: PropTypes.object,
+  handleClick: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired
+};
+
+// Container //
+
+const mapState = ({ user }) => ({
+  loggedIn: !!user.id
+});
 
 const mapDispatch = dispatch => ({
   handleClick () {

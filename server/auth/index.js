@@ -10,7 +10,7 @@ module.exports = router
         else if (!user.correctPassword(req.body.password))
           res.status(401).send('Incorrect password');
         else
-          req.login(user, err => err ? next(err) : res.json(user))
+          req.login(user, err => err ? next(err) : res.json(user));
       })
       .catch(next);
   })
@@ -21,14 +21,14 @@ module.exports = router
       .catch(err => {
         if (err.name === 'SequelizeUniqueConstraintError')
           res.status(401).send('User already exists');
-        else next(err)
+        else next(err);
       });
   })
-  .post('/logout', (req, res, next) => {
+  .post('/logout', (req, res) => {
     req.logout();
     res.redirect('/');
   })
-  .get('/me', (req, res, next) => {
+  .get('/me', (req, res) => {
     res.json(req.user);
   })
   .use('/google', require('./google'));
