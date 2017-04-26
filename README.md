@@ -26,7 +26,7 @@ To use this boilerplate, you'll need to take the following steps:
   ```
 
 * To use OAuth with Google, complete the step above with a real client ID and client secret from Google
-  * You can get them there: https://console.developers.google.com/apis/credentials
+  * You can get them here: https://console.developers.google.com/apis/credentials
 
 ## Start
 
