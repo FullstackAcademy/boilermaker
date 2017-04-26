@@ -15,7 +15,7 @@ To use this boilerplate, you'll need to take the following steps:
   * By default, running `npm test` will use `boilermaker-test`, while regular development uses `boilermaker`
 * Create a file called `secrets.js` in the project root
   * This file is `.gitignore`'d, and will *only* be required in your *development* environment
-  * Its purpose is to attach the secret env variables that you'll use while developing.
+  * Its purpose is to attach the secret env variables that you'll use while developing
   * However, it's **very** important that you **not** push it to Github! Otherwise, *prying eyes* will find your secret API keys!
   * It might look like this:
 
@@ -25,8 +25,8 @@ To use this boilerplate, you'll need to take the following steps:
     process.env.GOOGLE_CALLBACK = '/auth/google/callback';
   ```
 
-* To use OAuth with Google, complete the step above and get a client ID and client secret from Google
-  * https://console.developers.google.com/apis/credentials
+* To use OAuth with Google, complete the step above with a real client ID and client secret from Google
+  * You can get them there: https://console.developers.google.com/apis/credentials
 
 ## Start
 
