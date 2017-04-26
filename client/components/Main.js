@@ -16,7 +16,7 @@ const Main = props => {
       { loggedIn ?
           <nav>
             <Link to="/home">Home</Link>
-            <a href="" onClick={handleClick}>Logout</a>
+            <a href="#" onClick={handleClick}>Logout</a>
           </nav> :
           <nav>
             <Link to="/login">Login</Link>
