@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { withRouter, Link } from 'react-router-dom';
 import { logout } from '../reducer/user';
 
 // Component //
@@ -16,11 +16,13 @@ const Main = props => {
       { loggedIn ?
           <nav>
             <Link to="/home">Home</Link>
+            <Link to="/summer-home">Summer Home</Link>
             <a href="#" onClick={handleClick}>Logout</a>
           </nav> :
           <nav>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
+            <Link to="/summer-home">Protected</Link>
           </nav>
       }
       <hr />
@@ -37,14 +39,15 @@ Main.propTypes = {
 
 // Container //
 
-const mapState = ({ user }) => ({
-  loggedIn: !!user.id
+const mapState = ({ user }, { children }) => ({
+  loggedIn: !!user.id,
+  children
 });
 
-const mapDispatch = dispatch => ({
+const mapDispatch = (dispatch, { history }) => ({
   handleClick () {
-    dispatch(logout());
+    dispatch(logout(history));
   }
 });
 
-export default connect(mapState, mapDispatch)(Main);
+export default withRouter(connect(mapState, mapDispatch)(Main));

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { browserHistory } from 'react-router';
 
 const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
@@ -15,22 +14,22 @@ export const me = () =>
       .then(res =>
         dispatch(getUser(res.data || defaultUser)));
 
-export const auth = (email, password, method) =>
+export const auth = (email, password, method, history) =>
   dispatch =>
     axios.post(`/auth/${method}`, { email, password })
       .then(res => {
         dispatch(getUser(res.data));
-        browserHistory.push('/home');
+        history.push('/home');
       })
       .catch(error =>
         dispatch(getUser({ error })));
 
-export const logout = () =>
+export const logout = (history) =>
   dispatch =>
     axios.post('/auth/logout')
       .then(res => {
         dispatch(removeUser());
-        browserHistory.push('/login');
+        history.push('/login');
       })
       .catch(err => console.log(err));
 

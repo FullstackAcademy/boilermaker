@@ -1,28 +1,43 @@
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import AuthForm from './AuthForm';
-import { auth } from '../reducer/user';
+import { Redirect } from 'react-router-dom';
+import store from '../store';
+import { me } from '../reducer/user';
 
-const mapLogin = ({ user }) => ({
-  name: 'login',
-  displayName: 'Login',
-  error: user.error
-});
+// executes on page load - we only want to check this once
+const whoAmI = store.dispatch(me());
 
-const mapSignup = ({ user }) => ({
-  name: 'signup',
-  displayName: 'Sign Up',
-  error: user.error
-});
+class Auth extends React.Component {
 
-const mapDispatch = dispatch => ({
-  handleSubmit (evt) {
-    evt.preventDefault();
-    const formName = evt.target.name;
-    const email = evt.target.email.value;
-    const password = evt.target.password.value;
-    dispatch(auth(email, password, formName));
+  componentDidMount () {
+    whoAmI.then(() => {
+      const { user } = store.getState();
+      const { routeProps: { history } } = this.props;
+      if (!user.id) {
+        history.push('/login');
+      }
+    })
+  }
+
+  render () {
+    const { isAuthenticated, Component, routeProps } = this.props;
+    return isAuthenticated ? <Component {...routeProps} /> : <div>Loading...</div>
+  }
+}
+
+const mapState = ({ user }, {
+  history,
+  location,
+  match,
+  component: Component
+}) => ({
+  isAuthenticated: !!user.id,
+  Component,
+  routeProps: {
+    history,
+    location,
+    match
   }
 });
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm);
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
+export default connect(mapState)(Auth);
