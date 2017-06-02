@@ -1,11 +1,13 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { auth } from '../reducer/user';
+import React from 'react'
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
+import {auth} from '../reducer/user'
+
+// COMPONENT //
 
 const AuthForm = props => {
 
-  const { name, displayName, handleSubmit, error } = props;
+  const {name, displayName, handleSubmit, error} = props
 
   return (
     <div>
@@ -21,41 +23,45 @@ const AuthForm = props => {
         <div>
           <button type="submit">{ displayName }</button>
         </div>
-        { error && error.response && <div> { error.response.data } </div> }
+        {error && error.response && <div> { error.response.data } </div>}
       </form>
-      <a href="/auth/google">{ displayName } with Google</a>
+      <a href="/auth/google">{displayName} with Google</a>
     </div>
-  );
-};
+  )
+}
 
-const mapLogin = ({ user }) => ({
+// CONTAINER //
+
+const mapLogin = ({user}) => ({
   name: 'login',
   displayName: 'Login',
   error: user.error
-});
+})
 
-const mapSignup = ({ user }) => ({
+const mapSignup = ({user}) => ({
   name: 'signup',
   displayName: 'Sign Up',
   error: user.error
-});
+})
 
-const mapDispatch = (dispatch, { history }) => ({
+const mapDispatch = (dispatch, {history}) => ({
   handleSubmit (evt) {
-    evt.preventDefault();
-    const formName = evt.target.name;
-    const email = evt.target.email.value;
-    const password = evt.target.password.value;
-    dispatch(auth(email, password, formName, history));
+    evt.preventDefault()
+    const formName = evt.target.name
+    const email = evt.target.email.value
+    const password = evt.target.password.value
+    dispatch(auth(email, password, formName, history))
   }
-});
+})
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm);
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
+export const Login = connect(mapLogin, mapDispatch)(AuthForm)
+export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+
+// TYPES //
 
 AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
-};
+}

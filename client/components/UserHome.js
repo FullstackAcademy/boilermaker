@@ -1,24 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from 'react'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+
+// COMPONENT //
 
 const UserHome = props => {
 
-  const { email } = props;
+  const {email} = props
 
   return (
     <div>
-      <h3>Welcome, { email }</h3>
+      <h3>Welcome, {email}</h3>
     </div>
   );
 };
 
-const mapState = ({ user }) => ({
-  email: user.email
-});
+// CONTAINER //
 
-export default connect(mapState)(UserHome);
+const mapState = ({user}) => ({
+  email: user.email
+})
+
+export default connect(mapState)(UserHome)
+
+// TYPES //
 
 UserHome.propTypes = {
   email: PropTypes.string
-};
+}
