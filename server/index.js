@@ -6,15 +6,14 @@ const session = require('express-session')
 const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
-const store = new SequelizeStore({ db })
+const store = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 module.exports = app
 
 if (process.env.NODE_ENV === 'development') require('../secrets')
 
-passport.serializeUser((user, done) =>
-  done(null, user.id))
+passport.serializeUser((user, done) => done(null, user.id))
 
 passport.deserializeUser((id, done) =>
   db.models.user.findById(id)
@@ -43,12 +42,9 @@ const createApp = () => app
   .use((err, req, res, next) =>
     res.status(err.status || 500).send(err.message || 'Internal server error.'))
 
-const syncDb = () =>
-  db.sync()
+const syncDb = () => db.sync()
 
-const listenUp = () =>
-  app.listen(PORT, () =>
-    console.log(`Mixing it up on port ${PORT}`))
+const listenUp = () => app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
 
 // This evaluates as true when this file is run directly from the command line,
 // i.e. when we say 'node server/index.js' (or 'nodemon server/index.js', or 'nodemon server', etc)
