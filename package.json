@@ -4,7 +4,7 @@
   "description": "Some boilerplate code to get you started - get shakin'!",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -w & nodemon server",
+    "start": "webpack -w & NODE_ENV=development nodemon server",
     "start-server": "nodemon server",
     "build-client": "webpack",
     "test": "DATABASE_URL='postgres://localhost:5432/boilermaker-test' mocha ./**/*.spec.js --compilers js:babel-register"
