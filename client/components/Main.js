@@ -1,50 +1,35 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { logout } from '../reducer/user';
 
 // Component //
 
-const Main = props => {
-
-  const { children, handleClick, loggedIn } = props;
-
+export default function Main ({ children }) {
   return (
-    <div>
-      <h1>BOILERMAKER</h1>
-      { loggedIn ?
-          <nav>
-            <Link to="/home">Home</Link>
-            <a href="#" onClick={handleClick}>Logout</a>
-          </nav> :
-          <nav>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </nav>
-      }
-      <hr />
-      { children }
-    </div>
+      <div>
+        <video loop muted autoPlay poster="img/videoframe.jpg" className="fullscreen-bg__video">
+            <source src="/img/giphy.mp4" type="video/mp4" />
+        </video>
+        <h1>Everyone Just Parelax</h1>
+        { children }
+      </div>
+
   );
-};
+}
 
-Main.propTypes = {
-  children: PropTypes.object,
-  handleClick: PropTypes.func.isRequired,
-  loggedIn: PropTypes.bool.isRequired
-};
+//export default Main;
+// Main.propTypes = {
+//   children: PropTypes.object,
+// };
 
-// Container //
+// // Container //
 
-const mapState = ({ user }) => ({
-  loggedIn: !!user.id
-});
+// const mapState = state => ({
+// });
 
-const mapDispatch = dispatch => ({
-  handleClick () {
-    dispatch(logout());
-  }
-});
+// const mapDispatch = dispatch => ({
 
-export default connect(mapState, mapDispatch)(Main);
+// });
+
+// export default connect(mapState, mapDispatch)(Main);

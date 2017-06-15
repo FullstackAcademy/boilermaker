@@ -1,4 +1,24 @@
-import { combineReducers } from 'redux';
-import user from './user';
+import { RECEIVE_BG } from '../action-creators';
 
-export default combineReducers({ user });
+const initialState = {
+  bg: ''
+}
+
+export default function (state = initialState, action) {
+
+  const newState = Object.assign({}, state);
+
+  switch (action.type) {
+
+    case RECEIVE_BG:
+     newState.bg = action.bg;
+     break;
+
+    default:
+      return state;
+
+  }
+  return newState;
+
+}
+

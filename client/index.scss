@@ -1,21 +1,18 @@
-body {
-  font-family: sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 
-  a {
-    text-decoration: none;
-  }
+/* REUSABLE STYLE */
 
-  label {
-    display: block;
-  }
-
-  nav a {
-    display: inline-block;
-    margin: 1em;
-  }
-
-  form div {
-    margin: 1em;
-    display: inline-block;
-  }
+.fancy-type {
+  font-family: 'Raleway', sans-serif;
+  color: white;
 }
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* LANDING PAGE */
