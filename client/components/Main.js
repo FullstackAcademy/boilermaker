@@ -1,5 +1,5 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
@@ -8,13 +8,9 @@ import { Link } from 'react-router';
 export default function Main ({ children }) {
   return (
       <div>
-        <video loop muted autoPlay poster="img/videoframe.jpg" className="fullscreen-bg__video">
-            <source src="/img/giphy.mp4" type="video/mp4" />
-        </video>
-        <h1>Everyone Just Parelax</h1>
+        <img id="landing-bg" src="/img/pinksky.jpg" />
         { children }
       </div>
-
   );
 }
 

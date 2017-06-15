@@ -1,10 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
 /* REUSABLE STYLE */
+$color-white-translucent: rgba(255, 255, 255, 0.2);
+
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  color: white;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: bold;
+}
 
 .fancy-type {
   font-family: 'Raleway', sans-serif;
   color: white;
+}
+
+.center {
+  text-align: center;
+}
+
+.caps {
+  text-transform: uppercase;
 }
 
 .fullscreen-bg__video {
@@ -16,3 +41,53 @@
 }
 
 /* LANDING PAGE */
+
+#landing-bg {
+  width: 100%;
+  z-index: -100;
+  position: fixed;
+}
+
+#everyone {
+  font-size: 2.85em;
+  letter-spacing: .61em;
+  margin-bottom: 30px;
+}
+
+#parelax-logo {
+  font-size: 3.4em;
+  letter-spacing: 1.39em;
+  border: 1px white;
+}
+
+#logo-border {
+  border: 5px white;
+  padding: 3.05em;
+  margin-top: 15%;
+}
+
+#logo-border:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* READY FORM */
+
+#ready-form {
+  margin-top: 3em;
+  background-color: $color-white-translucent;
+  padding: 2em 3em;
+  text-align: left;
+}
+
+.form-group {
+  margin-left: .2em !important;
+}
+
+#complete {
+  text-align: right;
+  font-size: 3em;
+}
+
+#radios {
+  margin-left: 5.5em;
+}
