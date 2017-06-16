@@ -50,14 +50,16 @@ $color-white-translucent: rgba(255, 255, 255, 0.3);
 
 #everyone {
   font-size: 2.85em;
-  letter-spacing: .61em;
+  opacity: 0;
   margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: .61em,
 }
 
 #parelax-logo {
   font-size: 3.4em;
-  letter-spacing: 1.39em;
-  border: 1px white;
+  opacity: 0;
+  text-align: center;
 }
 
 #logo-border {
@@ -104,7 +106,7 @@ $color-white-translucent: rgba(255, 255, 255, 0.3);
 }
 
 #submit:hover {
-  background-color: $color-white-translucent;
+  background-image: url('/img/btn-bg.gif');
   border-color: white;
 }
 
@@ -117,7 +119,20 @@ $color-white-translucent: rgba(255, 255, 255, 0.3);
 }
 
 #add:hover {
-  background-color: $color-white-translucent;
+  background-image: url('/img/btn-bg.gif');
   border-color: white;
 }
 
+/* RESULTS */
+
+#code {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  color: #9E7CA4;
+}
+
+#code:hover {
+  background-image: url('/img/btn-bg.gif');
+  border-color: white;
+}

@@ -29,7 +29,7 @@ export default function Home (props) {
                   <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" /> Yes, my image is seamless
                 </label>
                 <label className="radio-inline">
-                  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" /> No, I acknowledge my own bad judgement.
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" /> No, I'm bad with directions.
                 </label>
               </div>
 

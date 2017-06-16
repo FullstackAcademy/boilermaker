@@ -1,5 +1,10 @@
-console.log('hello');
-$(window).scroll(function(e){
+$( document ).ready(function() {
+    $('#everyone').delay(1000).animate({ opacity: '1' }, 5000);
+    $('#parelax-logo').delay(3000).animate({ letterSpacing: '1.39em', opacity: '1' }, 4000);
+})
+
+
+$(window).scroll(function(event){
   parallax();
 });
 

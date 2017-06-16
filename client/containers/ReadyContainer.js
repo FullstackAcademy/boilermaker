@@ -64,7 +64,7 @@ class NewParallaxContainer extends Component {
         speed: this.state.speed
       }])
     })
-    console.log('local state', this.state)
+    console.log(this.refs);
   }
 
   handleSubmit (event) {

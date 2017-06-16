@@ -5,8 +5,7 @@ import ImageForm from './ImageForm';
 export default function Result (props) {
   const bg = props.bg;
   const images = props.images;
-  const height = screen.height * images.length;
-  let i = 0;
+  const height = screen.width;
 
   return (
       <div className="bg" style={{
@@ -19,6 +18,7 @@ export default function Result (props) {
           minWidth: '100%',
           position: 'absolute'
         }}>
+        <button type="button" onClick='' className="btn btn-default caps" id="code">Get the code</button>
         {
           images && images.map ( img => {
             return (
@@ -28,8 +28,7 @@ export default function Result (props) {
                 margin: 0,
                 padding: 0,
                 width: '100%',
-                position: 'absolute',
-                top: screen.height * i++
+                position: 'absolute'
               }} />
               </div>
             )
