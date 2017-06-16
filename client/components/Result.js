@@ -2,28 +2,36 @@ import React from 'react';
 import { Link } from 'react-router';
 import ImageForm from './ImageForm';
 
-export default function Home (props) {
+export default function Result (props) {
   const bg = props.bg;
   const images = props.images;
+  const height = screen.height * images.length;
+  let i = 0;
 
   return (
-      <div style={{
+      <div className="bg" style={{
           backgroundImage: `url(${bg})`,
           backgroundRepeat: 'repeat',
-          color: 'red',
           zIndex: 0,
           margin: '0 !important',
           padding: '0 !important',
-          minHeight: '150vh'
+          minHeight: height,
+          minWidth: '100%',
+          position: 'absolute'
         }}>
         {
           images && images.map ( img => {
             return (
-              <img src={img.url} style={{
-                zIndex: img.speed/10,
+              <div>
+              <img className={img.speed} src={img.url} style={{
+                zIndex: img.speed,
                 margin: 0,
-                padding: 0
+                padding: 0,
+                width: '100%',
+                position: 'absolute',
+                top: screen.height * i++
               }} />
+              </div>
             )
           })
         }

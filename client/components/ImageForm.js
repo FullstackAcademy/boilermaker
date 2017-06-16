@@ -7,7 +7,7 @@ export default function ImageForm (props) {
 
   return (
     <div className="form-group">
-      <h3 className="fancy-type">Enter at least one image</h3>
+      <h3 className="fancy-type">2. Enter at least one image</h3>
       <label className="col-sm-3 control-label">Image URL:</label>
       <div className="col-sm-9">
         <input onChange={handleImage} type="img"  className="form-control" id="img-input" placeholder="image" />

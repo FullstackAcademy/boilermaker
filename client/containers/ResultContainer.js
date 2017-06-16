@@ -2,6 +2,7 @@ import Result from '../components/Result';
 import { hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import $ from 'jquery';
 
 const mapState = (state) => {
   return {

@@ -8,6 +8,7 @@ import Main from './components/Main';
 import Home from './components/Home';
 import ReadyContainer from './containers/ReadyContainer';
 import ResultContainer from './containers/ResultContainer';
+import $ from 'jquery';
 
 
 ReactDOM.render(
