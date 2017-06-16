@@ -108,4 +108,16 @@ $color-white-translucent: rgba(255, 255, 255, 0.3);
   border-color: white;
 }
 
+#add {
+  text-align: right;
+  color: #9E7CA4;
+  margin-left: 58.3em;
+  margin-bottom: 1.5em;
+  margin-top: -.5em;
+}
+
+#add:hover {
+  background-color: $color-white-translucent;
+  border-color: white;
+}
 

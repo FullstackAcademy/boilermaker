@@ -13,7 +13,8 @@ export default function Home (props) {
           color: 'red',
           zIndex: 0,
           margin: '0 !important',
-          padding: '0 !important'
+          padding: '0 !important',
+          minHeight: '150vh'
         }}>
         {
           images && images.map ( img => {
@@ -25,7 +26,6 @@ export default function Home (props) {
               }} />
             )
           })
-
         }
       </div>
   );
