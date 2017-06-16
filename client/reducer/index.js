@@ -1,10 +1,12 @@
-import { RECEIVE_BG } from '../action-creators';
+import { RECEIVE_BG, RECEIVE_IMG } from '../action-creators';
 
 const initialState = {
-  bg: ''
+  bg: '',
+  images: []
 }
 
 export default function (state = initialState, action) {
+  console.log('action obj', action.images)
 
   const newState = Object.assign({}, state);
 
@@ -14,11 +16,15 @@ export default function (state = initialState, action) {
      newState.bg = action.bg;
      break;
 
+    case RECEIVE_IMG:
+     newState.images = state.images.concat(action.images);
+     break;
+
     default:
       return state;
 
   }
+  console.log('new State', newState.images)
   return newState;
-
 }
 

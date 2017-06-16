@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
 /* REUSABLE STYLE */
-$color-white-translucent: rgba(255, 255, 255, 0.2);
+$color-white-translucent: rgba(255, 255, 255, 0.3);
 
 
 *{
@@ -80,7 +80,7 @@ $color-white-translucent: rgba(255, 255, 255, 0.2);
 }
 
 .form-group {
-  margin-left: .2em !important;
+  padding-left: 1.2em;
 }
 
 #complete {
@@ -89,5 +89,23 @@ $color-white-translucent: rgba(255, 255, 255, 0.2);
 }
 
 #radios {
-  margin-left: 5.5em;
+  margin-left: 3em;
 }
+
+#background-check {
+  margin-top: 60px !important;
+  margin-bottom: 0;
+}
+
+#submit {
+  text-align: right;
+  color: #9E7CA4;
+  margin-left: 51.3em;
+}
+
+#submit:hover {
+  background-color: $color-white-translucent;
+  border-color: white;
+}
+
+
