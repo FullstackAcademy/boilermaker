@@ -1,21 +1,171 @@
-body {
-  font-family: sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 
-  a {
-    text-decoration: none;
-  }
+/* REUSABLE STYLE */
+$color-white-translucent: rgba(255, 255, 255, 0.3);
 
-  label {
-    display: block;
-  }
 
-  nav a {
-    display: inline-block;
-    margin: 1em;
-  }
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  color: white;
+}
 
-  form div {
-    margin: 1em;
-    display: inline-block;
-  }
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.fancy-type {
+  font-family: 'Raleway', sans-serif;
+  color: white;
+}
+
+.center {
+  text-align: center;
+}
+
+.caps {
+  text-transform: uppercase;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* LANDING PAGE */
+
+#landing-bg {
+  width: 100%;
+  z-index: -100;
+  position: fixed;
+}
+
+#everyone {
+  font-size: 2.85em;
+  opacity: 0;
+  margin-bottom: 30px;
+  text-align: center;
+  letter-spacing: .61em,
+}
+
+#parelax-logo {
+  font-size: 3.4em;
+  opacity: 0;
+  text-align: center;
+}
+
+#logo-border {
+  border: 5px white;
+  padding: 3.05em;
+  margin-top: 15%;
+}
+
+#logo-border:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* READY FORM */
+
+#ready-form {
+  margin-top: 3em;
+  background-color: $color-white-translucent;
+  padding: 2em 3em;
+  text-align: left;
+}
+
+#inputBG {
+  margin: 1em 1em 0 .5em;
+}
+
+#complete {
+  text-align: right;
+  font-size: 3em;
+}
+
+.number {
+  font-size: 3em;
+}
+
+#radios {
+  margin-top: 5em;
+  margin-left: 3em;
+}
+
+.right-side {
+  margin-left: 2.1em;
+  padding-left: 1em;
+}
+
+#background-check {
+  margin-top: 60px !important;
+  margin-bottom: 0;
+}
+
+#submit {
+  margin-top: 3em;
+  text-align: right;
+  color: #9E7CA4;
+  margin-left: -10%;
+  padding: .5em 1em;
+  font-size: 1.5em;
+  letter-spacing: .1em;
+  margin-bottom: 2em;
+}
+
+#submit:hover {
+  background-image: url('/img/btn-bg.gif');
+  border-color: white;
+}
+
+#add {
+  text-align: right;
+  color: #9E7CA4;
+  position: absolute;
+  right: 5.5em;
+  margin-top: 0em;
+}
+
+#add:hover {
+  background-image: url('/img/btn-bg.gif');
+  border-color: white;
+}
+
+/* RESULTS */
+
+#code {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  color: #9E7CA4;
+}
+
+#code:hover {
+  background-image: url('/img/btn-bg.gif');
+  border-color: white;
+}
+
+#code-box {
+  background-image: url('/img/pinksky.jpg');
+  margin-top: 50px;
+  z-index: 100;
+  padding: 2em 3em;
+  color: #9E7CA4 !important;
+}
+
+.inner-code {
+  padding: 2em 2em;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.your-code {
+  text-align: right;
+  margin-bottom: -.3em;
 }
