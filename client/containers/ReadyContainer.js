@@ -1,9 +1,14 @@
 import Ready from '../components/Ready';
 import { hashHistory } from 'react-router';
 import { connect } from 'react-redux';
-import { receiveBG, receiveIMG } from '../action-creators'
+import { receiveBG, receiveIMG, flashMSG} from '../action-creators'
 import React, { Component } from 'react';
 
+const mapState = state => {
+  return {
+    flash: state.flash
+  }
+}
 
 const mapDispatch = (dispatch) => {
   return {
@@ -11,7 +16,10 @@ const mapDispatch = (dispatch) => {
       dispatch(receiveBG(bg));
     },
     receiveIMG: (images) => {
-      dispatch(receiveIMG(images))
+      dispatch(receiveIMG(images));
+    },
+    toggleFlash: () => {
+      dispatch(flashMSG())
     }
   };
 };
@@ -24,7 +32,7 @@ class NewParallaxContainer extends Component {
       bg: '',
       images: [],
       url: '',
-      speed: 0,
+      speed: 0
     };
 
     this.handleBG = this.handleBG.bind(this);
@@ -92,6 +100,6 @@ class NewParallaxContainer extends Component {
   }
 }
 
-const ReadyContainer = connect(null, mapDispatch)(NewParallaxContainer);
+const ReadyContainer = connect(mapState, mapDispatch)(NewParallaxContainer);
 
 export default ReadyContainer;

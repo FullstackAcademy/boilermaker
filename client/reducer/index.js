@@ -1,8 +1,10 @@
-import { RECEIVE_BG, RECEIVE_IMG } from '../action-creators';
+import { RECEIVE_BG, RECEIVE_IMG, SHOW_CODE, FLASH_MSG } from '../action-creators';
 
 const initialState = {
   bg: '',
-  images: []
+  images: [],
+  showCode: false,
+  flash: false
 }
 
 export default function (state = initialState, action) {
@@ -19,6 +21,15 @@ export default function (state = initialState, action) {
     case RECEIVE_IMG:
      newState.images = state.images.concat(action.images);
      break;
+
+    case SHOW_CODE:
+      newState.showCode = !state.showCode;
+      break;
+
+    case FLASH_MSG:
+      newState.flash = !state.flash;
+      break;
+
 
     default:
       return state;

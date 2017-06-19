@@ -8,6 +8,7 @@ $(window).scroll(function(event){
   parallax();
 });
 
+var height = window.height;
 
 function parallax(){
   var scrolled = $(window).scrollTop();
