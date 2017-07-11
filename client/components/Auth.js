@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import store from '../store'
 import history from '../history'
 import {me} from '../reducer/user'
@@ -10,7 +10,7 @@ const whoAmI = store.dispatch(me())
 
 // LOADER //
 
-class Auth extends React.Component {
+class AuthChecker extends React.Component {
 
   componentDidMount () {
     whoAmI.then(() => {
@@ -22,7 +22,7 @@ class Auth extends React.Component {
   }
 
   render () {
-    const { isAuthenticated, Component, routeProps } = this.props
+    const {isAuthenticated, Component, routeProps} = this.props
     return isAuthenticated ? <Component {...routeProps} /> : <div>Loading...</div>
   }
 }
@@ -42,4 +42,17 @@ const mapState = ({user}, {
   }
 })
 
-export default connect(mapState)(Auth)
+const AuthContainer = connect(mapState)(AuthChecker)
+
+// ROUTE //
+
+const Auth = props => (
+  <Route
+    path={props.path}
+    render={
+      routeProps => <AuthContainer {...routeProps} {...props} />
+    }
+  />
+)
+
+export default Auth

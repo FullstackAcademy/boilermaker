@@ -9,15 +9,6 @@ import store from './store'
 import history from './history'
 import {Main, Auth, Login, Signup, UserHome} from './components'
 
-const AuthRoute = props => (
-  <Route
-    path={props.path}
-    render={
-      routeProps => <Auth {...routeProps} {...props} />
-    }
-  />
-)
-
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
@@ -25,7 +16,7 @@ ReactDOM.render(
         <div>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <AuthRoute path="/home" component={UserHome} />
+          <Auth path="/home" component={UserHome} />
         </div>
       </Main>
     </Router>
