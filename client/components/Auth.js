@@ -5,11 +5,18 @@ import store from '../store'
 import history from '../history'
 import {me} from '../reducer/user'
 
-// executes on page load - we only want to check this once
+/**
+ * This only executes once, during our app's initial load!
+*/
 const whoAmI = store.dispatch(me())
 
-// LOADER //
-
+/**
+ * The 'AuthChecker' component has a simple role:
+ * it resolves the whoAmI promise and checks the user on
+ * the state. If there is no user (which we determine by
+ * checking to see if user.id is falsey, we redirect to
+ * login)
+*/
 class AuthChecker extends React.Component {
 
   componentDidMount () {
@@ -28,24 +35,25 @@ class AuthChecker extends React.Component {
 }
 
 // CONTAINER //
-
 const mapState = ({user}, {
   location,
   match,
+  history,
   component: Component
 }) => ({
   isAuthenticated: !!user.id,
   Component,
   routeProps: {
     location,
-    match
+    match,
+    history
   }
 })
 
 const AuthContainer = connect(mapState)(AuthChecker)
 
-// ROUTE //
 
+// Auth => Route => AuthContainer => Component passed down as a prop to Auth
 const Auth = props => (
   <Route
     path={props.path}

@@ -44,7 +44,7 @@ const mapSignup = ({user}) => ({
   error: user.error
 })
 
-const mapDispatch = (dispatch) => ({
+const mapDispatch = dispatch => ({
   handleSubmit (evt) {
     evt.preventDefault()
     const formName = evt.target.name

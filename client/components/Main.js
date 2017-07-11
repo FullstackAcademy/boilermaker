@@ -37,7 +37,7 @@ const mapState = ({user}, {children}) => ({
   children
 })
 
-const mapDispatch = (dispatch) => ({
+const mapDispatch = dispatch => ({
   handleClick () {
     dispatch(logout())
   }
