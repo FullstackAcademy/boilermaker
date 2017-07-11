@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
@@ -14,7 +15,7 @@ export const me = () =>
       .then(res =>
         dispatch(getUser(res.data || defaultUser)))
 
-export const auth = (email, password, method, history) =>
+export const auth = (email, password, method) =>
   dispatch =>
     axios.post(`/auth/${method}`, { email, password })
       .then(res => {
@@ -24,7 +25,7 @@ export const auth = (email, password, method, history) =>
       .catch(error =>
         dispatch(getUser({error})))
 
-export const logout = (history) =>
+export const logout = () =>
   dispatch =>
     axios.post('/auth/logout')
       .then(res => {

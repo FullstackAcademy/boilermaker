@@ -3,8 +3,10 @@ import './index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {Router} from 'react-router'
+import {Route} from 'react-router-dom'
 import store from './store'
+import history from './history'
 import {Main, Auth, Login, Signup, UserHome} from './components'
 
 const AuthRoute = props => (
@@ -18,7 +20,7 @@ const AuthRoute = props => (
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <Router history={history}>
       <Main>
         <div>
           <Route path="/login" component={Login} />

@@ -21,9 +21,9 @@ const AuthForm = props => {
           <input name="password" type="password" />
         </div>
         <div>
-          <button type="submit">{ displayName }</button>
+          <button type="submit">{displayName}</button>
         </div>
-        {error && error.response && <div> { error.response.data } </div>}
+        {error && error.response && <div> {error.response.data} </div>}
       </form>
       <a href="/auth/google">{displayName} with Google</a>
     </div>
@@ -44,13 +44,13 @@ const mapSignup = ({user}) => ({
   error: user.error
 })
 
-const mapDispatch = (dispatch, {history}) => ({
+const mapDispatch = (dispatch) => ({
   handleSubmit (evt) {
     evt.preventDefault()
     const formName = evt.target.name
     const email = evt.target.email.value
     const password = evt.target.password.value
-    dispatch(auth(email, password, formName, history))
+    dispatch(auth(email, password, formName))
   }
 })
 

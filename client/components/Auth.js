@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import store from '../store'
+import history from '../history'
 import {me} from '../reducer/user'
 
 // executes on page load - we only want to check this once
@@ -13,8 +14,7 @@ class Auth extends React.Component {
 
   componentDidMount () {
     whoAmI.then(() => {
-      const { user } = store.getState()
-      const { routeProps: { history } } = this.props
+      const {user} = store.getState()
       if (!user.id) {
         history.push('/login')
       }
@@ -29,8 +29,7 @@ class Auth extends React.Component {
 
 // CONTAINER //
 
-const mapState = ({ user }, {
-  history,
+const mapState = ({user}, {
   location,
   match,
   component: Component
@@ -38,7 +37,6 @@ const mapState = ({ user }, {
   isAuthenticated: !!user.id,
   Component,
   routeProps: {
-    history,
     location,
     match
   }

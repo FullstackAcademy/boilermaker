@@ -37,9 +37,9 @@ const mapState = ({user}, {children}) => ({
   children
 })
 
-const mapDispatch = (dispatch, {history}) => ({
+const mapDispatch = (dispatch) => ({
   handleClick () {
-    dispatch(logout(history))
+    dispatch(logout())
   }
 })
 

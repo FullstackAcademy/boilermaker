@@ -1,4 +1,4 @@
-const { expect } = require('chai')
+const {expect} = require('chai')
 const db = require('../db')
 const User = db.model('user')
 
