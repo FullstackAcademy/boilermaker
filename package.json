@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack -w & nodemon server",
-    "start-server": "nodemon server",
+    "start-server": "nodemon -e html,js,scss server",
     "build-client": "webpack",
     "test": "DATABASE_URL='postgres://localhost:5432/boilermaker-test' mocha ./**/*.spec.js --compilers js:babel-register"
   },
