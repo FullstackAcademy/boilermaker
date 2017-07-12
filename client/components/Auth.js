@@ -52,7 +52,6 @@ const mapState = ({user}, {
 
 const AuthContainer = connect(mapState)(AuthChecker)
 
-
 // Auth => Route => AuthContainer => Component passed down as a prop to Auth
 const Auth = props => (
   <Route
