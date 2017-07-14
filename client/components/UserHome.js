@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 // COMPONENT //
 
-const UserHome = props => {
+const UserHome = (props) => {
 
   const {email} = props
 
@@ -17,9 +17,11 @@ const UserHome = props => {
 
 // CONTAINER //
 
-const mapState = ({user}) => ({
-  email: user.email
-})
+const mapState = (state) => {
+  return {
+    email: state.user.email
+  }
+}
 
 export default connect(mapState)(UserHome)
 
