@@ -1,11 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 
-// COMPONENT //
-
+/** COMPONENT **/
 const Main = (props) => {
 
   const {children, handleClick, isLoggedIn} = props;
@@ -32,7 +31,7 @@ const Main = (props) => {
   )
 }
 
-// CONTAINER //
+/** CONTAINER **/
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id
@@ -47,10 +46,13 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Main)
+/**
+ * The `withRouter` wrapper makes sure that updates are not blocked
+ * when the url changes
+ */
+export default withRouter(connect(mapState, mapDispatch)(Main))
 
-// TYPES //
-
+/** PROP TYPES **/
 Main.propTypes = {
   children: PropTypes.object,
   handleClick: PropTypes.func.isRequired,
