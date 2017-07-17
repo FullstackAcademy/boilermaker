@@ -11,36 +11,70 @@ const PORT = process.env.PORT || 8080
 const app = express()
 module.exports = app
 
+/**
+ * In your development environment, you can keep all of your
+ * app's secret API keys in a file called `secrets.js`, in your project
+ * root. This file is included in the .gitignore - it will NOT be tracked
+ * or show up on Github. On your production server, you can add these
+ * keys as environment variables, so that they can still be read by the
+ * Node process on process.env
+ */
 if (process.env.NODE_ENV === 'development') require('../secrets')
 
-passport.serializeUser((user, done) => done(null, user.id))
 
+// passport registration
+passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser((id, done) =>
   db.models.user.findById(id)
     .then(user => done(null, user))
     .catch(done))
 
-const createApp = () => app
-  .use(morgan('dev'))
-  .use(express.static(path.join(__dirname, '..', 'public')))
-  .use(bodyParser.json())
-  .use(bodyParser.urlencoded({ extended: true }))
-  .use(session({
+const createApp = () => {
+  // logging middleware
+  app.use(morgan('dev'))
+
+  // body parsing middleware
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({ extended: true }))
+
+  // session middleware with passport
+  app.use(session({
     secret: process.env.SESSION_SECRET || 'my best friend is Cody',
     store,
     resave: false,
     saveUninitialized: false
   }))
-  .use(passport.initialize())
-  .use(passport.session())
-  .use('/auth', require('./auth'))
-  .use('/api', require('./api'))
-  .use((req, res, next) =>
-    path.extname(req.path).length > 0 ? res.status(404).send('Not found') : next())
-  .use('*', (req, res) =>
-    res.sendFile(path.join(__dirname, '..', 'public/index.html')))
-  .use((err, req, res, next) =>
-    res.status(err.status || 500).send(err.message || 'Internal server error.'))
+  app.use(passport.initialize())
+  app.use(passport.session())
+
+  // auth and api routes
+  app.use('/auth', require('./auth'))
+  app.use('/api', require('./api'))
+
+  // static file-serving middleware
+  app.use(express.static(path.join(__dirname, '..', 'public')))
+
+  // 404 handling middleware
+  app.use((req, res, next) => {
+    if ( path.extname(req.path).length > 0) {
+      const err = new Error('Not found')
+      err.status = 404
+      next(err)
+    } else {
+      next()
+    }
+  })
+
+  // sends index.html
+  app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+  })
+
+  // error handling endware
+  app.use((err, req, res, next) => {
+    res.status(err.status || 500).send(err.message || 'Internal server error.')
+  })
+}
 
 const syncDb = () => db.sync()
 
