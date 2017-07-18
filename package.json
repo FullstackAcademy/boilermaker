@@ -6,7 +6,7 @@
   "scripts": {
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
-    "deploy": "webpack -p && git add . && git commit -m 'Deployment build' && git push origin deploy && git push heroku master",
+    "deploy": "webpack -p && git add . && git commit -m 'Deployment build' && git push origin deploy && git push heroku deploy:master",
     "start": "node server",
     "start-dev": "npm run build-client-watch & npm run start-server",
     "start-server": "nodemon -e html,js,scss --ignore public server",
