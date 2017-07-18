@@ -35,7 +35,8 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
-    "sequelize": "^4.3.1"
+    "sequelize": "^4.3.1",
+    "webpack": "^2.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
@@ -51,7 +52,6 @@
     "node-sass": "^4.5.0",
     "sass-loader": "^6.0.0",
     "style-loader": "^0.13.1",
-    "supertest": "^3.0.0",
-    "webpack": "^2.2.1"
+    "supertest": "^3.0.0"
   }
 }
