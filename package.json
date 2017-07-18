@@ -4,11 +4,12 @@
   "description": "Some boilerplate code to get you started - get shakin'!",
   "main": "index.js",
   "scripts": {
-    "start": "node server",
-    "start-server": "nodemon -e html,js,scss --ignore public server",
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
+    "heroku-postbuild": "webpack -p",
+    "start": "node server",
     "start-dev": "npm run build-client-watch & npm run start-server",
+    "start-server": "nodemon -e html,js,scss --ignore public server",
     "test": "DATABASE_URL='postgres://localhost:5432/boilermaker-test' mocha ./**/*.spec.js --compilers js:babel-register"
   },
   "author": "",
