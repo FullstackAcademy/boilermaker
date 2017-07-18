@@ -5,6 +5,8 @@ import {Provider} from 'react-redux'
 import store from './store'
 import Routes from './routes'
 
+console.log('We are deployed')
+
 ReactDOM.render(
   <Provider store={store}>
     <Routes />
