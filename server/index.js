@@ -9,6 +9,7 @@ const db = require('./db')
 const store = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
+const socketio = require('socket.io')
 module.exports = app
 
 /**
@@ -74,11 +75,16 @@ const createApp = () => {
   app.use((err, req, res, next) => {
     res.status(err.status || 500).send(err.message || 'Internal server error.')
   })
+
+  // start listening (and create a 'server' object representing our server)
+  const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
+
+  // set up our socket control center
+  const io = socketio(server)
+  require('./socket')(io)
 }
 
 const syncDb = () => db.sync()
-
-const listenUp = () => app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
 
 // This evaluates as true when this file is run directly from the command line,
 // i.e. when we say 'node server/index.js' (or 'nodemon server/index.js', or 'nodemon server', etc)
@@ -88,7 +94,6 @@ if (require.main === module) {
   store.sync()
     .then(syncDb)
     .then(createApp)
-    .then(listenUp)
 } else {
   createApp(app)
 }
