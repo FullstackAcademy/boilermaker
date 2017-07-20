@@ -3,6 +3,9 @@ module.exports = router
 
 router.use('/users', require('./users'))
 
-router.use((req, res) => {
-  res.status(404).send('Not found')
+router.use((req, res, next) => {
+  const error = new Error('Not Found')
+  error.status = 404
+  next(error)
 });
+
