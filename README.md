@@ -10,6 +10,7 @@ Follow along with the workshop to make your own! This canonical version can serv
 
 To use this boilerplate, you'll need to take the following steps:
 
+* Fork and clone this repo
 * `npm install`, or `yarn install` - whatever you're into
 * Create two postgres databases: `boilermaker` and `boilermaker-test`
   * By default, running `npm test` will use `boilermaker-test`, while regular development uses `boilermaker`
