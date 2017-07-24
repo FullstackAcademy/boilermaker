@@ -12,6 +12,7 @@ To use this boilerplate, you'll need to take the following steps:
 
 * Fork and clone this repo.
 * `cd` into your clone and `rm -rf .git` to remove the boilerplate git tracking
+* Update project name and description in `package.json` file
 * `git init` to start your own git tracking
 * `npm install`, or `yarn install` - whatever you're into
 * Create two postgres databases: `boilermaker` and `boilermaker-test` (you can substitute these with the name of your own application - just be sure to go through and change the `package.json` and `server/db/db.js` to refer to the new names)
