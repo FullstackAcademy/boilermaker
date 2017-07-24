@@ -55,10 +55,10 @@ export default function Result (props) {
           ) : null
         }
         {
-          images && images.map ( img => {
+          images && images.map ( (img, i) => {
             return (
               <div>
-                <img className={img.speed} src={img.url} style={{
+                <img key={i} className={img.speed} src={img.url} style={{
                   zIndex: img.speed,
                   margin: 0,
                   padding: 0,

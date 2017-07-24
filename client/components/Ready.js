@@ -20,7 +20,7 @@ export default function Home (props) {
             <h1 className="fancy-type caps" id="complete">You complete me.</h1>
             <hr />
 
-            <div className="form-group col-lg-6">
+            <div className="form-group col-lg-6 left-side">
               <h3 className="fancy-type">1. Pick a seamless background</h3>
               <div className="col-sm-10">
                 <input type="bg" onChange={handleBG} className="form-control" id="inputBG" placeholder="background image url" />

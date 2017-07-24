@@ -99,6 +99,10 @@ $color-white-translucent: rgba(255, 255, 255, 0.3);
   margin-left: 3em;
 }
 
+.left-side {
+
+}
+
 .right-side {
   margin-left: 2.1em;
   padding-left: 1em;
@@ -122,6 +126,8 @@ $color-white-translucent: rgba(255, 255, 255, 0.3);
 
 #submit:hover {
   background-image: url('/img/btn-bg.gif');
+  background-repeat: no-repeat;
+  background-position: center;
   border-color: white;
 }
 
@@ -129,18 +135,21 @@ $color-white-translucent: rgba(255, 255, 255, 0.3);
   text-align: right;
   color: #9E7CA4;
   position: absolute;
-  right: 5.5em;
+  right: 5.7em;
   margin-top: 0em;
 }
 
 #add:hover {
   background-image: url('/img/btn-bg.gif');
   border-color: white;
+    background-repeat: no-repeat;
+  background-position: center;
 }
 
 /* RESULTS */
 
 #code {
+  z-index: 1000;
   position: fixed;
   top: 50px;
   right: 50px;
@@ -150,6 +159,8 @@ $color-white-translucent: rgba(255, 255, 255, 0.3);
 #code:hover {
   background-image: url('/img/btn-bg.gif');
   border-color: white;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #code-box {
