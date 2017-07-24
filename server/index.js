@@ -57,7 +57,7 @@ const createApp = () => {
 
   // 404 handling middleware
   app.use((req, res, next) => {
-    if ( path.extname(req.path).length > 0) {
+    if (path.extname(req.path).length > 0) {
       const err = new Error('Not found')
       err.status = 404
       next(err)
