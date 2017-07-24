@@ -10,9 +10,11 @@ Follow along with the workshop to make your own! This canonical version can serv
 
 To use this boilerplate, you'll need to take the following steps:
 
-* Fork and clone this repo
+* Fork and clone this repo.
+* `cd` into your clone and `rm -rf .git` to remove the boilerplate git tracking
+* `git init` to start your own git tracking
 * `npm install`, or `yarn install` - whatever you're into
-* Create two postgres databases: `boilermaker` and `boilermaker-test`
+* Create two postgres databases: `boilermaker` and `boilermaker-test` (you can substitute these with the name of your own application - just be sure to go through and change the `package.json` and `server/db/db.js` to refer to the new names)
   * By default, running `npm test` will use `boilermaker-test`, while regular development uses `boilermaker`
 * Create a file called `secrets.js` in the project root
   * This file is `.gitignore`'d, and will *only* be required in your *development* environment
