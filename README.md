@@ -31,6 +31,21 @@ To use this boilerplate, you'll need to take the following steps:
 
 * To use OAuth with Google, complete the step above with a real client ID and client secret from Google
   * You can get them here: https://console.developers.google.com/apis/credentials
+* Finally, complete the section below to set up your linter
+
+## Linting
+
+Linters are fundamental to any project - they ensure that your code has a consistent style, which is critical to writing readable code.
+
+Everyone has their own style, so Boilermaker does not come prepackaged with a linter. However, we `strongly` recommend that you (and your team, if working in a group) decide on a style, and stick with it. Here's what you need to do:
+
+* `npm install -g eslint`
+* In the root of your project, `eslint --init`
+* You will then be prompted to choose how you want to configure ESLint. We recommend selecting the `Use a popular style guide option`. The existing Boilermaker code was written in accordance with the `Standard` style, but you may choose a different one if you don't like it.
+  * [Standard style guide](https://standardjs.com/)
+  * [Airbnb style guide](https://github.com/airbnb/javascript)
+  * [Google style guide](https://google.github.io/styleguide/jsguide.html)
+* This will add an `.eslintrc.js`, `.eslintrc.yaml`, or `.eslintrc.json` (depending on which you choose) - `.js` or `.json` will usually work fine. You may also need to install an appropriate eslint plugin specific for your code editor.
 
 ## Start
 
