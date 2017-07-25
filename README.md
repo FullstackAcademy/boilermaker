@@ -45,6 +45,7 @@ Everyone has their own style, so Boilermaker does not come prepackaged with a li
   * [Standard style guide](https://standardjs.com/)
   * [Airbnb style guide](https://github.com/airbnb/javascript)
   * [Google style guide](https://google.github.io/styleguide/jsguide.html)
+* This will add an `.eslintrc.js`, `.eslintrc.yaml`, or `.eslintrc.json` (depending on which you choose) - `.js` or `.json` will usually work fine. You may also need to install an appropriate eslint plugin specific for your code editor.
 
 ## Start
 
