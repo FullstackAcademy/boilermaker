@@ -13,9 +13,7 @@ const mockStore = configureMockStore(middlewares)
 describe('thunk creators', () => {
   let store
 
-  const initialState = {
-    user: {}
-  }
+  const initialState = {user: {}}
 
   beforeEach(() => {
     store = mockStore(initialState)
