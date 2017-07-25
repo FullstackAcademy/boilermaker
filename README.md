@@ -35,7 +35,7 @@ To use this boilerplate, you'll need to take the following steps:
 
 ## Linting
 
-Linters are a fundamental tool to any project - it ensures that code your working with has a consistent style, which is critical to writing readable code.
+Linters are fundamental to any project - they ensure that your code has a consistent style, which is critical to writing readable code.
 
 Everyone has their own style, so Boilermaker does not come prepackaged with a linter. However, we `strongly` recommend that you (and your team, if working in a group) decide on a style, and stick with it. Here's what you need to do:
 
