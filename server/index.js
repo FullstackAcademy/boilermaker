@@ -85,5 +85,5 @@ if (require.main === module) {
     .then(syncDb)
     .then(createApp)
 } else {
-  createApp(app)
+  createApp()
 }
