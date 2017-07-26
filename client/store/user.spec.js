@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import user, {me, logout} from './user'
+import {me, logout} from './user'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
@@ -11,12 +11,9 @@ const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
 
 describe('thunk creators', () => {
-
   let store
 
-  const initialState = {
-    user: {}
-  }
+  const initialState = {user: {}}
 
   beforeEach(() => {
     store = mockStore(initialState)
@@ -28,7 +25,6 @@ describe('thunk creators', () => {
 
   describe('me', () => {
     it('eventually dispatches the GET USER action', () => {
-
       const fakeUser = {email: 'Cody'}
       mockAxios.onGet('/auth/me').replyOnce(200, fakeUser)
       return store.dispatch(me())
@@ -42,7 +38,6 @@ describe('thunk creators', () => {
 
   describe('logout', () => {
     it('logout: eventually dispatches the REMOVE_USER action', () => {
-      const fakeUser = {email: 'Cody'}
       mockAxios.onPost('/auth/logout').replyOnce(204)
       return store.dispatch(logout())
         .then(() => {
@@ -53,4 +48,3 @@ describe('thunk creators', () => {
     })
   })
 })
-

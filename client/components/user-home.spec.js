@@ -4,7 +4,6 @@ import {shallow} from 'enzyme'
 import {UserHome} from './user-home'
 
 describe('UserHome', () => {
-
   let userHome
 
   beforeEach(() => {
