@@ -73,7 +73,7 @@ Ready to go world wide? Here's a guide to deployment!
 ### When you're ready to deploy
 
 1. Make sure that all your work is fully committed and pushed to your master branch on Github.
-2. Checkout a new branch called "deploy": `git checkout -b deploy`. If you currently have an existing branch called "deploy", delete it now (`git branch -d deploy`). Note that the name "deploy" here isn't magical, but it needs to match the name of the branch we specify in step 3d.
+2. Checkout a new branch called "deploy": `git checkout -b deploy`. If you currently have an existing branch called "deploy", delete it now (`git branch -d deploy`). Note that the name "deploy" here isn't magical, but it needs to match the name of the branch we specify when we push to our heroku remote.
 3. `npm run deploy` - this will cause the following commands to happen in order:
   - `webpack -p`: webpack will run in "production mode"
   - `git add -f public/bundle.js public/bundle.js/map`: "force" add the otherwise gitignored build files
