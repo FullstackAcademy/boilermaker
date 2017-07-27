@@ -75,10 +75,10 @@ Ready to go world wide? Here's a guide to deployment!
 1. Make sure that all your work is fully committed and pushed to your master branch on Github.
 2. Checkout a new branch called "deploy": `git checkout -b deploy`. If you currently have an existing branch called "deploy", delete it now (`git branch -d deploy`). Note that the name "deploy" here isn't magical, but it needs to match the name of the branch we specify in step 3d.
 3. `npm run deploy` - this will cause the following commands to happen in order:
-  a. `webpack -p`: webpack will run in "production mode"
-  b. `git add -f public/bundle.js public/bundle.js/map`: "force" add the otherwise gitignored build files
-  c. `git commit --allow-empy -m 'Deploying'`: create a commit, even if nothing changed
-  d. `git push heroku deploy:master`: push your local "deploy" branch to the "master" branch on heroku
+  - `webpack -p`: webpack will run in "production mode"
+  - `git add -f public/bundle.js public/bundle.js/map`: "force" add the otherwise gitignored build files
+  - `git commit --allow-empy -m 'Deploying'`: create a commit, even if nothing changed
+  - `git push heroku deploy:master`: push your local "deploy" branch to the "master" branch on heroku
 
 Now, you should be deployed! To clean up, remove your deploy branch:
 
