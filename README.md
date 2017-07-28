@@ -77,7 +77,7 @@ From there, just follow your bliss.
 Ready to go world wide? Here's a guide to deployment!
 
 ### Prep
-1. Set up the [Heroku command line tools](https://devcenter.heroku.com/articles/heroku-cli) and install [Yarn](https://yarnpkg.com/en/) if you haven't already (`npm install -g yarn`)
+1. Set up the [Heroku command line tools](https://devcenter.heroku.com/articles/heroku-cli)
 2. `heroku login`
 3. Add a git remote for heroku:
   - **If you're creating a new app...**
