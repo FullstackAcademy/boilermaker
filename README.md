@@ -98,7 +98,7 @@ Ready to go world wide? Here's a guide to deployment!
   - `git commit --allow-empy -m 'Deploying'`: create a commit, even if nothing changed
   - `git push --force heroku deploy:master`: push your local "deploy" branch to the "master" branch on heroku
   - `git checkout master`: return to your master branch
-  - `git branch -d deploy`: remove the deploy branch
+  - `git branch -D deploy`: remove the deploy branch
 
 Now, you should be deployed!
 
