@@ -12,7 +12,7 @@
     "deploy": "git checkout -b deploy && webpack -p && git add -f public/bundle.js public/bundle.js.map && git commit --allow-empty -m 'Deploying' && git push --force heroku deploy:master && git checkout master && git branch -D deploy",
     "start": "node server",
     "start-dev": "npm run build-client-watch & npm run start-server",
-    "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
+    "start-server": "NODE_ENV='development' nodemon server -e html,js,css --ignore public",
     "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/boilermaker-test' mocha ./**/*.spec.js --compilers js:babel-register"
   },
   "author": "",
@@ -50,15 +50,10 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
     "chai": "^3.5.0",
-    "css-loader": "^0.26.1",
     "enzyme": "^2.8.2",
-    "file-loader": "^0.11.2",
     "mocha": "^3.3.0",
-    "node-sass": "^4.5.0",
     "react-test-renderer": "^15.6.1",
     "redux-mock-store": "^1.2.3",
-    "sass-loader": "^6.0.0",
-    "style-loader": "^0.13.1",
     "supertest": "^3.0.0",
     "webpack": "^2.2.1"
   }
