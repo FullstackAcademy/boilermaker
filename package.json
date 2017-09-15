@@ -39,9 +39,7 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
     "sequelize": "^4.3.1",
-    "socket.io": "^2.0.3"
-  },
-  "devDependencies": {
+    "socket.io": "^2.0.3",
     "axios-mock-adapter": "^1.9.0",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
