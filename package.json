@@ -63,6 +63,7 @@
     "sass-loader": "^6.0.0",
     "style-loader": "^0.13.1",
     "supertest": "^3.0.0",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-livereload-plugin": "^1.0.0"
   }
 }
