@@ -29,6 +29,13 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
+/**
+ * In this example app, a user should only be able to get or modify themselves (but not other users), and only
+ * admins should be able to delete a user. Methods like `router.get` can accept any number of middleware
+ * functions to 'pipe' the request through. We require our permissions middleware functions (isSelf and isAdmin),
+ * and add these as additional arguments BEFORE the middleware function that sends the response. This way,
+ * every request we send will be evaluated by that permissions middleware function.
+ */
 router.get('/:id', isSelf, (req, res, next) => {
   res.json(req.requestedUser)
 })
