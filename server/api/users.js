@@ -4,7 +4,7 @@ const {isAdmin, isSelf} = require('../permissions')
 module.exports = router
 
 router.param('id', (req, res, next, id) => {
-  User.findById(id)
+  User.findById(id, {attributes: ['id', 'email', 'isAdmin']})
     .then(user => {
       if (!user) {
         const err = new Error('Not found!')
@@ -23,7 +23,7 @@ router.get('/', (req, res, next) => {
     // explicitly select only the id and email fields - even though
     // users' passwords are encrypted, it won't help if we just
     // send everything to anyone who asks!
-    attributes: ['id', 'email']
+    attributes: ['id', 'email', 'isAdmin']
   })
     .then(users => res.json(users))
     .catch(next)
