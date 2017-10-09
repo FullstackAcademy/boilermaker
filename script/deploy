@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# set -e tells bash to terminate if any line terminates with an error
+set -e
+
+# trapping EXIT with this cleanup function protects us from errors where
+# we end up with the `deploy` branch checked out
+
+# cleanup_at_exit will always run at the end of this script
+
+function cleanup_at_exit {
+  git checkout master
+  git branch -D deploy
+}
+trap cleanup_at_exit EXIT
+
+git checkout -b deploy
+webpack -p
+git add -f public/bundle.js public/bundle.js.map
+git commit --allow-empty -m 'Deploying'
+git push --force heroku deploy:master
