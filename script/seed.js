@@ -9,8 +9,8 @@
  *
  * Now that you've got the main idea, check it out in practice below!
  */
-const db = require('./server/db')
-const {User} = require('./server/db/models')
+const db = require('../server/db')
+const {User} = require('../server/db/models')
 
 async function seed () {
   await db.sync({force: true})
