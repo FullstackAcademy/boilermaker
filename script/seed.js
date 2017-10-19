@@ -31,17 +31,20 @@ async function seed () {
 // Execute the `seed` function
 // `Async` functions always return a promise, so we can use `catch` to handle any errors
 // that might occur inside of `seed`
-seed()
-  .catch(err => {
+async function runSeed () {
+  try {
+    await seed()
+    console.log('closing db connection')
+    await db.close()
+    console.log('db connection closed')
+  }
+  catch (err) {
     console.error(err.message)
     console.error(err.stack)
     process.exitCode = 1
-  })
-  .then(() => {
-    console.log('closing db connection')
-    db.close()
-    console.log('db connection closed')
-  })
+  }
+}
+
 
 /*
  * note: everything outside of the async function is totally synchronous

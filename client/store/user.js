@@ -22,30 +22,40 @@ const removeUser = () => ({type: REMOVE_USER})
  * THUNK CREATORS
  */
 export const me = () =>
-  dispatch =>
-    axios.get('/auth/me')
-      .then(res =>
-        dispatch(getUser(res.data || defaultUser)))
-      .catch(err => console.log(err))
+  async (dispatch) => {
+    try {
+      const res = await axios.get('/auth/me')
+      dispatch(getUser(res.data || defaultUser))
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+
 
 export const auth = (email, password, method) =>
-  dispatch =>
-    axios.post(`/auth/${method}`, { email, password })
-      .then(res => {
-        dispatch(getUser(res.data))
-        history.push('/home')
-      })
-      .catch(error =>
-        dispatch(getUser({error})))
+  async (dispatch) => {
+    try {
+      const res = await axios.post(`/auth/${method}`, { email, password })
+      dispatch(getUser(res.data))
+      history.push('/home')
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
 
 export const logout = () =>
-  dispatch =>
-    axios.post('/auth/logout')
-      .then(res => {
-        dispatch(removeUser())
-        history.push('/login')
-      })
-      .catch(err => console.log(err))
+  async (dispatch) => {
+    try {
+      const res = axios.post('/auth/logout')
+      dispatch(removeUser())
+      history.push('/login')
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
 
 /**
  * REDUCER
