@@ -10,6 +10,7 @@
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
+    "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
     "start": "node server",
     "start-dev": "npm run build-client-watch & npm run start-server",
