@@ -36,11 +36,11 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     const email = profile.emails[0].value
 
     User.find({where: {googleId}})
-      .then(foundUser => foundUser
+      .then(foundUser => (foundUser
         ? done(null, foundUser)
         : User.create({name, email, googleId})
           .then(createdUser => done(null, createdUser))
-      )
+      ))
       .catch(done)
   })
 
