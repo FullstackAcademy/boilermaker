@@ -37,7 +37,6 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.2",
-    "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
