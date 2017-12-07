@@ -54,15 +54,11 @@ Now that you've got the code, follow these steps to get acclimated:
 
 Linters are fundamental to any project - they ensure that your code has a consistent style, which is critical to writing readable code.
 
-Everyone has their own style, so Boilermaker does not come prepackaged with a linter. However, we `strongly` recommend that you (and your team, if working in a group) decide on a style, and stick with it. Here's what you need to do:
+Boilermaker comes with a working linter (ESLint, with `eslint-config-fullstack`) "out of the box." However, everyone has their own style, so we recommend that you and your team work out yours and stick to it. Any linter rule that you object to can be "turned off" in `.eslintrc.json`. You may also choose an entirely different config if you don't like ours:
 
-* `npm install -g eslint`
-* In the root of your project, `eslint --init`
-* You will then be prompted to choose how you want to configure ESLint. We recommend selecting the `Use a popular style guide option`. The existing Boilermaker code was written in accordance with the `Standard` style, but you may choose a different one if you don't like it.
-  * [Standard style guide](https://standardjs.com/)
-  * [Airbnb style guide](https://github.com/airbnb/javascript)
-  * [Google style guide](https://google.github.io/styleguide/jsguide.html)
-* This will add an `.eslintrc.js`, `.eslintrc.yaml`, or `.eslintrc.json` (depending on which you choose) - `.js` or `.json` will usually work fine. You may also need to install an appropriate eslint plugin specific for your code editor.
+* [Standard style guide](https://standardjs.com/)
+* [Airbnb style guide](https://github.com/airbnb/javascript)
+* [Google style guide](https://google.github.io/styleguide/jsguide.html)
 
 ## Start
 
@@ -94,8 +90,8 @@ Ready to go world wide? Here's a guide to deployment!
 3. `npm run deploy` - this will cause the following commands to happen in order:
   - `git checkout -b deploy`: checks out a new branch called "deploy". Note that the name "deploy" here isn't magical, but it needs to match the name of the branch we specify when we push to our heroku remote.
   - `webpack -p`: webpack will run in "production mode"
-  - `git add -f public/bundle.js public/bundle.js/map`: "force" add the otherwise gitignored build files
-  - `git commit --allow-empy -m 'Deploying'`: create a commit, even if nothing changed
+  - `git add -f public/bundle.js public/bundle.js.map`: "force" add the otherwise gitignored build files
+  - `git commit --allow-empty -m 'Deploying'`: create a commit, even if nothing changed
   - `git push --force heroku deploy:master`: push your local "deploy" branch to the "master" branch on heroku
   - `git checkout master`: return to your master branch
   - `git branch -D deploy`: remove the deploy branch
