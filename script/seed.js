@@ -9,9 +9,8 @@
  *
  * Now that you've got the main idea, check it out in practice below!
  */
-const db = require('../server/db')
-const {User, Product} = require('../server/db/models')
-
+const db = require('../server/db');
+const {User, Category, Product} = require('../server/db/models');
 
 async function seed () {
   await db.sync({force: true})
@@ -43,9 +42,23 @@ async function seed () {
   ])
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
+  // console.log(`seeded ${users.length} users`)
+  // console.log(`seeded successfully`)
+
+  const categories = await Promise.all([
+    Category.create({name: 'rice'}),
+    Category.create({name: 'wheat'}),
+    Category.create({name: 'Veggie'}),
+    Category.create({name: 'Egg'}),
+  ])
+  // Wowzers! We can even `await` on the right-hand side of the assignment operator
+  // and store the result that the promise resolves to in a variable! This is nice!
+  // console.log(`seeded ${categories.length} users`)
+  // console.log(`seeded successfully`)
 }
+
+
+
 
 // Execute the `seed` function
 // `Async` functions always return a promise, so we can use `catch` to handle any errors
