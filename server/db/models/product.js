@@ -9,7 +9,7 @@ const Product = db.define('product', {
   },
   image: {
     type: Sequelize.STRING,
-    defaultValue: ""
+    defaultValue: "https://i.pinimg.com/736x/91/5d/43/915d4345e49c0cdafa82cdfcf7ed9967.jpg"
   },
   price: {
     type: Sequelize.FLOAT,
@@ -24,7 +24,7 @@ const Product = db.define('product', {
     allowNull: false
   },
   size: {
-    type: Sequelize.FLOAT,
+    type: Sequalize.FLOAT,
     allowNull: false
   }
 })
