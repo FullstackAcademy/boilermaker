@@ -24,7 +24,7 @@ const Product = db.define('product', {
     allowNull: false
   },
   size: {
-    type: Sequalize.FLOAT,
+    type: Sequelize.FLOAT,
     allowNull: false
   }
 })
