@@ -19,6 +19,18 @@ const User = db.define('user', {
   },
 	isAdmin: {
 		type: Sequelize.BOOLEAN
+	},
+	address: {
+		type: Sequelize.STRING
+	},
+	phone: {
+		type: Sequelize.STRING(15)
+	},
+	creditCard: {
+		type: SEquelize.STRING(16)
+	},
+	isAdmin: {
+		type: Sequelize.BOOLEAN
 	}
 })
 
