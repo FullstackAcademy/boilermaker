@@ -39,13 +39,12 @@ async function seed () {
   // console.log(`seeded successfully`)
 
   const products = await Promise.all([
-    Product.create({name: "Egg Noodles", 
+    Product.create({name: "Wheat Noodles",
+    price: 8.00, description: "Tasty and made with classic wheat", inventoryCount: 50,
+    size: 50, categoryId: 4}),Product.create({name: "Egg Noodles", 
     image: "https://thefoodistuk.files.wordpress.com/2015/01/p1060025.jpg",
     price: 10.00, description: "Tasty and made with eggs", inventoryCount: 100,
     size: 60, categoryId: 2}),
-    Product.create({name: "Wheat Noodles",
-    price: 8.00, description: "Tasty and made with classic wheat", inventoryCount: 50,
-    size: 50, categoryId: 4}),
     Product.create({name: "Rice Noodles",
     image: "https://s3.amazonaws.com/ktowntogo/1r/LNPozDyoUD.jpg",
     price: 11.50, description: "Tasty and made with rice", inventoryCount: 150,
