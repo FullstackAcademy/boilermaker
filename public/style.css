@@ -25,6 +25,12 @@ form div {
   align-items: center;
 }
 
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .spaceBtw {
   justify-content: space-between;
 }
@@ -32,7 +38,9 @@ form div {
 .blue {
   background-color: blue
 }
-
+.fullWidth {
+  width: 100%;
+}
 /* -----------------NAV Section -------------------*/
 
 #title{
@@ -44,3 +52,8 @@ form div {
 }
 
 /* -----------------CATEGORY LIST Section -------------------*/
+.categoryContainer{
+  width: 50%;
+  height: 40px;
+  background-color: yellow;
+}

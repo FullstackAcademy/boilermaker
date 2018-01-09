@@ -19,8 +19,9 @@ class Routes extends Component {
 
     return (
       <div>
-        <Navbar />
         <Router history={history}>
+          <div>
+            <Navbar />
             <Switch>
               {/* Routes placed here are available to all visitors */}
               <Route path="/login" component={Login} />
@@ -37,6 +38,7 @@ class Routes extends Component {
               <Route exact path="/category/:categoryId" component={ProductList} />
               <Route component={FrontPage} />
             </Switch>
+          </div>
         </Router>
       </div>
     )

@@ -27,37 +27,40 @@ class Navbar extends Component {
     // const {children, handleClick, isLoggedIn} = props
     // console.log('clicked is --------------', clicked)
     return (
-      <div className="flex-container-row blue spaceBtw">
-        <div id="title">
-          <h3>RAMENZONE</h3>
-        </div>
-       <div className="flex-container-row menuContainer spaceBtw">
+      <div className="flex-container-column">
+        <div className="flex-container-row blue spaceBtw fullWidth">
+          <div id="title">
+            <h3>RAMENZONE</h3>
+          </div>
+        <div className="flex-container-row menuContainer spaceBtw">
 
-         <button onClick={this.handleClick}>SHOP</button>
-         {this.state.clicked && <CategoryList />}
-         <span>OURSTORY</span>
-         <span>FB</span>
-         <span>TW</span>
-         <span>EM</span>
-         <div className="flex-container-row">
-           <span>cartlogo</span>
-           <span>#</span>
-           <h3>CART</h3>
-         </div>
-          {
-            // !isLoggedIn
-            //   ? <div>
-            //     {/* The navbar will show these links after you log in */}
-            //     <Link to="/home">Home</Link>
-            //     <a href="#" onClick={handleClick}>Logout</a>
-            //   </div>
-            //   : <div>
-            //     {/* The navbar will show these links before you log in */}
-            //     <Link to="/login">Login</Link>
-            //     <Link to="/signup">Sign Up</Link>
-            //   </div>
-          }
+          <button onClick={this.handleClick}>SHOP</button>
+
+          <span>OURSTORY</span>
+          <span>FB</span>
+          <span>TW</span>
+          <span>EM</span>
+          <div className="flex-container-row">
+            <span>cartlogo</span>
+            <span>#</span>
+            <h3>CART</h3>
+          </div>
+            {
+              // !isLoggedIn
+              //   ? <div>
+              //     {/* The navbar will show these links after you log in */}
+              //     <Link to="/home">Home</Link>
+              //     <a href="#" onClick={handleClick}>Logout</a>
+              //   </div>
+              //   : <div>
+              //     {/* The navbar will show these links before you log in */}
+              //     <Link to="/login">Login</Link>
+              //     <Link to="/signup">Sign Up</Link>
+              //   </div>
+            }
+          </div>
         </div>
+        {this.state.clicked && <CategoryList />}
       </div>
       )
   }
