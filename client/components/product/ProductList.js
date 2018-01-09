@@ -1,17 +1,43 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 export class ProductList extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {  }
   }
   render() {
+    const { products } = this.props
+    console.log('PRODUCTS', this.props.products)
     return (
-      <div>
-        <h1 style={ {backgroundColor: 'green', height: '100vh'}}>Product List</h1>
-      </div>
-     )
+        <div className="flex-container-wrap green spaceBtw" >
+          {products.map( product => {
+            return <div className= "flex-container-column" key={product.id}>
+              <div className="productImage">
+                <img src={product.image}  />
+                </div>
+                <div className="flex-container-row spaceAround product">
+                  <span>{product.name}</span>
+                  <span>{`${product.size}-Pack`}</span>
+                </div>
+                <div>
+                  <span>{`$ ${product.price}`}</span>
+                </div>
+              </div>
+          })
+          }
+        </div>
+
+
+    )
   }
 }
 
-export default ProductList;
+
+const mapState = (state) => {
+  return {
+    products: state.products
+  }
+}
+
+export default connect(mapState)(ProductList)
