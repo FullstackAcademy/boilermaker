@@ -19,3 +19,28 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.flex-container-row {
+  display: flex;
+  align-items: center;
+}
+
+.spaceBtw {
+  justify-content: space-between;
+}
+
+.blue {
+  background-color: blue
+}
+
+/* -----------------NAV Section -------------------*/
+
+#title{
+  flex: 0 0 40%;
+}
+
+.menuContainer{
+  flex: 0 0 60%;
+}
+
+/* -----------------CATEGORY LIST Section -------------------*/
