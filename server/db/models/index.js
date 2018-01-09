@@ -19,6 +19,12 @@ const Review = require('./review')
 Product.belongsTo(Category);
 Category.hasMany(Product);
 
+Review.belongsTo(User);
+User.hasMany(Review);
+
+Review.belongsTo(Product);
+Product.hasMany(Review);
+
 module.exports = {
   User,
   Category,
