@@ -14,9 +14,11 @@ router.get('/:userId', (req, res, next) => {
 });
 
 // GET api/Orders/:orderId
-router.get('/:orderId/', (req, res, next) => {
+router.get('/:orderId/products', (req, res, next) => {
     const id = req.params.orderId;
-    Order.findById(id)
+    Order.findById(id, {
+			include: [Product]
+		})
         .then(order => {
             res.json(order);
         })
