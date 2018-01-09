@@ -27,7 +27,7 @@ const User = db.define('user', {
 		type: Sequelize.STRING(15)
 	},
 	creditCard: {
-		type: SEquelize.STRING(16)
+		type: Sequelize.STRING(16)
 	},
 	isAdmin: {
 		type: Sequelize.BOOLEAN
