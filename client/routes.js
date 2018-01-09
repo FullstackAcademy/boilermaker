@@ -4,7 +4,7 @@ import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import {Navbar, Login, Signup, UserHome, FrontPage} from './components'
-import {me} from './store'
+import {me, getProductsThunk } from './store'
 import ProductList from './components/product/ProductList';
 /**
  * COMPONENT
@@ -12,6 +12,7 @@ import ProductList from './components/product/ProductList';
 class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData()
+    this.props.loadProducts()
   }
 
   render () {
@@ -60,6 +61,9 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
+    },
+    loadProducts () {
+      dispatch(getProductsThunk())
     }
   }
 }
