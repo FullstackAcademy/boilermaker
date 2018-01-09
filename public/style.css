@@ -19,3 +19,41 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.flex-container-row {
+  display: flex;
+  align-items: center;
+}
+
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spaceBtw {
+  justify-content: space-between;
+}
+
+.blue {
+  background-color: blue
+}
+.fullWidth {
+  width: 100%;
+}
+/* -----------------NAV Section -------------------*/
+
+#title{
+  flex: 0 0 40%;
+}
+
+.menuContainer{
+  flex: 0 0 60%;
+}
+
+/* -----------------CATEGORY LIST Section -------------------*/
+.categoryContainer{
+  width: 50%;
+  height: 40px;
+  background-color: yellow;
+}

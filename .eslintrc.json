@@ -3,6 +3,6 @@
 	"parser": "babel-eslint",
 	"extends": "fullstack",
 	"rules": {
-		"semi": 0,
+		"semi": 0
 	}
 }
