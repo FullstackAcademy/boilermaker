@@ -3,14 +3,18 @@ const { Order, Product } = require('../db/models');
 module.exports = router;
 
 // GET api/orders
-router.get('/', (req, res, next) => {
-  Order.findAll({})
+router.get('/:userId', (req, res, next) => {
+  Order.findAll({
+		where: {
+			userId: req.params.userId
+		}
+	})
     .then(Orders => res.json(Orders))
     .catch(next)
 });
 
 // GET api/Orders/:orderId
-router.get('/:orderId', (req, res, next) => {
+router.get('/:orderId/', (req, res, next) => {
     const id = req.params.orderId;
     Order.findById(id)
         .then(order => {
@@ -23,7 +27,7 @@ router.get('/:orderId', (req, res, next) => {
 router.post('/', (req, res, next) => {
     Order.create(req.body.order)
     .then(order => {
-        order.addProduct([req.body.p1, req.body.p2]);
+        order.addProduct(req.body.shoppingCart);
         res.json(order);
     })
     .catch(next)
