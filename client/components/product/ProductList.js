@@ -12,9 +12,9 @@ export class ProductList extends Component {
     const products = categoryId ? this.props.products.filter(product => product.id === +categoryId) : this.props.products
 
     return (
-        <div className="flex-container-wrap green spaceBtw" >
+        <div className="flex-container-wrap green spaceBtw productListContainer" >
           {products.map( product => {
-            return <div className= "flex-container-column" key={product.id}>
+            return <div className= "flex-container-column productItemContainer" key={product.id}>
               <div className="productImage">
                 <img src={product.image}  />
                 </div>

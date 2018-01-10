@@ -27,23 +27,23 @@ class Navbar extends Component {
     // const {children, handleClick, isLoggedIn} = props
     // console.log('clicked is --------------', clicked)
     return (
-      <div className="flex-container-column">
-        <div className="flex-container-row blue spaceBtw fullWidth">
+      <div className="flex-container-column navContainer">
+        <div className="flex-container-row spaceBtw fullWidth topNavContainer">
           <div id="title">
-            <h3>RAMENZONE</h3>
+            <h2>RAMENZONE</h2>
           </div>
         <div className="flex-container-row menuContainer spaceBtw">
 
-          <button onClick={this.handleClick}>SHOP</button>
+          <button id="shopBtn" className="fontSpecial fontBlack" onClick={this.handleClick}>SHOP</button>
 
-          <span>OURSTORY</span>
+          <span className="fontSpecial fontBlack">RAMEN STORY</span>
           <span>FB</span>
           <span>TW</span>
           <span>EM</span>
           <div className="flex-container-row">
             <span>cartlogo</span>
             <span>#</span>
-            <h3>CART</h3>
+            <h3 className="fontBlack">CART</h3>
           </div>
             {
               // !isLoggedIn
