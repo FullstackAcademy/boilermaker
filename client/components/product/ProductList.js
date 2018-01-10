@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { AddToCartButton } from '../order/AddToCartButton'
 
 export class ProductList extends Component {
   constructor(props) {
@@ -25,6 +26,7 @@ export class ProductList extends Component {
                 </div>
                 <div>
                   <span>{`$ ${product.price}`}</span>
+                  <AddToCartButton item={product} />
                 </div>
               </div>
           })

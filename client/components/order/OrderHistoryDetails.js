@@ -1,6 +1,6 @@
 import React from 'react'
 
-const OrderDetails = (props) => {
+const OrderHistoryDetails = (props) => {
 	console.log(props)
 	return (
 		<div>
@@ -9,6 +9,6 @@ const OrderDetails = (props) => {
 	)
 }
 
-export default OrderDetails
+export default OrderHistoryDetails
 
 //TODO: add redux state: activeOrder & orders[]

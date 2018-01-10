@@ -44,7 +44,9 @@ class Navbar extends Component {
           <div className="flex-container-row">
             <span>cartlogo</span>
             <span>#</span>
+            <Link exact to={'/cart-list'}>
             <h3 className="fontBlack">CART</h3>
+            </Link>
           </div>
             {
               // !isLoggedIn
