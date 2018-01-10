@@ -7,8 +7,10 @@ export class ProductList extends Component {
     this.state = {  }
   }
   render() {
-    const { products } = this.props
-    console.log('PRODUCTS', this.props.products)
+
+    const categoryId = this.props.match.params.categoryId
+    const products = categoryId ? this.props.products.filter(product => product.id === +categoryId) : this.props.products
+
     return (
         <div className="flex-container-wrap green spaceBtw" >
           {products.map( product => {
