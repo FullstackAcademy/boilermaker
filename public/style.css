@@ -67,6 +67,10 @@ form div {
 .spaceAround {
   justify-content: space-around;
 }
+
+.marginTop {
+  margin-top: 200px;
+}
 /* -----------------NAV Section -------------------*/
 .navContainer {
   position: fixed;
@@ -146,6 +150,16 @@ form div {
   color: white;
   background-color: darkgoldenrod;
   display: inline-block;
-  width: 450px;
+  width: 480px;
   text-align: center;
+}
+
+/* -----------------SINGLE PAGE Section -------------------*/
+.productImgContainer {
+
+}
+
+.productImgContainer img {
+  height: 250px;
+  width: 250px;
 }

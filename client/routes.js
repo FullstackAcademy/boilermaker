@@ -8,6 +8,7 @@ import {me, getProductsThunk } from './store'
 import ProductList from './components/product/ProductList';
 import OrderDetails from './components/order/OrderDetails'
 import OrderContainer from './components/order/OrderContainer'
+import SingleProduct from './components/product/SingleProduct';
 /**
  * COMPONENT
  */
@@ -39,8 +40,9 @@ class Routes extends Component {
               {/* Displays our Login component as a fallback */}
               <Route exact path="/shopall" component={ProductList} />
               <Route exact path="/category/:categoryId" component={ProductList} />
-              {/* <Route component={FrontPage} /> */}
+              <Route exact path="/" component={FrontPage} />
 							<Route exact path="/orders" component={OrderContainer} />
+              <Route exact path="/products/:productId" component={SingleProduct} />
 							<Route path="/orders/:orderId" component={OrderDetails} />
             </Switch>
           </div>
