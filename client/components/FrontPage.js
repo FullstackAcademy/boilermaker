@@ -1,4 +1,5 @@
 import React from 'react';
+import OrderContainer from './order/OrderContainer'
 
 export const FrontPage = (props) => {
 
