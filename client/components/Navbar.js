@@ -40,6 +40,7 @@ class Navbar extends Component {
           <span>FB</span>
           <span>TW</span>
           <span>EM</span>
+					<Link to={'/orders'}><span>My orders</span></Link>
           <div className="flex-container-row">
             <span>cartlogo</span>
             <span>#</span>

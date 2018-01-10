@@ -1,29 +1,16 @@
 import React from 'react'
-import axios from 'axios'
+import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchOrders } from '../../store'
 
-import OrderDetails from './OrderDetails'
-
-export default class OrderContainer extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			orders: []
-		}
-	}
+class OrderContainer extends React.Component {
 
 	componentWillMount() {
-		console.log('test')
-		axios.get('/api/orders/1')
-		.then(res => res.data)
-		.then(results => {
-			console.log(results)
-			this.setState({ orders: results })
-		})
-
+		this.props.fetchOrders()
 	}
 
 	render() {
-		let list = this.state.orders.map(order => <OrderDetails key={order.id} order={order} />)
+		let list = this.props.orders.map(order => <Link to={`/api/orders/${order.id}`} key={order.id}>{order.id}</Link>)
 		return (
 			<div>
 				<p>OrderContainer</p>
@@ -36,3 +23,17 @@ export default class OrderContainer extends React.Component {
 		)
 	}
 }
+
+const mapState = (state) => {
+	return {
+		orders: state.orders
+	}
+}
+
+const mapDispatch = () => {
+	return {
+		fetchOrders: fetchOrders({ id: 1 })
+	}
+}
+
+export default connect(mapState, mapDispatch)(OrderContainer)

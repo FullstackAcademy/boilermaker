@@ -7,7 +7,8 @@ router.get('/:userId', (req, res, next) => {
   Order.findAll({
 		where: {
 			userId: req.params.userId
-		}
+		},
+		include: [Product]
 	})
     .then(Orders => res.json(Orders))
     .catch(next)

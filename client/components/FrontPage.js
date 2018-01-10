@@ -6,7 +6,6 @@ export const FrontPage = (props) => {
   return (
     <div>
       <h1 style={ {backgroundColor: 'grey', height: '100vh'}}>Front Page</h1>
-			<OrderContainer />
     </div>
   )
 }
