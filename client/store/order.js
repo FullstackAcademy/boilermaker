@@ -4,7 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GOT_ORDERS = 'GOT_ORDERS'
-const GOT_ACTIVE_ORDER = 'GOT_ACTIVE_ORDER'
+// const GOT_ACTIVE_ORDER = 'GOT_ACTIVE_ORDER'
 
 /**
  * INITIAL STATE
@@ -20,10 +20,10 @@ const gotOrders = (orders) => ({
 	orders
 })
 
-const gotActiveOrder = (activeOrder) => ({
-	type: GOT_ACTIVE_ORDER,
-	activeOrder
-})
+// const gotActiveOrder = (activeOrder) => ({
+// 	type: GOT_ACTIVE_ORDER,
+// 	activeOrder
+// })
 /**
  * THUNK CREATORS
  */

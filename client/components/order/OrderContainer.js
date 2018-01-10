@@ -30,9 +30,9 @@ const mapState = (state) => {
 	}
 }
 
-const mapDispatch = () => {
+const mapDispatch = (dispatch) => {
 	return {
-		fetchOrders: fetchOrders({ id: 1 })
+		fetchOrders: () => dispatch(fetchOrders({ id: 1 }))
 	}
 }
 
