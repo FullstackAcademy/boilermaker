@@ -28,10 +28,10 @@ async function seed () {
   // console.log(`seeded successfully`)
 
   const categories = await Promise.all([
-    Category.create({name: 'rice'}),
-    Category.create({name: 'wheat'}),
-    Category.create({name: 'Veggie'}),
-    Category.create({name: 'Egg'}),
+    Category.create({name: 'rice', id: 1}),
+    Category.create({name: 'wheat', id: 2}),
+    Category.create({name: 'Veggie', id: 3}),
+    Category.create({name: 'Egg', id: 4}),
   ])
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
@@ -41,18 +41,18 @@ async function seed () {
   const products = await Promise.all([
     Product.create({name: "Wheat Noodles",
     price: 8.00, description: "Tasty and made with classic wheat", inventoryCount: 50,
-    size: 50, categoryId: 4}),Product.create({name: "Egg Noodles",
+    size: 50, categoryId: 2}),Product.create({name: "Egg Noodles",
     image: "https://thefoodistuk.files.wordpress.com/2015/01/p1060025.jpg",
     price: 10.00, description: "Tasty and made with eggs", inventoryCount: 100,
-    size: 60, categoryId: 2}),
+    size: 60, categoryId: 4}),
     Product.create({name: "Rice Noodles",
     image: "https://s3.amazonaws.com/ktowntogo/1r/LNPozDyoUD.jpg",
     price: 11.50, description: "Tasty and made with rice", inventoryCount: 150,
-    size: 80, categoryId: 3}),
+    size: 80, categoryId: 1}),
     Product.create({name: "Veggie Noodles",
     image: "https://fitfoodiefinds.com/wp-content/uploads/2014/05/veggies5.jpg",
     price: 12.50, description: "Tasty and made with sweet potatoes, zucchini and butternut squash", inventoryCount: 200,
-    size: 65, categoryId: 1})
+    size: 65, categoryId: 3})
   ])
 
   const reviews = await Promise.all([
