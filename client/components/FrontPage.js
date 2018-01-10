@@ -3,8 +3,8 @@ import React from 'react';
 export const FrontPage = (props) => {
 
   return (
-    <div>
-      <h1 style={ {backgroundColor: 'grey', height: '100vh'}}>Front Page</h1>
+    <div className="frontPageContainer flex-container-column">
+      <h1>BUY A BAR. FEED A CHILD.</h1>
     </div>
   )
 }

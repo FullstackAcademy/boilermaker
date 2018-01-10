@@ -8,7 +8,7 @@ export const FrontPage = (props) => {
   return (
     <div className="flex-container-row spaceBtw categoryContainer">
       <NavLink exact to='/shopall'>
-      <span>all</span>
+      <span className="fontSpecial categoryName">all</span>
       </NavLink>
 
 
@@ -17,7 +17,7 @@ export const FrontPage = (props) => {
         category => {
         return (
         <NavLink key={category.name} exact to={`/category/${category.id}`}>
-          <span >{category.name}</span>
+          <span className="fontSpecial categoryName">{category.name}</span>
         </NavLink>
         )
       })
