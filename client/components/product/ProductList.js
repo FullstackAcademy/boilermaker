@@ -9,8 +9,9 @@ export class ProductList extends Component {
   render() {
 
     const categoryId = this.props.match.params.categoryId
-    const products = categoryId ? this.props.products.filter(product => product.id === +categoryId) : this.props.products
+    const products = categoryId ? this.props.products.filter(product => product.categoryId === +categoryId) : this.props.products
 
+    console.log('this.props.products--------------', this.props.products)
     return (
         <div className="flex-container-wrap green spaceBtw productListContainer" >
           {products.map( product => {
