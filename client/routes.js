@@ -41,7 +41,8 @@ class Routes extends Component {
               {/* Displays our Login component as a fallback */}
               <Route exact path="/shopall" component={ProductList} />
               <Route exact path="/category/:categoryId" component={ProductList} />
-              {/* <Route component={FrontPage} /> */}
+              <Route exact path="/" component={FrontPage} />
+              <Route exact path="/products/:productId" component={SingleProduct} />
 							<Route exact path="/order-history" component={OrderHistoryContainer} />
               <Route exact path="/cart-list" component={CartList} />
 							<Route path="/orders/:orderId" component={OrderHistoryDetails} />

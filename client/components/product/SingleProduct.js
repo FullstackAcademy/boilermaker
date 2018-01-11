@@ -34,9 +34,10 @@ class SingleProduct extends Component {
                 <div>
                   <div>
                     <span>QUANTITY</span>
-                    <input type= "text" placeHolder="1"/>
+                    <input type="text" 
+                           placeHolder="1"/>
                   </div>
-                  <button>ADD TO CART</button>
+                  <button type="submit">ADD TO CART</button>
                 </div>
               </div>
               <div>
