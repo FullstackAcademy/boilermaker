@@ -1,14 +1,11 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-
 const Review = db.define('review', {
   body: {
     type: Sequelize.TEXT,
     allowNull: false,
     validate: {
-      len: {
-        args: [20, 5000],
-      }
+      len: [20, 5000]
     }
   },
   rating: {
@@ -21,11 +18,28 @@ const Review = db.define('review', {
   }
 })
 
-Review.findAverage = function(productId){
+// Review.findAverage = function(productId){
+//   return this.findAll({
+//     where: {
+//       productId: productId
+//     }
+//   })
+//   .then(selectedProductReviews => {
+//
+//     const totalRating = selectedProductReviews
+//     .reduce((accumulator, currentElement) => {
+//       return accumulator + currentElement.rating
+//     }, 0)
+//     return totalRating / selectedProductReviews.length
+//   })
+// }
+
+Review.findReviewsWithAverage = function(productId){
   return this.findAll({
     where: {
       productId: productId
-    }
+    },
+		include: [require('./User')]
   })
   .then(selectedProductReviews => {
 
@@ -33,7 +47,7 @@ Review.findAverage = function(productId){
     .reduce((accumulator, currentElement) => {
       return accumulator + currentElement.rating
     }, 0)
-    return totalRating / selectedProductReviews.length
+    return {reviews: [...selectedProductReviews], avg: totalRating / selectedProductReviews.length}
   })
 }
 

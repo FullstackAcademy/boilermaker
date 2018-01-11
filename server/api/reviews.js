@@ -3,19 +3,22 @@ const { Review } = require('../db/models')
 module.exports = router
 
 //GET api/reviews
-router.get('/', (req, res, next) => {
-  Review.findAll({
-  })
-    .then(reviews => res.json(reviews))
-    .catch(next)
-  }
-)
+router.get('/:productId', (req, res, next) => {
+	const productId = +req.params.productId;
+	Review.findReviewsWithAverage(productId)
+		.then((reviews) => {
+				res.json(reviews)
+		})
+})
 
 //GET api/reviews/avgrating
 router.get('/:productId/avgrating', (req, res, next) => {
   const productId = +req.params.productId;
   console.log('productId  is-----------------', productId )
-  Review.findAverage(productId)
+
+
+
+	Review.findAverage(productId)
     .then(avgRating => {
       console.log('avgrating is-----------------', avgRating)
       res.json(avgRating)
