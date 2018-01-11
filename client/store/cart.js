@@ -13,7 +13,7 @@ const defaultItems = []
 /**
  * ACTION CREATORS
  */
-const AddItem = (item) => ({
+export const addItem = (item) => ({
 	type: ADD_ITEM,
 	item
 })

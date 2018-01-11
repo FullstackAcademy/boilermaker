@@ -2,15 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addItem } from '../../store/cart'
 
-function AddToCartButton (props) {
+const AddToCartButton = (props) => {
   return (
-    <button>Add To Cart</button>
+    <button onClick={() => props.addToCart(props.item)}>Add To Cart</button>
   )
 }
 
 const mapDispatch = (dispatch) => {
 	return {
-		AddToCart: () => dispatch(addItem(item))
+		addToCart: (item) => dispatch(addItem(item))
 	}
 }
 

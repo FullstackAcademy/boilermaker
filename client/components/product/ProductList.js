@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { AddToCartButton } from '../order/AddToCartButton'
+import AddToCartButton from '../order/AddToCartButton'
 
-export class ProductList extends Component {
+class ProductList extends Component {
   constructor(props) {
     super(props)
     this.state = {  }
