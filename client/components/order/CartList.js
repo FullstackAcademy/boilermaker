@@ -1,19 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { fetchItems } from '../../store/cart'
 
 export class CartList extends Component {
   constructor(props) {
     super(props)
     this.state = {  }
   }
+
+  componentDidMount(){
+    this.props.getAllLineItems(this.props.userId);
+  }
+
   render() {
 
    const items = this.props.items
-
-    console.log('this.props.products--------------', this.props.products)
     return (
         <div className="flex-container-wrap green spaceBtw productListContainer" >
-          {items.map( item => {
+          {
+            items&&
+            items.map( item => {
             return <div className= "flex-container-column productItemContainer" key={item.id}>
               <div className="productImage">
                 <img src={item.image}  />
@@ -38,8 +44,17 @@ export class CartList extends Component {
 
 const mapState = (state) => {
   return {
-    items: state.cartItems
+    items: state.cartItems,
+    userId: state.user.id
   }
 }
 
-export default connect(mapState)(CartList)
+const mapDisptach = dispatch => {
+  return {
+    getAllLineItems(userId) {
+      dispatch(fetchItems(userId))
+    }
+  }
+}
+
+export default connect(mapState, mapDisptach)(CartList)
