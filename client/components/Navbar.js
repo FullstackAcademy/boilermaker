@@ -31,7 +31,7 @@ class Navbar extends Component {
         <div className="flex-container-row spaceBtw fullWidth topNavContainer">
           <div id="title">
             <NavLink exact to="/">
-              <h2>RAMENZONE</h2>
+              <h2>RAMENZON</h2>
             </ NavLink >
           </div>
         <div className="flex-container-row menuContainer spaceBtw">

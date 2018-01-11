@@ -21,4 +21,20 @@ const Review = db.define('review', {
   }
 })
 
+Review.findAverage = function(productId){
+  return this.findAll({
+    where: {
+      productId: productId
+    }
+  })
+  .then(selectedProductReviews => {
+
+    const totalRating = selectedProductReviews
+    .reduce((accumulator, currentElement) => {
+      return accumulator + currentElement.rating
+    }, 0)
+    return totalRating / selectedProductReviews.length
+  })
+}
+
 module.exports = Review
