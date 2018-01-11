@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 /**
  * ACTION TYPES
  */
@@ -17,6 +19,16 @@ export const addItem = (item) => ({
 	type: ADD_ITEM,
 	item
 })
+
+/* THUNK */
+export const postItem = (item) => {
+  console.log('item', item);
+  dispatch =>
+    axios.post('/api/lineItems', item)
+      .then(res => dispatch(addItem(res.data || defaultItems)))
+      .catch(err => console.log(err))
+}
+  
 
 /**
  * REDUCER

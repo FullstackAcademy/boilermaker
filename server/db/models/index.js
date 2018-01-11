@@ -26,6 +26,9 @@ Order.hasMany(LineItem)
 Product.belongsTo(LineItem)
 LineItem.hasMany(Product)
 
+LineItem.belongsTo(User)
+User.hasMany(LineItem)
+
 module.exports = {
   User,
   Category,
