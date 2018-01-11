@@ -36,6 +36,8 @@ export default function (state = defaultReviews, action) {
   switch (action.type) {
     case GET_REVIEWS:
       return action.reviews
+		case CREATED_REVIEW:
+      return [...state.reviews, action.review]
     default:
       return state
   }

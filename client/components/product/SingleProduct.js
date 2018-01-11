@@ -57,7 +57,6 @@ class SingleProduct extends Component {
 }
 
 const mapState = (state, ownProps) => {
-  console.log('ownprops is ------------', ownProps)
   const productId = ownProps.match.params.productId;
 
   return {
@@ -69,7 +68,6 @@ const mapState = (state, ownProps) => {
 
 const mapDispatch = (dispatch, ownProps) => {
   const productId = +ownProps.match.params.productId
-  console.log('productid is --------', productId)
   return {
     getReviewsWithAverageThunk(){
       dispatch(getReviewsWithAverageThunk(productId))

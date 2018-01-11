@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import {logout, getCategoriesThunk} from '../store'
 import CategoryList from './CategoryList';
 
@@ -12,8 +12,8 @@ import CategoryList from './CategoryList';
  *  rendered out by the component's `children`.
  */
 class Navbar extends Component {
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 		this.state = {clicked: false}
 		this.handleClick = this.handleClick.bind(this)
 	}
@@ -24,8 +24,7 @@ class Navbar extends Component {
 	}
 
   render(){
-    // const {children, handleClick, isLoggedIn} = props
-    // console.log('clicked is --------------', clicked)
+    const {children, handleClick, isLoggedIn} = this.props
 		let badge
 		if (this.props.cartItems.length > 0) {
 				badge = <h3 style={{ color: 'red' }}>{this.props.cartItems.length}</h3>
@@ -43,9 +42,18 @@ class Navbar extends Component {
 					<button id="shopBtn" className="fontSpecial fontBlack" onClick={this.handleClick}>SHOP</button>
 
 					<span className="fontSpecial fontBlack">RAMEN STORY</span>
-					<span>FB</span>
-					<span>TW</span>
-					<span>EM</span>
+					{
+						isLoggedIn
+						  ? <div>
+						    {/* The navbar will show these links after you log in */}
+						    <Link to="/logout" onClick={handleClick}>Logout</Link>
+						  </div>
+						  : <div>
+						    {/* The navbar will show these links before you log in */}
+						    <Link to="/login">Login</Link>
+						    <Link to="/signup">Sign Up</Link>
+						  </div>
+					}
 					<NavLink to={'/orders'}><span>My orders</span></NavLink>
 					<div className="flex-container-row">
 						<span>cartlogo</span>
@@ -59,19 +67,7 @@ class Navbar extends Component {
 							</div>
 						</NavLink>
 					</div>
-						{
-							// !isLoggedIn
-							//   ? <div>
-							//     {/* The navbar will show these links after you log in */}
-							//     <Link to="/home">Home</Link>
-							//     <a href="#" onClick={handleClick}>Logout</a>
-							//   </div>
-							//   : <div>
-							//     {/* The navbar will show these links before you log in */}
-							//     <Link to="/login">Login</Link>
-							//     <Link to="/signup">Sign Up</Link>
-							//   </div>
-						}
+
 					</div>
 				</div>
 				{this.state.clicked && <CategoryList />}
