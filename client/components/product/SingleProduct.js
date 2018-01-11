@@ -17,7 +17,6 @@ class SingleProduct extends Component {
 
   render() {
     const product = this.props.product
-    console.log('rating is----------', this.props.rating3)
     return (
       <div>
         <div>
@@ -34,10 +33,6 @@ class SingleProduct extends Component {
                 <span>{`${product.size}-pack`}</span>
                 </div>
                 <div>
-                  <div>
-                    <span>QUANTITY</span>
-                    <input type= "text" placeHolder="1"/>
-                  </div>
                   <AddToCartButton item={product} />
                 </div>
               </div>
@@ -57,7 +52,6 @@ class SingleProduct extends Component {
 }
 
 const mapState = (state, ownProps) => {
-  console.log('ownprops is ------------', ownProps)
   const productId = ownProps.match.params.productId;
 
   return {
@@ -69,7 +63,6 @@ const mapState = (state, ownProps) => {
 
 const mapDispatch = (dispatch, ownProps) => {
   const productId = +ownProps.match.params.productId
-  console.log('productid is --------', productId)
   return {
     getAvgRating(){
       dispatch(getRatingThunk(productId))
