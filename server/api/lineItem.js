@@ -3,21 +3,26 @@ const { LineItem, Product } = require('../db/models');
 
 module.exports = router
 
-//GET /api/lineItems
-router.get('/', (req, res, next) => {
-    res.send(200);
+//GET /api/lineItems/:id
+router.get('/:id', (req, res, next) => {
+    const userId = req.params.id;
+    
+    LineItem.findAll({
+        where: {userId}
+    })
+    .then(lineItems =>{
+        const allProducts = lineItems.map(item => {
+        return item.getProducts()
+    })
+        return Promise.all(allProducts)
+        .then(lineItems => {
+            // console.log('backend ------', lineItems)
+            res.json([...lineItems])
+        })
+        .catch(next)
+    })
+    
 })
-
-// // POST api/orders
-// router.post('/', (req, res, next) => {
-//   Order.create(req.body.order)
-//   .then(order => {
-//       order.addProduct(req.body.shoppingCart);
-//       res.json(order);
-//   })
-//   .catch(next)
-// });
-
 
 //POST /api/lineItems
 router.post('/', (req, res, next) => {
