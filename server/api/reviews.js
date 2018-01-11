@@ -11,6 +11,19 @@ router.get('/', (req, res, next) => {
   }
 )
 
+//GET api/reviews/avgrating
+router.get('/:productId/avgrating', (req, res, next) => {
+  const productId = +req.params.productId;
+  console.log('productId  is-----------------', productId )
+  Review.findAverage(productId)
+    .then(avgRating => {
+      console.log('avgrating is-----------------', avgRating)
+      res.json(avgRating)
+    })
+    .catch(next)
+  }
+)
+
 // GET api/reviews/:reviewId
 router.get('/:reviewId', (req, res, next) => {
   const id = req.params.reviewId;

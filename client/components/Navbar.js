@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+<<<<<<< HEAD
 import {NavLink} from 'react-router-dom'
+=======
+import {Link, NavLink} from 'react-router-dom'
+>>>>>>> e7f81c047488908aa2d5207d266f750261556881
 import {logout, getCategoriesThunk} from '../store'
 import CategoryList from './CategoryList';
 
@@ -23,20 +27,22 @@ class Navbar extends Component {
 		this.props.getCategories();
 	}
 
-	render(){
-		// const {children, handleClick, isLoggedIn} = props
-		// console.log('clicked is --------------', clicked)
+  render(){
+    // const {children, handleClick, isLoggedIn} = props
+    // console.log('clicked is --------------', clicked)
 		let badge
 		if (this.props.cartItems.length > 0) {
 				badge = <div style={{ backgroundColor: 'red' }}>{this.props.cartItems.length}</div>
 		}
-		return (
-			<div className="flex-container-column navContainer">
-				<div className="flex-container-row spaceBtw fullWidth topNavContainer">
-					<div id="title">
-						<h2>RAMENZONE</h2>
-					</div>
-				<div className="flex-container-row menuContainer spaceBtw">
+    return (
+      <div className="flex-container-column navContainer">
+        <div className="flex-container-row spaceBtw fullWidth topNavContainer">
+          <div id="title">
+            <NavLink exact to="/">
+              <h2>RAMENZON</h2>
+            </ NavLink >
+          </div>
+        <div className="flex-container-row menuContainer spaceBtw">
 
 					<button id="shopBtn" className="fontSpecial fontBlack" onClick={this.handleClick}>SHOP</button>
 

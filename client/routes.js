@@ -9,6 +9,7 @@ import ProductList from './components/product/ProductList';
 import OrderHistoryDetails from './components/order/OrderHistoryDetails'
 import OrderHistoryContainer from './components/order/OrderHistoryContainer'
 import CartList from './components/order/CartList'
+import SingleProduct from './components/product/SingleProduct';
 /**
  * COMPONENT
  */
