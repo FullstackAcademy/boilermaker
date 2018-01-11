@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-<<<<<<< HEAD
 import {NavLink} from 'react-router-dom'
-=======
-import {Link, NavLink} from 'react-router-dom'
->>>>>>> e7f81c047488908aa2d5207d266f750261556881
 import {logout, getCategoriesThunk} from '../store'
 import CategoryList from './CategoryList';
 

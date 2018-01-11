@@ -18,9 +18,9 @@ const getReviews = reviews => ({type: GET_REVIEWS, reviews})
 /**
  * THUNK CREATORS
  */
-export const getReviewsThunk = () =>
+export const getReviewsWithAverageThunk = (productId) =>
   dispatch =>
-    axios.get('/api/reviews')
+    axios.get(`/api/reviews/${productId}`)
       .then(res => dispatch(getReviews(res.data || defaultReviews)))
       .catch(err => console.log(err))
 

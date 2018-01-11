@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import Reviews from '../reviews'
-import { getRatingThunk } from '../../store/index';
+import { getReviewsWithAverageThunk } from '../../store/index';
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -10,11 +10,12 @@ class SingleProduct extends Component {
   }
 
   componentDidMount(){
-    this.props.getAvgRating();
+    this.props.getReviewsWithAverageThunk();
   }
 
   render() {
     const product = this.props.product
+		const { reviews, avg } = this.props.reviews
     console.log('rating is----------', this.props.rating3)
     return (
       <div>
@@ -23,7 +24,7 @@ class SingleProduct extends Component {
             <div className="marginTop flex-container-row  singleProductContainer">
             <div className="productImgContainer flex-container-column">
               <img src={`${product.image}`} />
-              <span>{`AVERAGE REVIEW ${this.props.rating}`}</span>
+              <span>{`AVERAGE REVIEW ${this.props.avg}`}</span>
             </div>
             <div className="flex-container-column singleProductInfoContainer">
               <div className="flex-container-column singleProductInfoContainerTop">
@@ -48,7 +49,7 @@ class SingleProduct extends Component {
           </div>
           }
       </div>
-      <Reviews />
+      <Reviews reviews={reviews}/>
     </div>
      )
   }
@@ -60,7 +61,7 @@ const mapState = (state, ownProps) => {
 
   return {
     product: state.products.find(product => product.id === +productId),
-    rating: state.currentRating
+    reviews: state.reviews
   }
 
 }
@@ -69,8 +70,8 @@ const mapDispatch = (dispatch, ownProps) => {
   const productId = +ownProps.match.params.productId
   console.log('productid is --------', productId)
   return {
-    getAvgRating(){
-      dispatch(getRatingThunk(productId))
+    getReviewsWithAverageThunk(){
+      dispatch(getReviewsWithAverageThunk(productId))
     }
   }
 }
