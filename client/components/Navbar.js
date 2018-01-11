@@ -28,7 +28,7 @@ class Navbar extends Component {
     // console.log('clicked is --------------', clicked)
 		let badge
 		if (this.props.cartItems.length > 0) {
-				badge = <div style={{ backgroundColor: 'red' }}>{this.props.cartItems.length}</div>
+				badge = <h3 style={{ color: 'red' }}>{this.props.cartItems.length}</h3>
 		}
     return (
       <div className="flex-container-column navContainer">

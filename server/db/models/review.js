@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-
 const Review = db.define('review', {
   body: {
     type: Sequelize.TEXT,
@@ -41,7 +40,8 @@ Review.findReviewsWithAverage = function(productId){
   return this.findAll({
     where: {
       productId: productId
-    }
+    },
+		include: [require('./User')]
   })
   .then(selectedProductReviews => {
 

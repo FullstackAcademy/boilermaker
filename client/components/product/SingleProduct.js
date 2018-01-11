@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import Reviews from '../reviews'
+import ReviewContainer from '../review/ReviewContainer'
 import { getReviewsWithAverageThunk } from '../../store/index';
+import AddToCartButton from '../order/AddToCartButton'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class SingleProduct extends Component {
             <div className="marginTop flex-container-row  singleProductContainer">
             <div className="productImgContainer flex-container-column">
               <img src={`${product.image}`} />
-              <span>{`AVERAGE REVIEW ${this.props.avg}`}</span>
+              <span>{`AVERAGE REVIEW ${avg}`}</span>
             </div>
             <div className="flex-container-column singleProductInfoContainer">
               <div className="flex-container-column singleProductInfoContainerTop">
@@ -35,9 +36,9 @@ class SingleProduct extends Component {
                 <div>
                   <div>
                     <span>QUANTITY</span>
-                    <input type= "text" placeHolder="1"/>
+                    <input type= "text" placeholder="1" />
                   </div>
-                  <button>ADD TO CART</button>
+                  <AddToCartButton item={product} />
                 </div>
               </div>
               <div>
@@ -49,7 +50,7 @@ class SingleProduct extends Component {
           </div>
           }
       </div>
-      <Reviews reviews={reviews}/>
+      <ReviewContainer reviews={reviews} />
     </div>
      )
   }
