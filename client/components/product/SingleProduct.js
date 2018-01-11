@@ -34,10 +34,6 @@ class SingleProduct extends Component {
                 <span>{`${product.size}-pack`}</span>
                 </div>
                 <div>
-                  <div>
-                    <span>QUANTITY</span>
-                    <input type= "text" placeholder="1" />
-                  </div>
                   <AddToCartButton item={product} />
                 </div>
               </div>

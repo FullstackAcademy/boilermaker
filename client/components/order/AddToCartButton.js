@@ -35,7 +35,8 @@ export class AddToCartButton extends Component {
   handleSubmit(event){
     event.preventDefault()
 
-    let item = {userId: this.props.userId,
+    let item = {
+      userId: this.props.userId,
       productId: this.props.productId,
       quantity: +this.state.quantityEntry,
       price: this.props.price};
