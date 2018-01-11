@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import AddToCartButton from '../order/AddToCartButton'
 import { NavLink } from 'react-router-dom';
 
-export class ProductList extends Component {
+class ProductList extends Component {
   constructor(props) {
     super(props)
     this.state = {  }
@@ -27,6 +28,7 @@ export class ProductList extends Component {
                 </div>
                 <div>
                   <span>{`$ ${product.price}`}</span>
+                  <AddToCartButton item={product} />
                 </div>
               </div>
             </NavLink>

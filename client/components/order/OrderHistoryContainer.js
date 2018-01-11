@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchOrders } from '../../store'
 
-class OrderContainer extends React.Component {
+class OrderHistoryContainer extends React.Component {
 
 	componentWillMount() {
 		this.props.fetchOrders()
@@ -36,4 +36,4 @@ const mapDispatch = (dispatch) => {
 	}
 }
 
-export default connect(mapState, mapDispatch)(OrderContainer)
+export default connect(mapState, mapDispatch)(OrderHistoryContainer)

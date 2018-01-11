@@ -6,8 +6,9 @@ import history from './history'
 import {Navbar, Login, Signup, UserHome, FrontPage} from './components'
 import {me, getProductsThunk } from './store'
 import ProductList from './components/product/ProductList';
-import OrderDetails from './components/order/OrderDetails'
-import OrderContainer from './components/order/OrderContainer'
+import OrderHistoryDetails from './components/order/OrderHistoryDetails'
+import OrderHistoryContainer from './components/order/OrderHistoryContainer'
+import CartList from './components/order/CartList'
 import SingleProduct from './components/product/SingleProduct';
 /**
  * COMPONENT
@@ -40,10 +41,10 @@ class Routes extends Component {
               {/* Displays our Login component as a fallback */}
               <Route exact path="/shopall" component={ProductList} />
               <Route exact path="/category/:categoryId" component={ProductList} />
-              <Route exact path="/" component={FrontPage} />
-							<Route exact path="/orders" component={OrderContainer} />
-              <Route exact path="/products/:productId" component={SingleProduct} />
-							<Route path="/orders/:orderId" component={OrderDetails} />
+              {/* <Route component={FrontPage} /> */}
+							<Route exact path="/order-history" component={OrderHistoryContainer} />
+              <Route exact path="/cart-list" component={CartList} />
+							<Route path="/orders/:orderId" component={OrderHistoryDetails} />
             </Switch>
           </div>
         </Router>
