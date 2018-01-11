@@ -46,8 +46,7 @@ class Navbar extends Component {
 						isLoggedIn
 						  ? <div>
 						    {/* The navbar will show these links after you log in */}
-						    <Link to="/home">Home</Link>
-						    <a href="#" onClick={handleClick}>Logout</a>
+						    <Link to="/logout" onClick={handleClick}>Logout</Link>
 						  </div>
 						  : <div>
 						    {/* The navbar will show these links before you log in */}
@@ -68,7 +67,7 @@ class Navbar extends Component {
 							</div>
 						</NavLink>
 					</div>
-						
+
 					</div>
 				</div>
 				{this.state.clicked && <CategoryList />}

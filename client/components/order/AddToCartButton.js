@@ -31,13 +31,13 @@ export class AddToCartButton extends Component {
       quantityEntry: event.target.value
     })
   }
-  
+
   handleSubmit(event){
     event.preventDefault()
 
-    let item = {userId: this.props.userId, 
-      productId: this.props.productId, 
-      quantity: this.state.quantityEntry, 
+    let item = {userId: this.props.userId,
+      productId: this.props.productId,
+      quantity: +this.state.quantityEntry,
       price: this.props.price};
 
     this.props.addItems(item)
@@ -46,7 +46,7 @@ export class AddToCartButton extends Component {
 
 const mapState = (state, ownProps) => {
   return {
-    userId: state.userId,
+    userId: state.user.id,
     productId: ownProps.item.id,
     price: ownProps.item.price
   }

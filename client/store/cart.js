@@ -21,14 +21,11 @@ export const addItem = (item) => ({
 })
 
 /* THUNK */
-export const postItem = (item) => {
-  console.log('item', item);
+export const postItem = (item) =>
   dispatch =>
     axios.post('/api/lineItems', item)
       .then(res => dispatch(addItem(res.data || defaultItems)))
       .catch(err => console.log(err))
-}
-  
 
 /**
  * REDUCER

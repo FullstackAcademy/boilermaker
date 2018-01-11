@@ -14,17 +14,14 @@ User.hasMany(Review);
 Review.belongsTo(Product);
 Product.hasMany(Review);
 
-// Product.belongsToMany(Order, { through: "ProductOrder" });
-// Order.belongsToMany(Product, { through: "ProductOrder" });
+Product.belongsToMany(LineItem, {through: 'ProductLineItem'});
+LineItem.belongsToMany(Product, {through: 'ProductLineItem'});
 
 User.hasMany(Order)
 Order.belongsTo(User)
 
 LineItem.belongsTo(Order)
 Order.hasMany(LineItem)
-
-Product.belongsTo(LineItem)
-LineItem.hasMany(Product)
 
 LineItem.belongsTo(User)
 User.hasMany(LineItem)

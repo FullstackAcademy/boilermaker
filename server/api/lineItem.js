@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { LineItem } = require('../db/models');
+const { LineItem, Product } = require('../db/models');
 
 module.exports = router
 
@@ -8,18 +8,30 @@ router.get('/', (req, res, next) => {
     res.send(200);
 })
 
+// // POST api/orders
+// router.post('/', (req, res, next) => {
+//   Order.create(req.body.order)
+//   .then(order => {
+//       order.addProduct(req.body.shoppingCart);
+//       res.json(order);
+//   })
+//   .catch(next)
+// });
+
+
 //POST /api/lineItems
 router.post('/', (req, res, next) => {
+  console.log('req body is --------------------------', req.body)
     const { userId, productId, quantity, price } = req.body
-
     LineItem.findOrCreate({
         where: {
-            userId, productId, quantity, price
+            userId, quantity, price
         }
     })
     .spread((lineItem, isCreated) => {
-        res.json(lineItem)
+      return lineItem.addProduct(productId)
     })
+    .then(data => res.json(data))
     .catch(next)
 })
 
