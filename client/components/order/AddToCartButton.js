@@ -4,7 +4,11 @@ import { addItem } from '../../store/cart'
 
 const AddToCartButton = (props) => {
   return (
-    <button onClick={() => props.addToCart(props.item)}>Add To Cart</button>
+    <button onClick={(evt) => {
+      evt.preventDefault()
+      props.addToCart(props.item)
+    }
+    }>Add To Cart</button>
   )
 }
 
