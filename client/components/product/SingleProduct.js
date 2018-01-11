@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import Reviews from '../reviews'
-import { getRatingThunk } from '../../store/index';
+import { getRatingThunk } from '../../store/index'
+import AddToCartButton from '../order/AddToCartButton'
+
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -36,7 +38,7 @@ class SingleProduct extends Component {
                     <span>QUANTITY</span>
                     <input type= "text" placeHolder="1"/>
                   </div>
-                  <button>ADD TO CART</button>
+                  <AddToCartButton item={product} />
                 </div>
               </div>
               <div>
