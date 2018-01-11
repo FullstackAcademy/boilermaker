@@ -60,13 +60,13 @@ async function seed () {
     size: 1, categoryId: 1}),
 
     Product.create({name: "Dark Noodles 1",
-    image: "https://japancentre-images.freetls.fastly.net/recipes/pics/1659/main/KARAKA.gif?1495531764",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1c7nMXKaBJUJsap2gi44gOIf_HftiALTviPqYGa-x22onwQCRww",
     price: 12.50, description: "Tasty and made with sweet potatoes, zucchini and butternut squash", inventoryCount: 200,
     size: 2, categoryId: 3})
   ,
 
   Product.create({name: "Dark Noodles 2",
-  image: "http://noshandnibble.blog/content/images/2017/12/the-poke-shop-black-garlic-oil-tonkotsu-ramen.jpg",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJP92ERTxXWYAeolqMQZHPhvBz98jjbz2qb9SEifB0plxonoZI1Q",
   price: 12.50, description: "Tasty and made with sweet potatoes, zucchini and butternut squash", inventoryCount: 200,
   size: 2, categoryId: 3})
 ]
