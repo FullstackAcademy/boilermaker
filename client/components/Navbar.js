@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import {logout, getCategoriesThunk} from '../store'
 import CategoryList from './CategoryList';
 
@@ -30,7 +30,9 @@ class Navbar extends Component {
       <div className="flex-container-column navContainer">
         <div className="flex-container-row spaceBtw fullWidth topNavContainer">
           <div id="title">
-            <h2>RAMENZONE</h2>
+            <NavLink exact to="/">
+              <h2>RAMENZON</h2>
+            </ NavLink >
           </div>
         <div className="flex-container-row menuContainer spaceBtw">
 
