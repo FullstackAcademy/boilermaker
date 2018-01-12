@@ -49,6 +49,10 @@ export class AddToCartButton extends Component {
         price: this.props.price};
 
       this.props.addItems(item)
+    }else{
+      document.cookie = `productId=${this.props.productId}`
+      document.cookie = `quantity=${+this.state.quantityEntry}`
+      document.cookie = `price=${this.props.price}`
     }
   }
 }

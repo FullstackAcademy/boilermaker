@@ -9,6 +9,7 @@ import ProductList from './components/product/ProductList';
 import OrderHistoryDetails from './components/order/OrderHistoryDetails'
 import OrderHistoryContainer from './components/order/OrderHistoryContainer'
 import CartList from './components/order/CartList'
+import { authUserCart, unAuthUserCart } from './components/order/CartList'
 import SingleProduct from './components/product/SingleProduct'
 /**
  * COMPONENT
@@ -43,7 +44,8 @@ class Routes extends Component {
               <Route exact path="/category/:categoryId" component={ProductList} />
               <Route exact path="/products/:productId" component={SingleProduct} />
 							<Route exact path="/order-history" component={OrderHistoryContainer} />
-              <Route exact path="/cart-list" component={CartList} />
+              <Route exact path="/authUserCart" component={authUserCart} />
+              <Route exact path="/unAuthUserCart" component={unAuthUserCart} />
 							<Route exact path="/orders/:orderId" component={OrderHistoryDetails} />
               <Route exact path="/products/:productId" component={SingleProduct} />
               <Route path="/" component={FrontPage} />

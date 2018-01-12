@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchItems } from '../../store/cart'
 
+let login=false;
+
 export class CartList extends Component {
   constructor(props) {
     super(props)
@@ -9,12 +11,17 @@ export class CartList extends Component {
   }
 
   componentDidMount(){
-    this.props.getAllLineItems(this.props.userId);
+    if(this.props.userId) {
+      login = true;
+      this.props.getAllLineItems(this.props.userId);
+    }
+
   }
 
   render() {
 
    const items = this.props.items
+
     return (
         <div className="flex-container-wrap green spaceBtw productListContainer" >
           {
@@ -49,6 +56,15 @@ const mapState = (state) => {
   }
 }
 
+const mapStateUnauth = (state) => {
+  console.log('checking productId======', getCookie("productId"))
+  console.log('checking products======', state.products)
+  console.log('checking mapStateUnauth======', state.products.find(product => product.id === getCookie("productId")))
+  return {
+    items: state.products.find(product => product.id === getCookie("productId"))
+  }
+}
+
 const mapDisptach = dispatch => {
   return {
     getAllLineItems(userId) {
@@ -57,4 +73,20 @@ const mapDisptach = dispatch => {
   }
 }
 
-export default connect(mapState, mapDisptach)(CartList)
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+      }
+  }
+  return "";
+}
+
+  export const authUserCart = connect(mapState, mapDisptach)(CartList)
+  export const unAuthUserCart = connect(mapStateUnauth)(CartList)
