@@ -9,8 +9,8 @@ export const FrontPage = (props) => {
 
   return (
     <div className="flex-container-row spaceBtw categoryContainer">
-      <NavLink exact to='/shopall' isActive={() => props.removeSearchFilter([])}>
-      <span className="fontSpecial categoryName" onClick={() => props.removeSearchFilter([])}>all</span>
+      <NavLink exact to='/shopall'>
+      <span className="fontSpecial categoryName">ALL</span>
       </NavLink>
 
 
