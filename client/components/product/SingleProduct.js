@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import ReviewContainer from '../review/ReviewContainer'
-import { getReviewsWithAverageThunk } from '../../store/index';
+import { getReviewsWithAverageThunk } from '../../store/index'
 import AddToCartButton from '../order/AddToCartButton'
+import EditProductForm from './EditProductForm'
 
 class SingleProduct extends Component {
   constructor(props) {
@@ -17,7 +18,6 @@ class SingleProduct extends Component {
   render() {
     const product = this.props.product
 		const { reviews, avg } = this.props.reviews
-    console.log('rating is----------', this.props.rating3)
     return (
       <div>
         <div>
@@ -31,11 +31,14 @@ class SingleProduct extends Component {
               <div className="flex-container-column singleProductInfoContainerTop">
                 <div>
                 <span>{product.name}</span>
+                </div>
+                <div>
                 <span>{`${product.size}-pack`}</span>
                 </div>
                 <div>
                   <AddToCartButton item={product} />
                 </div>
+                  {this.props.user.isAdmin ? <EditProductForm product={product} /> :  <div />}
               </div>
               <div>
                 <h4>*FREE SHIPPING ON ORDERS OVER $50</h4>
@@ -44,6 +47,7 @@ class SingleProduct extends Component {
               </div>
             </div>
           </div>
+
           }
       </div>
       <ReviewContainer reviews={reviews} />
@@ -57,7 +61,8 @@ const mapState = (state, ownProps) => {
 
   return {
     product: state.products.find(product => product.id === +productId),
-    reviews: state.reviews
+    reviews: state.reviews,
+    user: state.user
   }
 
 }
