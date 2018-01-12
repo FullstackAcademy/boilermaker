@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AddToCartButton from '../order/AddToCartButton'
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
+import EditProductForm from './EditProductForm'
 
 class ProductList extends Component {
   constructor(props) {
     super(props)
-    this.state = {  }
+    this.state = {
+      showEditForm: false
+     }
   }
   render() {
 
@@ -29,6 +32,11 @@ class ProductList extends Component {
                 <div>
                   <span>{`$ ${product.price}`}</span>
                   <AddToCartButton item={product} />
+                  {this.props.user.isAdmin ? <EditProductForm product={product} /> : <div />}
+                  {/* {this.props.user.isAdmin ? <button onClick={(evt) => { evt.preventDefault()
+                    this.setState({showEditForm: !this.state.showEditForm})}}>Edit Product</button>
+
+          // : <div />}{this.props.user.isAdmin && this.state.showEditForm ? <EditProductForm product={product}/>: <div />} */}
                 </div>
               </div>
             </NavLink>
@@ -45,7 +53,8 @@ class ProductList extends Component {
 
 const mapState = (state) => {
   return {
-    products: state.products
+    products: state.products,
+    user: state.user
   }
 }
 
