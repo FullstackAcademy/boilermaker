@@ -6,7 +6,9 @@ export class AddToCartButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      quantityEntry: ''
+      quantityEntry: '',
+      loggedIn: false,
+      clicked: false
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -21,7 +23,10 @@ export class AddToCartButton extends Component {
             selections.map(selection => <option key={selection}>{selection}</option>)
           }
         </select>
-        <button type="submit">Add To Cart</button>
+        <div className="flex-container-column">
+          <button type="submit">Add To Cart</button>
+          {!this.state.loggedIn && this.state.clicked && <div className="loginReminder">Please log in or sign up</div>}
+          </ div>
       </form>
     )
   }
@@ -34,14 +39,17 @@ export class AddToCartButton extends Component {
 
   handleSubmit(event){
     event.preventDefault()
+    this.setState({clicked: true})
+    if (this.props.userId) {
+      this.setState({loggedIn: true});
+      let item = {
+        userId: this.props.userId,
+        productId: this.props.productId,
+        quantity: +this.state.quantityEntry,
+        price: this.props.price};
 
-    let item = {
-      userId: this.props.userId,
-      productId: this.props.productId,
-      quantity: +this.state.quantityEntry,
-      price: this.props.price};
-
-    this.props.addItems(item)
+      this.props.addItems(item)
+    }
   }
 }
 

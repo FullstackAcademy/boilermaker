@@ -46,18 +46,17 @@ class Navbar extends Component {
 						isLoggedIn
 						  ? <div>
 						    {/* The navbar will show these links after you log in */}
-						    <Link to="/logout" onClick={handleClick}>Logout</Link>
+						    <Link to="/logout" className="fontSpecial fontBlack" onClick={handleClick}>LOGOUT</Link>
 						  </div>
-						  : <div>
+						  : <div className="loginMenu flex-container-row spaceBtw">
 						    {/* The navbar will show these links before you log in */}
-						    <Link to="/login">Login</Link>
-						    <Link to="/signup">Sign Up</Link>
+						    <Link to="/login" className="fontSpecial fontBlack">LOGIN</Link>
+						    <Link className="fontSpecial fontBlack " to="/signup">SIGNUP</Link>
 						  </div>
 					}
 					<NavLink to={'/orders'}><span>My orders</span></NavLink>
 					<div className="flex-container-row">
-						<span>cartlogo</span>
-						<span>#</span>
+						<span><i className="material-icons">shopping_cart</i></span>
 						<NavLink exact to={'/cart-list'}>
 							<div className="flex-container-row">
 								<h3 className="fontBlack">CART</h3>
