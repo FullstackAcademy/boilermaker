@@ -8,7 +8,7 @@ export const FrontPage = (props) => {
   return (
     <div className="flex-container-row spaceBtw categoryContainer">
       <NavLink exact to='/shopall'>
-      <span className="fontSpecial categoryName">all</span>
+      <span className="fontSpecial categoryName">ALL</span>
       </NavLink>
 
 
