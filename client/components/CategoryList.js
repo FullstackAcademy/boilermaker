@@ -1,9 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import category from '../store/category'
-import { search } from '../store'
-import product from '../store/product';
+
 
 export const FrontPage = (props) => {
 
@@ -24,7 +22,6 @@ export const FrontPage = (props) => {
         )
       })
     }
-
     </div>
   )
 }
@@ -36,12 +33,5 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-    removeSearchFilter(searchTerm) {
-      dispatch(search(searchTerm))
-    }
-  }
-}
 
-export default connect(mapState, mapDispatch)(FrontPage);
+export default connect(mapState)(FrontPage);

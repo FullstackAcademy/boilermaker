@@ -1,56 +1,74 @@
 import React from 'react'
-import {Redirect, NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { search } from '../../store'
+import AddToCartButton from '../order/AddToCartButton'
+import EditProductForm from './EditProductForm'
+import InputBoxDoneTyping from 'react-input-box-done-typing'
 
-class SearchForm extends React.Component {
+class Search extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-      searchTerm: '',
-      isShowing: this.props.searchTerm
-    }
+		this.state = {}
     this.onSearchSubmit = this.onSearchSubmit.bind(this)
 	}
 
 
-	onSearchSubmit(evt) {
-    //thunk
-    //evt.preventDefault()
-		const searchTerm = this.state.searchTerm
+	onSearchSubmit(searchTerm) {
+
     let searchResults = this.props.products.filter(product => (
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
   ))
     if (!searchResults.length){
-      searchResults = [{msg: 'Sorry, we do not have any products that match you search'}]
+      searchResults = [{msg: 'Sorry, we do not have any products that match your search'}]
     }
-
     this.props.searchProducts(searchResults)
-    //this.setState({ searchTerm: ''})
 	}
 
 	render() {
-    console.log('reset', this.props)
-    console.log('stateTrerm', this.state.searchTerm)
-		return this.state.isShowing ? (
-			<div>
-				<form>
-					<input placeholder="noodles" onChange={(e) => this.setState({ searchTerm: e.target.value})} value={this.state.searchTerm}/>
-          <NavLink exact to="/shopall" isActive={(evt) => this.onSearchSubmit(evt)}>
-          <button>Submit Search</button>
-          </NavLink>
-					<button onClick={() => this.setState({ searchTerm: '', isShowing: false })}>Cancel</button>
-				</form>
+    const products = this.props.searchResults.length ? this.props.searchResults : this.props.products
+		return (
+			<div style={{marginTop: 100 }}>
+				<InputBoxDoneTyping
+               type="text"
+               placeholder="Search Ramenzon"
+               doneTyping={(val) => this.onSearchSubmit(val)}
+               doneTypingInterval={100}
+            />
+        <div className="flex-container-wrap productListContainer" style={{marginTop: 30 }}>
+          {products.map( product => {
+            return product.msg ? <h3>{product.msg}</h3> : (
+              <div key={product.id} className="productItemContainer">
+                <NavLink  exact to={`/products/${product.id}`} >
+                  <div className= "flex-container-column" >
+                    <div className="productImage">
+                      <img src={product.image}  />
+                      </div>
+                      <div className="flex-container-row spaceAround product">
+                        <span>{product.name}</span>
+                        <span>{`${product.size}-Pack`}</span>
+                      </div>
+                      <div>
+                        <span>{`$ ${product.price}`}</span>
+                      </div>
+                    </div>
+                  </NavLink>
+                  <AddToCartButton item={product} />
+                  {this.props.user.isAdmin ? <EditProductForm product={product} /> : <div />}
+                </div>
+              )
+            })
+          }
+        </div>
 			</div>
-		) : (
-			<button onClick={() => this.setState({ isShowing: true })}>Search Products</button>
 		)
 	}
 }
 const mapState = (state) => {
 	return {
     products: state.products,
-    searchTerm: state.clearSearchBar
+    user: state.user,
+    searchResults: state.searchResults
 	}
 }
 const mapDispatch = (dispatch) => {
@@ -60,4 +78,4 @@ const mapDispatch = (dispatch) => {
 		}
 	}
 }
-export default connect(mapState, mapDispatch)(SearchForm)
+export default connect(mapState, mapDispatch)(Search)

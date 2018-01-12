@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import AddToCartButton from '../order/AddToCartButton'
 import { NavLink } from 'react-router-dom'
 import EditProductForm from './EditProductForm'
-import SearchForm from './Search'
+
 
 class ProductList extends Component {
   constructor(props) {
@@ -12,22 +12,14 @@ class ProductList extends Component {
   }
 
   render() {
-    const categoryId = this.props.match.params.categoryId
-    let searchResults
-    if (!categoryId){
-      console.log('searchrrrrr', this.props.searchResults)
-      searchResults = this.props.searchResults.length ? this.props.searchResults : null
-    }
 
-    const productsList = categoryId ? this.props.products.filter(product => product.categoryId === +categoryId) : this.props.products
-    const products = searchResults || productsList
+    const categoryId = this.props.match.params.categoryId
+    const products = categoryId ? this.props.products.filter(product => product.categoryId === +categoryId) : this.props.products
 
     return (
-      <div>
-      <SearchForm />
         <div className="flex-container-wrap productListContainer" >
           {products.map( product => {
-            return product.msg ? <h3>{product.msg}</h3> : (
+            return  (
               <div key={product.id} className="productItemContainer">
                 <NavLink  exact to={`/products/${product.id}`} >
                   <div className= "flex-container-column" >
@@ -50,7 +42,6 @@ class ProductList extends Component {
             })
           }
         </div>
-          </div>
 
     )
   }
@@ -60,8 +51,7 @@ class ProductList extends Component {
 const mapState = (state) => {
   return {
     products: state.products,
-    user: state.user,
-    searchResults: state.searchResults
+    user: state.user
   }
 }
 

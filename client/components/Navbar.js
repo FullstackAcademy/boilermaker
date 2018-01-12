@@ -27,12 +27,7 @@ class Navbar extends Component {
 	}
 
   render(){
-		const {children, handleClick, isLoggedIn} = this.props
-		let cartUrl;
-		if(isLoggedIn) cartUrl = '/authUserCart'
-		else {
-			cartUrl = '/unAuthUserCart'
-		}
+    const {children, handleClick, isLoggedIn} = this.props
 		let badge
 		if (this.props.cartItems.length > 0) {
 				badge = <h3 style={{ color: 'red' }}>{this.props.cartItems.length}</h3>
@@ -48,6 +43,9 @@ class Navbar extends Component {
         <div className="flex-container-row menuContainer spaceBtw">
           <div>
 					<button id="shopBtn" className="fontSpecial fontBlack" onClick={this.handleClick}>SHOP</button>
+          <NavLink exact to="/search">
+          <button id="shopBtn" className="fontSpecial fontBlack">SEARCH</button>
+          </NavLink>
 					<span className="fontSpecial fontBlack">RAMEN STORY</span>
           </div>
 					{
@@ -65,7 +63,7 @@ class Navbar extends Component {
 					<NavLink to={'/orders'}><span>My orders</span></NavLink>
 					<div className="flex-container-row">
 						<span><i className="material-icons">shopping_cart</i></span>
-						<NavLink exact to={cartUrl}>
+						<NavLink exact to={'/cart-list'}>
 							<div className="flex-container-row">
 								<h3 className="fontBlack">CART</h3>
 								{
