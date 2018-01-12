@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Link, NavLink} from 'react-router-dom'
 import {logout, getCategoriesThunk} from '../store'
 import CategoryList from './CategoryList'
-import SearchForm from './product/search'
+
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -14,7 +14,10 @@ import SearchForm from './product/search'
 class Navbar extends Component {
 	constructor(props){
 		super(props)
-		this.state = {clicked: false}
+		this.state = {
+      clicked: false
+
+    }
 		this.handleClick = this.handleClick.bind(this)
 	}
 
@@ -40,7 +43,6 @@ class Navbar extends Component {
         <div className="flex-container-row menuContainer spaceBtw">
           <div>
 					<button id="shopBtn" className="fontSpecial fontBlack" onClick={this.handleClick}>SHOP</button>
-          <SearchForm />
 					<span className="fontSpecial fontBlack">RAMEN STORY</span>
           </div>
 					{

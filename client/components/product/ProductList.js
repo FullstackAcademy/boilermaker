@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import AddToCartButton from '../order/AddToCartButton'
 import { NavLink } from 'react-router-dom'
 import EditProductForm from './EditProductForm'
+import SearchForm from './Search'
 
 class ProductList extends Component {
   constructor(props) {
@@ -11,18 +12,22 @@ class ProductList extends Component {
   }
 
   render() {
-    // if (this.props.searchResults.length) {
-    //   let products = this.props.searchResults
-    // }
-    // else {
-    const searchResults = this.props.searchResults.length ? this.props.searchResults : null
     const categoryId = this.props.match.params.categoryId
-    const products = searchResults || categoryId ? this.props.products.filter(product => product.categoryId === +categoryId) : this.props.products
-    // }
+    let searchResults
+    if (!categoryId){
+      console.log('searchrrrrr', this.props.searchResults)
+      searchResults = this.props.searchResults.length ? this.props.searchResults : null
+    }
+
+    const productsList = categoryId ? this.props.products.filter(product => product.categoryId === +categoryId) : this.props.products
+    const products = searchResults || productsList
+
     return (
+      <div>
+      <SearchForm />
         <div className="flex-container-wrap productListContainer" >
           {products.map( product => {
-            return (
+            return product.msg ? <h3>{product.msg}</h3> : (
               <div key={product.id} className="productItemContainer">
                 <NavLink  exact to={`/products/${product.id}`} >
                   <div className= "flex-container-column" >
@@ -45,7 +50,7 @@ class ProductList extends Component {
             })
           }
         </div>
-
+          </div>
 
     )
   }

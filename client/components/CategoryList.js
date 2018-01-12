@@ -2,13 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import category from '../store/category'
+import { search } from '../store'
+import product from '../store/product';
 
 export const FrontPage = (props) => {
-  console.log('props is----------', props)
+
   return (
     <div className="flex-container-row spaceBtw categoryContainer">
-      <NavLink exact to='/shopall'>
-      <span className="fontSpecial categoryName">all</span>
+      <NavLink exact to='/shopall' isActive={() => props.removeSearchFilter([])}>
+      <span className="fontSpecial categoryName" onClick={() => props.removeSearchFilter([])}>all</span>
       </NavLink>
 
 
@@ -29,8 +31,17 @@ export const FrontPage = (props) => {
 
 const mapState = (state) => {
   return {
-    categories: state.categories
+    categories: state.categories,
+    products: state.products
   }
 }
 
-export default connect(mapState)(FrontPage);
+const mapDispatch = (dispatch) => {
+  return {
+    removeSearchFilter(searchTerm) {
+      dispatch(search(searchTerm))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(FrontPage);

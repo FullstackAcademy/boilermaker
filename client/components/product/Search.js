@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import {Redirect, NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { search } from '../../store'
 
@@ -8,28 +8,36 @@ class SearchForm extends React.Component {
 		super(props)
 		this.state = {
       searchTerm: '',
-      isShowing: false
-		}
+      isShowing: this.props.searchTerm
+    }
+    this.onSearchSubmit = this.onSearchSubmit.bind(this)
 	}
 
-	onSearchSubmit() {
-		//thunk
-		const searchTerm = {
-			searchTerm: this.state.searchTerm,
-    }
-    const searchResults = this.props.products.filter(product => (
+
+	onSearchSubmit(evt) {
+    //thunk
+    //evt.preventDefault()
+		const searchTerm = this.state.searchTerm
+    let searchResults = this.props.products.filter(product => (
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
   ))
-	  this.props.searchProducts(searchResults)
+    if (!searchResults.length){
+      searchResults = [{msg: 'Sorry, we do not have any products that match you search'}]
+    }
+
+    this.props.searchProducts(searchResults)
+    //this.setState({ searchTerm: ''})
 	}
 
 	render() {
+    console.log('reset', this.props)
+    console.log('stateTrerm', this.state.searchTerm)
 		return this.state.isShowing ? (
 			<div>
-				<form onSubmit={() => this.onSearchSubmit()}>
-					<input placeholder="noodles" onChange={(e) => this.setState({ searchTerm: e.target.value})} />
-					<NavLink exact to="/shopall">
-          <button type="submit">Submit Search</button>
+				<form>
+					<input placeholder="noodles" onChange={(e) => this.setState({ searchTerm: e.target.value})} value={this.state.searchTerm}/>
+          <NavLink exact to="/shopall" isActive={(evt) => this.onSearchSubmit(evt)}>
+          <button>Submit Search</button>
           </NavLink>
 					<button onClick={() => this.setState({ searchTerm: '', isShowing: false })}>Cancel</button>
 				</form>
@@ -41,7 +49,8 @@ class SearchForm extends React.Component {
 }
 const mapState = (state) => {
 	return {
-		products: state.products
+    products: state.products,
+    searchTerm: state.clearSearchBar
 	}
 }
 const mapDispatch = (dispatch) => {
