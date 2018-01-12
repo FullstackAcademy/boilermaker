@@ -29,6 +29,7 @@ router.post('/', (req, res, next) => {
 // PUT api/products/:productId
 router.put('/:productId', (req, res, next) => {
     const id = req.params.productId;
+    console.log('hit put', req.body)
     Product.findById(id)
         .then(product => {
             product.update(req.body);
