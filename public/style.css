@@ -69,8 +69,9 @@ form div {
 }
 
 .marginTop {
-  margin-top: 200px;
+  margin-top: 150px;
 }
+
 /* -----------------NAV Section -------------------*/
 .navContainer {
   position: fixed;
@@ -105,6 +106,11 @@ form div {
   border: none;
   background: none;
 }
+
+.loginMenu {
+  width: 20%;
+
+}
 /* -----------------CATEGORY LIST Section -------------------*/
 .categoryContainer{
   width: 50%;
@@ -117,7 +123,7 @@ form div {
 }
 /* -----------------PRODUCT LIST Section -------------------*/
 .productListContainer{
-  margin-top: 200px;
+  margin-top: 150px;
   width: 100%;
 }
 
@@ -177,10 +183,10 @@ form div {
   box-sizing: border-box;
 }
 
-/* -----------------SINGLE PAGE Section -------------------*/
+/* -----------------SINGLE PRODUCT Section -------------------*/
 
 .singleProductContainer{
-  background-color: grey;
+  background-color: beige;
   padding-top: 40px;
   padding-bottom: 40px;
 }
@@ -210,3 +216,10 @@ form div {
 }
 
 /* -----------------LOGIN Section -------------------*/
+
+
+/* -----------------Add To CART BUTTOM -------------------*/
+.loginReminder{
+  color: red;
+  font-weight: 500;
+}
