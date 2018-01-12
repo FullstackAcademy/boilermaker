@@ -7,13 +7,18 @@ import EditProductForm from './EditProductForm'
 class ProductList extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = { }
   }
+
   render() {
-
+    // if (this.props.searchResults.length) {
+    //   let products = this.props.searchResults
+    // }
+    // else {
+    const searchResults = this.props.searchResults.length ? this.props.searchResults : null
     const categoryId = this.props.match.params.categoryId
-    const products = categoryId ? this.props.products.filter(product => product.categoryId === +categoryId) : this.props.products
-
+    const products = searchResults || categoryId ? this.props.products.filter(product => product.categoryId === +categoryId) : this.props.products
+    // }
     return (
         <div className="flex-container-wrap productListContainer" >
           {products.map( product => {
@@ -50,7 +55,8 @@ class ProductList extends Component {
 const mapState = (state) => {
   return {
     products: state.products,
-    user: state.user
+    user: state.user,
+    searchResults: state.searchResults
   }
 }
 

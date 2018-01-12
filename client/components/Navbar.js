@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, NavLink} from 'react-router-dom'
 import {logout, getCategoriesThunk} from '../store'
-import CategoryList from './CategoryList';
-
+import CategoryList from './CategoryList'
+import SearchForm from './product/search'
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -38,10 +38,11 @@ class Navbar extends Component {
             </ NavLink >
           </div>
         <div className="flex-container-row menuContainer spaceBtw">
-
+          <div>
 					<button id="shopBtn" className="fontSpecial fontBlack" onClick={this.handleClick}>SHOP</button>
-
+          <SearchForm />
 					<span className="fontSpecial fontBlack">RAMEN STORY</span>
+          </div>
 					{
 						isLoggedIn
 						  ? <div>
