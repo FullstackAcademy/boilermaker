@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { postItem } from '../../store/cart'
+import { postItem } from '../../store'
+import {addLocalItems} from '../../store'
 
 export class AddToCartButton extends Component {
   constructor(props) {
@@ -56,7 +57,10 @@ export class AddToCartButton extends Component {
       const price=this.props.price
       let item = {productId, quantity, price}
       let existing = localStorage.getArr("item") ||[];
+
       localStorage.setObj("item", [item].concat(existing));
+      const allLocalItems = localStorage.getArr('item')
+      this.props.addLocalItems(allLocalItems);
       }
 
 
@@ -76,7 +80,8 @@ const mapState = (state, ownProps) => {
 
 const mapDispatch = (dispatch) => {
 	return {
-		addItems: (item) => dispatch(postItem(item))
+    addItems: (item) => dispatch(postItem(item)),
+    addLocalItems: (items) => dispatch(addLocalItems(items))
 	}
 }
 
