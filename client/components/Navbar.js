@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, NavLink} from 'react-router-dom'
 import {logout, getCategoriesThunk} from '../store'
-import CategoryList from './CategoryList';
+import CategoryList from './CategoryList'
 
 /**
  * COMPONENT
@@ -15,7 +15,7 @@ class Navbar extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-      clicked: false,
+      clicked: false
     }
 		this.handleClick = this.handleClick.bind(this)
 	}
@@ -26,12 +26,7 @@ class Navbar extends Component {
 	}
 
   render(){
-		const {children, handleClick, isLoggedIn} = this.props
-		let cartUrl;
-		if (isLoggedIn) cartUrl = '/authUserCart'
-		else {
-			cartUrl = '/unAuthUserCart'
-		}
+    const {children, handleClick, isLoggedIn} = this.props
 		let badge
     (isLoggedIn && this.props.cartItems.length > 0) ?
     badge = this.props.cartItems.length
@@ -47,10 +42,13 @@ class Navbar extends Component {
             </ NavLink >
           </div>
         <div className="flex-container-row menuContainer spaceBtw">
-
+          <div>
 					<button id="shopBtn" className="fontSpecial fontBlack" onClick={this.handleClick}>SHOP</button>
-
+          <NavLink exact to="/search">
+          <button id="shopBtn" className="fontSpecial fontBlack">SEARCH</button>
+          </NavLink>
 					<span className="fontSpecial fontBlack">RAMEN STORY</span>
+          </div>
 					{
 						isLoggedIn
 						  ? <div>

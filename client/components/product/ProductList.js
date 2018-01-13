@@ -4,11 +4,13 @@ import AddToCartButton from '../order/AddToCartButton'
 import { NavLink } from 'react-router-dom'
 import EditProductForm from './EditProductForm'
 
+
 class ProductList extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = { }
   }
+
   render() {
 
     const categoryId = this.props.match.params.categoryId
@@ -17,7 +19,7 @@ class ProductList extends Component {
     return (
         <div className="flex-container-wrap productListContainer" >
           {products.map( product => {
-            return (
+            return  (
               <div key={product.id} className="productItemContainer">
                 <NavLink  exact to={`/products/${product.id}`} className="productItemInnerContainer" >
                   <div className= "flex-container-column" >
@@ -41,7 +43,6 @@ class ProductList extends Component {
             })
           }
         </div>
-
 
     )
   }

@@ -11,6 +11,7 @@ import OrderHistoryContainer from './components/order/OrderHistoryContainer'
 import CartList from './components/order/CartList'
 import { authUserCart, unAuthUserCart } from './components/order/CartList'
 import SingleProduct from './components/product/SingleProduct'
+import Search from './components/product/Search'
 /**
  * COMPONENT
  */
@@ -48,6 +49,7 @@ class Routes extends Component {
               <Route exact path="/unAuthUserCart" component={unAuthUserCart} />
 							<Route exact path="/orders/:orderId" component={OrderHistoryDetails} />
               <Route exact path="/products/:productId" component={SingleProduct} />
+              <Route exact path="/search" component={Search} />
               <Route path="/" component={FrontPage} />
             </Switch>
           </div>
