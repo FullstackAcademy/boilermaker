@@ -122,6 +122,19 @@ form div {
   width: 20%;
 
 }
+
+.badgeContainer {
+  height: 40px;
+}
+
+.badgeContainer span{
+  background-color: #ed7638;
+  color: white;
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+  border-radius: 3px;
+}
 /* -----------------CATEGORY LIST Section -------------------*/
 .categoryContainer{
   width: 50%;
@@ -266,4 +279,18 @@ form div {
 
 .addCartContainer button:hover {
   background-color: #e0a17f
+}
+
+/* -----------------SHOPPING CART SECTION -------------------*/
+.shoppingCartContainer {
+  width: 50%;
+}
+
+.cartImage {
+  height: 150px;
+  width: 250px;
+}
+
+.subtotalContainer{
+  margin-top: 237px;
 }

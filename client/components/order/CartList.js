@@ -26,14 +26,17 @@ export class CartList extends Component {
     const items = this.props.items;
 
     return (
-        <div className="flex-container-wrap green spaceBtw productListContainer" >
+      <div className="flex-container-row alignStart">
+        <div className="flex-container-column shoppingCartContainer marginTop" >
+          <h1>CART</h1>
+          <h2>PRODUCTS</h2>
           {
             items &&
             items.map( item => {
 
-            return <div className= "flex-container-column productItemContainer" key={item.id}>
-              <div className="productImage">
-                <img src={item.image}  />
+            return <div className= "flex-container-column" key={item.id}>
+              <div >
+                <img className="cartImage" src={item.image}  />
                 </div>
                 <div className="flex-container-row spaceAround product">
                   <span>{item.name}</span>
@@ -47,8 +50,15 @@ export class CartList extends Component {
           })
           }
         </div>
-
-
+        <div className="subtotalContainer">
+          <h2>SUBTOTAL</h2>
+          <div >Order Summary</div>
+          <div>Excluding tax shipping</div>
+          <div>Note to Ramenzon</div>
+          <input />
+          <button>CHECKOUT</button>
+      </div>
+    </div>
     )
   }
 }

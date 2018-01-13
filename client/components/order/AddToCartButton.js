@@ -56,7 +56,6 @@ export class AddToCartButton extends Component {
       const price=this.props.price
       let item = {productId, quantity, price}
       let existing = localStorage.getArr("item") ||[];
-      console.log('exsiting is--------', existing)
       localStorage.setObj("item", [item].concat(existing));
       }
 
@@ -64,17 +63,6 @@ export class AddToCartButton extends Component {
       // document.cookie = `productId=${this.props.productId}`
       // document.cookie = `quantity=${+this.state.quantityEntry}`
       // document.cookie = `price=${this.props.price}`
-      // const existingProductId = localStorage.getArr("productId") ||[];
-      // const addedNewProductId = existingProductId.concat(this.props.productId)
-      // localStorage.setArr("productId", addedNewProductId);
-
-      // const existingQuantity = localStorage.getArr("quantity") ||[];
-      // const addedNewQuantity = existingQuantity.concat(+this.state.quantityEntry)
-      // localStorage.setArr("quantity", addedNewQuantity);
-
-      // const existingPrice = localStorage.getArr("price") ||[];
-      // const addedNewPrice = existingPrice.concat(this.props.price)
-      // localStorage.setArr("price", addedNewPrice);
     }
 }
 
