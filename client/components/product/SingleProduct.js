@@ -30,17 +30,16 @@ class SingleProduct extends Component {
             <div className="flex-container-column singleProductInfoContainer">
               <div className="flex-container-column singleProductInfoContainerTop">
                 <div>
-                <span>{product.name}</span>
-                </div>
-                <div>
-                <span>{`${product.size}-pack`}</span>
-                </div>
-                <div>
+                  <span>{product.name}</span>
+                  <span>{`${product.size}-pack`}</span>
+                  <span>{`$${product.price}`}</span>
+                  </div>
+                <div className="fullWidth">
                   <AddToCartButton item={product} />
                 </div>
                   {this.props.user.isAdmin ? <EditProductForm product={product} /> :  <div />}
               </div>
-              <div>
+              <div className="fullWidth">
                 <h4>*FREE SHIPPING ON ORDERS OVER $50</h4>
                 <h4>*ORDERS PLACED BY 3PM EST SHIP SAME DAY</h4>
                 <span>{product.description}</span>

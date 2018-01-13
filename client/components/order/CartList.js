@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchItems } from '../../store/cart'
+import _ from 'lodash'
 
 let login=false;
 
@@ -11,7 +12,7 @@ export class CartList extends Component {
   }
 
   componentDidMount(){
-    if(this.props.userId) {
+    if (this.props.userId) {
       login = true;
       this.props.getAllLineItems(this.props.userId);
     }
@@ -19,14 +20,17 @@ export class CartList extends Component {
   }
 
   render() {
-
-   const items = this.props.items
+    console.log('this.props.items are---------', this.props.items)
+    // const items = localStorage.getItem('item')
+    // console.log('cartItems is----------', items)
+    const items = this.props.items;
 
     return (
         <div className="flex-container-wrap green spaceBtw productListContainer" >
           {
-            items&&
+            items &&
             items.map( item => {
+
             return <div className= "flex-container-column productItemContainer" key={item.id}>
               <div className="productImage">
                 <img src={item.image}  />
@@ -35,6 +39,7 @@ export class CartList extends Component {
                   <span>{item.name}</span>
                   <span>{`${item.size}-Pack`}</span>
                 </div>
+                <div>{item.quantity}</div>
                 <div>
                   <span>{`$ ${item.price}`}</span>
                 </div>
@@ -50,18 +55,30 @@ export class CartList extends Component {
 
 
 const mapState = (state) => {
+  const productArr =
+  state.cartItems.map(item => {
+    return state.products.find(product => product.id === +item.productId)
+  })
+  console.log('productARR is -------------', productArr)
   return {
-    items: state.cartItems,
+    items: productArr,
     userId: state.user.id
   }
 }
 
 const mapStateUnauth = (state) => {
-  console.log('checking productId======', getCookie("productId"))
-  console.log('checking products======', state.products)
-  console.log('checking mapStateUnauth======', state.products.find(product => product.id === getCookie("productId")))
+  const cartItems = localStorage.getArr('item')
+  console.log('cartItems is----------', cartItems)
+  console.log('cartItems type----------', typeof cartItems)
+  // // console.log('state.products is----------', state.products)
+  // const productArr =
+  const items = cartItems.map(cartItem => {
+    const productObj = state.products.find(product => product.id === cartItem.productId)
+    return {...cartItem, ...productObj}
+  })
+  console.log('items are----------', items)
   return {
-    items: state.products.find(product => product.id === getCookie("productId"))
+    items: items
   }
 }
 
@@ -73,20 +90,23 @@ const mapDisptach = dispatch => {
   }
 }
 
-function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-  for(var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-          c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-          return c.substring(name.length, c.length);
-      }
-  }
-  return "";
+Storage.prototype.getArr = function(key) {
+  return JSON.parse(this.getItem(key))
 }
+// function getCookie(cname) {
+//   var name = cname + "=";
+//   var ca = document.cookie.split(';');
+//   for(var i = 0; i < ca.length; i++) {
+//       var c = ca[i];
+//       while (c.charAt(0) == ' ') {
+//           c = c.substring(1);
+//       }
+//       if (c.indexOf(name) == 0) {
+//           return c.substring(name.length, c.length);
+//       }
+//   }
+//   return "";
+// }
 
   export const authUserCart = connect(mapState, mapDisptach)(CartList)
-  export const unAuthUserCart = connect(mapStateUnauth)(CartList)
+  export const unAuthUserCart = connect(mapStateUnauth, mapDisptach)(CartList)

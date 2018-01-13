@@ -19,18 +19,19 @@ class ProductList extends Component {
           {products.map( product => {
             return (
               <div key={product.id} className="productItemContainer">
-                <NavLink  exact to={`/products/${product.id}`} >
+                <NavLink  exact to={`/products/${product.id}`} className="productItemInnerContainer" >
                   <div className= "flex-container-column" >
                     <div className="productImage">
                       <img src={product.image}  />
                       </div>
-                      <div className="flex-container-row spaceAround product">
-                        <span>{product.name}</span>
-                        <span>{`${product.size}-Pack`}</span>
+                      <div className="flex-container-row flexStart product">
+                        <span className="fontBlack">{product.name}</span>
+                        <span className="fontBlack">{`${product.size}-Pack`}</span>
+                        <span className="fontBlack productPrice">{`$ ${product.price}`}</span>
                       </div>
-                      <div>
-                        <span>{`$ ${product.price}`}</span>
-                      </div>
+                      {/* <div className="textLeft fullWidth priceContainer">
+
+                      </div> */}
                     </div>
                   </NavLink>
                   <AddToCartButton item={product} />

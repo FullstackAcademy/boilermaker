@@ -6,7 +6,7 @@ module.exports = router
 //GET /api/lineItems/:id
 router.get('/:id', (req, res, next) => {
     const userId = req.params.id;
-    
+
     LineItem.findAll({
         where: {userId}
     })
@@ -16,12 +16,13 @@ router.get('/:id', (req, res, next) => {
     })
         return Promise.all(allProducts)
         .then(lineItems => {
-            // console.log('backend ------', lineItems)
-            res.json([...lineItems])
+            console.log('backend ------', ...lineItems)
+            // const result = [].concat.apply([], lineItems);
+            res.json(...lineItems)
         })
         .catch(next)
     })
-    
+
 })
 
 //POST /api/lineItems
@@ -34,9 +35,12 @@ router.post('/', (req, res, next) => {
         }
     })
     .spread((lineItem, isCreated) => {
-      return lineItem.addProduct(productId)
+      console.log('lineItem is----------', lineItem)
+      return lineItem.addProduct(+productId)
     })
-    .then(data => res.json(data))
+    .then(data => {
+      console.log('data is----------', data)
+      res.json(...data)})
     .catch(next)
 })
 
