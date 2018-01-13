@@ -4,11 +4,10 @@ import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import {Navbar, Login, Signup, UserHome, FrontPage} from './components'
-import {me, getProductsThunk } from './store'
+import {me, getProductsThunk, fetchItems } from './store'
 import ProductList from './components/product/ProductList';
 import OrderHistoryDetails from './components/order/OrderHistoryDetails'
 import OrderHistoryContainer from './components/order/OrderHistoryContainer'
-import CartList from './components/order/CartList'
 import { authUserCart, unAuthUserCart } from './components/order/CartList'
 import SingleProduct from './components/product/SingleProduct'
 import Search from './components/product/Search'
@@ -19,6 +18,7 @@ class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData()
     this.props.loadProducts()
+    // this.props.getAllCartItems(this.props.userId)
   }
 
   render () {
@@ -66,7 +66,8 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    userId: state.user.id
   }
 }
 
@@ -77,7 +78,10 @@ const mapDispatch = (dispatch) => {
     },
     loadProducts () {
       dispatch(getProductsThunk())
-    }
+    },
+    // getAllCartItems(userId) {
+    //   dispatch(fetchItems(userId))
+    // }
   }
 }
 

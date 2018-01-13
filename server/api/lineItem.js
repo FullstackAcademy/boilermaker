@@ -27,22 +27,26 @@ router.get('/:id', (req, res, next) => {
 
 //POST /api/lineItems
 router.post('/', (req, res, next) => {
-  console.log('req body is --------------------------', req.body)
     const { userId, productId, quantity, price } = req.body
-    LineItem.findOrCreate({
-        where: {
-            userId, quantity, price
-        }
+    LineItem.create({userId, quantity, price})
+    .then((lineItem, isCreated) => {
+      Product.findById(`${productId}`)
+      .then(product => {
+        // console.log('product is--------------', product)
+        // console.log('lineItem.addProduct(product) is--------------', lineItem.addProduct(product))
+        return lineItem.addProduct(product)
+      })
+      .then((data)=>{
+        // console.log('lineItem.id is--------------', lineItem.id)
+        // return LineItem.findById(`${lineItem.id}`)
+        // .then((data) => {
+        //   console.log('data is-----------', data)
+          res.json(data)})
+        .catch(next)
+      })
+      .catch(next)
     })
-    .spread((lineItem, isCreated) => {
-      console.log('lineItem is----------', lineItem)
-      return lineItem.addProduct(+productId)
-    })
-    .then(data => {
-      console.log('data is----------', data)
-      res.json(...data)})
-    .catch(next)
-})
+// })
 
 //PUT /api/lineItems/:id
 // router.put('/:id', (req, res, next) => {

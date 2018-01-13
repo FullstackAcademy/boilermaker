@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchItems } from '../../store/cart'
-import _ from 'lodash'
+import { fetchItems, me } from '../../store'
+// import _ from 'lodash'
 
-let login=false;
+let login = false;
 
 export class CartList extends Component {
   constructor(props) {
@@ -11,31 +11,28 @@ export class CartList extends Component {
     this.state = {  }
   }
 
-  componentDidMount(){
+  componentWillReceiveProps(){
+    // this.props.loadInitialData();
     if (this.props.userId) {
       login = true;
-      this.props.getAllLineItems(this.props.userId);
+      this.props.getAllCartItems(this.props.userId);
     }
 
   }
 
   render() {
-    console.log('this.props.items are---------', this.props.items)
-    // const items = localStorage.getItem('item')
-    // console.log('cartItems is----------', items)
-    const items = this.props.items;
 
+    const items = this.props.items;
+    console.log('items are---------', items)
     return (
       <div className="flex-container-row alignStart">
         <div className="flex-container-column shoppingCartContainer marginTop" >
           <h1>CART</h1>
           <h2>PRODUCTS</h2>
           {
-            items &&
-            items.map( item => {
-
+          items && items.map( item => {
             return <div className= "flex-container-column" key={item.id}>
-              <div >
+                <div >
                 <img className="cartImage" src={item.image}  />
                 </div>
                 <div className="flex-container-row spaceAround product">
@@ -65,10 +62,12 @@ export class CartList extends Component {
 
 
 const mapState = (state) => {
+  console.log('state.cartItems is -------------', state.cartItems)
   const productArr =
   state.cartItems.map(item => {
     return state.products.find(product => product.id === +item.productId)
   })
+  console.log('state.user.id is -------------', state.user.id)
   console.log('productARR is -------------', productArr)
   return {
     items: productArr,
@@ -77,24 +76,29 @@ const mapState = (state) => {
 }
 
 const mapStateUnauth = (state) => {
-  const cartItems = localStorage.getArr('item')
-  console.log('cartItems is----------', cartItems)
-  console.log('cartItems type----------', typeof cartItems)
+  const localItems = localStorage.getArr('item') || []
+  // console.log('cartItems is----------', cartItems)
+  // console.log('cartItems type----------', typeof cartItems)
   // // console.log('state.products is----------', state.products)
   // const productArr =
-  const items = cartItems.map(cartItem => {
-    const productObj = state.products.find(product => product.id === cartItem.productId)
-    return {...cartItem, ...productObj}
+  const items = localItems.map(localItem => {
+    const productObj = state.products.find(product => product.id === localItem.productId)
+    return {...localItem, ...productObj}
   })
-  console.log('items are----------', items)
+  // console.log('items are----------', items)
   return {
     items: items
   }
 }
 
 const mapDisptach = dispatch => {
+  console.log('dispath 1 is called------------')
   return {
-    getAllLineItems(userId) {
+    loadInitialData () {
+      dispatch(me())
+    },
+    getAllCartItems(userId) {
+      console.log('dispath 2 is called------------')
       dispatch(fetchItems(userId))
     }
   }
@@ -103,20 +107,6 @@ const mapDisptach = dispatch => {
 Storage.prototype.getArr = function(key) {
   return JSON.parse(this.getItem(key))
 }
-// function getCookie(cname) {
-//   var name = cname + "=";
-//   var ca = document.cookie.split(';');
-//   for(var i = 0; i < ca.length; i++) {
-//       var c = ca[i];
-//       while (c.charAt(0) == ' ') {
-//           c = c.substring(1);
-//       }
-//       if (c.indexOf(name) == 0) {
-//           return c.substring(name.length, c.length);
-//       }
-//   }
-//   return "";
-// }
 
   export const authUserCart = connect(mapState, mapDisptach)(CartList)
   export const unAuthUserCart = connect(mapStateUnauth, mapDisptach)(CartList)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, NavLink} from 'react-router-dom'
-import {logout, getCategoriesThunk} from '../store'
+import {logout, getCategoriesThunk, addLocalItems} from '../store'
 import CategoryList from './CategoryList'
 
 /**
@@ -20,6 +20,11 @@ class Navbar extends Component {
 		this.handleClick = this.handleClick.bind(this)
 	}
 
+  componentDidMount(){
+    const allLocalItems = localStorage.getArr('item')
+    this.props.addLocalItems(allLocalItems);
+  }
+
 	handleClick(){
 		this.setState({clicked: !this.state.clicked});
 		this.props.getCategories();
@@ -35,11 +40,11 @@ class Navbar extends Component {
     }
 
 		let badge
-    (isLoggedIn && this.props.cartItems.length > 0) ?
-    badge = this.props.cartItems.length
-            :
-    badge = localStorage.getArr('item').length
-
+    if (isLoggedIn && this.props.cartItems.length > 0) {
+      badge = this.props.cartItems.length
+    } else if (!isLoggedIn && this.props.localItems) {
+      badge = this.props.localItems.length
+    }
     return (
       <div className="flex-container-column navContainer">
         <div className="flex-container-row spaceBtw fullWidth topNavContainer">
@@ -100,7 +105,8 @@ class Navbar extends Component {
 const mapState = (state) => {
 	return {
 		isLoggedIn: !!state.user.id,
-		cartItems: state.cartItems
+    cartItems: state.cartItems,
+    localItems: state.localItems
 	}
 }
 
@@ -111,8 +117,11 @@ const mapDispatch = (dispatch) => {
 		},
 		getCategories(){
 			dispatch(getCategoriesThunk())
-		}
-	}
+    },
+    addLocalItems(items) {
+      dispatch(addLocalItems(items))
+	  }
+  }
 }
 
 Storage.prototype.getArr = function(key) {

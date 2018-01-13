@@ -14,8 +14,14 @@ User.hasMany(Review);
 Review.belongsTo(Product);
 Product.hasMany(Review);
 
-Product.belongsToMany(LineItem, {through: 'ProductLineItem'});
-LineItem.belongsToMany(Product, {through: 'ProductLineItem'});
+
+// Product.belongsTo(LineItem)
+// LineItem.hasMany(Product)
+
+//https://github.com/sequelize/sequelize/issues/5077
+//does not work due the the N:M unique contraints with selquelze
+Product.belongsToMany(LineItem, {through: 'ProductLineItem', unique: false});
+LineItem.belongsToMany(Product, {through: 'ProductLineItem', unique: false});
 
 User.hasMany(Order)
 Order.belongsTo(User)
@@ -32,5 +38,5 @@ module.exports = {
   Product,
   Review,
   Order,
-  LineItem
+  LineItem,
 };
