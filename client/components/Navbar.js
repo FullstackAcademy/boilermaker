@@ -16,7 +16,6 @@ class Navbar extends Component {
 		super(props)
 		this.state = {
       clicked: false
-
     }
 		this.handleClick = this.handleClick.bind(this)
 	}
@@ -28,10 +27,19 @@ class Navbar extends Component {
 
   render(){
     const {children, handleClick, isLoggedIn} = this.props
+
+		let cartUrl;
+		if(isLoggedIn) cartUrl = '/authUserCart'
+		else {
+			cartUrl = '/unAuthUserCart'
+    }
+
 		let badge
-		if (this.props.cartItems.length > 0) {
-				badge = <h3 style={{ color: 'red' }}>{this.props.cartItems.length}</h3>
-		}
+    (isLoggedIn && this.props.cartItems.length > 0) ?
+    badge = this.props.cartItems.length
+            :
+    badge = localStorage.getArr('item').length
+
     return (
       <div className="flex-container-column navContainer">
         <div className="flex-container-row spaceBtw fullWidth topNavContainer">
@@ -63,12 +71,17 @@ class Navbar extends Component {
 					<NavLink to={'/orders'}><span>My orders</span></NavLink>
 					<div className="flex-container-row">
 						<span><i className="material-icons">shopping_cart</i></span>
-						<NavLink exact to={'/cart-list'}>
+          <div className="badgeContainer">
+              <span>
+                {
+                  badge
+                }
+              </span>
+          </div>
+						<NavLink exact to={cartUrl}>
 							<div className="flex-container-row">
 								<h3 className="fontBlack">CART</h3>
-								{
-									badge
-								}
+
 							</div>
 						</NavLink>
 					</div>
@@ -102,6 +115,9 @@ const mapDispatch = (dispatch) => {
 	}
 }
 
+Storage.prototype.getArr = function(key) {
+  return JSON.parse(this.getItem(key))
+}
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default connect(mapState, mapDispatch)(Navbar)

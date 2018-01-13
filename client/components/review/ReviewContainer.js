@@ -11,7 +11,6 @@ const ReviewContainer = (props) => {
 	let productId
 	if(props.reviews) {
 		list = props.reviews.map(review => {
-			console.log('review', review)
 			return <Review key={review.id} review={review} />
 		})
 		productId = props.reviews[0].productId
