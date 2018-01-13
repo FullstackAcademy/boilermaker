@@ -42,7 +42,7 @@ class Navbar extends Component {
 		let badge
     if (isLoggedIn && this.props.cartItems.length > 0) {
       badge = this.props.cartItems.length
-    } else if (this.props.localItems) {
+    } else if (!isLoggedIn && this.props.localItems) {
       badge = this.props.localItems.length
     }
     return (
