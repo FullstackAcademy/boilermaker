@@ -27,6 +27,13 @@ class Navbar extends Component {
 
   render(){
     const {children, handleClick, isLoggedIn} = this.props
+
+		let cartUrl;
+		if(isLoggedIn) cartUrl = '/authUserCart'
+		else {
+			cartUrl = '/unAuthUserCart'
+    }
+
 		let badge
     (isLoggedIn && this.props.cartItems.length > 0) ?
     badge = this.props.cartItems.length
