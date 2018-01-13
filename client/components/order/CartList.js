@@ -77,7 +77,7 @@ const mapState = (state) => {
 }
 
 const mapStateUnauth = (state) => {
-  const cartItems = localStorage.getArr('item')
+  const cartItems = localStorage.getArr('item') || []
   console.log('cartItems is----------', cartItems)
   console.log('cartItems type----------', typeof cartItems)
   // // console.log('state.products is----------', state.products)

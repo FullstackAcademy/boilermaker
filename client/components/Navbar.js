@@ -40,11 +40,11 @@ class Navbar extends Component {
     }
 
 		let badge
-    (isLoggedIn && this.props.cartItems.length > 0) ?
-    badge = this.props.cartItems.length
-            :
-    badge = this.props.localItems.length
-
+    if (isLoggedIn && this.props.cartItems.length > 0) {
+      badge = this.props.cartItems.length
+    } else if (this.props.localItems) {
+      badge = this.props.localItems.length
+    }
     return (
       <div className="flex-container-column navContainer">
         <div className="flex-container-row spaceBtw fullWidth topNavContainer">
