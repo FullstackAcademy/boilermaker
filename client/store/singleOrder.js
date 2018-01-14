@@ -27,10 +27,21 @@ export const fetchActiveOrder = (orderId) =>
   dispatch =>
 	axios.get(`/api/orders/${orderId}/lineItems`)
 	.then(res => res.data)
-	.then(results => {
-		console.log(results)
-		dispatch(gotActiveOrder(results))
-	})
+	.then(result => {
+      console.log(result);
+      const allProducts = result.lineItems.map(lineItem => {
+        return axios.get(`/api/products/lineItems/${lineItem.id}`)
+      })
+      Promise.all(allProducts)
+      .then(res => {
+        console.log('allProducts===== ',res)
+        let products = []
+        res.forEach(e => products.push(e.data[0]))
+        result['products'] = products
+        dispatch(gotActiveOrder(result))
+      })
+      .catch(err => console.error(err))
+  })
 
 
 /**
@@ -39,7 +50,6 @@ export const fetchActiveOrder = (orderId) =>
 export default function (state = activeOrder, action) {
   switch (action.type) {
     case GOT_ACTIVE_ORDER:
-        console.log('reducer activeOrder ----', action.activeOrder)
         return action.activeOrder
     default:
       return state

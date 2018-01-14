@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Product } = require('../db/models');
+const { Product, LineItem } = require('../db/models');
 module.exports = router;
 
 // GET api/products
@@ -18,6 +18,19 @@ router.get('/:productId', (req, res, next) => {
         })
         .catch(next);
 });
+
+// GET api/products/lineItems/:id
+router.get('/lineItems/:id', (req, res, next)=> {
+    const lineItemId = req.params.id;
+    LineItem.findById(lineItemId)
+    .then(lineItem => {
+        return lineItem.getProducts()
+    })
+    .then(products => {
+        res.json(products)
+    })
+    .catch(next)
+})
 
 // POST api/products
 router.post('/', (req, res, next) => {
