@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Order, Product } = require('../db/models');
+const { Order, Product, LineItem } = require('../db/models');
 module.exports = router;
 
 // GET api/orders
@@ -35,6 +35,16 @@ router.post('/', (req, res, next) => {
     })
     .catch(next)
 });
+
+// Needs to be refactored: POST api/orders
+// router.post('/', (req, res, next) => {
+//     Order.create()
+//     .then(order => {
+//         order.addLineItem([LineItem])
+//         res.json(order);
+//     })
+//     .catch(next)
+// });
 
 // PUT api/orders/:orderId
 router.put('/:orderId', (req, res, next) => {

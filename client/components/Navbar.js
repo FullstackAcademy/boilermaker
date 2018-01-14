@@ -73,7 +73,7 @@ class Navbar extends Component {
 						    <Link className="fontSpecial fontBlack " to="/signup">SIGNUP</Link>
 						  </div>
 					}
-					<NavLink to={'/orders'}><span>My orders</span></NavLink>
+					<NavLink to={'/orders-checkout'}><span>My orders</span></NavLink>
 					<div className="flex-container-row">
 						<span><i className="material-icons">shopping_cart</i></span>
           <div className="badgeContainer">

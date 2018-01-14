@@ -53,6 +53,10 @@ export class CartList extends Component {
           <div>Excluding tax shipping</div>
           <div>Note to Ramenzon</div>
           <input />
+          {/* Pressing the checkout button should trigger 
+            also, users need to be logged in to checkout
+            <OrderCheckout items={items}/>
+          */}
           <button>CHECKOUT</button>
       </div>
     </div>
