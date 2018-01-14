@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Order, Product } = require('../db/models');
+const { Order, Product, LineItem } = require('../db/models');
 module.exports = router;
 
 // GET api/orders
@@ -8,17 +8,17 @@ router.get('/:userId', (req, res, next) => {
 		where: {
 			userId: req.params.userId
 		},
-		include: [Product]
+		include: [LineItem]
 	})
     .then(Orders => res.json(Orders))
     .catch(next)
 });
 
 // GET api/Orders/:orderId
-router.get('/:orderId/products', (req, res, next) => {
+router.get('/:orderId/lineItems', (req, res, next) => {
     const id = req.params.orderId;
     Order.findById(id, {
-			include: [Product]
+			include: [LineItem]
 		})
         .then(order => {
             res.json(order);
@@ -35,6 +35,18 @@ router.post('/', (req, res, next) => {
     })
     .catch(next)
 });
+
+// Needs to be refactored: POST api/orders
+// router.post('/:id', (req, res, next) => {
+//     const userId = req.params.id;
+//     Order.create()
+//     .then(order => {
+//         order.addLineItem([LineItem])
+//         order.setUser([User])
+//         res.json(order);
+//     })
+//     .catch(next)
+// });
 
 // PUT api/orders/:orderId
 router.put('/:orderId', (req, res, next) => {

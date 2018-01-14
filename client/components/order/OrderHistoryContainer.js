@@ -6,14 +6,15 @@ import { fetchOrders } from '../../store'
 class OrderHistoryContainer extends React.Component {
 
 	componentWillMount() {
-		this.props.fetchOrders()
+		let userId = this.props.match.params.userId
+		this.props.fetchOrders(userId)
 	}
 
 	render() {
-		let list = this.props.orders.map(order => <Link to={`/api/orders/${order.id}`} key={order.id}>{order.id}</Link>)
+		let list = this.props.orders.map(order => <li><Link to={`/api/orders/${order.id}`} key={order.id}>{order.id}</Link></li>)
 		return (
-			<div>
-				<p>OrderContainer</p>
+			<div className="shoppingCartContainer marginTop">
+				<h2>OrderContainer</h2>
 				<ul>
 					{
 						list
@@ -32,7 +33,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
 	return {
-		fetchOrders: () => dispatch(fetchOrders({ id: 1 }))
+		fetchOrders: (userId) => dispatch(fetchOrders(userId))
 	}
 }
 
