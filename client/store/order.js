@@ -4,13 +4,13 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GOT_ORDERS = 'GOT_ORDERS'
-// const GOT_ACTIVE_ORDER = 'GOT_ACTIVE_ORDER'
+const GOT_ACTIVE_ORDER = 'GOT_ACTIVE_ORDER'
 
 /**
  * INITIAL STATE
  */
 const defaultOrders = []
-// const activeOrder = {}
+const activeOrder = {}
 
 /**
  * ACTION CREATORS
@@ -20,31 +20,31 @@ const gotOrders = (orders) => ({
 	orders
 })
 
-// const gotActiveOrder = (activeOrder) => ({
-// 	type: GOT_ACTIVE_ORDER,
-// 	activeOrder
-// })
+const gotActiveOrder = (activeOrder) => ({
+	type: GOT_ACTIVE_ORDER,
+	activeOrder
+})
+
 /**
  * THUNK CREATORS
  */
-export const fetchOrders = (user) =>
+export const fetchOrders = (userId) =>
   dispatch =>
-	axios.get(`/api/orders/${user.id}`)
+	axios.get(`/api/orders/${userId}`)
 	.then(res => res.data)
 	.then(results => {
-		console.log(results)
 		dispatch(gotOrders(results))
 	})
 	.catch(err => console.log(err))
 
-// export const fetchActiveOrder = (order) =>
-//   dispatch =>
-// 	axios.get(`/api/orders/${order.id}/products`)
-// 	.then(res => res.data)
-// 	.then(results => {
-// 		console.log(results)
-// 		dispatch(gotActiveOrder(results))
-// 	})
+export const fetchActiveOrder = (orderId) =>
+  dispatch =>
+	axios.get(`/api/orders/${orderId}/lineItems`)
+	.then(res => res.data)
+	.then(results => {
+		console.log(results)
+		dispatch(gotActiveOrder(results))
+	})
 
 
 /**

@@ -31,7 +31,7 @@ class Navbar extends Component {
 	}
 
   render(){
-    const {children, handleClick, isLoggedIn} = this.props
+    const {children, handleClick, isLoggedIn, userId} = this.props
 
 		let cartUrl;
 		if(isLoggedIn) cartUrl = '/authUserCart'
@@ -73,7 +73,7 @@ class Navbar extends Component {
 						    <Link className="fontSpecial fontBlack " to="/signup">SIGNUP</Link>
 						  </div>
 					}
-					<NavLink to={'/orders-checkout'}><span>My orders</span></NavLink>
+					<NavLink to={`/orders-history/${userId}`}><span>My orders</span></NavLink>
 					<div className="flex-container-row">
 						<span><i className="material-icons">shopping_cart</i></span>
           <div className="badgeContainer">
@@ -106,7 +106,8 @@ const mapState = (state) => {
 	return {
 		isLoggedIn: !!state.user.id,
     cartItems: state.cartItems,
-    localItems: state.localItems
+		localItems: state.localItems,
+		userId: state.user.id
 	}
 }
 
