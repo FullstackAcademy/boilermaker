@@ -8,12 +8,13 @@ class OrderHistoryDetails extends Component{
 	}
 
 	componentWillMount(){
-		const userId = this.props.match.params.userId;
-		this.props.getOrder(userId);
+		const orderId = this.props.match.params.orderId;
+		this.props.getSingleOrder(orderId);
 	}
 
 	render(){
-		const { order } = this.props;
+		const { activeOrder } = this.props;
+		console.log('activeOrder?? ', activeOrder);
 		return (
 			<div>
 				<p>order details...</p>
@@ -24,21 +25,16 @@ class OrderHistoryDetails extends Component{
 
 const mapState = (state) => {
 	return {
-		order: state.order
+		activeOrder: state.activeOrder
 	}
 }
 
 const mapDispatch = dispatch => {
 	return {
-		getOrder: (orderId) => {
+		getSingleOrder: (orderId) => {
 			dispatch(fetchActiveOrder(orderId))
-		},
-		getItems: orderId => {
-			dispatch()
 		}
 	}
 }
 
-export default connect(mapState, null)(OrderHistoryDetails)
-
-//TODO: add redux state: activeOrder & orders[]
+export default connect(mapState, mapDispatch)(OrderHistoryDetails)
