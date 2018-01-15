@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const { Product, LineItem } = require('../db/models');
+const { Product, LineItem, Review } = require('../db/models');
 module.exports = router;
 
 // GET api/products
 router.get('/', (req, res, next) => {
-  Product.findAll({include: [{all: true}]})
+  Product.findAll({include: [Review]})
     .then(products => res.json(products))
     .catch(next)
 });
