@@ -8,39 +8,31 @@ router.get('/:id', (req, res, next) => {
     const userId = req.params.id;
 
     LineItem.findAll({
-        where: {userId}
+        where: {userId},
+        include:[Product]
     })
-    .then(lineItems =>{
-        const allProducts = lineItems.map(item => {
-        return item.getProducts()
+    .then(lineItems => {
+        console.log("backend linItems api=====", lineItems); res.json(lineItems)
     })
-        return Promise.all(allProducts)
-        .then(lineItems => {
-            console.log('backend ------', ...lineItems)
-            // const result = [].concat.apply([], lineItems);
-            res.json(...lineItems)
-        })
-        .catch(next)
-    })
-
+    .catch(next)
 })
 
 //POST /api/lineItems
 router.post('/', (req, res, next) => {
     const { userId, productId, quantity, price } = req.body
-    LineItem.create({userId, quantity, price})
-    .then((lineItem, isCreated) => {
+    LineItem.findOrCreate({
+      where:{userId, quantity, price}
+    })
+    .spread((lineItem, isCreated) => {
       Product.findById(`${productId}`)
       .then(product => {
-        // console.log('product is--------------', product)
-        // console.log('lineItem.addProduct(product) is--------------', lineItem.addProduct(product))
-        return lineItem.addProduct(product)
+        return product.setLineItem(lineItem)
       })
       .then((data)=>{
         // console.log('lineItem.id is--------------', lineItem.id)
         // return LineItem.findById(`${lineItem.id}`)
         // .then((data) => {
-        //   console.log('data is-----------', data)
+          console.log('data is-----------', data)
           res.json(data)})
         .catch(next)
       })

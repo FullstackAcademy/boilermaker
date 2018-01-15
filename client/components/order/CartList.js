@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchItems, me } from '../../store'
+import { Link } from 'react-router-dom'
 // import _ from 'lodash'
 
 let login = false;
@@ -11,7 +12,7 @@ export class CartList extends Component {
     this.state = {  }
   }
 
-  componentWillReceiveProps(){
+  componentDidMount(){
     // this.props.loadInitialData();
     if (this.props.userId) {
       login = true;
@@ -23,7 +24,7 @@ export class CartList extends Component {
   render() {
 
     const items = this.props.items;
-    console.log('items are---------', items)
+    // console.log('items are---------', items)
     return (
       <div className="flex-container-row alignStart">
         <div className="flex-container-column shoppingCartContainer marginTop" >
@@ -39,7 +40,7 @@ export class CartList extends Component {
                   <span>{item.name}</span>
                   <span>{`${item.size}-Pack`}</span>
                 </div>
-                <div>{item.quantity}</div>
+                <div>Quantity{item.quantity}</div>
                 <div>
                   <span>{`$ ${item.price}`}</span>
                 </div>
@@ -53,11 +54,9 @@ export class CartList extends Component {
           <div>Excluding tax shipping</div>
           <div>Note to Ramenzon</div>
           <input />
-          {/* Pressing the checkout button should trigger 
-            also, users need to be logged in to checkout
-            <OrderCheckout items={items}/>
-          */}
-          <button>CHECKOUT</button>
+          <Link to="/orders-checkout">
+            <button>CHECKOUT</button>
+          </Link>
       </div>
     </div>
     )
@@ -66,15 +65,17 @@ export class CartList extends Component {
 
 
 const mapState = (state) => {
-  console.log('state.cartItems is -------------', state.cartItems)
-  const productArr =
+
+  const items =
   state.cartItems.map(item => {
-    return state.products.find(product => product.id === +item.productId)
+    const productObj = item.products[0]
+    return {...item, ...productObj}
   })
-  console.log('state.user.id is -------------', state.user.id)
-  console.log('productARR is -------------', productArr)
+  console.log('items is -------------', items)
+  // console.log('state.user.id is -------------', state.user.id)
+  // console.log('productARR is -------------', productArr)
   return {
-    items: productArr,
+    items: items,
     userId: state.user.id
   }
 }
@@ -96,13 +97,13 @@ const mapStateUnauth = (state) => {
 }
 
 const mapDisptach = dispatch => {
-  console.log('dispath 1 is called------------')
+  // console.log('dispath 1 is called------------')
   return {
     loadInitialData () {
       dispatch(me())
     },
     getAllCartItems(userId) {
-      console.log('dispath 2 is called------------')
+      // console.log('dispath 2 is called------------')
       dispatch(fetchItems(userId))
     }
   }
