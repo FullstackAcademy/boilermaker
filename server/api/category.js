@@ -8,3 +8,9 @@ router.get('/', (req, res, next) => {
     .then(categories => res.json(categories))
     .catch(next)
 })
+
+router.post('/', (req, res, next) => {
+	Category.create(req.body)
+	.then(category => res.json(category))
+	.catch(next)
+})

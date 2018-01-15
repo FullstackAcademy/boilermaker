@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import { NavLink } from 'react-router-dom'
-
+import CategoryForm from './CategoryForm'
 
 export const FrontPage = (props) => {
 
@@ -10,8 +10,6 @@ export const FrontPage = (props) => {
       <NavLink exact to='/shopall'>
       <span className="fontSpecial categoryName">ALL</span>
       </NavLink>
-
-
     {
       props.categories && props.categories.map(
         category => {
@@ -22,6 +20,7 @@ export const FrontPage = (props) => {
         )
       })
     }
+		{ props.user.isAdmin ? <CategoryForm /> : <div></div> }
     </div>
   )
 }
@@ -29,7 +28,8 @@ export const FrontPage = (props) => {
 const mapState = (state) => {
   return {
     categories: state.categories,
-    products: state.products
+    products: state.products,
+		user: state.user
   }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getCategoriesThunk, editProductThunk } from '../../store'
+import { getCategoriesThunk, editProductThunk, createProductThunk } from '../../store'
 
 
 class EditProductForm extends React.Component {
@@ -28,9 +28,9 @@ class EditProductForm extends React.Component {
     })
   }
 	//thunk
-	onEditSubmit() {
+	onEditSubmit(e) {
     //const id = this.props.product.id
-    console.log('proppps', this.props.product.id)
+		e.preventDefault()
 		const data = {
 			name: this.state.name,
 			image: this.state.image,
@@ -40,15 +40,18 @@ class EditProductForm extends React.Component {
       inventoryCount: this.state.inventoryCount,
       categoryId: this.state.categoryId
 		}
-		this.props.editProduct(data, this.props.product.id)
+		if (!this.props.isCreate) {
+			this.props.editProduct(data, this.props.product.id)
+		} else {
+			this.props.createProduct(data)
+		}
 	}
 
 	render() {
 
 		return this.state.isShowing ? (
 			<div>
-				<form onSubmit={
-          this.onEditSubmit}>
+				<form onSubmit={(e) => this.onEditSubmit(e)}>
               <p style={{marginBottom: 0}}>Name</p>
               <input value={this.state.name} onClick={(evt) => evt.preventDefault()} onChange={this.handleChange} name="name" />
               <p style={{marginBottom: 0}}>Image</p>
@@ -74,7 +77,7 @@ class EditProductForm extends React.Component {
                     </option>)
               })}
             </select>
-					<button type="submit">Submit Edit</button>
+					<button type="submit">Submit</button>
 					<button onClick={(evt) => {
         evt.preventDefault()
         this.setState({ isShowing: false })
@@ -84,11 +87,11 @@ class EditProductForm extends React.Component {
 			</div>
 		) : (
 			<button onClick={(evt) => {
-        //evt.preventDefault()
+        evt.preventDefault()
         this.setState({ isShowing: true })
         this.props.getCategories()
       }
-      }>Edit Product</button>
+		}>{ this.props.isCreate ? 'Add Product' : 'Edit Product'}</button>
 		)
 	}
 }
@@ -104,7 +107,10 @@ const mapDispatch = (dispatch) => {
     },
     editProduct(data, id){
       dispatch(editProductThunk(data, id))
-    }
+    },
+		createProduct(product){
+			dispatch(createProductThunk(product))
+		}
 	}
 }
 export default connect(mapState, mapDispatch)(EditProductForm)
