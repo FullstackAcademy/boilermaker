@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { fetchActiveOrder } from '../../store/order'
+import { fetchActiveOrder } from '../../store/singleOrder'
 
 class OrderHistoryDetails extends Component{
 	constructor(props){
@@ -8,15 +8,40 @@ class OrderHistoryDetails extends Component{
 	}
 
 	componentWillMount(){
-		const userId = this.props.match.params.userId;
-		this.props.getOrder(userId);
+		const orderId = this.props.match.params.orderId;
+		this.props.getSingleOrder(orderId);
 	}
 
 	render(){
-		const { order } = this.props;
+		const { activeOrder } = this.props;
 		return (
 			<div>
-				<p>order details...</p>
+			{
+				activeOrder&&
+				<div className="flex-container-column shoppingCartContainer marginTop">
+					<h2>order details...</h2>
+					<ul>
+					{
+						activeOrder.lineItems && activeOrder.lineItems.map(lineItem => {
+							return (
+								<div key={lineItem.id}>
+									<li>LineItem #{lineItem.id}</li>
+									<ol>
+									{
+										activeOrder.products.map(product =>
+											<div key={product.id}>
+												<li>{product.name} ${product.price}</li>
+											</div>
+										)
+									}
+									</ol>
+								</div>
+							)
+						})
+					}
+					</ul>
+				</div>
+			}
 			</div>
 		)
 	}
@@ -24,21 +49,16 @@ class OrderHistoryDetails extends Component{
 
 const mapState = (state) => {
 	return {
-		order: state.order
+		activeOrder: state.activeOrder
 	}
 }
 
 const mapDispatch = dispatch => {
 	return {
-		getOrder: (orderId) => {
+		getSingleOrder: (orderId) => {
 			dispatch(fetchActiveOrder(orderId))
-		},
-		getItems: orderId => {
-			dispatch()
 		}
 	}
 }
 
-export default connect(mapState, null)(OrderHistoryDetails)
-
-//TODO: add redux state: activeOrder & orders[]
+export default connect(mapState, mapDispatch)(OrderHistoryDetails)
