@@ -24,7 +24,7 @@ export class CartList extends Component {
   render() {
 
     const items = this.props.items;
-    console.log('items are---------', items)
+    // console.log('items are---------', items)
     return (
       <div className="flex-container-row alignStart">
         <div className="flex-container-column shoppingCartContainer marginTop" >
@@ -65,16 +65,17 @@ export class CartList extends Component {
 
 
 const mapState = (state) => {
-  console.log('state.cartItems is -------------', state.cartItems)
-  const productArr =
+
+  const items =
   state.cartItems.map(item => {
-    const productObj = state.products.find(product => product.id === +item.productId)
-    return {...state.cartItems, ...productObj}
+    const productObj = item.products[0]
+    return {...item, ...productObj}
   })
-  console.log('state.user.id is -------------', state.user.id)
-  console.log('productARR is -------------', productArr)
+  console.log('items is -------------', items)
+  // console.log('state.user.id is -------------', state.user.id)
+  // console.log('productARR is -------------', productArr)
   return {
-    items: productArr,
+    items: items,
     userId: state.user.id
   }
 }
@@ -96,13 +97,13 @@ const mapStateUnauth = (state) => {
 }
 
 const mapDisptach = dispatch => {
-  console.log('dispath 1 is called------------')
+  // console.log('dispath 1 is called------------')
   return {
     loadInitialData () {
       dispatch(me())
     },
     getAllCartItems(userId) {
-      console.log('dispath 2 is called------------')
+      // console.log('dispath 2 is called------------')
       dispatch(fetchItems(userId))
     }
   }

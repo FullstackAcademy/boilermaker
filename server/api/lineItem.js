@@ -20,8 +20,10 @@ router.get('/:id', (req, res, next) => {
 //POST /api/lineItems
 router.post('/', (req, res, next) => {
     const { userId, productId, quantity, price } = req.body
-    LineItem.create({userId, quantity, price})
-    .then((lineItem, isCreated) => {
+    LineItem.findOrCreate({
+      where:{userId, quantity, price}
+    })
+    .spread((lineItem, isCreated) => {
       Product.findById(`${productId}`)
       .then(product => {
         return product.setLineItem(lineItem)
