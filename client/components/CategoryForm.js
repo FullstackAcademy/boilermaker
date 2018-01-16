@@ -22,7 +22,7 @@ class CategoryForm extends React.Component {
 		return (
 			<div>
 				<form onSubmit={(e) => this.handleSubmit(e)}>
-					<input placeholder="name" onChange={(e) => this.setState({ category: e.target.value })} />
+					<input placeholder="add category" onChange={(e) => this.setState({ category: e.target.value })} />
 					<button type="submit">submit</button>
 				</form>
 			</div>
