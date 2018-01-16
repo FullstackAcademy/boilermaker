@@ -1,7 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 import { fetchOrders } from './order'
-import { fetchUnAuthenticatedUser } from './unAuthUser'
+import { fetchUnAuthenticatedUser, createUnAuthenticatedUser } from './unAuthUser'
 import {postItem, addLocalItems, fetchItems} from '../store'
 import { getUniqueKey } from '../helper'
 /**
@@ -33,11 +33,11 @@ export const me = () =>
 					dispatch(fetchOrders(res.data.id))
 				} else { //if not logged in, look for unauth user.
 
-					//if they arent logged in but have a sessionId
+					//if they arent a user but have a sessionId, meaning they exist in unauth users..
 					if(localStorage.getItem('sessionId')) {
 						const thunk = fetchUnAuthenticatedUser(localStorage.getItem('sessionId'))
 						dispatch(thunk)
-					} else {
+					} else { //they dont exist as either type of user, create an unauth user..
 						localStorage.setItem('sessionId', getUniqueKey())
 						const thunk = createUnAuthenticatedUser(localStorage.getItem('sessionId'))
 						dispatch(thunk)

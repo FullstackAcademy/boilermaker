@@ -20,7 +20,7 @@ const gotUnAuthUser = unAuthUser => ({type: GOT_UNAUTH_USER, unAuthUser})
  */
  export const createUnAuthenticatedUser = (localStorageId) => {
  	return (dispatch) => {
- 		axios.post('/api/unAuthenticated', {localStorageId})
+ 		axios.post('/api/unAuthenticated', {sessionId: localStorageId})
  		.then(res => {
  			console.log(res)
  			return res.data
@@ -31,6 +31,7 @@ const gotUnAuthUser = unAuthUser => ({type: GOT_UNAUTH_USER, unAuthUser})
 					dispatch(fetchUnAuthOrders(data.sessionId))
  			}
  		})
+		.catch(err => console.log(err))
  	}
  }
 
