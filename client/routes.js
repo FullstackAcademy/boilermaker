@@ -12,7 +12,7 @@ import { authUserCart, unAuthUserCart } from './components/order/CartList'
 import SingleProduct from './components/product/SingleProduct'
 import Search from './components/product/Search'
 import OrderCheckout from './components/order/OrderCheckout'
-import RaisedButton from 'material-ui/RaisedButton';
+
 /**
  * COMPONENT
  */
@@ -47,7 +47,6 @@ class Routes extends Component {
         <Router history={history}>
           <div>
             <Navbar />
-            <RaisedButton label="Default" />
             <Switch>
               {/* Routes placed here are available to all visitors */}
               <Route path="/login" component={Login} />

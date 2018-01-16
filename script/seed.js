@@ -44,35 +44,35 @@ async function seed () {
   // console.log(`seeded successfully`)
 
   const products = await Promise.all([
-    Product.create({name: "Spicy Noodles",
+    Product.create({name: "SPICY PAITAN",
     image:"http://whereto.vn/custom/domain_1/articles/fullsize/article14741/a-combination-of-sesame-and-ramen-photo-alapaap88-wordpress-tin8-2.jpg",
-    price: 8.00, description: "Tasty and made with classic wheat", inventoryCount: 50,
+    price: 899, description: "Tasty and made with classic wheat", inventoryCount: 50,
     size: 1, categoryId: 2}),
 
-    Product.create({name: "Traditional Noodles 1",
+    Product.create({name: "CHICKEN PAITAN",
     image: "https://fthmb.tqn.com/6SpbqS3OAwdCSqk9gteOP7aq9ak=/960x0/filters:no_upscale()/GettyImages-1355176861-56de62135f9b5854a9f644aa.jpg",
-    price: 10.00, description: "Tasty and made with eggs", inventoryCount: 100,
+    price: 1099, description: "Tasty and made with eggs", inventoryCount: 100,
     size: 1, categoryId: 4}),
 
-    Product.create({name: "Traditional Noodles 2",
+    Product.create({name: "VEGETABLE PAITAN",
     image: "https://media-cdn.tripadvisor.com/media/photo-s/0e/1e/ff/d2/tonkotsu-ramen-hakata.jpg",
-    price: 10.00, description: "Tasty and made with eggs", inventoryCount: 100,
+    price: 1099, description: "Tasty and made with eggs", inventoryCount: 100,
     size: 2, categoryId: 4}),
 
-    Product.create({name: "Miso Noodles",
+    Product.create({name: "MISO PAITAN",
     image: "http://www.yireservation.com/wp-content/uploads/2011/08/img_9348.jpg?x48477",
-    price: 11.50, description: "Tasty and made with rice", inventoryCount: 150,
+    price: 1199, description: "Tasty and made with rice", inventoryCount: 150,
     size: 1, categoryId: 1}),
 
-    Product.create({name: "Dark Noodles 1",
+    Product.create({name: "MEGA PAITAN",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1c7nMXKaBJUJsap2gi44gOIf_HftiALTviPqYGa-x22onwQCRww",
-    price: 12.50, description: "Tasty and made with sweet potatoes, zucchini and butternut squash", inventoryCount: 200,
+    price: 1399, description: "Tasty and made with sweet potatoes, zucchini and butternut squash", inventoryCount: 200,
     size: 2, categoryId: 3})
   ,
 
-  Product.create({name: "Dark Noodles 2",
+  Product.create({name: "TAIWAN PAITAN",
   image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJP92ERTxXWYAeolqMQZHPhvBz98jjbz2qb9SEifB0plxonoZI1Q",
-  price: 12.50, description: "Tasty and made with sweet potatoes, zucchini and butternut squash", inventoryCount: 200,
+  price: 1499, description: "Tasty and made with sweet potatoes, zucchini and butternut squash", inventoryCount: 200,
   size: 2, categoryId: 3})
 ]
 
