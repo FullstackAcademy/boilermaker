@@ -27,6 +27,12 @@ export class CartList extends Component {
 		}
 	}
 
+  // onclick function to call thunk to delete item
+
+
+// onChange funcation for select to call thunk to update item quantity
+
+
   render() {
 
     const items = this.props.items;
