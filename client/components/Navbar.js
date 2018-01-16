@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, NavLink} from 'react-router-dom'
-import {logout, getCategoriesThunk, addLocalItems, postItem} from '../store'
+import {logout, getCategoriesThunk, addLocalItems, postItem, getUsersThunk} from '../store'
 import CategoryList from './CategoryList'
 
 /**
@@ -34,7 +34,7 @@ class Navbar extends Component {
 	}
 
   render(){
-    const {children, handleClick, isLoggedIn, userId} = this.props
+    const {children, handleClick, isLoggedIn, userId, isAdmin, getAllUsers} = this.props
 
 		let cartUrl;
 		if(isLoggedIn) cartUrl = '/authUserCart'
@@ -69,6 +69,7 @@ class Navbar extends Component {
 						  ? <div>
 						    {/* The navbar will show these links after you log in */}
 						    <Link to="/logout" className="fontSpecial fontBlack" onClick={handleClick}>LOGOUT</Link>
+                {isAdmin && <Link to="/users" className="fontSpecial fontBlack" onClick={getAllUsers}>   USERS</Link>}
 						  </div>
 						  : <div className="loginMenu flex-container-row spaceBtw">
 						    {/* The navbar will show these links before you log in */}
@@ -107,7 +108,8 @@ class Navbar extends Component {
  */
 const mapState = (state) => {
 	return {
-		isLoggedIn: !!state.user.id,
+    isLoggedIn: !!state.user.id,
+    isAdmin: state.user.isAdmin,
     cartItems: state.cartItems,
 		localItems: state.localItems,
 		userId: state.user.id
@@ -125,7 +127,9 @@ const mapDispatch = (dispatch) => {
     addLocalItems(items) {
       dispatch(addLocalItems(items))
     },
-
+    getAllUsers() {
+      dispatch(getUsersThunk())
+    }
   }
 }
 
