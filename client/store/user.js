@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from '../history'
-import { fetchOrders } from './order'
+import { fetchOrders, fetchUnAuthOrders } from './order'
 import { fetchUnAuthenticatedUser, createUnAuthenticatedUser } from './unAuthUser'
 import {postItem, addLocalItems, fetchItems} from '../store'
 import { getUniqueKey } from '../helper'

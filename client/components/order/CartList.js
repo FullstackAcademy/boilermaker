@@ -23,9 +23,7 @@ export class CartList extends Component {
   }
 
 	componentWillReceieveProps(newProps) {
-		if(newProps.user) {
-			this.props.getAllCartItems(newProps.user.id);
-		}
+			this.props.getAllCartItems(this.props.activeOrder.id);
 	}
 
   // onclick function to call thunk to delete item
@@ -40,6 +38,7 @@ export class CartList extends Component {
   render() {
 
     const items = this.props.items;
+    console.log('items =======', items);
     let selections = [1,2,3,4,5,6,7,8,9,10];
     return (
       <div className="flex-container-row alignStart">
@@ -51,11 +50,11 @@ export class CartList extends Component {
             return (
             <div className= "flex-container-column" key={item.id}>
                 <div >
-                <img className="cartImage" src={item.image}  />
+                <img className="cartImage" src={item.product.image}  />
                 </div>
                 <div className="flex-container-row spaceBtw product">
-                  <span>{item.name}</span>
-                  <span>{`${item.size}-Pack`}</span>
+                  <span>{item.product.name}</span>
+                  <span>{`${item.product.size}-Pack`}</span>
                 </div>
 
                 <button id="deleteBtn" onClick={() => this.props.deleteItem(item.id)}><i className="material-icons">remove_circle</i>
@@ -95,7 +94,7 @@ export class CartList extends Component {
 const mapState = (state) => {
   return {
     items: state.cartItems,
-    user: state.user
+    activeOrder: state.activeOrder
   }
 }
 
@@ -115,8 +114,8 @@ const mapDisptach = dispatch => {
     loadInitialData () {
       dispatch(me())
     },
-    getAllCartItems(userId) {
-      dispatch(fetchItems(userId))
+    getAllCartItems(orderId) {
+      dispatch(fetchItems(orderId))
     },
     deleteItem(itemId){
       dispatch(deleteItemThunk(itemId))

@@ -19,6 +19,23 @@ router.get('/:userId', (req, res, next) => {
     .catch(next)
 });
 
+//get orders for unauth user by sessionId
+router.get('/unAuthenticated/:sessionId', (req, res, next) => {
+	Order.findAll({
+		where: {
+			sessionId: req.params.sessionId
+		},
+		include: [
+			{
+				model: LineItem,
+				include: [Product]
+			}
+		]
+	})
+    .then(orders => res.json(orders))
+    .catch(next)
+})
+
 //GET shopping cart (only order that is not complete)
 router.get('/:userId/cart', (req, res, next) => {
 	Order.findOne({

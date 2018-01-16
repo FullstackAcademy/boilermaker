@@ -35,7 +35,7 @@ LineItem.belongsTo(Product)
 //this is for the include on products...
 LineItem.belongsTo(Product)
 
-UnAuthUser.hasMany(Order)
+UnAuthUser.hasMany(Order) //use sessionid instead of db id key
 Order.belongsTo(UnAuthUser)
 
 

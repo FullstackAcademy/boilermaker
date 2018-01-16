@@ -26,6 +26,10 @@ const Order = db.define('order', {
 	},
 	creditCard: {
 		type: Sequelize.STRING(16)
+	},
+	sessionId: {
+		type: Sequelize.STRING,
+		defaultValue: null
 	}
 })
 
