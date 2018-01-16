@@ -1,13 +1,15 @@
 import axios from 'axios'
 import history from '../history'
-import { fetchOrders } from './order'
+import { fetchOrders, fetchUnAuthOrders } from './order'
+import { fetchUnAuthenticatedUser, createUnAuthenticatedUser } from './unAuthUser'
 import {postItem, addLocalItems, fetchItems} from '../store'
+import { getUniqueKey } from '../helper'
 /**
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-
+const GOT_UNAUTH_USER = 'GOT_UNAUTH_USER'
 /**
  * INITIAL STATE
  */
@@ -18,7 +20,7 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-
+const gotUnAuthUser = user => ({type: GOT_UNAUTH_USER, user})
 /**
  * THUNK CREATORS
  */
@@ -26,8 +28,21 @@ export const me = () =>
   dispatch =>
     axios.get('/auth/me')
       .then(res => {
-				dispatch(getUser(res.data || defaultUser))
-				dispatch(fetchOrders(res.data.id))
+				if(res.data) { //if user is logged in
+					dispatch(getUser(res.data || defaultUser))
+					dispatch(fetchOrders(res.data.id))
+				} else { //if not logged in, look for unauth user.
+
+					//if they arent a user but have a sessionId, meaning they exist in unauth users..
+					if(localStorage.getItem('sessionId')) {
+						const thunk = fetchUnAuthenticatedUser(localStorage.getItem('sessionId'))
+						dispatch(thunk)
+					} else { //they dont exist as either type of user, create an unauth user..
+						localStorage.setItem('sessionId', getUniqueKey())
+						const thunk = createUnAuthenticatedUser(localStorage.getItem('sessionId'))
+						dispatch(thunk)
+					}
+				}
 			})
       .catch(err => console.log(err))
 

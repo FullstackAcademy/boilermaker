@@ -7,7 +7,7 @@ class OrderHistoryContainer extends React.Component {
 
 	componentWillMount() {
 		let userId = this.props.user.id
-		this.props.fetchOrders(userId)
+		// this.props.fetchOrders(userId)
 	}
 
 	render() {

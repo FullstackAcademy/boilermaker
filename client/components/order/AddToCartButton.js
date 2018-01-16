@@ -102,6 +102,15 @@ Storage.prototype.getObj = function(key) {
 Storage.prototype.getArr = function(key) {
   return JSON.parse(this.getItem(key))
 }
+Storage.prototype.getUniqueKey = function() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+}
 
 // Do not Delete this.  It is used to reset the localStorage
 // localStorage.removeItem("item");

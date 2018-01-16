@@ -4,6 +4,7 @@ const Product = require('./product')
 const Review = require('./review')
 const Order = require('./order')
 const LineItem = require('./lineItem')
+const UnAuthUser = require('./unAuthUser')
 
 Product.belongsTo(Category);
 Category.hasMany(Product);
@@ -34,11 +35,8 @@ LineItem.belongsTo(Product)
 //this is for the include on products...
 LineItem.belongsTo(Product)
 
-// Order.hasMany(LineItem)
-// LineItem.belongsTo(Order)
-//
-// Product.hasMany(LineItem)
-// LineItem.belongsTo(Product)
+UnAuthUser.hasMany(Order) //use sessionid instead of db id key
+Order.belongsTo(UnAuthUser)
 
 
 module.exports = {
@@ -48,4 +46,5 @@ module.exports = {
   Review,
   Order,
   LineItem,
+  UnAuthUser
 };
