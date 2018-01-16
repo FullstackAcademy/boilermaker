@@ -28,9 +28,9 @@ export const deleteItem = (itemId) => ({
 	itemId
 })
 
-export const updateItem = (item) => ({
+export const updateItem = (itemId) => ({
 	type: UPDATE_ITEM,
-	item
+	itemId
 })
 
 export const getItems = (items) => ({
@@ -93,11 +93,11 @@ export default function (state = defaultItems, action) {
     case ADD_ITEM:
       return [...state, action.item]
     case DELETE_ITEM:
-      const items = state.filter(item => item.id !== +action.itemId)
+      let items = state.filter(item => item.id !== +action.itemId)
       return items
     case UPDATE_ITEM:
-    const items = state.filter(item => item.id !== +action.item.id)
-    return [...items, action.item]
+    let updateItems = state.filter(item => item.id !== +action.itemId)
+    return [...updateItems, action.item]
     case GET_ITEMS:
       return action.items
     default:
