@@ -75,9 +75,9 @@ dispatch =>
     .catch(err => console.log(err))
 
 
-export const fetchItems = (userId) =>
+export const fetchItems = (orderId) =>
   dispatch => {
-    axios.get(`/api/lineItems/${userId}`)
+    axios.get(`/api/lineItems/${orderId}`)
     .then(res => {
       return res.data})
     .then(lineItems => dispatch(getItems(lineItems)))

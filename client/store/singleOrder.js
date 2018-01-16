@@ -3,7 +3,7 @@ import axios from 'axios'
 /**
  * ACTION TYPES
  */
-const GOT_ACTIVE_ORDER = 'GOT_ACTIVE_ORDER'
+export const GOT_ACTIVE_ORDER = 'GOT_ACTIVE_ORDER'
 
 /**
  * INITIAL STATE

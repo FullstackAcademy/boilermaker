@@ -5,11 +5,11 @@ const { LineItem, Product } = require('../db/models');
 module.exports = router
 
 //GET /api/lineItems/:id
-router.get('/:userId', (req, res, next) => {
-    const userId = req.params.userId;
+router.get('/:id', (req, res, next) => {
+    const orderId = req.params.id;
 
     LineItem.findAll({
-        where: {userId},
+        where: {orderId},
         include:[Product]
     })
     .then(lineItems => {
@@ -19,10 +19,15 @@ router.get('/:userId', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-	let lineItem = req.body
+  let lineItem = req.body
+
 	LineItem.create(lineItem)
 	.then(data => {
-		res.send(data.dataValues)
+    const lineItem = data.dataValues;
+    Product.findById(lineItem.productId)
+    .then(product => {
+      res.send({...lineItem, product})
+    })
 	})
 	.catch(err => console.log(err))
 })

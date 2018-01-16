@@ -113,14 +113,15 @@ class OrderCheckout extends React.Component {
                         Product Information
                         {
                             items && items.map(item =>
-                                <div>
-                                    <img className="cartImage" src={item.image}  />
+                                <div key={item.id}>
+                                    <img className="cartImage" src={item.product.image}  />
                                     <div>
                                         {
-                                            item.name
+                                            item.product.name
                                         }
                                     </div>
                                     <div>
+                                    SubTotal:
                                         {
                                             item.price * item.quantity
                                         }
@@ -146,7 +147,7 @@ class OrderCheckout extends React.Component {
 
                     <div>
                         <div>Total</div>
-                        <div>{total}</div>
+                        <div>{subTotal}</div>
 												<form onSubmit={(e) => this.handleSubmit(e)}>
 													<button type="submit">fullfill order</button>
 												</form>
