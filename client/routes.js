@@ -17,7 +17,7 @@ import OrderCheckout from './components/order/OrderCheckout'
  */
 class Routes extends Component {
   componentDidMount () {
-    this.props.loadInitialData()
+    this.props.loadInitialData() //this takes care of orders when user is returned...
     this.props.loadProducts()
   }
 

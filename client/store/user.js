@@ -1,7 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 import { fetchOrders } from './order'
-import { fetchUnAuthenticatedUser } from './order'
+import { fetchUnAuthenticatedUser } from './unAuthUser'
 import {postItem, addLocalItems, fetchItems} from '../store'
 import { getUniqueKey } from '../helper'
 /**
@@ -36,12 +36,12 @@ export const me = () =>
 					//if they arent logged in but have a sessionId
 					if(localStorage.getItem('sessionId')) {
 						const thunk = fetchUnAuthenticatedUser(localStorage.getItem('sessionId'))
-							.then(() => console.log('promise'))
+						dispatch(thunk)
 					} else {
 						localStorage.setItem('sessionId', getUniqueKey())
 						const thunk = createUnAuthenticatedUser(localStorage.getItem('sessionId'))
+						dispatch(thunk)
 					}
-					console.log('promise.....')
 				}
 			})
       .catch(err => console.log(err))

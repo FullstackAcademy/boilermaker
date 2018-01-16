@@ -2,7 +2,7 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const unAuthUser = db.define('unAuthUser', {
+const UnAuthUser = db.define('unAuthUser', {
     sessionId: {
         type: Sequelize.STRING,
         unique: true,
@@ -22,4 +22,4 @@ const unAuthUser = db.define('unAuthUser', {
     }
 })
 
-module.exports = unAuthUser
+module.exports = UnAuthUser

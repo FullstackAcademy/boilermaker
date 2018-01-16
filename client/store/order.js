@@ -47,8 +47,17 @@ export const postOrder = (id) =>
 		})
 		.catch(err => console.log(err))
 
+export const postUnAuthOrder = (unAuthId) =>
+	dispatch =>
+		axios.post(`/api/orders`, {
+			unAuthUserId: unAuthId,
+		})
+		.then(res => res.data)
+		.then(result => {
+			dispatch(createdOrder(result))
+		})
+		.catch(err => console.log(err))
 
-//this could also be an unauthenticated user's id....
 export const fetchOrders = (userId) =>
   dispatch =>
 	axios.get(`/api/orders/${userId}`)
@@ -63,6 +72,26 @@ export const fetchOrders = (userId) =>
 			dispatch(gotActiveOrder(cart[0]))
 		} else if (cart.length === 0){
 			dispatch(postOrder(userId))//create new unfulfilled order(shoppingcart)
+		} else {
+			console.log('error with finding shopping cart')
+		}
+	})
+	.catch(err => console.log(err))
+
+export const fetchUnAuthOrders = (unAuthId) =>
+  dispatch =>
+	axios.get(`/api/orders/${unAuthId}`)
+	.then(res => res.data)
+	.then(results => {
+		let completedOrders = results.filter(order => order.isFullfilled)
+		let cart = results.filter(order => !order.isFullfilled)
+		dispatch(gotOrders(completedOrders || defaultOrders))
+		if (cart.length === 1) {
+			let items = cart[0].lineItems
+			dispatch(getItems(items))
+			dispatch(gotActiveOrder(cart[0]))
+		} else if (cart.length === 0){
+			dispatch(postUnAuthOrder(unAuthId))//create new unfulfilled order(shoppingcart)
 		} else {
 			console.log('error with finding shopping cart')
 		}

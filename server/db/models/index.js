@@ -4,7 +4,7 @@ const Product = require('./product')
 const Review = require('./review')
 const Order = require('./order')
 const LineItem = require('./lineItem')
-const unAuthUser = require('./unAuthUser')
+const UnAuthUser = require('./unAuthUser')
 
 Product.belongsTo(Category);
 Category.hasMany(Product);
@@ -35,8 +35,8 @@ LineItem.belongsTo(Product)
 //this is for the include on products...
 LineItem.belongsTo(Product)
 
-unAuthUser.hasMany(Order)
-Order.belongsTo(unAuthUser)
+UnAuthUser.hasMany(Order)
+Order.belongsTo(UnAuthUser)
 
 
 module.exports = {
@@ -46,5 +46,5 @@ module.exports = {
   Review,
   Order,
   LineItem,
-  unAuthUser
+  UnAuthUser
 };
