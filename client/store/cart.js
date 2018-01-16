@@ -30,21 +30,16 @@ export const getItems = (items) => ({
 export const postItem = (item) =>
   dispatch =>
     axios.post('/api/lineItems', item)
-    .then(res => {
-      console.log('res are ---------', [].concat.apply([], res.data))
-      return [].concat.apply([], res.data)
-    })
+    .then(res => res.data)
       .then(lineItems => {
-        console.log('lineItems are ---------', lineItems)
+        // console.log('lineItems are ---------', lineItems)
         dispatch(addItem(lineItems || defaultItems))})
       .catch(err => console.log(err))
 
 export const fetchItems = (userId) =>
   dispatch => {
-    console.log('fetch is called---------')
     axios.get(`/api/lineItems/${userId}`)
     .then(res => {
-      console.log('fetached res is-------------', res.data)
       return res.data})
     .then(lineItems => dispatch(getItems(lineItems)))
     .catch(err => console.log(err))
@@ -57,7 +52,7 @@ export const fetchItems = (userId) =>
 export default function (state = defaultItems, action) {
   switch (action.type) {
     case ADD_ITEM:
-      return [...state, ...action.item]
+      return [...state, action.item]
     case GET_ITEMS:
       return action.items
     default:
