@@ -1,7 +1,6 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { search } from '../../store'
 import AddToCartButton from '../order/AddToCartButton'
 import EditProductForm from './EditProductForm'
 import InputBoxDoneTyping from 'react-input-box-done-typing'
@@ -9,7 +8,10 @@ import InputBoxDoneTyping from 'react-input-box-done-typing'
 class Search extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		this.state = {
+      searchResults: [],
+      msg: ''
+    }
     this.onSearchSubmit = this.onSearchSubmit.bind(this)
 	}
 
@@ -19,25 +21,25 @@ class Search extends React.Component {
     let searchResults = this.props.products.filter(product => (
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
   ))
-    if (!searchResults.length){
-      searchResults = [{msg: 'Sorry, we do not have any products that match your search'}]
+    this.setState({searchResults, msg: ''})
+    if (!this.state.searchResults.length){
+      this.setState({msg: 'Sorry, we do not have any products that match your search'})
     }
-    this.props.searchProducts(searchResults)
 	}
 
 	render() {
-    const products = this.props.searchResults.length ? this.props.searchResults : this.props.products
+    const products = this.state.searchResults.length ? this.state.searchResults : this.props.products
 		return (
-			<div style={{marginTop: 100 }}>
+			<div style={{marginTop: 120 }}>
 				<InputBoxDoneTyping
                type="text"
                placeholder="Search Ramenzon"
                doneTyping={(val) => this.onSearchSubmit(val)}
                doneTypingInterval={100}
             />
-        <div className="flex-container-wrap productListContainer" style={{marginTop: 30 }}>
-          {products.map( product => {
-            return product.msg ? <h3>{product.msg}</h3> : (
+        <div className="flex-container-wrap productListContainer" style={{marginTop: 10 }}>
+    {this.state.msg ?  ( <h3>{this.state.msg}</h3> ) : products.map( product => {
+            return  (
               <div key={product.id} className="productItemContainer">
                 <NavLink  exact to={`/products/${product.id}`} >
                   <div className= "flex-container-column" >
@@ -67,15 +69,7 @@ class Search extends React.Component {
 const mapState = (state) => {
 	return {
     products: state.products,
-    user: state.user,
-    searchResults: state.searchResults
+    user: state.user
 	}
 }
-const mapDispatch = (dispatch) => {
-	return {
-		searchProducts(searchTerm) {
-			dispatch(search(searchTerm))
-		}
-	}
-}
-export default connect(mapState, mapDispatch)(Search)
+export default connect(mapState)(Search)

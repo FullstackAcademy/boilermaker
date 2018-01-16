@@ -4,7 +4,7 @@ import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import {Navbar, Login, Signup, UserHome, FrontPage} from './components'
-import {me, getProductsThunk, fetchItems, fetchOrders } from './store'
+import {me, getProductsThunk, fetchItems, fetchOrders, postItem } from './store'
 import ProductList from './components/product/ProductList';
 import OrderHistoryDetails from './components/order/OrderHistoryDetails'
 import OrderHistoryContainer from './components/order/OrderHistoryContainer'
@@ -20,6 +20,23 @@ class Routes extends Component {
     this.props.loadInitialData()
     this.props.loadProducts()
   }
+
+  // componentDidUpdate(){
+  //   const allLocalItems = localStorage.getArr('item')
+  //   // if(!nextProps.userId === this.props.userId) {
+  //     const userId = this.props.userId;
+  //     // if logged in, add all localItems to lineItem table for the current user and return the added item to uddate cartItems and delete localItems
+  //     // this.props.getAllCartItems(this.props.userId)
+  //     console.log('componentWillReceiveProps is called')
+  //     console.log('this.props.isLoggedIn----------------', this.props.isLoggedIn)
+  //     if(this.props.isLoggedIn) {
+      //   allLocalItems.map(localItem => {
+      //     console.log('localItem to add to backend---------', {...localItem, userId })
+      //     this.props.postItem({...localItem, userId })})
+      // }
+    // }
+
+  // }
 
   render () {
     const {isLoggedIn, items} = this.props
@@ -81,6 +98,12 @@ const mapDispatch = (dispatch, ownProps) => {
     loadProducts () {
       dispatch(getProductsThunk())
     },
+    getAllCartItems(userId) {
+      dispatch(fetchItems(userId))
+    },
+    postItem(item) {
+      dispatch(postItem(item))
+    }
   }
 }
 

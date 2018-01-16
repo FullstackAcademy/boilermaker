@@ -36,16 +36,14 @@ export const postItem = (item) =>
     })
       .then(data => {
         console.log('new item is ---------', data)
-        dispatch(addItem(data))
+        dispatch(addItem(data || defaultItems))
 			})
       .catch(err => console.log(err))
 
 export const fetchItems = (userId) =>
   dispatch => {
-    console.log('fetch is called---------')
     axios.get(`/api/lineItems/${userId}`)
     .then(res => {
-      console.log('fetached res is-------------', res.data)
       return res.data})
     .then(lineItems => dispatch(getItems(lineItems)))
     .catch(err => console.log(err))

@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import CategoryForm from './CategoryForm'
+import { deleteCategoryThunk } from '../store'
+import deleteButton  from './DeleteButton'
 
 export const FrontPage = (props) => {
 
@@ -14,9 +16,12 @@ export const FrontPage = (props) => {
       props.categories && props.categories.map(
         category => {
         return (
-        <NavLink key={category.name} exact to={`/category/${category.id}`}>
-          <span className="fontSpecial categoryName">{category.name}</span>
-        </NavLink>
+        <div key={category.name}>
+          <NavLink exact to={`/category/${category.id}`}>
+            <span className="fontSpecial categoryName">{category.name}</span>
+          </NavLink>
+          <deleteButton item={category} handleDelete={deleteCategoryThunk} />
+        </div>
         )
       })
     }
@@ -33,5 +38,12 @@ const mapState = (state) => {
   }
 }
 
+const mapDispatch = (dispatch) => {
+  return {
+    deleteCategoryFunc (category) {
+      dispatch(deleteCategoryThunk(category))
+    }
+  }
+}
 
-export default connect(mapState)(FrontPage);
+export default connect(mapState, mapDispatch)(FrontPage)

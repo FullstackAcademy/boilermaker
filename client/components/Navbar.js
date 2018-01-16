@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, NavLink} from 'react-router-dom'
-import {logout, getCategoriesThunk, addLocalItems} from '../store'
+import {logout, getCategoriesThunk, addLocalItems, postItem} from '../store'
 import CategoryList from './CategoryList'
 
 /**
@@ -23,7 +23,10 @@ class Navbar extends Component {
   componentDidMount(){
     const allLocalItems = localStorage.getArr('item')
     this.props.addLocalItems(allLocalItems);
+
   }
+
+
 
 	handleClick(){
 		this.setState({clicked: !this.state.clicked});
@@ -121,7 +124,8 @@ const mapDispatch = (dispatch) => {
     },
     addLocalItems(items) {
       dispatch(addLocalItems(items))
-	  }
+    },
+
   }
 }
 

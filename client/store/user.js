@@ -1,6 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 import { fetchOrders } from './order'
+import {postItem, addLocalItems, fetchItems} from '../store'
 /**
  * ACTION TYPES
  */
@@ -38,8 +39,21 @@ export const auth = (email, password, method) =>
 				//get their orders and shopping cart.
 				dispatch(fetchOrders((res.data.id)))
         history.push('/')
+        return res.data
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
         dispatch(getUser({error: authError}))
+      })
+      .then((user)=> {
+        // console.log('user is-------', user)
+        const allLocalItems = localStorage.getArr('item')
+        const userId = user.id
+        allLocalItems.map(localItem=> {
+          dispatch(postItem({...localItem, userId }))
+        })
+        dispatch(fetchItems(userId))
+        localStorage.removeItem("item");
+        const LocalItems = localStorage.getArr('item')
+        dispatch(addLocalItems(LocalItems));
       })
       .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
 
