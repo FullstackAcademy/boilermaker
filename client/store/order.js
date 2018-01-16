@@ -73,6 +73,7 @@ export const fullFillOrder = (orderId) =>
 	.then(res => res.data)
 	.then(results => {
 		console.log('updated order', !results)
+		dispatch(getItems([]))
 		history.push(`/orders-history`)
 	})
 	.catch(err => console.log(err))
