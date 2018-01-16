@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Navbar, Login, Signup, UserHome, FrontPage} from './components'
+import {Navbar, Login, Signup, FrontPage, UserList} from './components'
 import {me, getProductsThunk, fetchItems, fetchOrders, postItem } from './store'
 import ProductList from './components/product/ProductList';
 import OrderHistoryDetails from './components/order/OrderHistoryDetails'
@@ -68,6 +68,7 @@ class Routes extends Component {
               <Route exact path="/orders-checkout" render={() => <OrderCheckout items={items} />} />
               <Route exact path="/products/:productId" component={SingleProduct} />
               <Route exact path="/search" component={Search} />
+              <Route exact path="/users" component={UserList} />
               <Route path="/" component={FrontPage} />
             </Switch>
           </div>

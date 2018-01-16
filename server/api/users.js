@@ -13,7 +13,7 @@ function isAdmin (req, res, next){
 // GET api/users
 router.get('/', (req, res, next) => {
   User.findAll({
-    attributes: ['id', 'email']
+    attributes: ['id', 'email', 'isAdmin']
   })
     .then(users => res.json(users))
     .catch(next)
