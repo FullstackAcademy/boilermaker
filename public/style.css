@@ -294,3 +294,7 @@ form div {
 .subtotalContainer{
   margin-top: 237px;
 }
+
+#deleteBtn{
+  color: red
+}
