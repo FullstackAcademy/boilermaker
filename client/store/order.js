@@ -47,6 +47,8 @@ export const postOrder = (id) =>
 		})
 		.catch(err => console.log(err))
 
+
+//this could also be an unauthenticated user's id....
 export const fetchOrders = (userId) =>
   dispatch =>
 	axios.get(`/api/orders/${userId}`)
