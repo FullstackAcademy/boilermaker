@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { getItems } from './cart'
-import { gotActiveOrder } from './singleOrder'
+import { gotActiveOrder, GOT_ACTIVE_ORDER } from './singleOrder'
 import history from '../history'
 
 /**
@@ -44,6 +44,7 @@ export const postOrder = (id) =>
 		.then(res => res.data)
 		.then(result => {
 			dispatch(createdOrder(result))
+			dispatch(gotActiveOrder(result))
 		})
 		.catch(err => console.log(err))
 
@@ -55,6 +56,7 @@ export const postUnAuthOrder = (unAuthId) =>
 		.then(res => res.data)
 		.then(result => {
 			dispatch(createdOrder(result))
+			dispatch(gotActiveOrder(result))
 		})
 		.catch(err => console.log(err))
 
@@ -88,6 +90,7 @@ export const fetchUnAuthOrders = (unAuthId) =>
 		dispatch(gotOrders(completedOrders || defaultOrders))
 		if (cart.length === 1) {
 			let items = cart[0].lineItems
+			console.log('order items, cart[0] =====', items, cart[0])
 			dispatch(getItems(items))
 			dispatch(gotActiveOrder(cart[0]))
 		} else if (cart.length === 0){
@@ -119,6 +122,8 @@ export default function (state = defaultOrders, action) {
 			return [...state, action.order]
 		case CREATED_ORDER:
 			return [...state, action.order]
+		// case GOT_ACTIVE_ORDER:
+		// 	return action.activeOrder
     default:
       return state
   }

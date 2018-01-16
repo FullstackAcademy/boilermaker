@@ -69,8 +69,6 @@ export class AddToCartButton extends Component {
       // This is tracking all items added to cart by unauthorized user
       localStorage.setObj("item", [item].concat(existingLocalItems));
       const allLocalItems = localStorage.getArr('item')
-      const sessionId = localStorage.getUniqueKey()
-      localStorage.setObj("sessionId", sessionId)
       this.props.addLocalItems(allLocalItems);
       }
     }
