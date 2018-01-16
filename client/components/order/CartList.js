@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchItems, me, deleteItemThunk, updateItemThunk } from '../../store'
 import { Link } from 'react-router-dom'
-// import _ from 'lodash'
 
 let login = false;
 
@@ -98,14 +97,6 @@ const mapState = (state) => {
 }
 
 const mapStateUnauth = (state) => {
-  // const localItems = localStorage.getArr('item') || []
-  // const items = localItems.map(localItem => {
-  //   const productObj = state.products.find(product => product.id === localItem.productId)
-  //   return {...localItem, ...productObj}
-  // })
-  // return {
-  //   items: items
-  // }
   return {
     items: state.cartItems,
     activeOrder: state.activeOrder

@@ -43,7 +43,7 @@ class Navbar extends Component {
     }
 
 		let badge
-    if (isLoggedIn && this.props.cartItems.length > 0) {
+    if (this.props.cartItems.length > 0) {
       badge = this.props.cartItems.length
     } else if (!isLoggedIn && this.props.localItems) {
       badge = this.props.localItems.length
@@ -68,15 +68,16 @@ class Navbar extends Component {
 						isLoggedIn
 						  ? <div>
 						    {/* The navbar will show these links after you log in */}
-						    <Link to="/logout" className="fontSpecial fontBlack" onClick={handleClick}>LOGOUT</Link>
+								<Link to="/logout" className="fontSpecial fontBlack" onClick={handleClick}>LOGOUT</Link>
+								<NavLink to={'/orders-history'}><span>My orders</span></NavLink>
 						  </div>
 						  : <div className="loginMenu flex-container-row spaceBtw">
 						    {/* The navbar will show these links before you log in */}
 						    <Link to="/login" className="fontSpecial fontBlack">LOGIN</Link>
 						    <Link className="fontSpecial fontBlack " to="/signup">SIGNUP</Link>
-						  </div>
+							</div>
+							
 					}
-					<NavLink to={'/orders-history'}><span>My orders</span></NavLink>
 					<div className="flex-container-row">
 						<span><i className="material-icons">shopping_cart</i></span>
           <div className="badgeContainer">
