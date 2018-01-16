@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from '../history'
-import { fetchOrders } from './order'
+import { fetchOrders, fetchUnAuthOrders } from './order'
 import { getUniqueKey } from '../helper'
 /**
  * ACTION TYPES
