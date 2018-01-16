@@ -50,7 +50,7 @@ export const postOrder = (id) =>
 export const postUnAuthOrder = (unAuthId) =>
 	dispatch =>
 		axios.post(`/api/orders`, {
-			unAuthUserId: unAuthId,
+			sessionId: unAuthId,
 		})
 		.then(res => res.data)
 		.then(result => {
@@ -80,7 +80,7 @@ export const fetchOrders = (userId) =>
 
 export const fetchUnAuthOrders = (unAuthId) =>
   dispatch =>
-	axios.get(`/api/orders/${unAuthId}`)
+	axios.get(`/api/orders/unAuthenticated/${unAuthId}`)
 	.then(res => res.data)
 	.then(results => {
 		let completedOrders = results.filter(order => order.isFullfilled)
