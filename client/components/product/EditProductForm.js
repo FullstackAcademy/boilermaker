@@ -34,7 +34,7 @@ class EditProductForm extends React.Component {
 		const data = {
 			name: this.state.name,
 			image: this.state.image,
-      price: this.state.price,
+      price: this.state.price * 100,
       description: this.state.description,
       size: this.state.size,
       inventoryCount: this.state.inventoryCount,

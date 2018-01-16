@@ -12,8 +12,11 @@ const Product = db.define('product', {
     defaultValue: "https://i.pinimg.com/736x/91/5d/43/915d4345e49c0cdafa82cdfcf7ed9967.jpg"
   },
   price: {
-    type: Sequelize.FLOAT,
-    allowNull: false
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    get(){
+      return this.getDataValue('price')/100
+    }
   },
   description: {
     type: Sequelize.TEXT,
@@ -24,7 +27,7 @@ const Product = db.define('product', {
     allowNull: false
   },
   size: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.INTEGER,
     allowNull: false
   }
 })

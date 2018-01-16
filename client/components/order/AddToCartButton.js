@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { postItem } from '../../store'
 import {addLocalItems} from '../../store'
+// import RaisedButton from 'material-ui/RaisedButton';
 
 export class AddToCartButton extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ export class AddToCartButton extends Component {
             }
           </select>
           <button type="submit">Add To Cart</button>
+          {/* <RaisedButton label="Default" /> */}
           {/* {!this.state.loggedIn && this.state.clicked && <div className="loginReminder">Please log in or sign up</div>} */}
         </div>
       </form>
