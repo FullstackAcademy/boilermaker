@@ -48,7 +48,7 @@ class Routes extends Component {
               <Route exact path="/authUserCart" component={authUserCart} />
               <Route exact path="/unAuthUserCart" component={unAuthUserCart} />
               <Route exact path="/orders/:orderId" component={OrderHistoryDetails} />
-              <Route exact path="/orders-checkout" render={() => <OrderCheckout items={items} />}/>
+              <Route exact path="/orders-checkout" render={() => <OrderCheckout items={items} />} />
               <Route exact path="/products/:productId" component={SingleProduct} />
               <Route exact path="/search" component={Search} />
               <Route path="/" component={FrontPage} />
@@ -64,16 +64,12 @@ class Routes extends Component {
  * CONTAINER
  */
 const mapState = (state) => {
-  const productArr =
-  state.cartItems.map(item => {
-      return state.products.find(product => product.id === +item.productId)
-  })
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
     userId: state.user.id,
-    items: productArr
+    items: state.cartItems
   }
 }
 

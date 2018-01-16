@@ -51,7 +51,7 @@ class Navbar extends Component {
           <div id="title">
             <NavLink exact to="/">
               <h2>RAMENZON</h2>
-            </ NavLink >
+            </NavLink >
           </div>
         <div className="flex-container-row menuContainer spaceBtw">
           <div>

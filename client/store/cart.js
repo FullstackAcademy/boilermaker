@@ -32,11 +32,11 @@ export const postItem = (item) =>
     axios.post('/api/lineItems', item)
     .then(res => {
       console.log('res are ---------', res)
-      return res
+      return res.data
     })
-      .then(res => {
-        console.log('lineItems are ---------', res)
-        dispatch(addItem(res.data))
+      .then(data => {
+        console.log('new item is ---------', data)
+        dispatch(addItem(data))
 			})
       .catch(err => console.log(err))
 
@@ -58,7 +58,7 @@ export const fetchItems = (userId) =>
 export default function (state = defaultItems, action) {
   switch (action.type) {
     case ADD_ITEM:
-      return [...state, ...action.item]
+      return [...state, action.item]
     case GET_ITEMS:
       return action.items
     default:
