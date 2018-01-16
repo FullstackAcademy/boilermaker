@@ -68,7 +68,8 @@ class Navbar extends Component {
 						isLoggedIn
 						  ? <div>
 						    {/* The navbar will show these links after you log in */}
-						    <Link to="/logout" className="fontSpecial fontBlack" onClick={handleClick}>LOGOUT</Link>
+								<Link to="/logout" className="fontSpecial fontBlack" onClick={handleClick}>LOGOUT</Link>
+								<NavLink to={'/orders-history'}><span>My orders</span></NavLink>
                 {isAdmin && <Link to="/users" className="fontSpecial fontBlack" onClick={getAllUsers}>   USERS</Link>}
 						  </div>
 						  : <div className="loginMenu flex-container-row spaceBtw">
@@ -77,7 +78,6 @@ class Navbar extends Component {
 						    <Link className="fontSpecial fontBlack " to="/signup">SIGNUP</Link>
 						  </div>
 					}
-					<NavLink to={'/orders-history'}><span>My orders</span></NavLink>
 					<div className="flex-container-row">
 						<span><i className="material-icons">shopping_cart</i></span>
           <div className="badgeContainer">
