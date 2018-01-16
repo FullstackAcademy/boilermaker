@@ -5,11 +5,11 @@ const { LineItem, Product } = require('../db/models');
 module.exports = router
 
 //GET /api/lineItems/:id
-router.get('/:userId', (req, res, next) => {
-    const userId = req.params.userId;
+router.get('/:id', (req, res, next) => {
+    const orderId = req.params.id;
 
     LineItem.findAll({
-        where: {userId},
+        where: {orderId},
         include:[Product]
     })
     .then(lineItems => {
