@@ -98,13 +98,17 @@ const mapState = (state) => {
 }
 
 const mapStateUnauth = (state) => {
-  const localItems = localStorage.getArr('item') || []
-  const items = localItems.map(localItem => {
-    const productObj = state.products.find(product => product.id === localItem.productId)
-    return {...localItem, ...productObj}
-  })
+  // const localItems = localStorage.getArr('item') || []
+  // const items = localItems.map(localItem => {
+  //   const productObj = state.products.find(product => product.id === localItem.productId)
+  //   return {...localItem, ...productObj}
+  // })
+  // return {
+  //   items: items
+  // }
   return {
-    items: items
+    items: state.cartItems,
+    activeOrder: state.activeOrder
   }
 }
 
