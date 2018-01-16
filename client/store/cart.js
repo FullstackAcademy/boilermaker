@@ -30,10 +30,14 @@ export const getItems = (items) => ({
 export const postItem = (item) =>
   dispatch =>
     axios.post('/api/lineItems', item)
-    .then(res => res.data)
-      .then(lineItems => {
-        // console.log('lineItems are ---------', lineItems)
-        dispatch(addItem(lineItems || defaultItems))})
+    .then(res => {
+      console.log('res are ---------', res)
+      return res.data
+    })
+      .then(data => {
+        console.log('new item is ---------', data)
+        dispatch(addItem(data || defaultItems))
+			})
       .catch(err => console.log(err))
 
 export const fetchItems = (userId) =>

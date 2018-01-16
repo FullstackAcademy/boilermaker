@@ -54,7 +54,7 @@ class Navbar extends Component {
           <div id="title">
             <NavLink exact to="/">
               <h2>RAMENZON</h2>
-            </ NavLink >
+            </NavLink >
           </div>
         <div className="flex-container-row menuContainer spaceBtw">
           <div>
@@ -76,7 +76,7 @@ class Navbar extends Component {
 						    <Link className="fontSpecial fontBlack " to="/signup">SIGNUP</Link>
 						  </div>
 					}
-					<NavLink to={`/orders-history/${userId}`}><span>My orders</span></NavLink>
+					<NavLink to={'/orders-history'}><span>My orders</span></NavLink>
 					<div className="flex-container-row">
 						<span><i className="material-icons">shopping_cart</i></span>
           <div className="badgeContainer">

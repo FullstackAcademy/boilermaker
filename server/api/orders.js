@@ -2,23 +2,52 @@ const router = require('express').Router();
 const { Order, Product, LineItem } = require('../db/models');
 module.exports = router;
 
-// GET api/orders
+// GET all orders for orderhistory
 router.get('/:userId', (req, res, next) => {
   Order.findAll({
 		where: {
 			userId: req.params.userId
 		},
-		include: [LineItem]
+		include: [
+			{
+				model: LineItem,
+				include: [Product]
+			}
+		]
 	})
     .then(Orders => res.json(Orders))
     .catch(next)
 });
 
+//GET shopping cart (only order that is not complete)
+router.get('/:userId/cart', (req, res, next) => {
+	Order.findOne({
+		where: {
+			userId: req.params.userId,
+			isFullfilled: false
+		},
+		include: [
+			{
+				model: LineItem,
+				include: [Product]
+			}
+		]
+	})
+	.then(data => res.json(data))
+	.catch(err => console.log(err))
+})
+
+
 // GET api/Orders/:orderId
 router.get('/:orderId/lineItems', (req, res, next) => {
     const id = req.params.orderId;
     Order.findById(id, {
-			include: [LineItem]
+			include: [
+				{
+					model: LineItem,
+					include: [Product]
+				}
+			]
 		})
         .then(order => {
             res.json(order);
@@ -28,9 +57,9 @@ router.get('/:orderId/lineItems', (req, res, next) => {
 
 // POST api/orders
 router.post('/', (req, res, next) => {
-    Order.create(req.body.order)
+    Order.create(req.body)
     .then(order => {
-        order.addProduct(req.body.shoppingCart);
+        // order.addProduct(req.body.shoppingCart);
         res.json(order);
     })
     .catch(next)
@@ -49,12 +78,13 @@ router.post('/', (req, res, next) => {
 // });
 
 // PUT api/orders/:orderId
-router.put('/:orderId', (req, res, next) => {
-    const id = req.params.orderId;
+router.put('/', (req, res, next) => {
+    const id = req.body.orderId;
 
-    Order.findById(id, {
-        include: [{model: Product}]
-    })
+    Order.upsert({
+			id: id,
+			isFullfilled: true
+		})
     .then(order => res.json(order))
     .catch(next)
 });

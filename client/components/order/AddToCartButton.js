@@ -28,7 +28,7 @@ export class AddToCartButton extends Component {
           </select>
           <button type="submit">Add To Cart</button>
           {/* {!this.state.loggedIn && this.state.clicked && <div className="loginReminder">Please log in or sign up</div>} */}
-        </ div>
+        </div>
       </form>
     )
   }
@@ -46,14 +46,16 @@ export class AddToCartButton extends Component {
    // the reason for this is so that all components use local storage can re-render when local storage change such as Navbar
   handleSubmit(event){
     event.preventDefault()
-    if (this.props.userId) {
+    if (this.props.user) {
       this.setState({loggedIn: true});
       let item = {
-        userId: this.props.userId,
+				orderId: this.props.activeOrder.id,
         productId: this.props.productId,
         quantity: +this.state.quantityEntry,
-        price: this.props.price};
+        price: this.props.price,
+			}
       this.props.addItems(item)
+
     } else {
       const productId = this.props.productId
       const quantity = +this.state.quantityEntry
@@ -74,15 +76,19 @@ export class AddToCartButton extends Component {
 
 const mapState = (state, ownProps) => {
   return {
-    userId: state.user.id,
     productId: ownProps.item.id,
-    price: ownProps.item.price
+    price: ownProps.item.price,
+		activeOrder: state.activeOrder,
+		user: state.user
   }
 }
 
 const mapDispatch = (dispatch) => {
 	return {
-    addItems: (item) => dispatch(postItem(item)),
+    addItems: (item) => {
+			console.log(item)
+			dispatch(postItem(item))
+		},
     addLocalItems: (items) => dispatch(addLocalItems(items))
 	}
 }
