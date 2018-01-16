@@ -54,7 +54,7 @@ export const postItem = (item) =>
 
 export const deleteItemThunk = (itemId) =>
 dispatch =>
-  axios.post(`/api/lineItems/${itemId}`)
+  axios.delete(`/api/lineItems/${itemId}`)
   .then(res => {
     return res.data
   })
