@@ -49,11 +49,11 @@ export class CartList extends Component {
             return (
             <div className= "flex-container-column" key={item.id}>
                 <div >
-                <img className="cartImage" src={item.image}  />
+                <img className="cartImage" src={item.product.image}  />
                 </div>
                 <div className="flex-container-row spaceBtw product">
-                  <span>{item.name}</span>
-                  <span>{`${item.size}-Pack`}</span>
+                  <span>{item.product.name}</span>
+                  <span>{`${item.product.size}-Pack`}</span>
                 </div>
 
                 <button id="deleteBtn" onClick={() => this.props.deleteItem(item.id)}><i className="material-icons">remove_circle</i>

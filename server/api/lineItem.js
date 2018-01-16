@@ -19,10 +19,15 @@ router.get('/:id', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-	let lineItem = req.body
+  let lineItem = req.body
+
 	LineItem.create(lineItem)
 	.then(data => {
-		res.send(data.dataValues)
+    const lineItem = data.dataValues;
+    Product.findById(lineItem.productId)
+    .then(product => {
+      res.send({...lineItem, product})
+    })
 	})
 	.catch(err => console.log(err))
 })
