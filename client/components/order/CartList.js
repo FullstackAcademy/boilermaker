@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchItems, me } from '../../store'
+import { fetchItems, me, deleteItemThunk, updateItemThunk } from '../../store'
 import { Link } from 'react-router-dom'
 // import _ from 'lodash'
 
@@ -10,10 +10,10 @@ export class CartList extends Component {
   constructor(props) {
     super(props)
     this.state = {  }
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount(){
-    // this.props.loadInitialData();
     if (this.props.user) {
       login = true;
       this.props.getAllCartItems(this.props.user.id);
@@ -27,10 +27,19 @@ export class CartList extends Component {
 		}
 	}
 
+  // onclick function to call thunk to delete item
+
+// onChange funcation for select to call thunk to update item quantity
+  handleChange(evt, itemId){
+    evt.preventDefault()
+    const quantity = evt.target.value
+    this.props.updateItem(itemId, quantity)
+  }
+
   render() {
 
     const items = this.props.items;
-    // console.log('items are---------', items)
+    let selections = [1,2,3,4,5,6,7,8,9,10];
     return (
       <div className="flex-container-row alignStart">
         <div className="flex-container-column shoppingCartContainer marginTop" >
@@ -38,20 +47,32 @@ export class CartList extends Component {
           <h2>PRODUCTS</h2>
           {
           items && items.map( item => {
-            return <div className= "flex-container-column" key={item.id}>
+            return (
+            <div className= "flex-container-column" key={item.id}>
                 <div >
                 <img className="cartImage" src={item.image}  />
                 </div>
-                <div className="flex-container-row spaceAround product">
+                <div className="flex-container-row spaceBtw product">
                   <span>{item.name}</span>
                   <span>{`${item.size}-Pack`}</span>
                 </div>
-                <div>Quantity{item.quantity}</div>
+
+                <button id="deleteBtn" onClick={() => this.props.deleteItem(item.id)}><i className="material-icons">remove_circle</i>
+                </button>
+
+                <select name="quantity" defaultValue={item.quantity} onChange={(evt)=> this.handleChange(evt, item.id)}>
+                  {
+                    selections.map(selection => <option key={selection}>{selection}</option>)
+                  }
+               </select>
+
                 <div>
                   <span>{`$ ${item.price}`}</span>
                 </div>
               </div>
+              )
           })
+
           }
         </div>
         <div className="subtotalContainer">
@@ -71,9 +92,6 @@ export class CartList extends Component {
 
 
 const mapState = (state) => {
-  console.log('items is -------------', state.cartItems)
-  // console.log('state.user.id is -------------', state.user.id)
-  // console.log('productARR is -------------', productArr)
   return {
     items: state.cartItems,
     user: state.user
@@ -82,29 +100,28 @@ const mapState = (state) => {
 
 const mapStateUnauth = (state) => {
   const localItems = localStorage.getArr('item') || []
-  // console.log('cartItems is----------', cartItems)
-  // console.log('cartItems type----------', typeof cartItems)
-  // // console.log('state.products is----------', state.products)
-  // const productArr =
   const items = localItems.map(localItem => {
     const productObj = state.products.find(product => product.id === localItem.productId)
     return {...localItem, ...productObj}
   })
-  // console.log('items are----------', items)
   return {
     items: items
   }
 }
 
 const mapDisptach = dispatch => {
-  // console.log('dispath 1 is called------------')
   return {
     loadInitialData () {
       dispatch(me())
     },
     getAllCartItems(userId) {
-      // console.log('dispath 2 is called------------')
       dispatch(fetchItems(userId))
+    },
+    deleteItem(itemId){
+      dispatch(deleteItemThunk(itemId))
+    },
+    updateItem(itemId, quantity){
+      dispatch(updateItemThunk(itemId, quantity))
     }
   }
 }
