@@ -31,12 +31,13 @@ export const postItem = (item) =>
   dispatch =>
     axios.post('/api/lineItems', item)
     .then(res => {
-      console.log('res are ---------', [].concat.apply([], res.data))
-      return [].concat.apply([], res.data)
+      console.log('res are ---------', res)
+      return res
     })
-      .then(lineItems => {
-        console.log('lineItems are ---------', lineItems)
-        dispatch(addItem(lineItems || defaultItems))})
+      .then(res => {
+        console.log('lineItems are ---------', res)
+        dispatch(addItem(res.data))
+			})
       .catch(err => console.log(err))
 
 export const fetchItems = (userId) =>

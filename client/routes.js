@@ -4,7 +4,7 @@ import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import {Navbar, Login, Signup, UserHome, FrontPage} from './components'
-import {me, getProductsThunk, fetchItems } from './store'
+import {me, getProductsThunk, fetchItems, fetchOrders } from './store'
 import ProductList from './components/product/ProductList';
 import OrderHistoryDetails from './components/order/OrderHistoryDetails'
 import OrderHistoryContainer from './components/order/OrderHistoryContainer'
@@ -19,7 +19,6 @@ class Routes extends Component {
   componentDidMount () {
     this.props.loadInitialData()
     this.props.loadProducts()
-    // this.props.getAllCartItems(this.props.userId)
   }
 
   render () {
@@ -45,7 +44,7 @@ class Routes extends Component {
               <Route exact path="/shopall" component={ProductList} />
               <Route exact path="/category/:categoryId" component={ProductList} />
               <Route exact path="/products/:productId" component={SingleProduct} />
-							<Route exact path="/orders-history/:userId" component={OrderHistoryContainer} />
+							<Route exact path="/orders-history/" component={OrderHistoryContainer} />
               <Route exact path="/authUserCart" component={authUserCart} />
               <Route exact path="/unAuthUserCart" component={unAuthUserCart} />
               <Route exact path="/orders/:orderId" component={OrderHistoryDetails} />
@@ -78,7 +77,7 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
     loadInitialData () {
       dispatch(me())
@@ -86,9 +85,6 @@ const mapDispatch = (dispatch) => {
     loadProducts () {
       dispatch(getProductsThunk())
     },
-    getAllCartItems(userId) {
-      dispatch(fetchItems(userId))
-    }
   }
 }
 

@@ -6,7 +6,7 @@ import { fetchOrders } from '../../store'
 class OrderHistoryContainer extends React.Component {
 
 	componentWillMount() {
-		let userId = this.props.match.params.userId
+		let userId = this.props.user.id
 		this.props.fetchOrders(userId)
 	}
 
@@ -27,7 +27,8 @@ class OrderHistoryContainer extends React.Component {
 
 const mapState = (state) => {
 	return {
-		orders: state.orders
+		orders: state.orders,
+		user: state.user
 	}
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import {  } from '../../store'
+import { fullFillOrder } from '../../store'
 
 class OrderCheckout extends React.Component {
     constructor(props){
@@ -28,9 +28,9 @@ class OrderCheckout extends React.Component {
         newCompanyEntry, newAddressEntry, newAptEntry,
         newCityEntry, newZipEntry, newPhoneEntry} = this.state;
 
-        const {items}= this.props;
+        const {items} = this.props;
         console.log('items in OrderCheckout =====', items)
-        
+
         let subTotal = 0, total = 0;
         items && items.forEach(item => {
             subTotal += item.price * item.quantity
@@ -112,8 +112,8 @@ class OrderCheckout extends React.Component {
                     <div>
                         Product Information
                         {
-                            items && items.map(item => 
-                                <div> 
+                            items && items.map(item =>
+                                <div>
                                     <img className="cartImage" src={item.image}  />
                                     <div>
                                         {
@@ -147,27 +147,40 @@ class OrderCheckout extends React.Component {
                     <div>
                         <div>Total</div>
                         <div>{total}</div>
+												<form onSubmit={(e) => this.handleSubmit(e)}>
+													<button type="submit">fullfill order</button>
+												</form>
                     </div>
                 </div>
-                
+
 			</div>
 		)
     }
-    
+
     handleChange(event){
         this.setState({[event.target.name]: event.target.value});
     }
 
     handleSubmit(event){
         event.preventDefault();
+				this.props.fullFillOrder(this.props.activeOrder.id)
 
     }
 }
 
 const mapState = (state, ownProps) => {
     return {
-        items: ownProps.items
+        activeOrder: state.activeOrder,
+				user: state.user
     }
 }
 
-export default connect(mapState)(OrderCheckout)
+const mapDispatch = (dispatch, ownProps) => {
+	return {
+		fullFillOrder(id) {
+			dispatch(fullFillOrder(id))
+		}
+	}
+}
+
+export default connect(mapState, mapDispatch)(OrderCheckout)

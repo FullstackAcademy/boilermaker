@@ -14,7 +14,7 @@ const activeOrder = {}
  * ACTION CREATORS
  */
 
-const gotActiveOrder = (activeOrder) => ({
+export const gotActiveOrder = (activeOrder) => ({
 	type: GOT_ACTIVE_ORDER,
 	activeOrder
 })

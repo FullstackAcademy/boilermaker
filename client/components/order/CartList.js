@@ -14,12 +14,18 @@ export class CartList extends Component {
 
   componentDidMount(){
     // this.props.loadInitialData();
-    if (this.props.userId) {
+    if (this.props.user) {
       login = true;
-      this.props.getAllCartItems(this.props.userId);
+      this.props.getAllCartItems(this.props.user.id);
     }
 
   }
+
+	componentWillReceieveProps(newProps) {
+		if(newProps.user) {
+			this.props.getAllCartItems(newProps.user.id);
+		}
+	}
 
   render() {
 
@@ -65,18 +71,12 @@ export class CartList extends Component {
 
 
 const mapState = (state) => {
-
-  const items =
-  state.cartItems.map(item => {
-    const productObj = item.products[0]
-    return {...item, ...productObj}
-  })
-  console.log('items is -------------', items)
+  console.log('items is -------------', state.cartItems)
   // console.log('state.user.id is -------------', state.user.id)
   // console.log('productARR is -------------', productArr)
   return {
-    items: items,
-    userId: state.user.id
+    items: state.cartItems,
+    user: state.user
   }
 }
 

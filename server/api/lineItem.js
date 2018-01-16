@@ -18,26 +18,40 @@ router.get('/:id', (req, res, next) => {
 })
 
 //POST /api/lineItems
+// router.post('/', (req, res, next) => {
+//     const { userId, productId, quantity, price } = req.body
+//     LineItem.findOrCreate({
+//       where:{userId, quantity, price}
+//     })
+//     .spread((lineItem, isCreated) => {
+//       Product.findById(`${productId}`)
+//       .then(product => {
+//         return product.setLineItem(lineItem)
+//       })
+//       .then((data)=>{
+//         // console.log('lineItem.id is--------------', lineItem.id)
+//         // return LineItem.findById(`${lineItem.id}`)
+//         // .then((data) => {
+//           console.log('data is-----------', data)
+//           res.json(data)})
+//         .catch(next)
+//       })
+//       .catch(next)
+// })
+
+
 router.post('/', (req, res, next) => {
-    const { userId, productId, quantity, price } = req.body
-    LineItem.findOrCreate({
-      where:{userId, quantity, price}
-    })
-    .spread((lineItem, isCreated) => {
-      Product.findById(`${productId}`)
-      .then(product => {
-        return product.setLineItem(lineItem)
-      })
-      .then((data)=>{
-        // console.log('lineItem.id is--------------', lineItem.id)
-        // return LineItem.findById(`${lineItem.id}`)
-        // .then((data) => {
-          console.log('data is-----------', data)
-          res.json(data)})
-        .catch(next)
-      })
-      .catch(next)
-    })
+	let lineItem = req.body
+	LineItem.create(lineItem)
+	.then(data => {
+		console.log(data)
+		res.send(data.dataValues)
+	})
+	.catch(err => console.log(err))
+})
+
+
+
 // })
 
 //PUT /api/lineItems/:id
