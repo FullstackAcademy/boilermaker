@@ -10,7 +10,7 @@ export const FrontPage = (props) => {
   return (
     <div className="flex-container-row spaceBtw categoryContainer">
       <NavLink exact to='/shopall'>
-      <span className="fontSpecial categoryName">ALL</span>
+      <span className="fontSpecial categoryName all fontWhite">ALL</span>
       </NavLink>
     {
       props.categories && props.categories.map(
@@ -18,7 +18,7 @@ export const FrontPage = (props) => {
         return (
         <div key={category.name}>
           <NavLink exact to={`/category/${category.id}`}>
-            <span className="fontSpecial categoryName">{category.name}</span>
+            <span className="fontSpecial categoryName fontWhite">{category.name}</span>
           </NavLink>
           <deleteButton item={category} handleDelete={deleteCategoryThunk} />
         </div>
