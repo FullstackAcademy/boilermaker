@@ -225,6 +225,10 @@ form div {
   box-sizing: border-box;
 }
 
+.frontPageContainer h4{
+  color: white;
+  background-color: darkgoldenrod;
+}
 /* -----------------SINGLE PRODUCT Section -------------------*/
 
 .singleProductContainer{

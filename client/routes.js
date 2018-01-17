@@ -12,6 +12,7 @@ import { authUserCart, unAuthUserCart } from './components/order/CartList'
 import SingleProduct from './components/product/SingleProduct'
 import Search from './components/product/Search'
 import OrderCheckout from './components/order/OrderCheckout'
+import RamenStory from './components/RamenStory'
 
 /**
  * COMPONENT
@@ -44,6 +45,7 @@ class Routes extends Component {
               <Route exact path="/orders/:orderId" component={OrderHistoryDetails} />
               <Route exact path="/orders-checkout" render={() => <OrderCheckout items={items} />} />
               <Route exact path="/products/:productId" component={SingleProduct} />
+              <Route exact path="/ramen-story" component={RamenStory} />
               <Route exact path="/search" component={Search} />
               <Route exact path="/users" component={UserList} />
               <Route path="/" component={FrontPage} />

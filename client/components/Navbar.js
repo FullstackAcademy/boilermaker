@@ -62,7 +62,7 @@ class Navbar extends Component {
           <NavLink exact to="/search">
           <button id="shopBtn" className="fontSpecial fontBlack">SEARCH</button>
           </NavLink>
-					<span className="fontSpecial fontBlack">RAMEN STORY</span>
+					<NavLink exact to='/ramen-story' className="fontSpecial fontBlack">RAMEN STORY</NavLink>
           </div>
 					{
 						isLoggedIn
