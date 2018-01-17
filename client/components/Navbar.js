@@ -78,6 +78,12 @@ class Navbar extends Component {
 						    <Link className="fontSpecial fontBlack " to="/signup">SIGNUP</Link>
 						  </div>
 					}
+<<<<<<< HEAD
+||||||| merged common ancestors
+					<NavLink to={'/orders-history'}><span>My orders</span></NavLink>
+=======
+					<NavLink to={'/orders-history'}><span className="fontSpecial fontBlack" >MY ORDERS</span></NavLink>
+>>>>>>> master
 					<div className="flex-container-row">
 						<span><i className="material-icons">shopping_cart</i></span>
           <div className="badgeContainer">

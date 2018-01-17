@@ -39,7 +39,7 @@ class OrderCheckout extends React.Component {
 		return (
             <div className="flex-container-row alignStart">
                 <div className= "flex-container-column shoppingCartContainer marginTop">
-                    <form onSubmit={this.handleSubmit}>
+                    <form className="flex-container-column orderContainer" onSubmit={this.handleSubmit}>
                         <h3>Customer information</h3>
                         <input
                             value={newEmailEntry}
@@ -131,25 +131,22 @@ class OrderCheckout extends React.Component {
                         }
                     </div>
 
-                    <div>
-                        <input placeholder="Gift card or discount code" />
+                    <div className="giftCardContainer">
+                        <input placeholder="Gift card or discount code"/>
                     </div>
 
                     <div>
-                        <div>Subtotal</div>
-                        <div>{`$ ${subTotal}`}</div>
+                        <span>Subtotal ${subTotal}</span>
                     </div>
 
                     <div>
-                        <div>Shipping</div>
-                        <div>-</div>
+                        <div>Shipping - </div>
                     </div>
 
                     <div>
-                        <div>Total</div>
-                        <div>{`$ ${subTotal}`}</div>
+                        <div>Total ${subTotal}</div>
 												<form onSubmit={(e) => this.handleSubmit(e)}>
-													<button type="submit">fullfill order</button>
+													<button className= "orderBtn" type="submit">fullfill order</button>
 												</form>
                     </div>
                 </div>
