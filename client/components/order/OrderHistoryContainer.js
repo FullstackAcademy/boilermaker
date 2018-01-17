@@ -11,7 +11,7 @@ class OrderHistoryContainer extends React.Component {
 	}
 
 	render() {
-		let list = this.props.orders.map(order => <li key={order.id}><Link to={`/orders/${order.id}`}>{order.id}</Link></li>)
+		let list = this.props.orders.map(order => <li key={order.id}><Link to={`/orders/${order.id}`}>ORDER ID: {order.id}</Link></li>)
 		return (
 			<div className="shoppingCartContainer marginTop">
 				<h2>OrderContainer</h2>
