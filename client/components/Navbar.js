@@ -91,7 +91,6 @@ class Navbar extends Component {
 						<NavLink exact to={cartUrl}>
 							<div className="flex-container-row">
 								<h3 className="fontBlack">CART</h3>
-
 							</div>
 						</NavLink>
 					</div>
