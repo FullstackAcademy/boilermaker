@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import history from './history'
 import {Navbar, Login, Signup, FrontPage, UserList} from './components'
 import {me, getProductsThunk, fetchItems, fetchOrders, postItem } from './store'
-import ProductList from './components/product/ProductList';
+import ProductList from './components/product/ProductList'
 import OrderHistoryDetails from './components/order/OrderHistoryDetails'
 import OrderHistoryContainer from './components/order/OrderHistoryContainer'
 import { authUserCart, unAuthUserCart } from './components/order/CartList'
@@ -25,7 +25,7 @@ class Routes extends Component {
   // componentDidUpdate(){
   //   const allLocalItems = localStorage.getArr('item')
   //   // if(!nextProps.userId === this.props.userId) {
-  //     const userId = this.props.userId;
+  //     const userId = this.props.userId
   //     // if logged in, add all localItems to lineItem table for the current user and return the added item to uddate cartItems and delete localItems
   //     // this.props.getAllCartItems(this.props.userId)
   //     console.log('componentWillReceiveProps is called')

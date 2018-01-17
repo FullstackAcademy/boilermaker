@@ -8,12 +8,12 @@ class OrderHistoryDetails extends Component{
 	}
 
 	componentWillMount(){
-		const orderId = this.props.match.params.orderId;
-		this.props.getSingleOrder(orderId);
+		const orderId = this.props.match.params.orderId
+		this.props.getSingleOrder(orderId)
 	}
 
 	render(){
-		const { activeOrder } = this.props;
+		const { activeOrder } = this.props
 		return (
 			<div>
 			{

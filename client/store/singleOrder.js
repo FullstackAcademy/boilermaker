@@ -28,7 +28,7 @@ export const fetchActiveOrder = (orderId) =>
 	axios.get(`/api/orders/${orderId}/lineItems`)
 	.then(res => res.data)
 	.then(result => {
-      console.log(result);
+      console.log(result)
       const allProducts = result.lineItems.map(lineItem => {
         return axios.get(`/api/products/lineItems/${lineItem.id}`)
       })

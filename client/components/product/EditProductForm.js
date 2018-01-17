@@ -16,8 +16,8 @@ class EditProductForm extends React.Component {
       categoryId: this.props.product.categoryId,
       isShowing: false
     }
-    this.onEditSubmit = this.onEditSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.onEditSubmit = this.onEditSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
 	}
   handleChange(event){
     event.preventDefault()

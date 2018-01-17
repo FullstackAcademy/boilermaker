@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 
 export const FrontPage = (props) => {
@@ -11,4 +11,4 @@ export const FrontPage = (props) => {
   )
 }
 
-export default FrontPage;
+export default FrontPage

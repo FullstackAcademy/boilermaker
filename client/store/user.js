@@ -66,9 +66,9 @@ export const auth = (email, password, method) =>
           dispatch(postItem({...localItem, userId }))
         })
         dispatch(fetchItems(userId))
-        localStorage.removeItem("item");
+        localStorage.removeItem("item")
         const LocalItems = localStorage.getArr('item')
-        dispatch(addLocalItems(LocalItems));
+        dispatch(addLocalItems(LocalItems))
       })
       .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
 
