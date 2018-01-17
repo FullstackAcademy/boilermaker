@@ -114,10 +114,11 @@ export const fullFillOrder = (orderId, props) =>
 		dispatch(getOrder(result))
 		if (props.user.id) {
 			dispatch(postOrder(props.user.id))
+			history.push(`/orders-history`)
 		} else if (props.unAuthUser.sessionId){
 			dispatch(postUnAuthOrder(props.unAuthUser.sessionId))
+			history.push(`/`)
 		}
-		history.push(`/orders-history`)
 	})
 	.catch(err => console.log(err))
 /**
