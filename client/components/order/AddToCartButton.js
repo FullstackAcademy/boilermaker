@@ -9,8 +9,6 @@ export class AddToCartButton extends Component {
     super(props)
     this.state = {
       quantityEntry: '1',
-      // loggedIn: false,
-      // clicked: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -28,8 +26,6 @@ export class AddToCartButton extends Component {
             }
           </select>
           <button type="submit">Add To Cart</button>
-          {/* <RaisedButton label="Default" /> */}
-          {/* {!this.state.loggedIn && this.state.clicked && <div className="loginReminder">Please log in or sign up</div>} */}
         </div>
       </form>
     )
@@ -89,7 +85,6 @@ const mapState = (state, ownProps) => {
 const mapDispatch = (dispatch) => {
 	return {
     addItems: (item) => {
-			console.log(item)
 			dispatch(postItem(item))
 		},
     addLocalItems: (items) => dispatch(addLocalItems(items))

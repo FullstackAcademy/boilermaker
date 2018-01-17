@@ -29,7 +29,6 @@ class OrderCheckout extends React.Component {
         newCityEntry, newZipEntry, newPhoneEntry} = this.state
 
         const {items} = this.props
-        console.log('items in OrderCheckout =====', items)
 
         let subTotal = 0, total = 0
         items && items.forEach(item => {

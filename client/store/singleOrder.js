@@ -34,7 +34,6 @@ export const fetchActiveOrder = (orderId) =>
       })
       Promise.all(allProducts)
       .then(res => {
-        console.log('allProducts===== ',res)
         let products = []
         res.forEach(e => products.push(e.data[0]))
         result['products'] = products

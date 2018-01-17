@@ -58,11 +58,10 @@ export const auth = (email, password, method) =>
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
         dispatch(getUser({error: authError}))
       })
-      .then((user)=> {
-        // console.log('user is-------', user)
+      .then((user) => {
         const allLocalItems = localStorage.getArr('item')
         const userId = user.id
-        allLocalItems.map(localItem=> {
+        allLocalItems.map(localItem => {
           dispatch(postItem({...localItem, userId }))
         })
         dispatch(fetchItems(userId))

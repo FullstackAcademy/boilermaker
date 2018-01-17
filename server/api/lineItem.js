@@ -51,7 +51,6 @@ router.put('/:id', (req, res, next) => {
 
     LineItem.findById(lineItemId, {include: [Product]})
     .then(lineItem => {
-      console.log('lineItem======', lineItem)
       lineItem.update(req.body)
       res.json(lineItem)
     })

@@ -21,7 +21,6 @@ class EditProductForm extends React.Component {
 	}
   handleChange(event){
     event.preventDefault()
-    console.log('valll', event.target.value)
     const name = event.target.name
     this.setState({
       [name]: event.target.value

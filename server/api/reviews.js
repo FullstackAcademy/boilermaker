@@ -47,7 +47,6 @@ router.post('/', (req, res, next) => {
 // PUT api/reviews/:reviewId
 router.put('/:reviewId', (req, res, next) => {
   const id = req.params.reviewId
-  console.log('REQ', req.body)
   Review.findById(id)
       .then(review => review.update(req.body))
       .then(review => res.json(review))
