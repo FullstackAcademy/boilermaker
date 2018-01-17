@@ -8,7 +8,7 @@ export class AddToCartButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      quantityEntry: '',
+      quantityEntry: '1',
       // loggedIn: false,
       // clicked: false
     }
@@ -73,6 +73,7 @@ export class AddToCartButton extends Component {
       const allLocalItems = localStorage.getArr('item')
       this.props.addLocalItems(allLocalItems);
       }
+      this.setState({quantityEntry: 1})
     }
 }
 

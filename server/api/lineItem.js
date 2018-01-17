@@ -46,16 +46,14 @@ router.delete('/:lineItemId', (req, res, next)=>{
 })
 
 //PUT /api/lineItems/:id
-router.put('/:lineItemId', (req, res, next) => {
-    const id = +req.params.lineItemId;
-    const quantity = req.body.quantity
-    LineItem.update(quantity, {
-      where: {
-        id
-      }
-    })
-    .spread((updatedRowCount, updatedLineItem)=> {
-      res.json(updatedLineItem)
+router.put('/:id', (req, res, next) => {
+    const lineItemId = req.params.id;
+
+    LineItem.findById(lineItemId, {include: [Product]})
+    .then(lineItem => {
+      console.log('lineItem======', lineItem)
+      lineItem.update(req.body)
+      res.json(lineItem)
     })
     .catch(next)
 })
