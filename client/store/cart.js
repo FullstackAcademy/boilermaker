@@ -43,11 +43,9 @@ export const postItem = (item) =>
   dispatch =>
     axios.post('/api/lineItems', item)
     .then(res => {
-      console.log('res are ---------', res)
       return res.data
     })
       .then(data => {
-        console.log('new item is ---------', data)
         dispatch(addItem(data || defaultItems))
 			})
       .catch(err => console.log(err))

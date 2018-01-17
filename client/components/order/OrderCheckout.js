@@ -5,7 +5,7 @@ import { fullFillOrder } from '../../store'
 
 class OrderCheckout extends React.Component {
     constructor(props){
-        super(props);
+        super(props)
         this.state = {
             newEmailEntry: "",
             newFirstNameEntry: "",
@@ -19,22 +19,21 @@ class OrderCheckout extends React.Component {
             newZipEntry: "",
             newPhoneEntry: ""
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
 
 	render() {
         const { newEmailEntry, newFirstNameEntry, newLastNameEntry,
         newCompanyEntry, newAddressEntry, newAptEntry,
-        newCityEntry, newZipEntry, newPhoneEntry} = this.state;
+        newCityEntry, newZipEntry, newPhoneEntry} = this.state
 
-        const {items} = this.props;
-        console.log('items in OrderCheckout =====', items)
+        const {items} = this.props
 
-        let subTotal = 0, total = 0;
+        let subTotal = 0, total = 0
         items && items.forEach(item => {
             subTotal += item.price * item.quantity
-        });
+        })
 
 		return (
             <div className="flex-container-row alignStart">
@@ -46,38 +45,38 @@ class OrderCheckout extends React.Component {
                             onChange={this.handleChange}
                             type="text"
                             name="newEmailEntry"
-                            placeholder="Enter Your Email"/>
+                            placeholder="Enter Your Email" />
                         <h3>Shipping Address</h3>
                         <input
                             value={newFirstNameEntry}
                             onChange={this.handleChange}
                             type="text"
                             name="newFirstNameEntry"
-                            placeholder="First Name"/>
+                            placeholder="First Name" />
                             <input
                             value={newLastNameEntry}
                             onChange={this.handleChange}
                             type="text"
                             name="newLastNameEntry"
-                            placeholder="Last Name"/>
+                            placeholder="Last Name" />
                         <input
                             value={newCompanyEntry}
                             onChange={this.handleChange}
                             type="text"
                             name="newCompanyEntry"
-                            placeholder="Company (optional)"/>
+                            placeholder="Company (optional)" />
                         <input
                             value={newAddressEntry}
                             onChange={this.handleChange}
                             type="text"
                             name="newAddressEntry"
-                            placeholder="Address"/>
+                            placeholder="Address" />
                         <input
                             value={newAptEntry}
                             onChange={this.handleChange}
                             type="text"
                             name="newAptEntry"
-                            placeholder="Apt, suite"/>
+                            placeholder="Apt, suite" />
 
                         <select name="newCountryEntry" value="newCountryEntry" onChange={this.handleChange}>
                             <option>United States</option>
@@ -123,7 +122,7 @@ class OrderCheckout extends React.Component {
                                     <div>
                                     SubTotal:
                                         {
-                                            item.price * item.quantity
+                                          ` $${item.price * item.quantity}`
                                         }
                                     </div>
                                 </div>
@@ -156,7 +155,7 @@ class OrderCheckout extends React.Component {
     }
 
     handleChange(event){
-        this.setState({[event.target.name]: event.target.value});
+        this.setState({[event.target.name]: event.target.value})
     }
 
     handleSubmit(event){

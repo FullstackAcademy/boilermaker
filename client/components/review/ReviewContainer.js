@@ -6,7 +6,6 @@ import ReviewForm from './ReviewForm'
 
 
 const ReviewContainer = (props) => {
-	console.log(props)
 	let list = []
 	let productId
 	if(props.reviews) {

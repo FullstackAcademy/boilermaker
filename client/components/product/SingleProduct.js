@@ -7,12 +7,12 @@ import EditProductForm from './EditProductForm'
 
 class SingleProduct extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {  }
   }
 
   componentDidMount(){
-    this.props.getReviewsWithAverageThunk();
+    this.props.getReviewsWithAverageThunk()
   }
 
   render() {
@@ -56,7 +56,7 @@ class SingleProduct extends Component {
 }
 
 const mapState = (state, ownProps) => {
-  const productId = ownProps.match.params.productId;
+  const productId = ownProps.match.params.productId
 
   return {
     product: state.products.find(product => product.id === +productId),
@@ -75,4 +75,4 @@ const mapDispatch = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapState, mapDispatch)(SingleProduct);
+export default connect(mapState, mapDispatch)(SingleProduct)

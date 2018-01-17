@@ -22,21 +22,21 @@ class Navbar extends Component {
 
   componentDidMount(){
     const allLocalItems = localStorage.getArr('item')
-    this.props.addLocalItems(allLocalItems);
+    this.props.addLocalItems(allLocalItems)
 
   }
 
 
 
 	handleClick(){
-		this.setState({clicked: !this.state.clicked});
-		this.props.getCategories();
+		this.setState({clicked: !this.state.clicked})
+		this.props.getCategories()
 	}
 
   render(){
     const {children, handleClick, isLoggedIn, userId, isAdmin, getAllUsers} = this.props
 
-		let cartUrl;
+		let cartUrl
 		if(isLoggedIn) cartUrl = '/authUserCart'
 		else {
 			cartUrl = '/unAuthUserCart'
@@ -90,7 +90,6 @@ class Navbar extends Component {
 						<NavLink exact to={cartUrl}>
 							<div className="flex-container-row">
 								<h3 className="fontBlack">CART</h3>
-
 							</div>
 						</NavLink>
 					</div>

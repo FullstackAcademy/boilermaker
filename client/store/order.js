@@ -94,7 +94,6 @@ export const fetchUnAuthOrders = (unAuthId) =>
 		dispatch(gotOrders(completedOrders || defaultOrders))
 		if (cart.length === 1) {
 			let items = cart[0].lineItems
-			console.log('order items, cart[0] =====', items, cart[0])
 			dispatch(getItems(items))
 			dispatch(gotActiveOrder(cart[0]))
 		} else if (cart.length === 0){

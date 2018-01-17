@@ -1,5 +1,5 @@
-const router = require('express').Router();
-const { UnAuthUser } = require('../db/models');
+const router = require('express').Router()
+const { UnAuthUser } = require('../db/models')
 
 // GET api/unAuthenticated/unauthId
 router.get('/:unAuthId', (req, res, next) => {
@@ -10,7 +10,7 @@ router.get('/:unAuthId', (req, res, next) => {
   })
     .then(unauth => res.json(unauth))
     .catch(next)
-});
+})
 
 router.post('/', (req, res, next) => {
 	console.log(req.body.sessionId)
@@ -19,6 +19,6 @@ router.post('/', (req, res, next) => {
 	})
     .then(unauth => res.json(unauth))
     .catch(next)
-});
+})
 
-module.exports = router;
+module.exports = router
