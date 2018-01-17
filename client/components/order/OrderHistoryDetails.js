@@ -27,13 +27,9 @@ class OrderHistoryDetails extends Component{
 								<div key={lineItem.id}>
 									<li>LineItem #{lineItem.id}</li>
 									<ol>
-									{
-										activeOrder.products.map(product =>
-											<div key={product.id}>
-												<li>{product.name} ${product.price}</li>
-											</div>
-										)
-									}
+										<div key={lineItem.product.id}>
+											<li>{lineItem.product.name} ${lineItem.product.price}</li>
+										</div>
 									</ol>
 								</div>
 							)

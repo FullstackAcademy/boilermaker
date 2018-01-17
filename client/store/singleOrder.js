@@ -23,25 +23,36 @@ export const gotActiveOrder = (activeOrder) => ({
  * THUNK CREATORS
  */
 
-export const fetchActiveOrder = (orderId) =>
+// OLDER VER
+// export const fetchActiveOrder = (orderId) =>
+//   dispatch =>
+// 	axios.get(`/api/orders/${orderId}/lineItems`)
+// 	.then(res => res.data)
+// 	.then(result => {
+//       console.log('wtf=====',result);
+//       const allProducts = result.lineItems.map(lineItem => {
+//         return axios.get(`/api/products/lineItems/${lineItem.id}`)
+//       })
+//       Promise.all(allProducts)
+//       .then(res => {
+//         console.log('allProducts===== ',res)
+//         let products = []
+//         res.forEach(e => products.push(e.data[0]))
+//         result['products'] = products
+//         dispatch(gotActiveOrder(result))
+//       })
+//       .catch(err => console.error(err))
+//   })
+
+  export const fetchActiveOrder = (orderId) =>
   dispatch =>
 	axios.get(`/api/orders/${orderId}/lineItems`)
 	.then(res => res.data)
 	.then(result => {
-      console.log(result);
-      const allProducts = result.lineItems.map(lineItem => {
-        return axios.get(`/api/products/lineItems/${lineItem.id}`)
-      })
-      Promise.all(allProducts)
-      .then(res => {
-        console.log('allProducts===== ',res)
-        let products = []
-        res.forEach(e => products.push(e.data[0]))
-        result['products'] = products
-        dispatch(gotActiveOrder(result))
-      })
-      .catch(err => console.error(err))
+      console.log('wtf=====',result);
+      dispatch(gotActiveOrder(result))
   })
+  .catch(err => console.error(err))
 
 
 /**
