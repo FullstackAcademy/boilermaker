@@ -7,17 +7,18 @@ class OrderCheckout extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            newEmailEntry: props.user.email || '',
-            newFirstNameEntry: props.user.first || '',
-            newLastNameEntry: props.user.last || '',
-            newAddressEntry: props.user.street || '',
-            newAptEntry: props.user.street2 || '',
-            newCityEntry: props.user.city || '',
-            newCountryEntry: props.user.country || '',
-            newStateEntry: props.user.state || '',
-            newZipEntry: props.user.zip || '',
-            newPhoneEntry: props.user.phone || '',
-
+            newEmailEntry: "",
+            newFirstNameEntry: "",
+            newLastNameEntry: "",
+            newCompanyEntry: "",
+            newAddressEntry: "",
+            newAptEntry: "",
+            newCityEntry: "",
+            newCountryEntry:"",
+            newStateEntry:"",
+            newZipEntry: "",
+            newPhoneEntry: ""
+        }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
