@@ -48,26 +48,27 @@ export class CartList extends Component {
           {
           items && items.map( item => {
             return (
-            <div className= "flex-container-column" key={item.id}>
+            <div className= "flex-container-column bottom20px" key={item.id}>
                 <div >
                 <img className="cartImage" src={item.product.image}  />
                 </div>
-                <div className="flex-container-row spaceBtw product">
+                <div className="flex-container-row spaceBtw">
+                  <button id="deleteBtn" onClick={() => this.props.deleteItem(item.id)}><i className="material-icons">remove_circle</i>
+                  </button>
                   <span>{item.product.name}</span>
                   <span>{`${item.product.size}-Pack`}</span>
                 </div>
 
-                <button id="deleteBtn" onClick={() => this.props.deleteItem(item.id)}><i className="material-icons">remove_circle</i>
-                </button>
 
+                <span className="top10px">Quantity:</span>
                 <select name="quantity" defaultValue={item.quantity} onChange={(evt)=> this.handleChange(evt, item.id)}>
                   {
                     selections.map(selection => <option key={selection}>{selection}</option>)
                   }
                </select>
 
-                <div>
-                  <span>{`$ ${item.price}`}</span>
+                <div className="top10px">
+                  <span>Price: {`$ ${item.price}`}</span>
                 </div>
               </div>
               )
@@ -79,10 +80,10 @@ export class CartList extends Component {
           <h2>SUBTOTAL</h2>
           <div >Order Summary</div>
           <div>Excluding tax shipping</div>
-          <div>Note to Ramenzon</div>
-          <input />
+          <div className="top10px">Note to Ramenzon</div>
+          <input className="noteContainer"/>
           <Link to="/orders-checkout">
-            <button>CHECKOUT</button>
+            <button className="checkoutBtn">CHECKOUT</button>
           </Link>
       </div>
     </div>
