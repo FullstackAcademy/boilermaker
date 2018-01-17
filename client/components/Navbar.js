@@ -22,21 +22,21 @@ class Navbar extends Component {
 
   componentDidMount(){
     const allLocalItems = localStorage.getArr('item')
-    this.props.addLocalItems(allLocalItems);
+    this.props.addLocalItems(allLocalItems)
 
   }
 
 
 
 	handleClick(){
-		this.setState({clicked: !this.state.clicked});
-		this.props.getCategories();
+		this.setState({clicked: !this.state.clicked})
+		this.props.getCategories()
 	}
 
   render(){
     const {children, handleClick, isLoggedIn, userId, isAdmin, getAllUsers} = this.props
 
-		let cartUrl;
+		let cartUrl
 		if(isLoggedIn) cartUrl = '/authUserCart'
 		else {
 			cartUrl = '/unAuthUserCart'
@@ -66,9 +66,10 @@ class Navbar extends Component {
           </div>
 					{
 						isLoggedIn
-						  ? <div>
+						  ? <div className="loginMenu flex-container-row spaceBtw">
 						    {/* The navbar will show these links after you log in */}
-						    <Link to="/logout" className="fontSpecial fontBlack" onClick={handleClick}>LOGOUT</Link>
+								<Link to="/logout" className="fontSpecial fontBlack" onClick={handleClick}>LOGOUT</Link>
+								<NavLink to={'/orders-history'} className="fontSpecial fontBlack"><span> ORDERS</span></NavLink>
                 {isAdmin && <Link to="/users" className="fontSpecial fontBlack" onClick={getAllUsers}>   USERS</Link>}
 						  </div>
 						  : <div className="loginMenu flex-container-row spaceBtw">
@@ -90,7 +91,6 @@ class Navbar extends Component {
 						<NavLink exact to={cartUrl}>
 							<div className="flex-container-row">
 								<h3 className="fontBlack">CART</h3>
-
 							</div>
 						</NavLink>
 					</div>

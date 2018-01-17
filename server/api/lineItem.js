@@ -1,12 +1,12 @@
 
 const router = require('express').Router()
-const { LineItem, Product } = require('../db/models');
+const { LineItem, Product } = require('../db/models')
 
 module.exports = router
 
 //GET /api/lineItems/:id
 router.get('/:id', (req, res, next) => {
-    const orderId = req.params.id;
+    const orderId = req.params.id
 
     LineItem.findAll({
         where: {orderId},
@@ -23,7 +23,7 @@ router.post('/', (req, res, next) => {
 
 	LineItem.create(lineItem)
 	.then(data => {
-    const lineItem = data.dataValues;
+    const lineItem = data.dataValues
     Product.findById(lineItem.productId)
     .then(product => {
       res.send({...lineItem, product})
@@ -33,7 +33,7 @@ router.post('/', (req, res, next) => {
 })
 
 router.delete('/:lineItemId', (req, res, next)=>{
-  const id = +req.params.lineItemId;
+  const id = +req.params.lineItemId
   LineItem.destroy({
     where: {
       id
@@ -46,16 +46,13 @@ router.delete('/:lineItemId', (req, res, next)=>{
 })
 
 //PUT /api/lineItems/:id
-router.put('/:lineItemId', (req, res, next) => {
-    const id = +req.params.lineItemId;
-    const quantity = req.body.quantity
-    LineItem.update(quantity, {
-      where: {
-        id
-      }
-    })
-    .spread((updatedRowCount, updatedLineItem)=> {
-      res.json(updatedLineItem)
+router.put('/:id', (req, res, next) => {
+    const lineItemId = req.params.id
+
+    LineItem.findById(lineItemId, {include: [Product]})
+    .then(lineItem => {
+      lineItem.update(req.body)
+      res.json(lineItem)
     })
     .catch(next)
 })

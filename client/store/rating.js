@@ -22,7 +22,6 @@ export const getRatingThunk = (productId) =>
   dispatch =>
     axios.get(`/api/reviews/${productId}/avgrating`)
       .then(res => {
-        console.log('res is----------', res)
         dispatch(getRating(res.data || defaultRating))}
       )
       .catch(err => console.log(err))

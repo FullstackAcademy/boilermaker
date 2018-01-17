@@ -28,13 +28,12 @@ export const fetchActiveOrder = (orderId) =>
 	axios.get(`/api/orders/${orderId}/lineItems`)
 	.then(res => res.data)
 	.then(result => {
-      console.log(result);
+      console.log(result)
       const allProducts = result.lineItems.map(lineItem => {
         return axios.get(`/api/products/lineItems/${lineItem.id}`)
       })
       Promise.all(allProducts)
       .then(res => {
-        console.log('allProducts===== ',res)
         let products = []
         res.forEach(e => products.push(e.data[0]))
         result['products'] = products

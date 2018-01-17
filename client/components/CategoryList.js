@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {connect} from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import CategoryForm from './CategoryForm'

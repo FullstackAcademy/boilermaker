@@ -4,7 +4,7 @@ module.exports = router
 
 //GET api/reviews
 router.get('/:productId', (req, res, next) => {
-	const productId = +req.params.productId;
+	const productId = +req.params.productId
 	Review.findReviewsWithAverage(productId)
 		.then((reviews) => {
 				res.json(reviews)
@@ -13,7 +13,7 @@ router.get('/:productId', (req, res, next) => {
 
 //GET api/reviews/avgrating
 router.get('/:productId/avgrating', (req, res, next) => {
-  const productId = +req.params.productId;
+  const productId = +req.params.productId
   console.log('productId  is-----------------', productId )
 
 
@@ -29,12 +29,12 @@ router.get('/:productId/avgrating', (req, res, next) => {
 
 // GET api/reviews/:reviewId
 router.get('/:reviewId', (req, res, next) => {
-  const id = req.params.reviewId;
+  const id = req.params.reviewId
   Review.findById(id)
       .then(review => {
           res.json(review)
       })
-      .catch(next);
+      .catch(next)
 })
 
 // POST api/reviews
@@ -46,8 +46,7 @@ router.post('/', (req, res, next) => {
 
 // PUT api/reviews/:reviewId
 router.put('/:reviewId', (req, res, next) => {
-  const id = req.params.reviewId;
-  console.log('REQ', req.body)
+  const id = req.params.reviewId
   Review.findById(id)
       .then(review => review.update(req.body))
       .then(review => res.json(review))
@@ -56,7 +55,7 @@ router.put('/:reviewId', (req, res, next) => {
 
 // DELETE api/reviews/:reviewId
 router.delete('/:reviewId', (req, res, next) => {
-  const id = req.params.reviewId;
+  const id = req.params.reviewId
   Review.destroy({ where: { id }})
       .then(() => {
           res.status(204).end()

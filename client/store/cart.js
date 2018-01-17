@@ -28,9 +28,9 @@ export const deleteItem = (itemId) => ({
 	itemId
 })
 
-export const updateItem = (itemId) => ({
+export const updateItem = (item) => ({
 	type: UPDATE_ITEM,
-	itemId
+	item
 })
 
 export const getItems = (items) => ({
@@ -43,11 +43,9 @@ export const postItem = (item) =>
   dispatch =>
     axios.post('/api/lineItems', item)
     .then(res => {
-      console.log('res are ---------', res)
       return res.data
     })
       .then(data => {
-        console.log('new item is ---------', data)
         dispatch(addItem(data || defaultItems))
 			})
       .catch(err => console.log(err))
@@ -65,7 +63,7 @@ dispatch =>
 
 export const updateItemThunk = (itemId, quantity) =>
 dispatch =>
-  axios.put(`/api/lineItems/${itemId}`, {quantity})
+  axios.put(`/api/lineItems/${itemId}`, {quantity: +quantity})
   .then(res => {
     return res.data
   })
@@ -96,7 +94,7 @@ export default function (state = defaultItems, action) {
       let items = state.filter(item => item.id !== +action.itemId)
       return items
     case UPDATE_ITEM:
-    let updateItems = state.filter(item => item.id !== +action.itemId)
+    let updateItems = state.filter(item => item.id !== +action.item.id)
     return [...updateItems, action.item]
     case GET_ITEMS:
       return action.items

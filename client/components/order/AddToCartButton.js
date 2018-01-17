@@ -2,21 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { postItem } from '../../store'
 import {addLocalItems} from '../../store'
-// import RaisedButton from 'material-ui/RaisedButton';
+// import RaisedButton from 'material-ui/RaisedButton'
 
 export class AddToCartButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      quantityEntry: '',
-      // loggedIn: false,
-      // clicked: false
+      quantityEntry: '1',
     }
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
   render() {
-    let selections = [1,2,3,4,5,6,7,8,9,10];
+    let selections = [1,2,3,4,5,6,7,8,9,10]
     return (
 
       <form onSubmit={this.handleSubmit}>
@@ -28,8 +26,6 @@ export class AddToCartButton extends Component {
             }
           </select>
           <button type="submit">Add To Cart</button>
-          {/* <RaisedButton label="Default" /> */}
-          {/* {!this.state.loggedIn && this.state.clicked && <div className="loginReminder">Please log in or sign up</div>} */}
         </div>
       </form>
     )
@@ -49,7 +45,7 @@ export class AddToCartButton extends Component {
   handleSubmit(event){
     event.preventDefault()
     if (this.props.user) {
-      this.setState({loggedIn: true});
+      this.setState({loggedIn: true})
       let item = {
 				orderId: this.props.activeOrder.id,
         productId: this.props.productId,
@@ -66,13 +62,14 @@ export class AddToCartButton extends Component {
       let item = {productId, quantity, price}
       // this is the existing items already added by unauthorized user
       // localStorage is an array of objects(item)
-      let existingLocalItems = localStorage.getArr("item") ||[];
+      let existingLocalItems = localStorage.getArr("item") ||[]
       // This add the new item into the existing array of items in localStorage
       // This is tracking all items added to cart by unauthorized user
-      localStorage.setObj("item", [item].concat(existingLocalItems));
+      localStorage.setObj("item", [item].concat(existingLocalItems))
       const allLocalItems = localStorage.getArr('item')
-      this.props.addLocalItems(allLocalItems);
+      this.props.addLocalItems(allLocalItems)
       }
+      this.setState({quantityEntry: 1})
     }
 }
 
@@ -88,7 +85,6 @@ const mapState = (state, ownProps) => {
 const mapDispatch = (dispatch) => {
 	return {
     addItems: (item) => {
-			console.log(item)
 			dispatch(postItem(item))
 		},
     addLocalItems: (items) => dispatch(addLocalItems(items))
@@ -108,14 +104,14 @@ Storage.prototype.getUniqueKey = function() {
     function s4() {
       return Math.floor((1 + Math.random()) * 0x10000)
         .toString(16)
-        .substring(1);
+        .substring(1)
     }
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-      s4() + '-' + s4() + s4() + s4();
+      s4() + '-' + s4() + s4() + s4()
 }
 
 // Do not Delete this.  It is used to reset the localStorage
-// localStorage.removeItem("item");
+// localStorage.removeItem("item")
 
 
 export default connect(mapState, mapDispatch)(AddToCartButton)
