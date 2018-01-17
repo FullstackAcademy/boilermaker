@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import CategoryForm from './CategoryForm'
 import { deleteCategoryThunk } from '../store'
-import deleteButton  from './DeleteButton'
+import DeleteButton  from './DeleteButton'
 
 export const FrontPage = (props) => {
 
@@ -20,7 +20,7 @@ export const FrontPage = (props) => {
           <NavLink exact to={`/category/${category.id}`}>
             <span className="fontSpecial categoryName fontWhite">{category.name}</span>
           </NavLink>
-          <deleteButton item={category} handleDelete={deleteCategoryThunk} />
+          <DeleteButton item={category} handleDelete={deleteCategoryThunk} />
         </div>
         )
       })

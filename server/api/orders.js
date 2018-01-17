@@ -98,11 +98,17 @@ router.post('/', (req, res, next) => {
 router.put('/', (req, res, next) => {
     const id = req.body.orderId;
 
-    Order.upsert({
-			id: id,
+    Order.update({
 			isFullfilled: true
+		}, {
+			where: {
+				id: id
+			}
 		})
-    .then(order => res.json(order))
+    .then(order => {
+			return Order.findById(id)
+		})
+		.then(result => res.json(result))
     .catch(next)
 });
 

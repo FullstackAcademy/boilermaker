@@ -1,7 +1,7 @@
 import React from 'react'
 import connect from 'react-redux'
 
-const deleteButton = (props) => {
+const DeleteButton = (props) => {
 
 
   return (
@@ -10,4 +10,4 @@ const deleteButton = (props) => {
   )
 }
 
-export default deleteButton
+export default DeleteButton

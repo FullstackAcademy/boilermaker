@@ -161,7 +161,8 @@ class OrderCheckout extends React.Component {
 
     handleSubmit(event){
         event.preventDefault();
-				this.props.fullFillOrder(this.props.activeOrder.id)
+				let isLoggedIn = this.props.user.id ? true : false
+				this.props.fullFillOrder(this.props.activeOrder.id, this.props)
 
     }
 }
@@ -169,14 +170,15 @@ class OrderCheckout extends React.Component {
 const mapState = (state, ownProps) => {
     return {
         activeOrder: state.activeOrder,
-				user: state.user
+				user: state.user,
+				unAuthUser: state.unAuthUser
     }
 }
 
 const mapDispatch = (dispatch, ownProps) => {
 	return {
-		fullFillOrder(id) {
-			dispatch(fullFillOrder(id))
+		fullFillOrder(id, props) {
+			dispatch(fullFillOrder(id, props))
 		}
 	}
 }

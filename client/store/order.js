@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { getItems } from './cart'
-import { gotActiveOrder, GOT_ACTIVE_ORDER } from './singleOrder'
+import { gotActiveOrder } from './singleOrder'
 import history from '../history'
 
 /**
@@ -9,6 +9,7 @@ import history from '../history'
 const GOT_ORDERS = 'GOT_ORDERS'
 const GET_ORDER = 'GET_ORDER'
 const CREATED_ORDER = 'CREATED_ORDER'
+const FULLFILLED_ORDER = 'FULLFILLED_ORDER'
 /**
  * INITIAL STATE
  */
@@ -31,6 +32,11 @@ const createdOrder = (order) => ({
 	type: CREATED_ORDER,
 	order
 })
+
+const fullFilledOrder = (order) => ({
+	type: FULLFILLED_ORDER,
+	order
+})
 /**
  * THUNK CREATORS
  */
@@ -43,7 +49,6 @@ export const postOrder = (id) =>
 		})
 		.then(res => res.data)
 		.then(result => {
-			dispatch(createdOrder(result))
 			dispatch(gotActiveOrder(result))
 		})
 		.catch(err => console.log(err))
@@ -55,7 +60,6 @@ export const postUnAuthOrder = (unAuthId) =>
 		})
 		.then(res => res.data)
 		.then(result => {
-			dispatch(createdOrder(result))
 			dispatch(gotActiveOrder(result))
 		})
 		.catch(err => console.log(err))
@@ -101,13 +105,19 @@ export const fetchUnAuthOrders = (unAuthId) =>
 	})
 	.catch(err => console.log(err))
 
-export const fullFillOrder = (orderId) =>
+export const fullFillOrder = (orderId, props) =>
   dispatch =>
 	axios.put(`/api/orders`, {orderId})
 	.then(res => res.data)
-	.then(results => {
-		console.log('updated order', !results)
+	.then(result => {
+		console.log('updated order', result)
 		dispatch(getItems([]))
+		dispatch(getOrder(result))
+		if (props.user.id) {
+			dispatch(postOrder(props.user.id))
+		} else if (props.unAuthUser.sessionId){
+			dispatch(postUnAuthOrder(props.unAuthUser.sessionId))
+		}
 		history.push(`/orders-history`)
 	})
 	.catch(err => console.log(err))
