@@ -66,10 +66,10 @@ class Navbar extends Component {
           </div>
 					{
 						isLoggedIn
-						  ? <div>
+						  ? <div className="loginMenu flex-container-row spaceBtw">
 						    {/* The navbar will show these links after you log in */}
 								<Link to="/logout" className="fontSpecial fontBlack" onClick={handleClick}>LOGOUT</Link>
-								<NavLink to={'/orders-history'}><span>My orders</span></NavLink>
+								<NavLink to={'/orders-history'} className="fontSpecial fontBlack"><span> ORDERS</span></NavLink>
                 {isAdmin && <Link to="/users" className="fontSpecial fontBlack" onClick={getAllUsers}>   USERS</Link>}
 						  </div>
 						  : <div className="loginMenu flex-container-row spaceBtw">
