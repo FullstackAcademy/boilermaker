@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize')
+const connectionString = require('../../config')
+
 const db = new Sequelize(
-  process.env.DATABASE_URL || 'postgres://localhost:5432/boilermaker', {
+  process.env.DATABASE_URL || `postgres://localhost:${connectionString}`, {
     logging: false
   }
 )
