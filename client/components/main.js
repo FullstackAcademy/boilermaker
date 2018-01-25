@@ -1,8 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
-import {logout} from '../store'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
+import { logout } from '../store';
+import Chat from './chat';
+import { setMessages } from '../store';
 
 /**
  * COMPONENT
@@ -11,11 +13,24 @@ import {logout} from '../store'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn} = props
+  const { children, handleClick, isLoggedIn } = props
+  var connection = new RTCMultiConnection();
 
+  // by default, socket.io server is assumed to be deployed on your own URL
+  connection.socketURL = '/';
+
+  connection.session = {
+    audio: true,
+    video: true,
+  };
+
+  connection.sdpConstraints.mandatory = {
+    OfferToReceiveAudio: true,
+    OfferToReceiveVideo: true
+  };
   return (
     <div>
-      <h1>BOILERMAKER</h1>
+      <h1>Bickr</h1>
       <nav>
         {
           isLoggedIn
@@ -30,10 +45,16 @@ const Main = (props) => {
               <Link to="/signup">Sign Up</Link>
             </div>
         }
+        <button onClick={() => {
+          setMessages(['- now joining room predefinedRoomId -']);
+          connection.open('predefinedRoomId');
+        }}>OPEN CHAT
+        </button>
+        <Chat />
       </nav>
       <hr />
       {children}
-    </div>
+    </div >
   )
 }
 
@@ -48,7 +69,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick () {
+    handleClick() {
       dispatch(logout())
     }
   }
