@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { logout } from '../store';
 import Chat from './chat';
+import { setMessages } from '../store';
 
 /**
  * COMPONENT
@@ -45,6 +46,7 @@ const Main = (props) => {
             </div>
         }
         <button onClick={() => {
+          setMessages(['- now joining room predefinedRoomId -']);
           connection.open('predefinedRoomId');
         }}>OPEN CHAT
         </button>

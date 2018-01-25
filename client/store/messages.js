@@ -3,7 +3,7 @@ const SET_MESSAGES = 'SET MESSAGES';
 const NEW_MESSAGE = 'NEW MESSAGE';
 
 export const setMessages = messages => (store.dispatch({
-        type: UPDATE_CHAT,
+        type: SET_MESSAGES,
         messages:messages||[]
 }));
 

@@ -106,7 +106,7 @@ require('./rtcmulticonnection/Signaling-Server.js')(server, function (io,socket)
       } catch (e) { }
     });
   } catch (e) { }
-  require('./socket')(io)
+  require('./socket')(io,socket)
 });
 
 // const startListening = () => {
