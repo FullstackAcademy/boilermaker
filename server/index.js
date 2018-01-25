@@ -133,7 +133,7 @@ if (require.main === module) {
   sessionStore.sync()
     .then(syncDb)
     .then(createApp)
-    .then(server.listen(process.env.PORT || 8080))
+    .then(server.listen(process.env.PORT || PORT))
 } else {
   createApp()
 }

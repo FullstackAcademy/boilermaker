@@ -19,3 +19,9 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+
+video {
+width: 350px;
+height: 350px;
+}

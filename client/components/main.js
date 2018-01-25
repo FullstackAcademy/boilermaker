@@ -14,20 +14,23 @@ import { setMessages } from '../store';
  */
 const Main = (props) => {
   const { children, handleClick, isLoggedIn, getMessages } = props
-  var connection = new RTCMultiConnection();
+  // var connection = new RTCMultiConnection();
 
-  // by default, socket.io server is assumed to be deployed on your own URL
-  connection.socketURL = '/';
+  // // by default, socket.io server is assumed to be deployed on your own URL
+  // connection.socketURL = '/';
 
-  connection.session = {
-    audio: true,
-    video: true,
-  };
+  // connection.session = {
+  //   audio: true,
+  //   video: true,
+  // };
 
-  connection.sdpConstraints.mandatory = {
-    OfferToReceiveAudio: true,
-    OfferToReceiveVideo: true
-  };
+  // connection.sdpConstraints.mandatory = {
+  //   OfferToReceiveAudio: true,
+  //   OfferToReceiveVideo: true
+  // };
+  // console.log(connection);
+  // console.log(connection.sessionid);
+  // console.log(connection.userid);
   return (
     <div>
       <h1>Bickr</h1>
