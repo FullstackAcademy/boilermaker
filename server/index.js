@@ -84,7 +84,7 @@ const createApp = () => {
   })
 }
 
-require('./rtcmulticonnection/Signaling-Server.js')(server, function (socket) {
+require('./rtcmulticonnection/Signaling-Server.js')(server, function (io,socket) {
   try {
     var params = socket.handshake.query;
 
@@ -106,6 +106,7 @@ require('./rtcmulticonnection/Signaling-Server.js')(server, function (socket) {
       } catch (e) { }
     });
   } catch (e) { }
+  require('./socket')(io)
 });
 
 // const startListening = () => {
@@ -113,8 +114,6 @@ require('./rtcmulticonnection/Signaling-Server.js')(server, function (socket) {
 //   const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
 
 //   // set up our socket control center
-//   const io = socketio(server)
-//   require('./socket')(io)
 // }
 
 const syncDb = () => db.sync()

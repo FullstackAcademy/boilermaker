@@ -1,8 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { withRouter, Link } from 'react-router-dom'
-import { logout } from '../store'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
+import { logout } from '../store';
+import Chat from './chat';
 
 /**
  * COMPONENT
@@ -28,7 +29,7 @@ const Main = (props) => {
   };
   return (
     <div>
-      <h1>BOILERMAKER</h1>
+      <h1>Bickr</h1>
       <nav>
         {
           isLoggedIn
@@ -47,6 +48,7 @@ const Main = (props) => {
           connection.open('predefinedRoomId');
         }}>OPEN CHAT
         </button>
+        <Chat />
       </nav>
       <hr />
       {children}
