@@ -13,7 +13,7 @@ import { setMessages } from '../store';
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const { children, handleClick, isLoggedIn } = props
+  const { children, handleClick, isLoggedIn, getMessages } = props
   var connection = new RTCMultiConnection();
 
   // by default, socket.io server is assumed to be deployed on your own URL
@@ -46,7 +46,7 @@ const Main = (props) => {
             </div>
         }
         <button onClick={() => {
-          setMessages(['- now joining room predefinedRoomId -']);
+          getMessages(['- now joining room predefinedRoomId -']);
           connection.open('predefinedRoomId');
         }}>OPEN CHAT
         </button>
@@ -71,6 +71,9 @@ const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       dispatch(logout())
+    },
+    getMessages() {
+      dispatch(setMessages())
     }
   }
 }
@@ -82,8 +85,3 @@ export default withRouter(connect(mapState, mapDispatch)(Main))
 /**
  * PROP TYPES
  */
-Main.propTypes = {
-  children: PropTypes.object,
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
