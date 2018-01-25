@@ -1,12 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { createChannel } from '../store';
+import { createChannel, fetchChannels } from '../store';
 
 const Home = (props) => {
-    const { makeChannel } = props;
+    const { makeChannel, channels } = props;
     return (
         <div>
+            {channels && 
+            
+                channels.map(channel => {
+                    return(
+                    <div key={channel.id}>
+                        {channel.name}
+                    </div>
+                    )
+                })
+            
+            }
             <form onSubmit={makeChannel}>
                 <input 
                     type='text'
@@ -16,6 +27,12 @@ const Home = (props) => {
             </form>
         </div>
     )
+}
+
+const mapState = (state) => {
+    return {
+        channels: state.channels
+    }
 }
 
 const mapDispatch = (dispatch) => {
@@ -28,4 +45,4 @@ const mapDispatch = (dispatch) => {
     }
 }
 
-export default withRouter(connect(null, mapDispatch)(Home));
+export default withRouter(connect(mapState, mapDispatch)(Home));
