@@ -11,15 +11,14 @@ class Channel extends Component {
 
   constructor() {
     super();
-    this.state = {
-      connection: new RTCMultiConnection(),
-    }
-  }
 
   componentDidMount () {
+    let {RtcConnection} = this.props;
     let channelName = this.props.match.params.channelName;
     this.props.setChannel(channelName);
     this.props.setMessages(['- Joining ' + channelName + ' -']);
+    RtcConnection.session = { audio:false, video:false };
+    RtcConnection.open(channelName);
   }
 
   componentWillUpdate () {
@@ -34,6 +33,7 @@ class Channel extends Component {
         <h1>{ currChannel.name }</h1>
         <div>
           <VideoFeed connection={this.state.connection} channel={this.state.connection.channel} />
+          <Button onClick={()=>Enqueue()}>Add Yourself To Queue</Button>
         </div>
       </div>
     )
@@ -41,11 +41,12 @@ class Channel extends Component {
 }
 
 const mapState = (state) => {
-  const currChannel = state.currChannel;
+  const {currChannel, rtcConnection} = state;
   return {
-    currChannel
+    currChannel,
+    rtcConnection,
   }
-}
+};
 
 const mapDispatch = (dispatch) => {
   return {

@@ -6,12 +6,14 @@ import user from './user';
 import messages from './messages';
 import channels from './channels';
 import currChannel from './currChannel';
+import rtcConnection from './rtcConnection';
 
 const reducer = combineReducers({
   user,
   messages,
   channels,
-  currChannel
+  currChannel,
+  rtcConnection,
 })
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
@@ -24,3 +26,4 @@ export * from './user';
 export * from './messages';
 export * from './channels';
 export * from './currChannel';
+export * from './rtcConnection';

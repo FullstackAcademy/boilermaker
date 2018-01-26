@@ -37,11 +37,6 @@ const Main = (props) => {
               <Link to="/signup">Sign Up</Link>
             </div>
         }
-        <button onClick={() => {
-          getMessages(['- now joining room predefinedRoomId -']);
-          connection.open('predefinedRoomId');
-        }}>OPEN CHAT
-        </button>
         <Chat />
       </nav>
       <hr />
