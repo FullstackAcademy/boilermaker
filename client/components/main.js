@@ -46,7 +46,7 @@ const Main = (props) => {
       </nav>
       <hr />
       {children}
-    </div >
+    </div>
   )
 }
 
