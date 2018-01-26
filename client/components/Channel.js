@@ -9,31 +9,31 @@ import VideoFeed from './VideoFeed';
 
 class Channel extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            connection: new RTCMultiConnection(),
-        }
+  constructor() {
+    super();
+    this.state = {
+      connection: new RTCMultiConnection(),
     }
+  }
 
-    render() {
-        const { currentChannel } = this.props;
-        return (
-            <div>
-                <h1>{currentChannel.name}</h1>
-                <div>
-                    <VideoFeed connection={this.state.connection} channel={this.state.connection.channel} />
-                </div>
-            </div>
-        )
-    }
+  render() {
+    const { currentChannel } = this.props;
+    return (
+      <div>
+        <h1>{currentChannel.name}</h1>
+        <div>
+          <VideoFeed connection={this.state.connection} channel={this.state.connection.channel} />
+        </div>
+      </div>
+    )
+  }
 }
 
 const mapState = (state, ownProps) => {
-    const currentChannel = state.channels.find(channel => channel.id === Number(ownProps.match.params.channelId))
-    return {
-        currentChannel
-    }
+  const currentChannel = state.channels.find(channel => channel.id === Number(ownProps.match.params.channelId))
+  return {
+    currentChannel
+  }
 }
 
 

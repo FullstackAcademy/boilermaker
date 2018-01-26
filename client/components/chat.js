@@ -7,34 +7,34 @@ import socket from '../socket';
 import { Button, Panel } from 'react-bootstrap';
 //import { newMessage } from '../store';
 
-function sendMessage(){
-    let message = $('#chat-input')[0].value;
-    $('#chat-input')[0].value = '';
-    socket.emit('message', message);
+function sendMessage() {
+  let message = $('#chat-input')[0].value;
+  $('#chat-input')[0].value = '';
+  socket.emit('message', message);
 }
 
 const Chat = props => {
-    const { messages } = props;
-    return (
-        <Panel id='main-chat-room' className='chat'>
-            <Panel.Body>
-                {messages.map((message, i) => {
-                    return (
-                        <p key={`chat-message-${i}`} className='chat-message'>{message}</p>
-                    )
-                })}
-                <input
-                    id='chat-input'
-                /><Button onClick={sendMessage}>Send</Button>
-            </Panel.Body>
-        </Panel>
-    )
+  const { messages } = props;
+  return (
+    <Panel id='main-chat-room' className='chat'>
+      <Panel.Body>
+        {messages.map((message, i) => {
+          return (
+            <p key={`chat-message-${i}`} className='chat-message'>{message}</p>
+          )
+        })}
+        <input
+          id='chat-input'
+        /><Button onClick={sendMessage}>Send</Button>
+      </Panel.Body>
+    </Panel>
+  )
 }
 
 const mapState = (state) => {
-    return {
-        messages: state.messages
-    }
+  return {
+    messages: state.messages
+  }
 }
 
 
