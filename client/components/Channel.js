@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import socket, { changeChannel } from '../socket';
-import { setChannel } from '../store';
-
+import { setChannel, setMessages } from '../store';
 import { Button, Panel } from 'react-bootstrap';
 import VideoFeed from './VideoFeed';
 //import { newMessage } from '../store';
@@ -18,7 +17,9 @@ class Channel extends Component {
   }
 
   componentDidMount () {
-    this.props.setChannel(this.props.match.params.channelName);
+    let channelName = this.props.match.params.channelName;
+    this.props.setChannel(channelName);
+    this.props.setMessages(['- Joining ' + channelName + ' -']);
   }
 
   componentWillUpdate () {
@@ -50,6 +51,9 @@ const mapDispatch = (dispatch) => {
   return {
     setChannel (channelId) {
       dispatch(setChannel(channelId));
+    },
+    setMessages(messages){
+      dispatch(setMessages(messages));
     }
   }
 }
