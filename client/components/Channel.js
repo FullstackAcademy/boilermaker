@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import socket from '../socket';
 
@@ -16,11 +17,10 @@ class Channel extends Component {
     }
 
     render() {
-        //console.log(this.state.connection)
-        console.log(this.state.connection.sessionid)
-
+        const { currentChannel } = this.props;
         return (
             <div>
+                <h1>{currentChannel.name}</h1>
                 <div>
                     <VideoFeed connection={this.state.connection} channel={this.state.connection.channel} />
                 </div>
@@ -29,12 +29,14 @@ class Channel extends Component {
     }
 }
 
-const mapState = (state) => {
+const mapState = (state, ownProps) => {
+    const currentChannel = state.channels.find(channel => channel.id === Number(ownProps.match.params.channelId))
     return {
+        currentChannel
     }
 }
 
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default connect(mapState)(Channel)
+export default withRouter(connect(mapState)(Channel))

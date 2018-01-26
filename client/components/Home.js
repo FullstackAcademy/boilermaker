@@ -1,27 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 import { createChannel, fetchChannels } from '../store';
 
 const Home = (props) => {
     const { makeChannel, channels } = props;
     return (
         <div>
-            {channels && 
-            
-                channels.map(channel => {
-                    return(
-                    <div key={channel.id}>
-                        {channel.name}
-                    </div>
-                    )
-                })
-            
-            }
+            <ul>
+                {channels &&
+                    channels.map(channel => {
+                        return (
+                            <li key={channel.id}>
+                                <NavLink to={`/channels/${channel.id}`} >
+                                    {channel.name}
+                                </NavLink>
+                            </li>
+                        )
+                    })
+
+                }
+            </ul>
             <form onSubmit={makeChannel}>
-                <input 
+                <input
                     type='text'
-                    name='name'                    
+                    name='name'
                 />
                 <button type='submit'> Submit </button>
             </form>

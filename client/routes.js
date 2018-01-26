@@ -10,7 +10,7 @@ import { me, fetchChannels } from './store'
  * COMPONENT
  */
 class Routes extends Component {
-  constructor () {
+  constructor() {
     super()
   }
 
@@ -25,19 +25,16 @@ class Routes extends Component {
       <Router history={history}>
         <Main>
           <Switch>
-            {/* Routes placed here are available to all visitors */}
-            <Route exact path="/" component={Channel} />
-            <Route path="/home" component={Home} />
+            <Route exact path="/" component={Home} />
+            <Route path="/channels/:channelId" component={Channel} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             {
               isLoggedIn &&
               <Switch>
-                {/* Routes placed here are only available after logging in */}
-                <Route path="/home" component={UserHome} />
+                {/* <Route path="/home" component={UserHome} /> */}
               </Switch>
             }
-            {/* Displays our Login component as a fallback */}
             <Route component={Login} />
           </Switch>
         </Main>

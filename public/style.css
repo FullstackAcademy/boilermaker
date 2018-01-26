@@ -2,10 +2,6 @@ body {
   font-family: sans-serif;
 }
 
-a {
-  text-decoration: none;
-}
-
 label {
   display: block;
 }
@@ -15,6 +11,21 @@ nav a {
   margin: 1em;
 }
 
+ul {
+  list-style-type: none;
+}
+
+a:link, a:visited, a:active {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(0, 108, 250);
+  text-decoration: none;
+}
+
+
 form div {
   margin: 1em;
   display: inline-block;
@@ -22,6 +33,6 @@ form div {
 
 
 video {
-width: 350px;
-height: 350px;
+  width: 350px;
+  height: 350px;
 }
