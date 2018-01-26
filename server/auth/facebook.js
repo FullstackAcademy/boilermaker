@@ -1,4 +1,5 @@
 const passport = require('passport')
+const Sequelize = require('sequelize')
 const router = require('express').Router()
 const FacebookStrategy = require('passport-facebook').Strategy;
 const {User} = require('../db/models');
@@ -14,18 +15,21 @@ if (!process.env.FACEBOOK_APP_ID || !process.env.FACEBOOK_APP_SECRET) {
     const facebookConfig = {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: process.env.FACEBOOK_CALLBACK
+        callbackURL: process.env.FACEBOOK_CALLBACK,
+        profileFields: ['id', 'email', 'name']
       }
   
     const strategy = new FacebookStrategy(facebookConfig, (token, refreshToken, profile, done) => {
-        console.log(profile)
-      const facebookId = profile.id
-      const name = profile.displayName
+      const facebookId = profile.id;
+      const name = profile.name.givenName + ' ' + profile.name.familyName;
+      const email = profile.emails[0].value;
   
-      User.find({where: {facebookId}})
+      User.find({where: {
+        [Sequelize.Op.or]: [{facebookId}, {email}]
+      } })
         .then(foundUser => (foundUser
           ? done(null, foundUser)
-          : User.create({name, facebookId})
+          : User.create({name, email, facebookId})
             .then(createdUser => done(null, createdUser))
         ))
         .catch(done)

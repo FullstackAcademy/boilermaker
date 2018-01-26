@@ -7,4 +7,5 @@ export { default as Main } from './Main'
 export { default as Channel } from './Channel'
 export { default as UserHome } from './user-home'
 export { default as Home } from './Home'
+export { default as UserNamePrompt } from './UserNamePrompt';
 export { Login, Signup } from './auth-form'
