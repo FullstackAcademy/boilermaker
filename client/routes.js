@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, Channel, Home } from './components'
+import { Main, Login, Signup, UserHome, Channel, Home, UserNamePrompt } from './components'
 import { me, fetchChannels } from './store'
 
 /**
@@ -29,6 +29,7 @@ class Routes extends Component {
             <Route path="/channels/:channelId" component={Channel} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/new-user" component={UserNamePrompt} />
             {
               isLoggedIn &&
               <Switch>
