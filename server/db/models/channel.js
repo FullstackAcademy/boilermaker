@@ -3,7 +3,10 @@ const db = require('../db');
 
 const Channel = db.define('channels', {
     name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        validate: {
+          unique: true
+        }
     },
     type: {
         type: Sequelize.STRING,

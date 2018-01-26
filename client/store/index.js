@@ -5,11 +5,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user';
 import messages from './messages';
 import channels from './channels';
+import currChannel from './currChannel';
 
 const reducer = combineReducers({
   user,
   messages,
-  channels
+  channels,
+  currChannel
 })
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
@@ -21,3 +23,4 @@ export default store;
 export * from './user';
 export * from './messages';
 export * from './channels';
+export * from './currChannel';

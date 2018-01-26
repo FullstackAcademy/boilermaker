@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import socket from '../socket';
+import socket, { changeChannel } from '../socket';
+import { setChannel } from '../store';
 
 import { Button, Panel } from 'react-bootstrap';
 import VideoFeed from './VideoFeed';
@@ -16,11 +17,20 @@ class Channel extends Component {
     }
   }
 
+  componentDidMount () {
+    this.props.setChannel(this.props.match.params.channelName);
+  }
+
+  componentWillUpdate () {
+    const { currChannel } = this.props;
+    changeChannel(currChannel);
+  }
+
   render() {
-    const { currentChannel } = this.props;
+    const { currChannel } = this.props;
     return (
       <div>
-        <h1>{currentChannel.name}</h1>
+        <h1>{ currChannel.name }</h1>
         <div>
           <VideoFeed connection={this.state.connection} channel={this.state.connection.channel} />
         </div>
@@ -29,14 +39,22 @@ class Channel extends Component {
   }
 }
 
-const mapState = (state, ownProps) => {
-  const currentChannel = state.channels.find(channel => channel.id === Number(ownProps.match.params.channelId))
+const mapState = (state) => {
+  const currChannel = state.currChannel;
   return {
-    currentChannel
+    currChannel
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+    setChannel (channelId) {
+      dispatch(setChannel(channelId));
+    }
   }
 }
 
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState)(Channel))
+export default withRouter(connect(mapState, mapDispatch)(Channel));
