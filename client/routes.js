@@ -29,7 +29,7 @@ class Routes extends Component {
             <Route path="/channels/:channelId" component={Channel} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/new-user" component={UserNamePrompt} />
+            <Route path='/new-user/:userId' component={UserNamePrompt} />
             {
               isLoggedIn &&
               <Switch>

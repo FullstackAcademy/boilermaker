@@ -2,37 +2,20 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { createUserName } from '../store'
 
-
-
-class UserNamePropmt extends Component {
-
-    CreateUsername(evt) {
-        evt.preventDefault();
-        axios.put(`/api/users/${this.props.user.id}`, {
-            userName: evt.target.username.value
-        })
-        //might want to dispatch to the store here but ran out of time
-        .catch(console.error)
-    }
-
-    render() {
-        return (
-            <div>
-                {
-                    this.props.user.username ? null :
-                        <div>
-                            <h3>{this.props.user.name}, don't have a username</h3>
-                            <form onSubmit={this.CreateUsername.bind(this)}>
-                                <label name="username">Username</label>
-                                <input name="username" type="text" />
-                                <button type="submit">Submit</button>
-                            </form>
-                        </div>
-                }
-            </div>
-        )
-    }
+const UserNamePrompt = (props) => {
+    const { user, userId, updateUserName } = props;
+    return (
+        <div>
+            <h3>{user.name}, don't have a username</h3>
+            <form onSubmit={updateUserName}>
+                <label>Username</label>
+                <input type="text" name="userName" />
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    )
 }
 
 const mapState = (state) => {
@@ -40,5 +23,18 @@ const mapState = (state) => {
         user: state.user
     }
 }
+const mapDispatch = (dispatch, ownProps) => {
+    const userId = ownProps.match.params.userId;
+    return {
+        updateUserName(evt) {
+            evt.preventDefault();
+            const updatedUser = {
+                userId,
+                userName: evt.target.userName.value
+            }
+            dispatch(createUserName(updatedUser));
+        }
+    }
+}
 
-export default withRouter(connect(mapState)(UserNamePropmt));
+export default withRouter(connect(mapState, mapDispatch)(UserNamePrompt));

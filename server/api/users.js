@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const { User } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -13,10 +13,9 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-router.put('/:id', (req, res, next) => {
-  User.findById(Number(req.params.id))
+router.put('/:userId', (req, res, next) => {
+  User.findById(Number(req.params.userId))
     .then(user => {
-      console.log('hitttt')
       user.update(req.body)
     })
     .then(user => res.json(user))
