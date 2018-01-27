@@ -5,8 +5,8 @@ export const setRtcConnection = rtcConnection => ({
   rtcConnection
 });
 
-export default (prevState = {},action) => {
-  switch(action.type){
+export default (prevState = {}, action) => {
+  switch (action.type) {
     case SET_RTC_CONNECTION:
       return action.rtcConnection;
     default:

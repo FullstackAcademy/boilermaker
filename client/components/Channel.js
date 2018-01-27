@@ -9,19 +9,16 @@ import VideoFeed from './VideoFeed';
 
 class Channel extends Component {
 
-  constructor() {
-    super();
-
-  componentDidMount () {
-    let {RtcConnection} = this.props;
+  componentDidMount() {
+    let { rtcConnection } = this.props;
     let channelName = this.props.match.params.channelName;
     this.props.setChannel(channelName);
     this.props.setMessages(['- Joining ' + channelName + ' -']);
-    RtcConnection.session = { audio:false, video:false };
-    RtcConnection.open(channelName);
+    rtcConnection.session = { audio: false, video: false };
+    rtcConnection.open(channelName);
   }
 
-  componentWillUpdate () {
+  componentWillUpdate() {
     const { currChannel } = this.props;
     changeChannel(currChannel);
   }
@@ -30,10 +27,10 @@ class Channel extends Component {
     const { currChannel } = this.props;
     return (
       <div>
-        <h1>{ currChannel.name }</h1>
+        <h1>{currChannel.name}</h1>
         <div>
           <VideoFeed connection={this.state.connection} channel={this.state.connection.channel} />
-          <Button onClick={()=>Enqueue()}>Add Yourself To Queue</Button>
+          <Button onClick={() => socket.emit('enqueue')}>Add Yourself To Queue</Button>
         </div>
       </div>
     )
@@ -41,7 +38,7 @@ class Channel extends Component {
 }
 
 const mapState = (state) => {
-  const {currChannel, rtcConnection} = state;
+  const { currChannel, rtcConnection } = state;
   return {
     currChannel,
     rtcConnection,
@@ -50,10 +47,10 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    setChannel (channelId) {
+    setChannel(channelId) {
       dispatch(setChannel(channelId));
     },
-    setMessages(messages){
+    setMessages(messages) {
       dispatch(setMessages(messages));
     }
   }
