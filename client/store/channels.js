@@ -3,6 +3,8 @@ import axios from 'axios'
 const GET_CHANNELS = 'GET_CHANNELS';
 const CREATE_CHANNEL = 'CREATE_CHANNEL';
 
+const defaultState = [];
+
 const getChannels = channels => ({ type: GET_CHANNELS, channels });
 const makeChannel = channel => ({ type: CREATE_CHANNEL, channel });
 
@@ -24,14 +26,13 @@ export const createChannel = (channel) => {
   }
 }
 
-
-export default function (state = [], action) {
+export default function (state = defaultState, action) {
   switch (action.type) {
     case GET_CHANNELS:
-      return action.channels
+      return action.channels;
     case CREATE_CHANNEL:
-      return [...state, action.channel]
+      return [...state, action.channel];
     default:
-      return state
+      return state;
   }
 }

@@ -7,7 +7,7 @@ const seedChannels = async function () {
     Channel.create({ name: 'NYC Town Hall', type: 'Debate', category: 'Politics', size: 200 }),
 
     Channel.create({ name: 'Herro Prease', type: 'Debate', category: 'Anime', size: 150 }),
-    Channel.create({ name: 'Herro Prease', type: 'Debate', category: 'Anime', size: 150 }),
+    //Channel.create({ name: 'Herro Prease', type: 'Debate', category: 'Anime', size: 150 }),
 
     Channel.create({ name: 'Welcome to the Jungle (LoL)', type: 'Debate', category: 'Gaming', size: 100 }),
     Channel.create({ name: 'EA Lovers', type: 'Debate', category: 'Gaming', size: 50 }),

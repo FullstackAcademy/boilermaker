@@ -14,7 +14,7 @@ const Home = (props) => {
           channels.map(channel => {
             return (
               <li key={channel.id}>
-                <NavLink to={`/channels/${channel.id}`} >
+                <NavLink to={`/channels/${channel.name}`} >
                   {channel.name}
                 </NavLink>
               </li>

@@ -1,6 +1,6 @@
 import store from './index';
-const SET_MESSAGES = 'SET MESSAGES';
-const NEW_MESSAGE = 'NEW MESSAGE';
+const SET_MESSAGES = 'SET_MESSAGES';
+const NEW_MESSAGE = 'NEW_MESSAGE';
 
 export const setMessages = messages => ({
   type: SET_MESSAGES,

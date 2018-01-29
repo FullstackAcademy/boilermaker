@@ -26,7 +26,7 @@ class Routes extends Component {
         <Main>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/channels/:channelId" component={Channel} />
+            <Route path="/channels/:channelName" component={Channel} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path='/new-user/:userId' component={UserNamePrompt} />
