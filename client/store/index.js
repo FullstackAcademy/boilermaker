@@ -6,19 +6,21 @@ import user from './user';
 import messages from './messages';
 import channels from './channels';
 import currChannel from './currChannel';
-import rtcConnection from './rtcConnection';
+//import rtcConnection, {refresh} from './rtcConnection';
 
 const reducer = combineReducers({
   user,
   messages,
   channels,
   currChannel,
-  rtcConnection,
-})
+  //rtcConnection,
+});
+
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({ collapsed: true })
-))
+));
+
 const store = createStore(reducer, middleware)
 
 export default store;
@@ -26,4 +28,4 @@ export * from './user';
 export * from './messages';
 export * from './channels';
 export * from './currChannel';
-export * from './rtcConnection';
+//export * from './rtcConnection';

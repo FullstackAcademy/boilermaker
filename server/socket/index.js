@@ -1,4 +1,4 @@
-const  {RoomList} = require('../db/models/room');
+const  {roomList} = require('../db/models/room');
 module.exports = (io, socket) => {
   console.log(`A socket connection to the server has been made: ${socket.id}`);
 
@@ -8,9 +8,10 @@ module.exports = (io, socket) => {
   
   socket.on('changeChannel', roomName => {
     socket.join(roomName);
-    let room = RoomList.createOrFindRoom(roomName);
+    let room = roomList.createOrFindRoom(roomName);
     room.addViewer(socket);
     socket.room = room;
+    console.log('chainging room to',roomName,room.id);
   });
   
   socket.on('enqueue', ()=>{
