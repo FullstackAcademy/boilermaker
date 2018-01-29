@@ -75,7 +75,7 @@ module.exports = exports = function(app, socketCallback) {
         var sessionid = params.sessionid;
         var autoCloseEntireSession = params.autoCloseEntireSession;
 
-        if (params.enableScalableBroadcast) {
+        if (params.enableScalableBroadcast || 1) {
             if (!ScalableBroadcast) {
                 ScalableBroadcast = require('./Scalable-Broadcast.js');
             }

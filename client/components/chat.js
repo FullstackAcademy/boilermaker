@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import socket from '../socket';
+import { socket } from '../socket';
 //import Button from 'react-bootstrap/lib/Button';
 //import Input from 'react-bootstrap/lib/Input';
 //import Panel from 'react-bootstrap/lib/Panel';
