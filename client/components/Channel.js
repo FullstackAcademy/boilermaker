@@ -14,6 +14,7 @@ class Channel extends Component {
     let channelName = this.props.match.params.channelName;
     this.props.setChannel(channelName);
     this.props.setMessages(['- Joining ' + channelName + ' -']);
+    if(!rtcConnection)return;
     rtcConnection.session = { audio: false, video: false };
     rtcConnection.open(channelName);
   }
@@ -24,12 +25,12 @@ class Channel extends Component {
   }
 
   render() {
-    const { currChannel } = this.props;
+    const { currChannel, rtcConnection } = this.props;
     return (
       <div>
         <h1>{currChannel.name}</h1>
         <div>
-          <VideoFeed connection={this.state.connection} channel={this.state.connection.channel} />
+          <VideoFeed connection={rtcConnection} channel={rtcConnection.channel} />
           <Button onClick={() => socket.emit('enqueue')}>Add Yourself To Queue</Button>
         </div>
       </div>

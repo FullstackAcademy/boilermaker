@@ -11,7 +11,7 @@ RoomList.prototype = {
 const Room = function (name) {
   this.name = name;
   RoomList[name] = this;
-  this.viewes = [];
+  this.viewers = [];
   this.broadcasters = [];
   this.queue  = [];
 }

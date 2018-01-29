@@ -7,15 +7,15 @@ module.exports = (io, socket) => {
   });
   
   socket.on('changeChannel', roomName => {
-    socket.join(currentRoom);
+    socket.join(roomName);
     let room = RoomList.createOrFindRoom(roomName);
     room.addViewer(socket);
     socket.room = room;
   });
   
-  socket.on('enqueue'){
-    socket.room.addToQueue(this);
-  }
+  socket.on('enqueue', ()=>{
+    socket.room.addToQueue(socket);
+  });
   socket.on('message', message => {
     let room = io;
     if (socket.room.name) room = io.to(socket.room.name);
