@@ -1,28 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
-import { createChannel, fetchChannels } from '../store';
+import { withRouter } from 'react-router-dom';
+import ChannelList from './Category-ChannelList';
 import { currentChannelList } from '../../utils/currentChannel';
+import { PageHeader } from 'react-bootstrap'
 
 const Category = (props) => {
-    const { channelList } = props;
+    const { channelList, currCategory } = props;
     return (
         <div>
-            <ul>
-                {
-                    channelList.map(channel => {
-                        return (
-                            <li key={channel.id}>
-                                <NavLink to={`/channels/${channel.name}`} >
-                                    <h3>
-                                        {channel.name}
-                                    </h3>
-                                </NavLink>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
+            <PageHeader>
+            {currCategory} <small>Channel List</small>
+            </PageHeader>
+            <ChannelList channelList={channelList} />
         </div>
     )
 }
@@ -31,6 +21,7 @@ const mapState = (state, ownProps) => {
     const currCategory = ownProps.match.params.categoryName;
     const channelList = currentChannelList(currCategory, state.channels);
     return {
+        currCategory,
         channelList
     }
 }
