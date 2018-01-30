@@ -20,10 +20,11 @@ const options = {
   cert: fs.readFileSync(path.join(__dirname, resolveURL('rtcmulticonnection/fake-keys/cert.pem')))
 };
 
-module.exports = app
+module.exports = app;
+const server;
 
-const server = https.createServer(options,app);
-
+if(!process.env.HEROKU)server = https.createServer(options,app);
+else http.createServer(app);
 
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 
