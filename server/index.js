@@ -11,17 +11,19 @@ const sessionStore = new SequelizeStore({ db })
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const https = require('https');
 const http = require('http');
-module.exports = app
-
-const server = http.createServer(app);
-
 const fs = require('fs');
 
 const options = {
-  key: fs.readFileSync(path.join(__dirname, resolveURL('rtcmulticonnection/fake-keys/privatekey.pem'))),
-  cert: fs.readFileSync(path.join(__dirname, resolveURL('rtcmulticonnection/fake-keys/certificate.pem')))
+  key: fs.readFileSync(path.join(__dirname, resolveURL('rtcmulticonnection/fake-keys/key.pem'))),
+  cert: fs.readFileSync(path.join(__dirname, resolveURL('rtcmulticonnection/fake-keys/cert.pem')))
 };
+
+module.exports = app
+
+const server = https.createServer(options,app);
+
 
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 
@@ -133,7 +135,9 @@ if (require.main === module) {
   sessionStore.sync()
     .then(syncDb)
     .then(createApp)
-    .then(server.listen(process.env.PORT || PORT))
+    .then(server.listen(443 || process.env.PORT || PORT))
+    .then(()=>console.log('starting a new server on '+443))
+    .catch(console.error)
 } else {
   createApp()
 }

@@ -18,18 +18,32 @@ export default (prevState = {}, action) => {
   }
 };*/
 const rtcConnection = new RTCMultiConnection();
-let connection = rtcConnection;
 rtcConnection.session = {audio:true,video:true,oneway:true};
-rtcConnection.direction = 'many-to-many';
 rtcConnection.dontOverrideSession = true;
+rtcConnection.socketMessageEvent = 'multi-broadcasters-demo';
+
 
 rtcConnection.onNewSession = session =>{
   console.log('new session');
   session.join({oneway:true});
 };
-//rtcConnection.videosContainer = $('#video-container')[0];
 
-rtcConnection.socketMessageEvent = 'multi-broadcasters-demo';
+rtcConnection.onstream = event =>{
+  console.log('started streaming',event);
+  $('#videos-container').append(event.mediaElement);
+
+  if (e.type == 'remote') {
+    connection.askToShareParticipants();
+  }
+
+  if (connection.isInitiator && e.type == 'remote' && !e.session.oneway) {
+    // call "shareParticipants" to manually share participants with all connected users!
+    connection.shareParticipants({
+        dontShareWith: e.userid
+    });
+}
+}
+//rtcConnection.videosContainer = $('#video-container')[0];
 
 /*rtcConnection.onstream = event =>{
   console.log('starting a new stream ',event);
