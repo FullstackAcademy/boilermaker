@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { logout } from '../store';
-import Chat from './Chat';
+import Chat from './chat';
 import { setMessages } from '../store';
 
 /**
