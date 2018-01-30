@@ -25,12 +25,25 @@ a:hover {
   text-decoration: none;
 }
 
+/************************ NAVBAR ***********************/
+
+#nav-bar-logo.navbar-brand{
+  width: 7.5vw;
+  height: auto;
+}
+
+.navbar {
+  background-color: white;
+  background-image: none;
+}
+
+/************************ NAVBAR ***********************/
+
 
 form div {
   margin: 1em;
   display: inline-block;
 }
-
 
 video {
   width: 350px;

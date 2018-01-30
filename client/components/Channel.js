@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Chat from './Chat';
 import { changeChannel, enqueue } from '../socket';
 import { setChannel, setMessages, setRtcConnection } from '../store';
 import { Button, Panel } from 'react-bootstrap';
@@ -23,6 +24,7 @@ class Channel extends Component {
       <div>
        <div id = 'videos-container'></div>
         <h1>{currChannel.name}</h1>
+        <Chat />
         <div>
           {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
           <Button onClick={enqueue}>Add Yourself To Queue</Button>
