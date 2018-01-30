@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
 import { createChannel } from '../store';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -84,7 +84,7 @@ class CreateChannel extends Component {
                         this.state.descriptionValue.length ? null : <HelpBlock>Please enter a value</HelpBlock>
                     }
                 </FormGroup><br />
-                <button type="submit">Submit</button>
+                <Button type="submit">Submit</Button>
             </form>
         );
     }

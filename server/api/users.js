@@ -13,6 +13,12 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
+router.get('/:userId', (req, res, next) => {
+  User.findById(Number(req.params.userId))
+    .then(user => res.json(user))
+    .catch(next);
+})
+
 router.put('/:userId', (req, res, next) => {
   User.findById(Number(req.params.userId))
     .then(user => {

@@ -11,3 +11,4 @@ export { default as UserNamePrompt } from './UserNamePrompt';
 export { default as Category } from './Category';
 export { Login, Signup } from './auth-form'
 export { default as CreateChannel } from './CreateChannel';
+export { default as UserPage } from './UserPage';
