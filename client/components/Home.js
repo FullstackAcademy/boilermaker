@@ -11,7 +11,7 @@ const Home = (props) => {
   return (
     <div>
       <Welcome />
-      <CategoryList categoryList={categoryList}/>
+      <CategoryList categoryList={categoryList} />
     </div>
   )
 }
