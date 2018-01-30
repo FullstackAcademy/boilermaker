@@ -8,4 +8,7 @@ export { default as Channel } from './Channel'
 export { default as UserHome } from './user-home'
 export { default as Home } from './Home'
 export { default as UserNamePrompt } from './UserNamePrompt';
+export { default as Category } from './Category';
 export { Login, Signup } from './auth-form'
+export { default as CreateChannel } from './CreateChannel';
+export { default as UserPage } from './UserPage';

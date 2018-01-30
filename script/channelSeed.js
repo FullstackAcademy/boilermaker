@@ -14,9 +14,9 @@ const seedChannels = async function () {
     Channel.create({ name: 'Fanboys: Xbox vs. PS4', type: 'Debate', category: 'Gaming', size: 200 }),
     Channel.create({ name: 'Get Smashed', type: 'Debate', category: 'Gaming', size: 125 }),
 
-    Channel.create({ name: 'Winter is Coming', type: 'Debate', category: 'TV/Film', size: 200 }),
-    Channel.create({ name: 'Oscars Predictions', type: 'Debate', category: 'TV/Film', size: 250 }),
-    Channel.create({ name: 'Basic Girls', type: 'Debate', category: 'TV/Film', size: 75 }),
+    Channel.create({ name: 'Winter is Coming', type: 'Debate', category: 'TV-Film', size: 200 }),
+    Channel.create({ name: 'Oscars Predictions', type: 'Debate', category: 'TV-Film', size: 250 }),
+    Channel.create({ name: 'Basic Girls', type: 'Debate', category: 'TV-Film', size: 75 }),
   ])
   await console.log(`seeded ${channels.length} channels`)
 }

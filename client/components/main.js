@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { logout } from '../store';
 import { setMessages } from '../store';
-import { Navbar, Nav, NavbarBrand, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 /**
  * COMPONENT
@@ -19,7 +19,11 @@ const Main = (props) => {
     <div>
       <Navbar>
         <Navbar.Brand>
+<<<<<<< HEAD
           <img src="/Bickr-logo.jpeg" id="nav-bar-logo" />
+=======
+          <img src="/Bickr-logo.png" id="nav-bar-logo" />
+>>>>>>> master
         </Navbar.Brand>
         {
           isLoggedIn ?
@@ -60,7 +64,7 @@ const Main = (props) => {
  */
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id,
+    isLoggedIn: !!state.me.id,
   }
 }
 

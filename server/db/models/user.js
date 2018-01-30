@@ -13,6 +13,13 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     unique: true
   },
+  photoURL: {
+    type: Sequelize.STRING,
+  },
+  score: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
   googleId: {
     type: Sequelize.STRING
   },

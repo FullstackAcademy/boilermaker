@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Channel } = require('../db/models');
+const gatekeeperMiddleware = require('../../utils/gatekeeper');
 
 router.get('/', (req, res, next) => {
     Channel.findAll()
@@ -7,12 +8,13 @@ router.get('/', (req, res, next) => {
         .catch(next);
 })
 
-router.post('/', (req, res, next) => {
-    console.log('HERE: ', req.body);
+router.post('/',
+    gatekeeperMiddleware.isLoggedIn,
+    (req, res, next) => {
     Channel.findOrCreate({
         where: req.body
     })
-        .then(channel => res.json(channel))
+        .spread(channel => res.json(channel))
         .catch(next);
 })
 
