@@ -20,7 +20,7 @@ const UserNamePrompt = (props) => {
 
 const mapState = (state) => {
     return {
-        user: state.user
+        user: state.me
     }
 }
 const mapDispatch = (dispatch, ownProps) => {

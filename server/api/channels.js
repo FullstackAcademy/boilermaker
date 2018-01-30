@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Channel } = require('../db/models');
+const gatekeeperMiddleware = require('../../utils/gatekeeper');
 
 router.get('/', (req, res, next) => {
     Channel.findAll()
@@ -7,7 +8,9 @@ router.get('/', (req, res, next) => {
         .catch(next);
 })
 
-router.post('/', (req, res, next) => {
+router.post('/',
+    gatekeeperMiddleware.isLoggedIn,
+    (req, res, next) => {
     Channel.findOrCreate({
         where: req.body
     })
