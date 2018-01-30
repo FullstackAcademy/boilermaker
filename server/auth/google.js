@@ -20,9 +20,10 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   const redirect = {};
 
   const strategy = new GoogleStrategy(googleConfig, (token, refreshToken, profile, done) => {
-    const googleId = profile.id
-    const name = profile.displayName
-    const email = profile.emails[0].value
+    const googleId = profile.id;
+    const name = profile.displayName;
+    const email = profile.emails[0].value;
+    const photoURL = profile.photos[0].value;
 
     User.find({
       where: {
@@ -35,7 +36,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
           redirect['failureRedirect'] = '/login'
           done(null, foundUser);
         } else {
-          return User.create({ name, email, googleId })
+          return User.create({ name, email, googleId, photoURL })
             .then(createdUser => {
               redirect['successRedirect'] = `/new-user/${createdUser.id}`
               redirect['failureRedirect'] = '/login'

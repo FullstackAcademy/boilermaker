@@ -16,7 +16,7 @@ if (!process.env.FACEBOOK_APP_ID || !process.env.FACEBOOK_APP_SECRET) {
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: process.env.FACEBOOK_CALLBACK,
-    profileFields: ['id', 'email', 'name']
+    profileFields: ['id', 'email', 'name', 'photos']
   }
 
   const redirect = {};
@@ -25,6 +25,7 @@ if (!process.env.FACEBOOK_APP_ID || !process.env.FACEBOOK_APP_SECRET) {
     const facebookId = profile.id;
     const name = profile.name.givenName + ' ' + profile.name.familyName;
     const email = profile.emails[0].value;
+    const photoURL = profile.photos[0].value;
 
     User.find({
       where: {
@@ -37,7 +38,7 @@ if (!process.env.FACEBOOK_APP_ID || !process.env.FACEBOOK_APP_SECRET) {
           redirect['failureRedirect'] = '/login'
           done(null, foundUser);
         } else {
-          return User.create({ name, email, facebookId })
+          return User.create({ name, email, facebookId, photoURL })
             .then(createdUser => {
               redirect['successRedirect'] = `/new-user/${createdUser.id}`
               redirect['failureRedirect'] = '/login'

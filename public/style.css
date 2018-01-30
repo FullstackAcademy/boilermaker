@@ -52,6 +52,17 @@ video {
 
 
 .user-page-user-image {
-  width: 171px;
-  height: 171px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin: 15px;
+}
+
+.user-page-header {
+  display: flex;
+}
+
+.user-page-header-text {
+  display: flex;
+  flex-direction: column;
 }

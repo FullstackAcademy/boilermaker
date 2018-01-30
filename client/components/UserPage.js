@@ -13,9 +13,12 @@ class UserPage extends Component {
         const { user } = this.props;
 
         return (
-            <div>
+            <div className="user-page-header">
                 <Image src={user.photoURL} rounded className="user-page-user-image" />
-                <h3>{user.name}</h3>
+                <div className="user-page-header-text">
+                    <h1>{user.name}</h1>
+                    <h3>Score: {user.score}</h3>
+                </div>
             </div>
         )
     }
