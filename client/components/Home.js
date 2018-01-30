@@ -2,11 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { createChannel, fetchChannels } from '../store';
+import Timer from './Timer';
 
 const Home = (props) => {
   const { makeChannel, channels } = props;
   return (
     <div>
+      <Timer />
       <ul>
         {channels &&
           channels.map(channel => {
