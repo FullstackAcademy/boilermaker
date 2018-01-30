@@ -1,28 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
-import { createChannel, fetchChannels } from '../store';
+import { withRouter } from 'react-router-dom';
+import ChannelList from './Category-ChannelList';
 import { currentChannelList } from '../../utils/currentChannel';
 
 const Category = (props) => {
     const { channelList } = props;
     return (
         <div>
-            <ul>
-                {
-                    channelList.map(channel => {
-                        return (
-                            <li key={channel.id}>
-                                <NavLink to={`/channels/${channel.name}`} >
-                                    <h3>
-                                        {channel.name}
-                                    </h3>
-                                </NavLink>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
+            <ChannelList channelList={channelList}/>
         </div>
     )
 }
