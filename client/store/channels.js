@@ -17,11 +17,14 @@ export const fetchChannels = () => {
   }
 }
 
-export const createChannel = (channel) => {
+export const createChannel = (name, category, description) => {
   return function (dispatch) {
-    return axios.post('/api/channels', channel)
-      .then(res =>
-        dispatch(makeChannel(res.data)))
+    return axios.post('/api/channels', {
+      name,
+      category,
+      description
+    })
+      .then(res => dispatch(makeChannel(res.data)))
       .catch(err => console.log(err));
   }
 }

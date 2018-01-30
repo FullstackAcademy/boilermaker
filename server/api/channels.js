@@ -8,11 +8,10 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-    console.log('HERE: ', req.body);
     Channel.findOrCreate({
         where: req.body
     })
-        .then(channel => res.json(channel))
+        .spread(channel => res.json(channel))
         .catch(next);
 })
 

@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { createChannel, fetchChannels } from '../store';
-import { uniqueChannelList } from '../../utils/uniqueChannels';
+import Timer from './Timer';
+import { CreateChannel } from './index'
 
 const Home = (props) => {
   const { makeChannel, channels, categoryList } = props;
@@ -24,6 +25,14 @@ const Home = (props) => {
 
         }
       </ul>
+      <CreateChannel />
+      <form onSubmit={makeChannel}>
+        <input
+          type='text'
+          name='name'
+        />
+        <button type='submit'> Submit </button>
+      </form>
     </div>
   )
 }

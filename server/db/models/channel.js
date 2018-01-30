@@ -12,6 +12,9 @@ const Channel = db.define('channels', {
     category: {
         type: Sequelize.STRING,
     },
+    description: {
+        type: Sequelize.STRING,
+    },
     password: {
         type: Sequelize.STRING
     },
