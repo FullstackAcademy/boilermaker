@@ -6,6 +6,7 @@ import { changeChannel, enqueue } from '../socket';
 import { setChannel, setMessages, setRtcConnection } from '../store';
 import { Button, Panel } from 'react-bootstrap';
 import VideoFeed from './VideoFeed';
+import Timer from './Timer';
 import rtcConnection from '../store/rtcConnection';
 //import { newMessage } from '../store';
 
@@ -22,8 +23,9 @@ class Channel extends Component {
     const { currChannel, rtcConnection } = this.props;
     return (
       <div>
-       <div id = 'videos-container'></div>
+        <div id='videos-container'></div>
         <h1>{currChannel.name}</h1>
+        <Timer />
         <Chat />
         <div>
           {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
@@ -38,7 +40,7 @@ const mapState = (state) => {
   const { currChannel } = state;
   return {
     currChannel,
-    refresh:refresh,
+    refresh: refresh,
   }
 };
 
@@ -58,4 +60,4 @@ const mapDispatch = (dispatch) => {
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Channel));
 
-export const refreshMe = function(){refresh != refresh}
+export const refreshMe = function () { refresh != refresh }

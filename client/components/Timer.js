@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProgressBar from 'progressbar.js';
-/* eslint-disable */
 
 class Timer extends Component {
   componentDidMount () {
@@ -16,24 +15,22 @@ class Timer extends Component {
         value: '',
         alignToBottom: false
       },
-      color: '#FFEA82',
-      from: { color: '#FFEA82' },
-      to: { color: '#ED6A5A' },
+      color: '#f08f36',
+      from: { color: '#00FF00' },
+      to: { color: '#ff0000' },
       step: (state, bar) => {
         bar.path.setAttribute('stroke', state.color);
-        var value = Math.floor(bar.value() * 30);
+        var value = Math.floor((bar.value() * 30));
         bar.setText(30 - value);
-
         bar.text.style.color = state.color;
       }
     });
     let text = bar.text;
     text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-    text.style.fontSize = '6rem';
+    text.style.fontSize = '2rem';
     text.style.top = '30%';
+    text.style.marginTop = '50px';
     bar.animate(1.0);  // Number from 0.0 to 1.0
-    
-    
   }
  
   render () {
