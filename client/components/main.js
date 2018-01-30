@@ -19,11 +19,7 @@ const Main = (props) => {
     <div>
       <Navbar>
         <Navbar.Brand>
-<<<<<<< HEAD
-          <img src="/Bickr-logo.jpeg" id="nav-bar-logo" />
-=======
           <img src="/Bickr-logo.png" id="nav-bar-logo" />
->>>>>>> master
         </Navbar.Brand>
         {
           isLoggedIn ?
