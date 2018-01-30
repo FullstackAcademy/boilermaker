@@ -21,8 +21,13 @@ a:link, a:visited, a:active {
 }
 
 a:hover {
-  color: rgb(0, 108, 250);
+  color: #f08f36;
   text-decoration: none;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
 }
 
 /************************ NAVBAR ***********************/
@@ -37,19 +42,22 @@ a:hover {
   background-image: none;
 }
 
-/************************ NAVBAR ***********************/
-
-
-form div {
-  margin: 1em;
-  display: inline-block;
-}
+/************************ CHANNEL ***********************/
 
 video {
   width: 350px;
   height: 350px;
 }
 
+svg {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  width: 100px;
+  height: 100px;
+}
+
+/************************ USER PAGE ***********************/
 
 .user-page-user-image {
   width: 50px;
