@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Chat from './Chat';
+import Chat from './chat';
 import { changeChannel, enqueue } from '../socket';
 import { setChannel, setMessages, setRtcConnection } from '../store';
 import { Button, Panel } from 'react-bootstrap';

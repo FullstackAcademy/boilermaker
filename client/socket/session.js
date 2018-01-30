@@ -4,32 +4,45 @@ import store, {setRtcConnection} from '../store/';
 
 export function changeChannel(channelName) {
   channelName = channelName.split(" ").join('');
-  console.log(channelName)
   socket.emit('changeChannel', channelName);
+  socket.channel = channelName;
   rtcConnection.channel = channelName;
-  rtcConnection.openOrJoin(channelName,()=>{console.log(rtcConnection.peers.getLength())});
+  //rtcConnection.join(channelName,()=>{console.log(rtcConnection.peers.getLength())});
+  rtcConnection.connect(channelName);
+  rtcConnection.join(channelName);
 }
 
 export function enqueue(){
   socket.emit('enqueue');
 }
 
-socket.on('startBroadcasting',()=>{
+socket.on('userStartedBroadcasting',()=>{
+  console.log('startingBroadcast!');
   let { currChannel} = store.getState();
-  rtcConnection.session = {audio: true, video:true, broadcast:true,oneway:false};
+  rtcConnection.session = {audio: true, video:true, broadcast:true};
   rtcConnection.openOrJoin(currChannel);
-  rtcConnection.addStream(rtcConnection.session);
+});
+
+socket.on('broadcasterStarted',broadcastId =>{
+  rtcConnection.join(broadcastId);
 });
 
 socket.on('setUserId',id=>{
   rtcConnection.userid = id;
+  console.log('setting user id to',id)
 });
 
-socket.on('setBroadcasters',broadcasters=>{
-  console.log('attempting to sync with broadcasters',broadcasters);
-  if(!broadcasters.length)return;
-  broadcasters.forEach(broadcastId =>{
+/*
+
+Auto does this for us....
+
+
+socket.on('setBroadcasters',broadcasterIds=>{
+  console.log('attempting to sync with broadcasters',broadcasterIds);
+  if(!broadcasterIds.length)return;
+  broadcasterIds.forEach(broadcastId =>{
     rtcConnection.connect(broadcastId,()=>{console.log('joined',broadcastId)});
-    console.log('111');
+    rtcConnection.peers[broadcastId].addStream({video:true,audio:true,oneway:true});
   })
 })
+*/
