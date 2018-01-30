@@ -8,20 +8,23 @@ const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
 const sessionStore = new SequelizeStore({ db })
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 443
 const app = express()
 const socketio = require('socket.io')
+const https = require('https');
 const http = require('http');
-module.exports = app
-
-const server = http.createServer(app);
-
 const fs = require('fs');
 
 const options = {
-  key: fs.readFileSync(path.join(__dirname, resolveURL('rtcmulticonnection/fake-keys/privatekey.pem'))),
-  cert: fs.readFileSync(path.join(__dirname, resolveURL('rtcmulticonnection/fake-keys/certificate.pem')))
+  key: fs.readFileSync(path.join(__dirname, resolveURL('rtcmulticonnection/fake-keys/key.pem'))),
+  cert: fs.readFileSync(path.join(__dirname, resolveURL('rtcmulticonnection/fake-keys/cert.pem')))
 };
+
+module.exports = app;
+let server;
+
+if(!process.env.HEROKU)server = https.createServer(options,app);
+else server = http.createServer(app);
 
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 
@@ -133,7 +136,9 @@ if (require.main === module) {
   sessionStore.sync()
     .then(syncDb)
     .then(createApp)
-    .then(server.listen(process.env.PORT || PORT))
+    .then(server.listen(PORT))
+    .then(()=>console.log('starting a new server on '+PORT))
+    .catch(console.error)
 } else {
   createApp()
 }

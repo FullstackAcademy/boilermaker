@@ -1,8 +1,13 @@
-const  {roomList} = require('../db/models/room');
+let roomList;
 module.exports = (io, socket) => {
+  const  rl = roomList; 
+  if(!rl){
+    roomList =require('../db/models/room')(io);
+  }
   console.log(`A socket connection to the server has been made: ${socket.id}`);
 
   socket.on('disconnect', () => {
+    if(socket.room)socket.room.removeViewer(socket);
     console.log(`Connection ${socket.id} has left the building`);
   });
   
