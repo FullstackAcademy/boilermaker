@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import history from './history'
 import { Main, Login, Signup, UserHome, Channel, Home, UserNamePrompt, Category } from './components'
 import { me, fetchChannels } from './store'
@@ -66,11 +65,3 @@ const mapDispatch = (dispatch) => {
 }
 
 export default connect(mapState, mapDispatch)(Routes)
-
-/**
- * PROP TYPES
- */
-Routes.propTypes = {
-  loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
