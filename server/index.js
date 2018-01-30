@@ -21,10 +21,10 @@ const options = {
 };
 
 module.exports = app;
-const server;
+let server;
 
 if(!process.env.HEROKU)server = https.createServer(options,app);
-else http.createServer(app);
+else server = http.createServer(app);
 
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 
