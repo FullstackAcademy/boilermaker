@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
+import Welcome from './Home-Welcome';
+import CategoryList from './Home-CategoryList';
 import { createChannel, fetchChannels } from '../store';
 import { uniqueChannelList } from '../../utils/uniqueChannels'
 
@@ -8,21 +10,8 @@ const Home = (props) => {
   const { makeChannel, channels, categoryList } = props;
   return (
     <div>
-      <ul>
-        {
-          categoryList.map(categoryName => {
-            return (
-              <li key={categoryName}>
-                <NavLink to={`/categories/${categoryName}/channels`} >
-                  <h1>
-                    {categoryName}
-                  </h1>
-                </NavLink>
-              </li>
-            )
-          })
-        }
-      </ul>
+      <Welcome />
+      <CategoryList categoryList={categoryList}/>
     </div>
   )
 }
