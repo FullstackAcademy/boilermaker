@@ -2,20 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { createChannel, fetchChannels } from '../store';
-import Timer from './Timer';
+import { uniqueChannelList } from '../../utils/uniqueChannels';
 
 const Home = (props) => {
-  const { makeChannel, channels } = props;
+  const { makeChannel, channels, categoryList } = props;
   return (
     <div>
-      <Timer />
       <ul>
-        {channels &&
-          channels.map(channel => {
+        {
+          categoryList.map(categoryName => {
             return (
-              <li key={channel.id}>
-                <NavLink to={`/channels/${channel.name}`} >
-                  {channel.name}
+              <li key={categoryName}>
+                <NavLink to={`/categories/${categoryName}/channels`} >
+                  <h1>
+                    {categoryName}
+                  </h1>
                 </NavLink>
               </li>
             )
@@ -23,30 +24,20 @@ const Home = (props) => {
 
         }
       </ul>
-      <form onSubmit={makeChannel}>
-        <input
-          type='text'
-          name='name'
-        />
-        <button type='submit'> Submit </button>
-      </form>
     </div>
   )
 }
 
 const mapState = (state) => {
+  const categoryList = uniqueChannelList(state.channels);
   return {
+    categoryList,
     channels: state.channels
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    makeChannel(evt) {
-      dispatch(createChannel({
-        name: evt.target.name.value
-      }))
-    }
   }
 }
 
