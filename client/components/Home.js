@@ -25,13 +25,13 @@ const Home = (props) => {
         }
       </ul>
       <CreateChannel />
-      {/*<form onSubmit={makeChannel}>
+      <form onSubmit={makeChannel}>
         <input
           type='text'
           name='name'
         />
         <button type='submit'> Submit </button>
-      </form>*/}
+      </form>
     </div>
   )
 }
