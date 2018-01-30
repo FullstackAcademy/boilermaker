@@ -24,34 +24,44 @@ const Main = (props) => {
         {
           isLoggedIn ?
             <Navbar.Collapse>
-              <Navbar.Text>
-                <NavLink to="/">
-                  <h3>Home</h3>
+              <h3>
+                <Navbar.Text>
+                  <NavLink to="/">
+                    Home
                 </NavLink >
-              </Navbar.Text>
-              <Navbar.Text>
-                <NavLink onClick={handleClick} to="/">
-                <h3>Logout</h3>
+                </Navbar.Text>
+              </h3>
+              <h3>
+                <Navbar.Text>
+                  <NavLink onClick={handleClick} to="/">
+                    Logout
                 </NavLink >
-              </Navbar.Text>
+                </Navbar.Text>
+              </h3>
             </Navbar.Collapse>
             :
             <Navbar.Collapse>
-              <Navbar.Text>
-                <NavLink to="/">
-                  <h3>Home</h3>
+              <h3>
+                <Navbar.Text>
+                  <NavLink to="/">
+                    Home
               </NavLink >
-              </Navbar.Text>
-              <Navbar.Text>
-                <NavLink to="/login">
-                  <h3>Login</h3>
+                </Navbar.Text>
+              </h3>
+              <h3>
+                <Navbar.Text>
+                  <NavLink to="/login">
+                    Login
                 </NavLink >
-              </Navbar.Text>
-              <Navbar.Text>
-                < NavLink to="/signup">
-                  <h3>Sign Up</h3>
+                </Navbar.Text>
+              </h3>
+              <h3>
+                <Navbar.Text>
+                  < NavLink to="/signup">
+                    Sign Up
               </NavLink >
-              </Navbar.Text>
+                </Navbar.Text>
+              </h3>
             </Navbar.Collapse>
         }
       </Navbar>

@@ -16,7 +16,7 @@ class Timer extends Component {
         alignToBottom: false
       },
       color: '#f08f36',
-      from: { color: '#00FF00' },
+      from: { color: '#18db18' },
       to: { color: '#ff0000' },
       step: (state, bar) => {
         bar.path.setAttribute('stroke', state.color);
