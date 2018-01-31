@@ -1,71 +1,79 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { socket } from '../socket';
-//import Button from 'react-bootstrap/lib/Button';
-//import Input from 'react-bootstrap/lib/Input';
-//import Panel from 'react-bootstrap/lib/Panel';
 import { Button, Panel, Grid, Row, Col } from 'react-bootstrap';
-import ReactDom from 'react-dom';
-//import { newMessage } from '../store';
-import { Widget, toggleWidget, addResponseMessage } from 'react-chat-widget';
-
-// function sendMessage(evt) {
-//   evt.preventDefault();
-//   let message = evt.target.input.value;
-//   socket.emit('message', message);
-//   evt.target.input.value = '';
-// }
-
-// function Chat(props) {
-//   const { messages, currChannel } = props;
-//   return (
-//     <div>
-//       <Panel id='main-chat-room' className='chat'>
-//         <Panel.Heading>{currChannel}</Panel.Heading>
-//         <Panel.Body>
-//           {messages.map((message, i) => {
-//             return (
-//               <p key={`chat-message-${i}`} className='chat-message'>{message}</p>
-//             )
-//           })}
-//         </Panel.Body>
-//       </Panel>
-//       <form id="send-message" onSubmit={sendMessage}>
-//         <input
-//           id='chat-input' name="input"
-//         /><Button type="submit">Send</Button>
-//       </form>
-//     </div>
-//   )
-// }
 
 class Chat extends Component {
 
-  componentDidMount() {
-    toggleWidget()
-  }
+    componentDidUpdate() {
+        let chat = document.getElementById('chat-body')
+        chat.scrollTop = chat.scrollHeight - 320;
+    }
 
-  handleNewUserMessage = (message) => {
-    socket.emit('message', message)
-  }
+    sendMessage(evt) {
+        evt.preventDefault();
+        let message = evt.target.input.value;
+        let username = this.props.user.userName;
+        let messageObj = { message, username }
+        socket.emit('message', messageObj);
+        evt.target.input.value = '';
+    }
 
-  render() {
-    return (
-      <Widget
-      title={this.props.currChannel}
-      subtitle="Type responsibly"
-      handleNewUserMessage={this.handleNewUserMessage}
-      />
-    )
-  }
+    render() {
+        const { messages, currChannel } = this.props;
+        let name = '';
+
+        currChannel.length > 12 ? name = currChannel.slice(0, 13) + '...' : name = currChannel
+
+        return (
+            <Grid>
+                <Col xs={4} md={3} id='main-chat-room' className='chat'>
+                    <div xs={4} md={3} id="chat-room-header">{name}</div>
+                    <div id="chat-body">
+                        {messages.map((message, i) => {
+                            let dateEndIdx = message.indexOf(']');
+                            let date = message.slice(0, dateEndIdx + 1);
+                            let body = message.slice(dateEndIdx + 2);
+                            let nameEndIdx = body.indexOf(':');
+                            let name = body.slice(0, nameEndIdx);
+                            let text = body.slice(nameEndIdx + 2);
+                            let color = 'chat-message-';
+
+                            i % 2 === 0 ? color += 'even' : color += 'odd';
+
+                            return (
+                                <div key={`chat-message-${i}`} className={`${color}`}>
+                                    <div className="chat-message-header">
+                                        <p className='chat-message'>
+                                            <span className="message-author">{name}</span>
+                                            <span className="message-date">{date}</span>
+                                        </p>
+                                    </div>
+                                    <p className='chat-message'>{text}</p>
+                                </div>
+                            )
+                        })}
+                    </div>
+                    <form xs={4} md={3} id="send-message" onSubmit={this.sendMessage.bind(this)}>
+                        <input
+                            id='chat-input'
+                            name="input"
+                            autoComplete="off"
+                        />
+                    </form>
+                </Col>
+            </Grid>
+        )
+    }
 }
 
 
 const mapState = (state) => {
-  return {
-    messages: state.messages,
-    currChannel: state.currChannel
-  }
+    return {
+        messages: state.messages,
+        currChannel: state.currChannel,
+        user: state.me
+    }
 }
 
 
