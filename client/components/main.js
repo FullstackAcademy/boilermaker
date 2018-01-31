@@ -1,9 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { logout } from '../store';
-import { setMessages } from '../store';
+import { logout, setMessages } from '../store';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 /**
@@ -91,10 +89,4 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Main))
-
-/**
- * PROP TYPES
- */

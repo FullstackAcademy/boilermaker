@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter, NavLink } from 'react-router-dom';
 import { Jumbotron } from 'react-bootstrap';
 
 const Welcome = (props) => {

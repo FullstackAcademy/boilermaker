@@ -2,12 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import history from './history'
-import { Main, Login, Signup, UserHome, Channel, Home, UserNamePrompt, Category, UserPage } from './components'
+import { Main, Login, Signup, Channel, Home, UserNamePrompt, Category, UserPage } from './components'
 import { me, fetchChannels } from './store'
 
-/**
- * COMPONENT
- */
 class Routes extends Component {
   constructor() {
     super()
@@ -45,9 +42,6 @@ class Routes extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.

@@ -3,7 +3,7 @@ import { withRouter, NavLink } from 'react-router-dom';
 import { Label } from 'react-bootstrap';
 
 const CategoryList = (props) => {
-  const { categoryList } = props;
+  const { channels } = props;
   return (
     <div>
       <h2>
@@ -13,7 +13,7 @@ const CategoryList = (props) => {
       </h2>
       <ul>
         {
-          categoryList.map(categoryName => {
+          channels.categoryList.map(categoryName => {
             return (
               <li key={categoryName}>
                 <NavLink to={`/categories/${categoryName}/channels`} >
