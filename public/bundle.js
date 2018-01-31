@@ -18031,6 +18031,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactBootstrap = __webpack_require__(22);
 
+var _reactRouterDom = __webpack_require__(23);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ChannelList = function ChannelList(props) {
@@ -18045,11 +18047,15 @@ var ChannelList = function ChannelList(props) {
             channelList.map(function (channel) {
                 return _react2.default.createElement(
                     _reactBootstrap.ListGroupItem,
-                    { key: channel.id, href: '/channels/' + channel.name },
+                    { key: channel.id },
                     _react2.default.createElement(
-                        'h3',
-                        null,
-                        channel.name
+                        _reactRouterDom.NavLink,
+                        { to: '/channels/' + channel.name },
+                        _react2.default.createElement(
+                            'h3',
+                            null,
+                            channel.name
+                        )
                     )
                 );
             })
@@ -19347,9 +19353,9 @@ var Chat = function (_Component) {
                 messages = _props.messages,
                 currChannel = _props.currChannel;
 
-            var name = '';
+            var channelName = '';
 
-            currChannel.length > 12 ? name = currChannel.slice(0, 13) + '...' : name = currChannel;
+            currChannel.length > 12 ? channelName = currChannel.slice(0, 13) + '...' : channelName = currChannel;
 
             return _react2.default.createElement(
                 _reactBootstrap.Grid,
@@ -19360,7 +19366,7 @@ var Chat = function (_Component) {
                     _react2.default.createElement(
                         'div',
                         { xs: 4, md: 3, id: 'chat-room-header' },
-                        name
+                        channelName
                     ),
                     _react2.default.createElement(
                         'div',

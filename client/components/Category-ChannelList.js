@@ -1,5 +1,6 @@
 import React from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom'
 
 const ChannelList = (props) => {
     const { channelList } = props;
@@ -9,8 +10,8 @@ const ChannelList = (props) => {
                 {
                     channelList.map(channel => {
                         return (
-                            <ListGroupItem key={channel.id} href={`/channels/${channel.name}`}>
-                                <h3>{channel.name}</h3>
+                            <ListGroupItem key={channel.id}>
+                                <NavLink to ={`/channels/${channel.name}`}><h3>{channel.name}</h3></NavLink>
                             </ListGroupItem>
                         )
                     })

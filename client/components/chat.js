@@ -21,14 +21,14 @@ class Chat extends Component {
 
     render() {
         const { messages, currChannel } = this.props;
-        let name = '';
+        let channelName = '';
 
-        currChannel.length > 12 ? name = currChannel.slice(0, 13) + '...' : name = currChannel
+        currChannel.length > 12 ? channelName = currChannel.slice(0, 13) + '...' : channelName = currChannel
 
         return (
             <Grid>
                 <Col xs={4} md={3} id='main-chat-room' className='chat'>
-                    <div xs={4} md={3} id="chat-room-header">{name}</div>
+                    <div xs={4} md={3} id="chat-room-header">{channelName}</div>
                     <div id="chat-body">
                         {messages.map((message, i) => {
                             let dateEndIdx = message.indexOf(']');
