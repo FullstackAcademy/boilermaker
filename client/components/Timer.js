@@ -6,11 +6,7 @@ class Timer extends Component {
 
   constructor (props) {
     super(props);
-    //this.state = props;
-    this.state = {
-      currTime: 27000,
-      totalTime: 30000
-    }
+    this.state = props;
 
     this.timerCreator = this.timerCreator.bind(this);
   }
