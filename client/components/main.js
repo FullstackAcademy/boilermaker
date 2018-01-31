@@ -1,17 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { logout, setMessages } from '../store';
+import { logout, fetchSingleUser, fetchFilteredUsers } from '../store';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import SearchBar from './SearchBar'
 
-/**
- * COMPONENT
- *  The Main component is our 'picture frame' - it displays the navbar and anything
- *  else common to our entire app. The 'picture' inside the frame is the space
- *  rendered out by the component's `children`.
- */
 const Main = (props) => {
-  const { children, handleClick, isLoggedIn, getMessages } = props
+  const { children, handleClick, isLoggedIn, channels, users, getMessages, getFilteredUsers, history, handleSubmit } = props
 
   return (
     <div>
@@ -26,14 +21,14 @@ const Main = (props) => {
                 <Navbar.Text>
                   <NavLink to="/">
                     Home
-                </NavLink >
+                  </NavLink >
                 </Navbar.Text>
               </h3>
               <h3>
                 <Navbar.Text>
                   <NavLink onClick={handleClick} to="/">
                     Logout
-                </NavLink >
+                  </NavLink >
                 </Navbar.Text>
               </h3>
             </Navbar.Collapse>
@@ -43,23 +38,26 @@ const Main = (props) => {
                 <Navbar.Text>
                   <NavLink to="/">
                     Home
-              </NavLink >
+                  </NavLink >
                 </Navbar.Text>
               </h3>
               <h3>
                 <Navbar.Text>
                   <NavLink to="/login">
                     Login
-                </NavLink >
+                  </NavLink >
                 </Navbar.Text>
               </h3>
               <h3>
                 <Navbar.Text>
                   < NavLink to="/signup">
                     Sign Up
-              </NavLink >
+                  </NavLink >
                 </Navbar.Text>
               </h3>
+              <Navbar.Form>
+                <SearchBar channels={channels} users={users} getFilteredUsers={getFilteredUsers} history={history} handleSubmit={handleSubmit} />
+              </Navbar.Form>
             </Navbar.Collapse>
         }
       </Navbar>
@@ -72,19 +70,30 @@ const Main = (props) => {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapState = (state, ownProps) => {
   return {
     isLoggedIn: !!state.me.id,
+    channels: state.channels,
+    users: state.users,
+    history: ownProps.history
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, ownProps) => {
+  const history = ownProps.history;
   return {
     handleClick() {
       dispatch(logout())
     },
-    getMessages() {
-      dispatch(setMessages())
+    getFilteredUsers(searchTerm) {
+      dispatch(fetchFilteredUsers(searchTerm))
+    }, 
+    handleSubmit(evt, filteredUsers, filteredChannels) {
+      evt.preventDefault();
+      const userId = filteredUsers.find(user => user.userName === evt.target.search.value).id
+      console.log(userId);
+      dispatch(fetchSingleUser(userId));
+      history.push(`/users/${userId}`)
     }
   }
 }

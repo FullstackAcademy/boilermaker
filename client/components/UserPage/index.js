@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { fetchUser } from '../../store';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Image } from 'react-bootstrap';
+
+import { fetchSingleUser } from '../../store';
 
 import Score from './Score';
 
 class UserPage extends Component {
   componentDidMount() {
-    this.props.loadUser(Number(this.props.match.params.userId))
+    this.props.loadSingleUser(Number(this.props.match.params.userId))
   }
 
   render() {
@@ -30,15 +31,16 @@ class UserPage extends Component {
 }
 
 const mapState = (state) => {
+  
   return {
-    user: state.inactiveUser
+    user: state.users.singleUser
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    loadUser(id) {
-      dispatch(fetchUser(id))
+    loadSingleUser(id) {
+      dispatch(fetchSingleUser(id))
     }
   }
 }

@@ -1,15 +1,15 @@
 import axios from 'axios'
 
-const GET_CHANNELS = 'GET_CHANNELS';
-const CREATE_CHANNEL = 'CREATE_CHANNEL';
-const GET_FILTERED_CHANNELS = 'GET_FILTERED_CHANNELS';
-const SET_CURRENT_CHANNEL = 'SET_CURRENT_CHANNEL';
-
 const defaultState = {
   channelList: [],
   filteredChannelList: [],
   categoryList: []
 };
+
+const GET_CHANNELS = 'GET_CHANNELS';
+const CREATE_CHANNEL = 'CREATE_CHANNEL';
+const GET_FILTERED_CHANNELS = 'GET_FILTERED_CHANNELS';
+const SET_CURRENT_CHANNEL = 'SET_CURRENT_CHANNEL';
 
 const getChannels = channels => ({ type: GET_CHANNELS, channels });
 const makeChannel = channel => ({ type: CREATE_CHANNEL, channel });

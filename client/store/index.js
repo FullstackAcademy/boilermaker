@@ -5,13 +5,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import me from './me';
 import messages from './messages';
 import channels from './channels';
-import inactiveUser from './inactiveUser';
+import users from './users';
 
 const reducer = combineReducers({
   me,
   messages,
   channels,
-  inactiveUser
+  users
 });
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -25,4 +25,4 @@ export default store;
 export * from './me';
 export * from './messages';
 export * from './channels';
-export * from './inactiveUser';
+export * from './users';
