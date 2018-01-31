@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { changeChannel, enqueue } from '../socket';
 import { Button, Panel } from 'react-bootstrap';
 
-import { setMessages, setRtcConnection } from '../store';
 import rtcConnection from '../store/rtcConnection';
-import Timer from './Timer';
-import VideoFeed from './VideoFeed';
+import { setMessages } from '../store';
+import { changeChannel, enqueue } from '../socket';
+
 import Chat from './chat';
+import VideoFeed from './VideoFeed';
+import Timer from './Timer';
 
 class Channel extends Component {
   componentDidMount() {
     let channelName = this.props.currentChannel;
     this.props.setMessages(['- Joining ' + channelName + ' -']);
     changeChannel(channelName);
-    //rtcConnection.connect(channelName);
   }
 
   render() {
