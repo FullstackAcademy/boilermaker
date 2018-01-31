@@ -24,28 +24,44 @@ const Main = (props) => {
         {
           isLoggedIn ?
             <Navbar.Collapse>
-              <Nav>
-                <NavItem eventKey={1} href="/">
-                  Home
-                </NavItem >
-                <NavItem eventKey={2} onClick={handleClick} href="/">
-                  Logout
-                </NavItem >
-              </Nav>
+              <h3>
+                <Navbar.Text>
+                  <NavLink to="/">
+                    Home
+                </NavLink >
+                </Navbar.Text>
+              </h3>
+              <h3>
+                <Navbar.Text>
+                  <NavLink onClick={handleClick} to="/">
+                    Logout
+                </NavLink >
+                </Navbar.Text>
+              </h3>
             </Navbar.Collapse>
             :
             <Navbar.Collapse>
-              <Nav>
-                <NavItem eventKey={1} href="/">
-                  Home
-              </NavItem >
-                < NavItem eventKey={2} href="/login">
-                  Login
-                </NavItem >
-                < NavItem eventKey={3} href="/signup">
-                  Sign Up
-              </NavItem >
-              </Nav>
+              <h3>
+                <Navbar.Text>
+                  <NavLink to="/">
+                    Home
+              </NavLink >
+                </Navbar.Text>
+              </h3>
+              <h3>
+                <Navbar.Text>
+                  <NavLink to="/login">
+                    Login
+                </NavLink >
+                </Navbar.Text>
+              </h3>
+              <h3>
+                <Navbar.Text>
+                  < NavLink to="/signup">
+                    Sign Up
+              </NavLink >
+                </Navbar.Text>
+              </h3>
             </Navbar.Collapse>
         }
       </Navbar>

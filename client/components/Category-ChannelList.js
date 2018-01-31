@@ -9,7 +9,7 @@ const ChannelList = (props) => {
                 {
                     channelList.map(channel => {
                         return (
-                            <ListGroupItem href={`/channels/${channel.name}`}>
+                            <ListGroupItem key={channel.id} href={`/channels/${channel.name}`}>
                                 <h3>{channel.name}</h3>
                             </ListGroupItem>
                         )

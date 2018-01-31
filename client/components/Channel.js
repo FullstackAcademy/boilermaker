@@ -6,6 +6,7 @@ import { changeChannel, enqueue } from '../socket';
 import { setChannel, setMessages } from '../store';
 import { Button, Panel } from 'react-bootstrap';
 import VideoFeed from './VideoFeed';
+import Timer from './Timer';
 
 class Channel extends Component {
   componentDidMount() {
@@ -19,8 +20,9 @@ class Channel extends Component {
     const { currChannel, rtcConnection } = this.props;
     return (
       <div>
-       <div id = 'videos-container'></div>
+        <div id='videos-container'></div>
         <h1>{currChannel.name}</h1>
+        <Timer />
         <Chat />
         <div>
           {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
