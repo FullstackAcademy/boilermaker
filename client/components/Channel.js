@@ -3,12 +3,10 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Chat from './chat';
 import { changeChannel, enqueue } from '../socket';
-import { setChannel, setMessages, setRtcConnection } from '../store';
+import { setChannel, setMessages } from '../store';
 import { Button, Panel } from 'react-bootstrap';
 import VideoFeed from './VideoFeed';
 import Timer from './Timer';
-import rtcConnection from '../store/rtcConnection';
-//import { newMessage } from '../store';
 
 class Channel extends Component {
   componentDidMount() {
@@ -16,7 +14,6 @@ class Channel extends Component {
     this.props.setMessages(['- Joining ' + channelName + ' -']);
     this.props.setChannel(channelName);
     changeChannel(channelName);
-    //rtcConnection.connect(channelName);
   }
 
   render() {
@@ -35,12 +32,10 @@ class Channel extends Component {
     )
   }
 }
-let refresh = false;
 const mapState = (state) => {
   const { currChannel } = state;
   return {
     currChannel,
-    refresh: refresh,
   }
 };
 
@@ -59,5 +54,3 @@ const mapDispatch = (dispatch) => {
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Channel));
-
-export const refreshMe = function () { refresh != refresh }
