@@ -13,8 +13,8 @@ import Timer from './Timer';
 
 class Channel extends Component {
   componentDidMount() {
-    let channelName = this.props.currentChannel;
-    this.props.setMessages(['- Joining ' + channelName + ' -']);
+    let channelName = this.props.match.params.channelName;
+    this.props.setChannel(channelName);
     changeChannel(channelName);
   }
 
@@ -25,7 +25,7 @@ class Channel extends Component {
         <div id='videos-container'></div>
         <h1>{currentChannel}</h1>
         <Timer />
-        <Chat />
+        <Chat channel={currChannel.name} />
         <div>
           {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
           <Button onClick={enqueue}>Add Yourself To Queue</Button>
