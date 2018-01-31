@@ -12,6 +12,7 @@ class Channel extends Component {
   componentDidMount() {
     let channelName = this.props.match.params.channelName;
     this.props.setChannel(channelName);
+    this.props.setMessages([]);
     changeChannel(channelName);
   }
 

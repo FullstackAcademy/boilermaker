@@ -145,3 +145,12 @@ svg {
   margin-left: 0;
   float: right;
 }
+
+.chat-transition-appear {
+  opacity: 0.01;
+}
+
+.chat-transition-appear.chat-transition-appear-active {
+  opacity: 1;
+  transition: opacity .75s ease-in;
+}
