@@ -18840,20 +18840,30 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Timer = function (_Component) {
   _inherits(Timer, _Component);
 
-  function Timer() {
+  function Timer(props) {
     _classCallCheck(this, Timer);
 
-    return _possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).apply(this, arguments));
+    //this.state = props;
+    var _this = _possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this, props));
+
+    _this.state = {
+      currTime: 27000,
+      totalTime: 30000
+    };
+
+    _this.timerCreator = _this.timerCreator.bind(_this);
+    return _this;
   }
 
   _createClass(Timer, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      //var { currTime, totalTime } = this.props;
-      console.log(this.props);
-      var currTime = 20000,
-          totalTime = -30000;
-      var bar = new _progressbar2.default.SemiCircle(document.getElementById('progressbar'), {
+    key: 'timerCreator',
+    value: function timerCreator(flip) {
+      var _state = this.state,
+          currTime = _state.currTime,
+          totalTime = _state.totalTime;
+
+      $('#progressbar').empty();
+      this.bar = new _progressbar2.default.SemiCircle($('#progressbar')[0], {
         // Set default step function for all animate calls
         strokeWidth: 6,
         trailColor: '#eee',
@@ -18874,13 +18884,44 @@ var Timer = function (_Component) {
           bar.text.style.color = state.color;
         }
       });
-      var text = bar.text;
+      if (flip) $('.progressbar-text').toggleClass('flip');
+      var text = this.bar.text;
       text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
       text.style.fontSize = '2rem';
       text.style.top = '30%';
       text.style.marginTop = '50px';
-      bar.set(currTime / totalTime);
-      bar.animate(1.0); // Number from 0.0 to 1.0
+      this.bar.set(currTime / totalTime);
+      this.bar.animate(1.0); // Number from 0.0 to 1.0
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var _state2 = this.state,
+          currTime = _state2.currTime,
+          totalTime = _state2.totalTime;
+
+      this.timerCreator(false);
+      setTimeout(function () {
+        $('#progressbar').toggleClass('flip');
+        $('.progressbar-text').toggleClass('flip');
+        var count = 5;
+        var countDown = function countDown() {
+          if (count === 0) window.clearInterval(leadIn);
+          _this2.bar.setText(count);
+          count--;
+        };
+        var leadIn = setInterval(countDown, 1000);
+
+        setTimeout(function () {
+          _this2.setState({
+            currTime: 0,
+            totalTime: 30000
+          });
+          _this2.timerCreator(true);
+        }, 6000);
+      }, totalTime - currTime);
     }
   }, {
     key: 'render',

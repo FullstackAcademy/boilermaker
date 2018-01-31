@@ -75,3 +75,13 @@ svg {
   display: flex;
   flex-direction: column;
 }
+
+/************************ TIMER ***********************/
+
+.flip {
+  transform: scale(-1, 1);
+}
+
+.progressbar-text.flip{
+  transform: translate(-50%, 50%) scale(-1,1)!important;
+}
