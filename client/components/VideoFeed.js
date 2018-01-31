@@ -1,9 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import socket from '../socket';
-
 import { Button, Panel } from 'react-bootstrap';
-//import { newMessage } from '../store';
+
+import socket from '../socket';
 
 const VideoFeed = props => {
   const { connection, channel } = props;
@@ -29,7 +27,7 @@ const VideoFeed = props => {
     <div>
       <Button onClick={startSession}>
         Start Video Chat
-            </Button>
+      </Button>
     </div>
   )
 }

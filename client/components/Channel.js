@@ -1,30 +1,29 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Chat from './chat';
 import { changeChannel, enqueue } from '../socket';
-import { setChannel, setMessages, setRtcConnection } from '../store';
 import { Button, Panel } from 'react-bootstrap';
-import VideoFeed from './VideoFeed';
-import Timer from './Timer';
+
+import { setMessages, setRtcConnection } from '../store';
 import rtcConnection from '../store/rtcConnection';
-//import { newMessage } from '../store';
+import Timer from './Timer';
+import VideoFeed from './VideoFeed';
+import Chat from './chat';
 
 class Channel extends Component {
   componentDidMount() {
-    let channelName = this.props.match.params.channelName;
+    let channelName = this.props.currentChannel;
     this.props.setMessages(['- Joining ' + channelName + ' -']);
-    this.props.setChannel(channelName);
     changeChannel(channelName);
     //rtcConnection.connect(channelName);
   }
 
   render() {
-    const { currChannel, rtcConnection } = this.props;
+    const { currentChannel, rtcConnection } = this.props;
     return (
       <div>
         <div id='videos-container'></div>
-        <h1>{currChannel.name}</h1>
+        <h1>{currentChannel}</h1>
         <Timer />
         <Chat />
         <div>
@@ -35,29 +34,20 @@ class Channel extends Component {
     )
   }
 }
-let refresh = false;
-const mapState = (state) => {
-  const { currChannel } = state;
+
+const mapState = (state, ownProps) => {
+  const currentChannel = ownProps.match.params.channelName;
   return {
-    currChannel,
-    refresh: refresh,
+    currentChannel
   }
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
-    setChannel(channelId) {
-      dispatch(setChannel(channelId));
-    },
     setMessages(messages) {
       dispatch(setMessages(messages));
     }
   }
 }
 
-
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Channel));
-
-export const refreshMe = function () { refresh != refresh }
