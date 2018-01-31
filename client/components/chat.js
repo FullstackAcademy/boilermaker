@@ -5,7 +5,7 @@ import { Button, Panel, Grid, Row, Col } from 'react-bootstrap';
 
 class Chat extends Component {
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     let chat = document.getElementById('chat-body')
     chat.scrollTop = chat.scrollHeight - 320;
   }

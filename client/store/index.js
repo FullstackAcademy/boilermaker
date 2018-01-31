@@ -6,12 +6,14 @@ import me from './me';
 import messages from './messages';
 import channels from './channels';
 import inactiveUser from './inactiveUser';
+import timer from './timer';
 
 const reducer = combineReducers({
   me,
   messages,
   channels,
-  inactiveUser
+  inactiveUser,
+  timer
 });
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -26,3 +28,4 @@ export * from './me';
 export * from './messages';
 export * from './channels';
 export * from './inactiveUser';
+export * from './timer';
