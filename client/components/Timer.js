@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ProgressBar from 'progressbar.js';
 
 class Timer extends Component {
-  componentDidMount() {
+
+  componentDidMount () {
+    //var { currTime, totalTime } = this.props;
+    console.log(this.props)
+    var currTime = 20000, totalTime = -30000;
     var bar = new ProgressBar.SemiCircle(document.getElementById('progressbar'), {
       // Set default step function for all animate calls
       strokeWidth: 6,
       trailColor: '#eee',
       trailWidth: 1,
-      duration: 30000,
+      duration: totalTime - currTime,
       svgStyle: null,
       text: {
         value: '',
@@ -19,8 +24,8 @@ class Timer extends Component {
       to: { color: '#ff0000' },
       step: (state, bar) => {
         bar.path.setAttribute('stroke', state.color);
-        var value = Math.floor((bar.value() * 30));
-        bar.setText(30 - value);
+        var value = Math.floor((bar.value() * totalTime/1000));
+        bar.setText(totalTime/1000 - value);
         bar.text.style.color = state.color;
       }
     });
@@ -29,6 +34,7 @@ class Timer extends Component {
     text.style.fontSize = '2rem';
     text.style.top = '30%';
     text.style.marginTop = '50px';
+    bar.set(currTime / totalTime);
     bar.animate(1.0);  // Number from 0.0 to 1.0
   }
 
@@ -39,4 +45,11 @@ class Timer extends Component {
   }
 }
 
-export default Timer;
+const mapState = (state) => {
+  return {
+    currTime: state.timer.currTime,
+    totalTime: state.timer.totalTime
+  }
+}
+
+export default connect(mapState)(Timer);

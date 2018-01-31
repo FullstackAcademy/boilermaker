@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Panel } from 'react-bootstrap';
 
-import rtcConnection from '../store/rtcConnection';
+import rtcConnection from '../rtcConnection';
 import { setMessages } from '../store';
 import { changeChannel, enqueue } from '../socket';
 
