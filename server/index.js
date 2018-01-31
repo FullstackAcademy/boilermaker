@@ -6,10 +6,11 @@ const compression = require('compression')
 const session = require('express-session')
 const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
-const db = require('./db')
-const sessionStore = new SequelizeStore({ db })
-const PORT = process.env.PORT || 8080
-const app = express()
+const db = require('./db');
+const sessionStore = new SequelizeStore({ db });
+const windowsMode = false;
+const PORT = process.env.PORT || windowsMode ? 443 : 8080;
+const app = express();
 const socketio = require('socket.io')
 const https = require('https');
 const http = require('http');
@@ -23,7 +24,7 @@ const options = {
 module.exports = app;
 let server;
 
-if(0 && !process.env.HEROKU)server = https.createServer(options,app);
+if(windowsMode && !process.env.HEROKU)server = https.createServer(options,app);
 else server = http.createServer(app);
 
 if (process.env.NODE_ENV !== 'production') require('../secrets')

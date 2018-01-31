@@ -2,7 +2,7 @@ let roomList;
 module.exports = (io, socket) => {
   const  rl = roomList; 
   if(!rl){
-    roomList =require('../db/models/room')(io);
+    roomList =require('../room')(io);
   }
   console.log(`A socket connection to the server has been made: ${socket.id}`);
 

@@ -26,33 +26,38 @@ module.exports = function(io){
   
   Room.prototype = {
     addViewer(viewer) {
+      this.viewers.push(viewer);
       viewer.emit('setUserId',viewer.id);
       viewer.emit('setBroadcasters',this.getBroadcastersId());
     },
     removeViewer(viewer) {
-      if(this.viewers.indexOf(viewer)<0)return;
-      this.viewers.splice(this.viewers.indexOf(viewer),1);
       this.removeFromQueue(viewer);
       this.stopBroadcasting(viewer);
+      if(this.viewers.indexOf(viewer)<0)return;
+      console.log('removing viewer');
+      this.viewers.splice(this.viewers.indexOf(viewer),1);
     },
     startBroadcasting(broadcaster){
       this.broadcasters.push(broadcaster);
+      this.removeFromQueue(broadcaster);
+      broadcaster.emit('userStartedBroadcasting');
+      io.to(this.name).emit('broadcasterStarted',broadcaster.id);
     },
     stopBroadcasting(broadcaster) {
       if(this.broadcasters.indexOf(broadcaster)<0)return;
-      io.to(this.name).emit('broadcastFinished',broadcaster)
+      console.log('stopping broadcast');
+      io.to(this.name).emit('broadcasterFinished',broadcaster.id)
       this.broadcasters.splice(this.broadcasters.indexOf(broadcaster),1);
     },
     addToQueue(queuer){
       this.queue.push(queuer);
       if(this.queue.length<3 || 1){
         this.startBroadcasting(queuer);
-        queuer.emit('userStartedBroadcasting');
-        io.to(this.name).emit('broadcasterStarted',queuer.id);
       }
     },
     removeFromQueue(queuer) {
       if(this.queue.indexOf(queuer)<0)return;
+      console.log('removed from queue');
       this.queue.splice(this.queue.indexOf(queuer),1);
     },
     getBroadcastersId(){
