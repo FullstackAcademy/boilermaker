@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
-import { createChannel } from '../store';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import { createChannel } from '../store';
 
 class CreateChannel extends Component {
     constructor(props, context) {

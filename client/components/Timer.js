@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import ProgressBar from 'progressbar.js';
 
 class Timer extends Component {
-  componentDidMount () {
+  componentDidMount() {
     var bar = new ProgressBar.SemiCircle(document.getElementById('progressbar'), {
       // Set default step function for all animate calls
       strokeWidth: 6,
@@ -32,8 +31,8 @@ class Timer extends Component {
     text.style.marginTop = '50px';
     bar.animate(1.0);  // Number from 0.0 to 1.0
   }
- 
-  render () {
+
+  render() {
     return (
       <div id="progressbar"> </div>
     )

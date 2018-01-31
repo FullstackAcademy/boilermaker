@@ -33,8 +33,9 @@ form div {
 /************************ NAVBAR ***********************/
 
 #nav-bar-logo.navbar-brand{
-  width: 10vw;
+  width: 12.5vw;
   height: auto;
+  margin: 0;
 }
 
 .navbar {
