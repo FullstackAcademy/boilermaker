@@ -7,7 +7,6 @@ import messages from './messages';
 import channels from './channels';
 import currChannel from './currChannel';
 import inactiveUser from './inactiveUser';
-//import rtcConnection, {refresh} from './rtcConnection';
 
 const reducer = combineReducers({
   me,
@@ -15,7 +14,6 @@ const reducer = combineReducers({
   channels,
   currChannel,
   inactiveUser
-  //rtcConnection,
 });
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -31,4 +29,3 @@ export * from './messages';
 export * from './channels';
 export * from './currChannel';
 export * from './inactiveUser';
-//export * from './rtcConnection';
