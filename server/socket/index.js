@@ -22,9 +22,11 @@ module.exports = (io, socket) => {
   socket.on('enqueue', ()=>{
     socket.room.addToQueue(socket);
   });
-  socket.on('message', message => {
+  socket.on('message', messageObj => {
     let room = io;
+    let { username, message } = messageObj;
+    if (!username) username = 'Anonymous';
     if (socket.room.name) room = io.to(socket.room.name);
-    room.emit('message', `[${new Date().toLocaleTimeString('en-US')}][ Username ] Says : ${message}`)
+    room.emit('message', `[${new Date().toLocaleTimeString('en-US')}] ${username}: ${message}`)
   });
 }

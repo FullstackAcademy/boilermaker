@@ -39,7 +39,10 @@ class Timer extends Component {
         bar.text.style.color = state.color;
       }
     });
-    if (flip) $('.progressbar-text').toggleClass('flip');
+    if (flip) {
+      $('#progressbar').toggleClass('flip');
+      $('.progressbar-text').toggleClass('flip');
+    }
     let text = this.bar.text;
     text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
     text.style.fontSize = '2rem';
@@ -53,8 +56,6 @@ class Timer extends Component {
     let { currTime, totalTime } = this.state;
     this.timerCreator(false);
     setTimeout(() => {
-      $('#progressbar').toggleClass('flip');
-      $('.progressbar-text').toggleClass('flip');
       let count = 5;
       const countDown = () => {
         if (count === 0) window.clearInterval(leadIn);
