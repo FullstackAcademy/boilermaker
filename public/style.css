@@ -74,3 +74,29 @@ svg {
   display: flex;
   flex-direction: column;
 }
+
+.conversation-container > .header {
+  background-color: #ff9001;
+}
+
+.widget-container {
+  margin: 0;
+  max-width: 250px;
+}
+
+.launcher {
+  position: absolute;
+  z-index: -1;
+}
+
+.chat {
+  width: 250px;
+  height: 400px;
+  position: relative;
+  overflow-y: auto;
+}
+
+#send-message {
+  position: absolute;
+  bottom: 0;
+}

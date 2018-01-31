@@ -26,7 +26,7 @@ class Channel extends Component {
         <div id='videos-container'></div>
         <h1>{currChannel.name}</h1>
         <Timer />
-        <Chat />
+        <Chat channel={currChannel.name} />
         <div>
           {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
           <Button onClick={enqueue}>Add Yourself To Queue</Button>

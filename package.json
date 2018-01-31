@@ -55,6 +55,7 @@
     "prop-types": "^15.5.8",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
+    "react-chat-widget": "^2.1.2",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.2",
     "react-router-dom": "^4.1.1",
