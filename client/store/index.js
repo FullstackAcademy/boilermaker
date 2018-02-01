@@ -5,13 +5,15 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import me from './me';
 import messages from './messages';
 import channels from './channels';
-import users from './users';
+import users from './users'
+import timer from './timer';
 
 const reducer = combineReducers({
   me,
   messages,
   channels,
-  users
+  users,
+  timer
 });
 
 const middleware = composeWithDevTools(applyMiddleware(
