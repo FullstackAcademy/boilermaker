@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { socket } from '../socket';
 import { Button, Panel, Grid, Row, Col } from 'react-bootstrap';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Chat extends Component {
 
@@ -23,11 +24,17 @@ class Chat extends Component {
     const { messages, channel } = this.props;
     let name = '';
 
-    channel.length > 12 ? name = channel.slice(0, 13) + '...' : name = channel
+    channel.length > 12 ? name = channel.slice(0, 12) + '...' : name = channel
 
     return (
+      <ReactCSSTransitionGroup
+        transitionName="transition"
+        transitionAppear={true}
+        transitionAppearTimeout={1000}
+        transitionEnter={false}
+        transitionLeave={false}>
       <Grid>
-        <Col xs={4} md={3} id='main-chat-room' className='chat'>
+        <Col xs={4} md={3} id='main-chat-room' className="chat">
           <div xs={4} md={3} id="chat-room-header">{name}</div>
           <div id="chat-body">
             {messages.map((message, i) => {
@@ -63,6 +70,7 @@ class Chat extends Component {
           </form>
         </Col>
       </Grid>
+      </ReactCSSTransitionGroup>
     )
   }
 }

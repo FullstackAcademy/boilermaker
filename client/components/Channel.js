@@ -13,6 +13,7 @@ import Timer from './Timer';
 class Channel extends Component {
   componentDidMount() {
     let channelName = this.props.match.params.channelName;
+    this.props.setMessages([]);
     changeChannel(channelName);
   }
 
