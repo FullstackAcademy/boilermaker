@@ -20157,12 +20157,43 @@ Emitter(Socket.prototype);
 Socket.prototype.subEvents = function () {
   if (this.subs) return;
 
+<<<<<<< HEAD
   var io = this.io;
   this.subs = [
     on(io, 'open', bind(this, 'onopen')),
     on(io, 'packet', bind(this, 'onpacket')),
     on(io, 'close', bind(this, 'onclose'))
   ];
+=======
+  return _react2.default.createElement(
+    _reactAddonsCssTransitionGroup2.default,
+    {
+      transitionName: 'transition',
+      transitionAppear: true,
+      transitionAppearTimeout: 750,
+      transitionEnter: false,
+      transitionLeave: false },
+    _react2.default.createElement(
+      _reactBootstrap.ListGroup,
+      null,
+      channels.filteredChannelList.map(function (channel) {
+        return _react2.default.createElement(
+          _reactBootstrap.ListGroupItem,
+          { key: channel.id, className: 'channel-list-item animated flipInX' },
+          _react2.default.createElement(
+            _reactRouterDom.NavLink,
+            { to: '/channels/' + channel.name },
+            _react2.default.createElement(
+              'h3',
+              null,
+              channel.name
+            )
+          )
+        );
+      })
+    )
+  );
+>>>>>>> master
 };
 
 /**
@@ -20606,6 +20637,7 @@ function decode(str) {
   return decoded;
 }
 
+<<<<<<< HEAD
 /**
  * Yeast: A tiny growing id generator.
  *
@@ -20614,6 +20646,42 @@ function decode(str) {
  */
 function yeast() {
   var now = encode(+new Date());
+=======
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('div', { id: 'videos-container' }),
+        _react2.default.createElement(
+          'h1',
+          { className: 'animated slideInLeft' },
+          currentChannel
+        ),
+        _react2.default.createElement(_Timer2.default, null),
+        _react2.default.createElement(_Chat2.default, { channel: currentChannel }),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            _reactBootstrap.Button,
+            { onClick: _socket.enqueue },
+            'Add Yourself To Queue'
+          )
+        ),
+        this.state.togglePrompt && _react2.default.createElement(_Prompts2.default, { displayPrompt: this.displayPrompt }),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            _reactBootstrap.Button,
+            { className: 'open-button', bsSize: "large", onClick: this.displayPrompt },
+            '+'
+          )
+        ),
+        _react2.default.createElement(_Voting2.default, { changeVote1: this.changeVote1, changeVote2: this.changeVote2 })
+      );
+    }
+  }]);
+>>>>>>> master
 
   if (now !== prev) return seed = 0, prev = now;
   return now +'.'+ encode(seed++);
@@ -20852,9 +20920,48 @@ axios.Cancel = __webpack_require__(157);
 axios.CancelToken = __webpack_require__(280);
 axios.isCancel = __webpack_require__(158);
 
+<<<<<<< HEAD
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
+=======
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'h2',
+      { className: 'home-category-list animated fadeIn' },
+      _react2.default.createElement(
+        _reactBootstrap.Label,
+        { bsStyle: 'warning' },
+        'Category List'
+      )
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'home-category-list animated slideInLeft' },
+      _react2.default.createElement(
+        'ul',
+        null,
+        channels.categoryList.map(function (categoryName) {
+          return _react2.default.createElement(
+            'li',
+            { key: categoryName },
+            _react2.default.createElement(
+              _reactRouterDom.NavLink,
+              { to: '/categories/' + categoryName + '/channels' },
+              _react2.default.createElement(
+                'h3',
+                null,
+                categoryName
+              )
+            )
+          );
+        })
+      )
+    )
+  );
+>>>>>>> master
 };
 axios.spread = __webpack_require__(295);
 
@@ -20910,6 +21017,7 @@ CancelToken.prototype.throwIfRequested = function throwIfRequested() {
   }
 };
 
+<<<<<<< HEAD
 /**
  * Returns an object that contains a new `CancelToken` and a function that, when called,
  * cancels the `CancelToken`.
@@ -20923,6 +21031,30 @@ CancelToken.source = function source() {
     token: token,
     cancel: cancel
   };
+=======
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      _reactBootstrap.Jumbotron,
+      null,
+      _react2.default.createElement(
+        'div',
+        { id: 'welcome-text', className: 'animated zoomIn' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Welcome to Bickr!'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Explore our current debate categories below or create your very own!'
+        )
+      )
+    )
+  );
+>>>>>>> master
 };
 
 module.exports = CancelToken;
@@ -21198,7 +21330,15 @@ module.exports = function enhanceError(error, config, code, response) {
 "use strict";
 
 
+<<<<<<< HEAD
 var createError = __webpack_require__(159);
+=======
+    _this.state = {
+      currTime: props.currTime,
+      totalTime: props.totalTime,
+      shake: false
+    };
+>>>>>>> master
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -21222,15 +21362,105 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
+<<<<<<< HEAD
 
 /***/ }),
 /* 286 */
 /***/ (function(module, exports, __webpack_require__) {
+=======
+  _createClass(Timer, [{
+    key: 'timerCreator',
+    value: function timerCreator(flip) {
+      var _this2 = this;
+
+      var _state = this.state,
+          currTime = _state.currTime,
+          totalTime = _state.totalTime;
+
+      $('#progressbar').empty();
+      this.bar = new _progressbar2.default.SemiCircle($('#progressbar')[0], {
+        // Set default step function for all animate calls
+        strokeWidth: 6,
+        trailColor: '#eee',
+        trailWidth: 1,
+        duration: totalTime - currTime,
+        svgStyle: null,
+        text: {
+          value: '',
+          alignToBottom: false
+        },
+        color: '#f08f36',
+        from: { color: '#18db18' },
+        to: { color: '#ff0000' },
+        step: function step(state, bar) {
+          bar.path.setAttribute('stroke', state.color);
+          var value = Math.floor(bar.value() * totalTime / 1000);
+          if (value === 25) {
+            _this2.setState({ shake: true });
+          } else if (value === 30) {
+            _this2.setState({ shake: false });
+          }
+          bar.setText(totalTime / 1000 - value);
+          bar.text.style.color = state.color;
+        }
+      });
+      if (flip) {
+        $('#progressbar').toggleClass('flip');
+        $('.progressbar-text').toggleClass('flip');
+      }
+      var text = this.bar.text;
+      text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+      text.style.fontSize = '2rem';
+      text.style.top = '30%';
+      text.style.marginTop = '50px';
+      this.bar.set(currTime / totalTime);
+      this.bar.animate(1.0); // Number from 0.0 to 1.0
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this3 = this;
+>>>>>>> master
 
 "use strict";
 
+<<<<<<< HEAD
 
 var utils = __webpack_require__(21);
+=======
+      this.timerCreator(false);
+      setTimeout(function () {
+        var count = 5;
+        var countDown = function countDown() {
+          if (count === 0) window.clearInterval(leadIn);
+          _this3.bar.setText(count);
+          count--;
+        };
+        var leadIn = setInterval(countDown, 1000);
+
+        setTimeout(function () {
+          _this3.setState({
+            currTime: 0,
+            totalTime: 30000
+          });
+          _this3.timerCreator(true);
+        }, 6000);
+      }, totalTime - currTime);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var animate = '';
+      this.state.shake ? animate = 'animated infinite shake' : animate = '';
+
+      return _react2.default.createElement(
+        'div',
+        { id: 'progressbar', className: animate },
+        ' '
+      );
+    }
+  }]);
+>>>>>>> master
 
 /**
  * Transform the data for a request or a response
@@ -21669,6 +21899,7 @@ var ChannelList = function ChannelList(props) {
   var channels = props.channels;
 
   return _react2.default.createElement(
+<<<<<<< HEAD
     _reactAddonsCssTransitionGroup2.default,
     {
       transitionName: 'transition',
@@ -21676,6 +21907,10 @@ var ChannelList = function ChannelList(props) {
       transitionAppearTimeout: 750,
       transitionEnter: false,
       transitionLeave: false },
+=======
+    'div',
+    { className: 'animated slideInUp' },
+>>>>>>> master
     _react2.default.createElement(
       _reactBootstrap.ListGroup,
       null,
