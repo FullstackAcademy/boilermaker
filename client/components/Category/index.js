@@ -3,19 +3,19 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { PageHeader } from 'react-bootstrap'
 
-import { fetchFilteredChannels } from '../../store'
+import { fetchCategoryChannels } from '../../store'
 import ChannelList from './ChannelList';
 
 class Category extends Component {
   componentDidMount() {
-    this.props.getFilteredChannels(this.props.currCategory)
+    this.props.getFilteredChannels(this.props.currentCategory.id)
   }
   render() {
-    const { channels, currCategory } = this.props;
+    const { channels, currentCategory } = this.props;
     return (
       <div>
         <PageHeader>
-          {currCategory} <small>Channel List</small>
+          {currentCategory.name} <small>Channel List</small>
         </PageHeader>
         <ChannelList channels={channels} />
       </div>
@@ -24,17 +24,17 @@ class Category extends Component {
 }
 
 const mapState = (state, ownProps) => {
-  const currCategory = ownProps.match.params.categoryName;
+  const currentCategory = state.categories.find(category => category.name === ownProps.match.params.categoryName);
   return {
     channels: state.channels,
-    currCategory
+    currentCategory
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
     getFilteredChannels(categoryName) {
-      dispatch(fetchFilteredChannels(categoryName))
+      dispatch(fetchCategoryChannels(categoryName))
     }
   }
 }

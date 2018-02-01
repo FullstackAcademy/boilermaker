@@ -1,34 +1,33 @@
 import React from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Label } from 'react-bootstrap';
+import { Label, PageHeader } from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const CategoryList = (props) => {
-  const { channels } = props;
+  const { categories } = props;
   return (
     <div>
-    <h2 className="home-category-list animated fadeIn">
-      <Label bsStyle="warning">
-        Category List
+      <h1 className="home-category-list animated fadeIn">
+        <Label bsStyle="warning">
+          Category List
     </Label>
-    </h2>
-    <div className="home-category-list animated slideInLeft">
-      <ul>
+      </h1>
+      <div className="home-category-list animated slideInLeft">
         {
-          channels.categoryList.map(categoryName => {
+          categories.map(category => {
             return (
-              <li key={categoryName}>
-                <NavLink to={`/categories/${categoryName}/channels`} >
-                  <h3>
-                    {categoryName}
-                  </h3>
-                </NavLink>
-              </li>
+              <NavLink to={`/categories/${category.name}/channels`} >
+                <div key={category.id} className="home-category-list-item">
+                  <h1>
+                    {category.name}
+                  </h1>
+                  <img src={`${category.imagePath}`} className="home-category-list-images" />
+                </div>
+              </NavLink>
             )
           })
         }
-      </ul>
-    </div>
+      </div>
     </div>
   )
 }

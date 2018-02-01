@@ -21,6 +21,18 @@ router.get('/', (req, res, next) => {
   }
 })
 
+router.get('/:categoryId', (req, res, next) => {
+  Channel.findAll({
+    where: {
+      categoryId: {
+        $eq: req.params.categoryId
+      }
+    }
+  })
+    .then(channels => res.json(channels))
+    .catch(next);
+})
+
 router.post('/',
   gatekeeperMiddleware.isLoggedIn,
   (req, res, next) => {
