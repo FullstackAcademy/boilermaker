@@ -27,4 +27,10 @@ module.exports = (io, socket) => {
     if (socket.room.name) room = io.to(socket.room.name);
     room.emit('message', `[${new Date().toLocaleTimeString('en-US')}][ Username ] Says : ${message}`)
   });
+  socket.on('readyToBroadcast', () => {
+    if('broadcasterCount' in socket.room.state)socket.room.state.broadcasterCount++;
+  });
+  socket.on('getRoomState', () => {
+    socket.room.sendRoomState(socket);
+  });
 }
