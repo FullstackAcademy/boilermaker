@@ -7,7 +7,6 @@ const defaultState = {
 };
 
 const GET_USERS = 'GET_USERS';
-const GET_FILTERED_USERS = 'GET_FILTERED_USERS';
 const GET_SINGLE_USER = 'GET_SINGLE_USER';
 
 const getUsers = users => ({ type: GET_USERS, users })
@@ -18,8 +17,6 @@ export const fetchUsers = () =>
     axios.get('/api/users')
       .then(res => dispatch(getUsers(res.data)))
       .catch(console.error)
-
-export const fetchFilteredUsers = searchTerm => ({ type: GET_FILTERED_USERS, searchTerm });
 
 export const fetchSingleUser = id =>
   dispatch =>
@@ -33,11 +30,6 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         userList: action.users
-      }
-    case GET_FILTERED_USERS:
-      return {
-        ...state,
-        filteredUserList: state.userList.filter(user => user.userName.toLowerCase().includes(action.searchTerm.toLowerCase()))
       }
     case GET_SINGLE_USER:
       return {

@@ -9,12 +9,17 @@ const defaultState = {
 const GET_CHANNELS = 'GET_CHANNELS';
 const CREATE_CHANNEL = 'CREATE_CHANNEL';
 const GET_FILTERED_CHANNELS = 'GET_FILTERED_CHANNELS';
-const SET_CURRENT_CHANNEL = 'SET_CURRENT_CHANNEL';
 
 const getChannels = channels => ({ type: GET_CHANNELS, channels });
 const makeChannel = channel => ({ type: CREATE_CHANNEL, channel });
 
 /******************** DISPATCH FUNCTIONS ********************/
+
+export const searchChannels = () => {
+  return axios.get('/api/channels')
+    .then(res => this.setState({ options: res.data }))
+      .catch(err => console.log(err));
+}
 
 export const fetchFilteredChannels = categoryName => (
   { type: GET_FILTERED_CHANNELS, categoryName }

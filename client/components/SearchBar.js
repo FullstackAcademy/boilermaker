@@ -4,24 +4,18 @@ import { withRouter, NavLink } from 'react-router-dom';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap'
 import { Typeahead } from 'react-bootstrap-typeahead';
 
-class SearchBar extends Component {
-  constructor() {
-    super();
-    this.state = {
-      userList: {},
-      channelList: {}
-    };
-  }
-  render() {
-    return (
-      <div>
-        <Typeahead
-        options={[]}
-        minLength={3}
+const SearchBar = (props) => {
+  const { options } = props;
+  console.log(options);
+  return (
+    <div>
+      <Typeahead
+        options={options}
+        minLength={0}
         placeholder="Search..."
-        />
-      </div>
-    )
-  }
+        // onSearch={handleSearch}
+      />
+    </div>
+  )
 }
-export default SearchBar
+export default SearchBar;

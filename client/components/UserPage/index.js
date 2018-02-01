@@ -9,6 +9,7 @@ import Score from './Score';
 
 class UserPage extends Component {
   componentDidMount() {
+    console.log(this.props.user);
     this.props.loadSingleUser(Number(this.props.match.params.userId))
   }
 
