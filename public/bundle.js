@@ -18158,7 +18158,7 @@ var ChannelList = function ChannelList(props) {
       channels.filteredChannelList.map(function (channel) {
         return _react2.default.createElement(
           _reactBootstrap.ListGroupItem,
-          { key: channel.id },
+          { key: channel.id, className: 'channel-list-item animated flipInX' },
           _react2.default.createElement(
             _reactRouterDom.NavLink,
             { to: '/channels/' + channel.name },
@@ -18379,7 +18379,7 @@ var Channel = function (_Component) {
         _react2.default.createElement('div', { id: 'videos-container' }),
         _react2.default.createElement(
           'h1',
-          null,
+          { className: 'animated slideInLeft' },
           currentChannel
         ),
         _react2.default.createElement(_Timer2.default, null),
@@ -18793,16 +18793,11 @@ var CategoryList = function CategoryList(props) {
   var channels = props.channels;
 
   return _react2.default.createElement(
-    _reactAddonsCssTransitionGroup2.default,
-    {
-      transitionName: 'transition',
-      transitionAppear: true,
-      transitionAppearTimeout: 750,
-      transitionEnter: false,
-      transitionLeave: false },
+    'div',
+    null,
     _react2.default.createElement(
       'h2',
-      null,
+      { className: 'home-category-list animated fadeIn' },
       _react2.default.createElement(
         _reactBootstrap.Label,
         { bsStyle: 'warning' },
@@ -18810,23 +18805,27 @@ var CategoryList = function CategoryList(props) {
       )
     ),
     _react2.default.createElement(
-      'ul',
-      null,
-      channels.categoryList.map(function (categoryName) {
-        return _react2.default.createElement(
-          'li',
-          { key: categoryName },
-          _react2.default.createElement(
-            _reactRouterDom.NavLink,
-            { to: '/categories/' + categoryName + '/channels' },
+      'div',
+      { className: 'home-category-list animated slideInLeft' },
+      _react2.default.createElement(
+        'ul',
+        null,
+        channels.categoryList.map(function (categoryName) {
+          return _react2.default.createElement(
+            'li',
+            { key: categoryName },
             _react2.default.createElement(
-              'h3',
-              null,
-              categoryName
+              _reactRouterDom.NavLink,
+              { to: '/categories/' + categoryName + '/channels' },
+              _react2.default.createElement(
+                'h3',
+                null,
+                categoryName
+              )
             )
-          )
-        );
-      })
+          );
+        })
+      )
     )
   );
 };
@@ -18864,14 +18863,18 @@ var Welcome = function Welcome(props) {
       _reactBootstrap.Jumbotron,
       null,
       _react2.default.createElement(
-        'h1',
-        null,
-        'Welcome to Bickr!'
-      ),
-      _react2.default.createElement(
-        'p',
-        null,
-        'Explore our current debate categories below or create your very own!'
+        'div',
+        { id: 'welcome-text', className: 'animated zoomIn' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Welcome to Bickr!'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Explore our current debate categories below or create your very own!'
+        )
       )
     )
   );
@@ -19203,7 +19206,11 @@ var Timer = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this, props));
 
-    _this.state = props;
+    _this.state = {
+      currTime: props.currTime,
+      totalTime: props.totalTime,
+      shake: false
+    };
 
     _this.timerCreator = _this.timerCreator.bind(_this);
     return _this;
@@ -19212,6 +19219,8 @@ var Timer = function (_Component) {
   _createClass(Timer, [{
     key: 'timerCreator',
     value: function timerCreator(flip) {
+      var _this2 = this;
+
       var _state = this.state,
           currTime = _state.currTime,
           totalTime = _state.totalTime;
@@ -19234,6 +19243,11 @@ var Timer = function (_Component) {
         step: function step(state, bar) {
           bar.path.setAttribute('stroke', state.color);
           var value = Math.floor(bar.value() * totalTime / 1000);
+          if (value === 25) {
+            _this2.setState({ shake: true });
+          } else if (value === 30) {
+            _this2.setState({ shake: false });
+          }
           bar.setText(totalTime / 1000 - value);
           bar.text.style.color = state.color;
         }
@@ -19253,7 +19267,7 @@ var Timer = function (_Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var _this2 = this;
+      var _this3 = this;
 
       var _state2 = this.state,
           currTime = _state2.currTime,
@@ -19264,26 +19278,29 @@ var Timer = function (_Component) {
         var count = 5;
         var countDown = function countDown() {
           if (count === 0) window.clearInterval(leadIn);
-          _this2.bar.setText(count);
+          _this3.bar.setText(count);
           count--;
         };
         var leadIn = setInterval(countDown, 1000);
 
         setTimeout(function () {
-          _this2.setState({
+          _this3.setState({
             currTime: 0,
             totalTime: 30000
           });
-          _this2.timerCreator(true);
+          _this3.timerCreator(true);
         }, 6000);
       }, totalTime - currTime);
     }
   }, {
     key: 'render',
     value: function render() {
+      var animate = '';
+      this.state.shake ? animate = 'animated infinite shake' : animate = '';
+
       return _react2.default.createElement(
         'div',
-        { id: 'progressbar' },
+        { id: 'progressbar', className: animate },
         ' '
       );
     }
@@ -19618,7 +19635,7 @@ var Voting = function Voting(props) {
 
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'animated slideInUp' },
     _react2.default.createElement(
       'div',
       null,

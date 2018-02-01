@@ -6,17 +6,13 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 const CategoryList = (props) => {
   const { channels } = props;
   return (
-    <ReactCSSTransitionGroup
-      transitionName="transition"
-      transitionAppear={true}
-      transitionAppearTimeout={750}
-      transitionEnter={false}
-      transitionLeave={false}>
-      <h2>
-        <Label bsStyle="warning">
-          Category List
-        </Label>
-      </h2>
+    <div>
+    <h2 className="home-category-list animated fadeIn">
+      <Label bsStyle="warning">
+        Category List
+    </Label>
+    </h2>
+    <div className="home-category-list animated slideInLeft">
       <ul>
         {
           channels.categoryList.map(categoryName => {
@@ -32,7 +28,8 @@ const CategoryList = (props) => {
           })
         }
       </ul>
-    </ReactCSSTransitionGroup>
+    </div>
+    </div>
   )
 }
 
