@@ -1,68 +1,87 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
-import {logout} from '../store'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, NavLink } from 'react-router-dom';
+import axios from 'axios';
+import { logout, fetchSingleUser, fetchSearchChannels } from '../store';
+import { Navbar, Nav, NavItem, FormGroup } from 'react-bootstrap';
+import SearchBar from './SearchBar'
 
-/**
- * COMPONENT
- *  The Main component is our 'picture frame' - it displays the navbar and anything
- *  else common to our entire app. The 'picture' inside the frame is the space
- *  rendered out by the component's `children`.
- */
-const Main = (props) => {
-  const {children, handleClick, isLoggedIn} = props
+class Main extends Component {
 
-  return (
-    <div>
-      <h1>BOILERMAKER</h1>
-      <nav>
-        {
-          isLoggedIn
-            ? <div>
-              {/* The navbar will show these links after you log in */}
-              <Link to="/home">Home</Link>
-              <a href="#" onClick={handleClick}>Logout</a>
-            </div>
-            : <div>
-              {/* The navbar will show these links before you log in */}
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
-            </div>
-        }
-      </nav>
-      <hr />
-      {children}
-    </div>
-  )
-}
-
-/**
- * CONTAINER
- */
-const mapState = (state) => {
-  return {
-    isLoggedIn: !!state.user.id
+  render() {
+    const { children, isLoggedIn, channels, handleClick, handleSearch } = this.props
+    return (
+      <div>
+        <Navbar>
+          <Navbar.Brand>
+            <img src="/Bickr-logo.png" id="nav-bar-logo" />
+          </Navbar.Brand>
+          {
+            isLoggedIn ?
+              <Navbar.Collapse>
+                <Navbar.Text>
+                  <NavLink to="/">
+                    Home
+                </NavLink >
+                </Navbar.Text>
+                <Navbar.Text>
+                  <NavLink onClick={handleClick} to="/">
+                    Logout
+                </NavLink >
+                </Navbar.Text>
+              </Navbar.Collapse>
+              :
+              <Navbar.Collapse>
+                <Navbar.Text>
+                  <NavLink to="/">
+                    Home
+                </NavLink >
+                </Navbar.Text>
+                <Navbar.Text>
+                  <NavLink to="/login">
+                    Login
+                </NavLink >
+                </Navbar.Text>
+                <Navbar.Text>
+                  <NavLink to="/signup">
+                    Sign Up
+                </NavLink >
+                </Navbar.Text>
+                <Navbar.Form>
+                  <FormGroup>
+                    <SearchBar
+                      searchResults={channels.channelList}
+                      handleSearch={handleSearch}
+                    />
+                  </FormGroup>
+                </Navbar.Form>
+              </Navbar.Collapse>
+          }
+        </Navbar>
+        <hr />
+        {children}
+      </div >
+    )
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapState = (state, ownProps) => {
   return {
-    handleClick () {
+    isLoggedIn: !!state.me.id,
+    channels: state.channels
+  }
+}
+
+const mapDispatch = (dispatch, ownProps) => {
+  const history = ownProps.history;
+  return {
+    handleClick() {
       dispatch(logout())
+    },
+    handleSearch(query) {
+      dispatch(fetchSearchChannels(query))
     }
   }
 }
 
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Main))
-
-/**
- * PROP TYPES
- */
-Main.propTypes = {
-  children: PropTypes.object,
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
