@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const defaultState = {
   userList: [],
-  filteredUserList: [],
   singleUser: {}
 };
 

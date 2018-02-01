@@ -13,7 +13,7 @@ const reducer = combineReducers({
   messages,
   channels,
   users,
-  timer
+  timer,
 });
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -28,3 +28,4 @@ export * from './me';
 export * from './messages';
 export * from './channels';
 export * from './users';
+export * from './timer';

@@ -2,28 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import axios from 'axios';
-import { logout, fetchSingleUser, searchChannels } from '../store';
+import { logout, fetchSingleUser, fetchSearchChannels } from '../store';
 import { Navbar, Nav, NavItem, FormGroup } from 'react-bootstrap';
 import SearchBar from './SearchBar'
 
 class Main extends Component {
-  constructor() {
-    super();
-    this.state = {
-      options: []
-    }
-    this.loadChannels = this.loadChannels.bind(this);
-  }
-  componentDidMount() {
-    this.loadChannels();
-  }
 
-  loadChannels() {
-    return axios.get('/api/channels')
-      .then(res => this.setState({ options: res.data }))
-  }
   render() {
-    const { children, handleClick, isLoggedIn, channels } = this.props
+    const { children, isLoggedIn, channels, handleClick, handleSearch } = this.props
     return (
       <div>
         <Navbar>
@@ -62,9 +48,10 @@ class Main extends Component {
                 </NavLink >
                 </Navbar.Text>
                 <Navbar.Form>
-                  <FormGroup>
-                    <SearchBar options={this.state.options} />
-                  </FormGroup>
+                  <SearchBar
+                    searchResults={channels.channelList}
+                    handleSearch={handleSearch}
+                  />
                 </Navbar.Form>
               </Navbar.Collapse>
           }
@@ -76,12 +63,10 @@ class Main extends Component {
   }
 }
 
-
 const mapState = (state, ownProps) => {
   return {
     isLoggedIn: !!state.me.id,
-    channels: state.channels,
-    history: ownProps.history
+    channels: state.channels
   }
 }
 
@@ -91,11 +76,8 @@ const mapDispatch = (dispatch, ownProps) => {
     handleClick() {
       dispatch(logout())
     },
-    handleSubmit(evt, filteredUsers, filteredChannels) {
-      evt.preventDefault();
-      const userId = filteredUsers.find(user => user.userName === evt.target.search.value).id
-      dispatch(fetchSingleUser(userId));
-      history.push(`/users/${userId}`)
+    handleSearch(query) {
+      dispatch(fetchSearchChannels(query))
     }
   }
 }
