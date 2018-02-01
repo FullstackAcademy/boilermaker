@@ -1,5 +1,7 @@
-const router = require('express').Router()
-const { User } = require('../db/models')
+const router = require('express').Router();
+const { User } = require('../db/models');
+const gatekeeper = require('../../utils/gatekeeper');
+
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -19,11 +21,22 @@ router.get('/:userId', (req, res, next) => {
     .catch(next);
 })
 
-router.put('/:userId', (req, res, next) => {
+router.put('/:userId',
+  gatekeeper.isSelf,
+  (req, res, next) => {
   User.findById(Number(req.params.userId))
     .then(user => {
       user.update(req.body)
     })
     .then(user => res.json(user))
     .catch(next)
+})
+
+router.delete('/:userId',
+  gatekeeper.isAdminOrSelf,
+  (req, res, next) => {
+    User.findById(Number(req.params.userId))
+      .then(user => user.destroy())
+      .then(() => res.sendStatus(204))
+      .catch(next)
 })

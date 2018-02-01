@@ -19470,6 +19470,10 @@ var _Score = __webpack_require__(246);
 
 var _Score2 = _interopRequireDefault(_Score);
 
+var _CreateChannel = __webpack_require__(238);
+
+var _CreateChannel2 = _interopRequireDefault(_CreateChannel);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19484,7 +19488,11 @@ var UserPage = function (_Component) {
   function UserPage() {
     _classCallCheck(this, UserPage);
 
-    return _possibleConstructorReturn(this, (UserPage.__proto__ || Object.getPrototypeOf(UserPage)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (UserPage.__proto__ || Object.getPrototypeOf(UserPage)).call(this));
+
+    _this.handleDelete = _this.handleDelete.bind(_this);
+    // this.handleEdit = this.handleEdit.bind(this);
+    return _this;
   }
 
   _createClass(UserPage, [{
@@ -19493,41 +19501,69 @@ var UserPage = function (_Component) {
       this.props.loadUser(Number(this.props.match.params.userId));
     }
   }, {
+    key: 'handleDelete',
+    value: function handleDelete(id) {
+      this.props.deleteUser(id);
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var user = this.props.user;
 
 
       return _react2.default.createElement(
         'div',
-        { className: 'user-page-header' },
-        _react2.default.createElement(_reactBootstrap.Image, { src: user.photoURL, rounded: true, className: 'user-page-user-image' }),
+        null,
         _react2.default.createElement(
           'div',
-          { className: 'user-page-header-text' },
+          { className: 'user-page-header' },
+          _react2.default.createElement(_reactBootstrap.Image, { src: user.photoURL, rounded: true, className: 'user-page-user-image' }),
           _react2.default.createElement(
-            'h1',
-            null,
-            user.name
+            'div',
+            { className: 'user-page-header-text' },
+            _react2.default.createElement(
+              'h1',
+              null,
+              user.name
+            ),
+            _react2.default.createElement(
+              'h3',
+              null,
+              'Cred'
+            ),
+            _react2.default.createElement(
+              'h4',
+              null,
+              'Level: ',
+              Math.floor(user.score / 100)
+            ),
+            _react2.default.createElement(
+              'h5',
+              null,
+              'Current Level Progress:'
+            ),
+            _react2.default.createElement(_Score2.default, { user: user })
           ),
           _react2.default.createElement(
-            'h3',
-            null,
-            'Cred'
-          ),
-          _react2.default.createElement(
-            'h4',
-            null,
-            'Level: ',
-            Math.floor(user.score / 100)
-          ),
-          _react2.default.createElement(
-            'h5',
-            null,
-            'Current Level Progress:'
-          ),
-          _react2.default.createElement(_Score2.default, { user: user })
-        )
+            'div',
+            { className: 'user-page-buttons' },
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              { bsStyle: 'info' },
+              'Edit'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              { bsStyle: 'danger', onClick: function onClick() {
+                  return _this2.handleDelete(user.id);
+                } },
+              'Delete'
+            )
+          )
+        ),
+        _react2.default.createElement(_CreateChannel2.default, null)
       );
     }
   }]);
@@ -19545,6 +19581,9 @@ var mapDispatch = function mapDispatch(dispatch) {
   return {
     loadUser: function loadUser(id) {
       dispatch((0, _store.fetchUser)(id));
+    },
+    deleteUser: function deleteUser(id) {
+      dispatch((0, _store.deleteUser)(id));
     }
   };
 };
@@ -20366,6 +20405,10 @@ var _axios = __webpack_require__(75);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _history = __webpack_require__(123);
+
+var _history2 = _interopRequireDefault(_history);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var GET_INACTIVE_USER = 'GET_INACTIVE_USER';
@@ -20392,7 +20435,7 @@ var fetchUser = exports.fetchUser = function fetchUser(id) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.createUserName = exports.logout = exports.auth = exports.me = undefined;
+exports.editUser = exports.deleteUser = exports.createUserName = exports.logout = exports.auth = exports.me = undefined;
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -20486,12 +20529,28 @@ var logout = exports.logout = function logout() {
 var createUserName = exports.createUserName = function createUserName(user) {
   return function (dispatch) {
     return _axios2.default.put('/api/users/' + user.userId, user).then(function (res) {
-      console.log(res.data);
       dispatch(updateUser(res.data));
       _history2.default.push('/');
     }).catch(function (err) {
       return console.error(err);
     });
+  };
+};
+
+var deleteUser = exports.deleteUser = function deleteUser(id) {
+  return function (dispatch) {
+    return _axios2.default.delete('/api/users/' + id).then(function () {
+      dispatch(removeUser());
+      _history2.default.push('/');
+    }).catch(console.error);
+  };
+};
+
+var editUser = exports.editUser = function editUser(user) {
+  return function (dispatch) {
+    return _axios2.default.put('/api/users/' + user.id, user).then(function (res) {
+      return dispatch(updateUser(res.data));
+    }).catch(console.error);
   };
 };
 
