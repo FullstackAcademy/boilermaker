@@ -3,10 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
-<<<<<<< HEAD
-import rtcConnection from '../rtcConnection';
-=======
->>>>>>> master
 import { setMessages } from '../store';
 import { changeChannel, enqueue } from '../socket';
 
@@ -22,7 +18,7 @@ class Channel extends Component {
   }
 
   render() {
-    const { currentChannel, rtcConnection } = this.props;
+    const { currentChannel } = this.props;
     return (
       <div>
         <div id='videos-container'></div>
