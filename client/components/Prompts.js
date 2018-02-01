@@ -26,7 +26,7 @@ const Prompts = (props) => {
               prompts.map(prompt => {
                 count++;
                 return (
-                  <li>
+                  <li key={count}>
                     #{count}: {prompt}
                   </li>
                 )
