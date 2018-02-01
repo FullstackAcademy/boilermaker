@@ -30,19 +30,16 @@ module.exports = function(io){
       this.tickRate = 0.5;
       this.gameLoop = this.gameLoop.bind(this);
       this.state = {};
-      this.debateTime = 15;
-      this.waitTime = 7;
+      this.debateTime = 10;
+      this.waitTime = 5;
     }
     gameLoop(){
       switch(this.currentAction){
         case WAITING_FOR_QUEUE:
           if(this.queue.length < 2)return;
           //Start the Broadcasts
-          console.log(this.queue.length);
           this.startBroadcasting(this.queue.shift());
-          console.log(this.queue.length);
           this.startBroadcasting(this.queue.shift());
-          console.log(this.queue.length);
           this.state = {
             time: this.waitTime,
             broadcasterCount: 0,
@@ -72,14 +69,17 @@ module.exports = function(io){
             }
             console.log('Broadcasters ready begining debate');
             this.sendRoomState();
+            this.broadcasters[0].emit('unmute');
             this.currentAction = USERS_DEBATING;
             break;
           
           case USERS_DEBATING:
+          console.log(this.state.time);
             if( (this.state.time -= this.tickRate) <= 0){
               if(this.state.first){
                 this.state.first = false;
-                io.to(this.name).emit('switchMutedUser');
+                this.broadcasters[0].emit('mute');
+                this.broadcasters[1].emit('unmute');
                 this.state.time = this.state.maxTime;
                 console.log('first user finished debating')
               }else{
@@ -152,12 +152,9 @@ module.exports = function(io){
     }
     sendRoomState(socket){  
       let state = Object.assign({},this.state,{sentTime:Date.now()});
-      let broadcastTarget = socket ? socket : io.to(this.name)
+      let broadcastTarget = socket ? socket : io.to(this.name);
       broadcastTarget.emit('setRoomState', state);
     }
   }
   return roomList;
-
 }
-
-

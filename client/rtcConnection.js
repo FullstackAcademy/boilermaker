@@ -61,60 +61,46 @@ function resetConnection() {
         }
       }
     },
-    
+
     refresh() {
       const channel = rtcConnection.channel;
       //rtcConnection.disconnect();
       //does not do anything anymore lol
       //so heres what it should do LOL
-      rtcConnection.getAllParticipants().forEach(sock=>{
+      rtcConnection.getAllParticipants().forEach(sock => {
         rtcConnection.disconnectWith(sock);
       });
-      rtcConnection.attachStreams.forEach(stream=>{
+      rtcConnection.attachStreams.forEach(stream => {
         stream.stop();
       })
       //rtcConnection = new RTCMultiConnection(channel);
       //rtcConnection.connect();
       //resetConnection();
     },
-    joinBroadcasters(broadcasterIds, callback) {
+    joinBroadcasters(broadcasterIds) {
       if (!broadcasterIds.length) return;
       rtcConnection.broadcasters = broadcasterIds;
       if (!broadcasterIds.includes(rtcConnection.USERID)) rtcConnection.session = { audio: true, video: true, oneway: true };
       if (broadcasterIds[1] === rtcConnection.USERID) return;
-      const runOnce = func => {
-        let once = false;
-        return () => {
-          if (once) return;
-          once = true;
-          return callback;
-        }
-      }
       broadcasterIds.forEach(broadcasterId => {
-        if (broadcasterId !== rtcConnection.USERID) rtcConnection.connect(broadcasterId, runOnce);
+        if (broadcasterId !== rtcConnection.USERID) rtcConnection.join(broadcasterId);
       });
     },
     toggleMute(first) {
-      //roomState.mutedUser = broadcasterId;
-      //if(rtcConnection.streamEvents[broadcasterId])rtcConnection.streamEvents[broadcasterId].stream.mute('audio');
-      //var elem = $(`#${userId}`)[0];
       const { USERID: userid, broadcasters } = rtcConnection
-      const [v1, v2] = $('video');
-      const [mc1, mc2] = $('.media-container');
       const isBroadcasting = broadcasters.includes(userid);
-      const isFirst = broadcasters[0] === userid && isBroadcasting;
-      const isSecond = broadcasters[1] === userid && isBroadcasting;
-      v1.muted = first;
-      v2.muted = !first;
-      
-      if (!isFirst) mc1.toggle('mute-audio', true);
-      if (!isSecond) mc2.toggle('mute-audio', true);
-      //$('video')[1].muted = !first;
-      //if(elem) getMediaElement(elem).toggle(['mute-audio']);
+      if (!isBroadcasting) return;
+      const [b1, b2] = broadcasters;
+      const isFirst = b1 === userid;
+      const isSecond = b2 === userid;
+
+      const f = (first && isFirst) || (!first && isSecond) ? 'unmute' : 'mute';
+      const localStream = Object.keys(rtcConnection.streamEvents).reduce(((old,e)=>e.length>12&&e.type==='local' ? e: old),undefined);
+      console.log('ugly children',rtcConnection.streamEvents,localStream);
+      localStream && localStream[f]('audio');
     },
-    
+
     endStreams() {
-      console.log('killing streams');
       rtcConnection.session = { audio: false, video: false, oneway: true };
       /*rtcConnection.broadcasters.forEach(broadcasterId => {
         rtcConnection.onstreamended({ mediaElement: $(`#${broadcasterId}`)[0] });
@@ -123,7 +109,7 @@ function resetConnection() {
       rtcConnection.broadcasters = [];
       rtcConnection.refresh();
     },
-    
+
     onStream(e) {
       var video = document.createElement('video');
       video.srcObject = e.stream;
@@ -139,8 +125,9 @@ function resetConnection() {
       //if (e.userid === rtcConnection.mutedUser) 
       //I'm gonna use jquery here and anyone and I challenge anyone reading this to find a better soloution
       $('#videos-container').append(mediaElement);
-      if (e.type === 'local') {
-        mediaElement.toggle(['mute-audio']);
+      if(e.type === 'local') {
+        //mediaElement.toggle(['mute-audio']);
+        //e.stream.mute('audio');
         socket.emit('readyToBroadcast');
       }
     },
@@ -149,8 +136,8 @@ function resetConnection() {
       e.mediaEvent && $(e.mediaEvent).remove();
     },
   });
-  rtcConnection.onstream = rtcConnection.onStream;
-  rtcConnection.onstreamended = rtcConnection.onStreamEnded;
+rtcConnection.onstream = rtcConnection.onStream;
+rtcConnection.onstreamended = rtcConnection.onStreamEnded;
 }
 
 export default rtcConnection;

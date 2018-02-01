@@ -6,13 +6,11 @@ class Timer extends Component {
 
   constructor (props) {
     super(props);
-    this.state = props;
-
     this.timerCreator = this.timerCreator.bind(this);
   }
 
   timerCreator (flip) {
-    let { currTime, totalTime } = this.state;
+    let { currTime, totalTime } = this.props;
     $('#progressbar').empty();
     this.bar = new ProgressBar.SemiCircle($('#progressbar')[0], {
       // Set default step function for all animate calls
@@ -35,10 +33,8 @@ class Timer extends Component {
         bar.text.style.color = state.color;
       }
     });
-    if (flip) {
-      $('#progressbar').toggleClass('flip');
-      $('.progressbar-text').toggleClass('flip');
-    }
+    flip &&  $('#progressbar:first-child').toggleClass('flip');// && $('.progressbar-text').toggleClass('flip');
+    
     let text = this.bar.text;
     text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
     text.style.fontSize = '2rem';
@@ -48,8 +44,8 @@ class Timer extends Component {
     this.bar.animate(1.0);  // Number from 0.0 to 1.0
   }
 
-  componentDidMount () {
-    let { currTime, totalTime } = this.state;
+  componentWillUpdate() {
+    let { currTime, totalTime } = this.props;
     this.timerCreator(false);
     setTimeout(() => {
       let count = 5;
@@ -61,10 +57,6 @@ class Timer extends Component {
       let leadIn = setInterval(countDown, 1000);
 
       setTimeout(() => {
-        this.setState({
-          currTime: 0,
-          totalTime: 30000
-        })
         this.timerCreator(true);
       }, 6000);
 

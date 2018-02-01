@@ -18905,8 +18905,6 @@ var Timer = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this, props));
 
-    _this.state = props;
-
     _this.timerCreator = _this.timerCreator.bind(_this);
     return _this;
   }
@@ -18914,9 +18912,9 @@ var Timer = function (_Component) {
   _createClass(Timer, [{
     key: 'timerCreator',
     value: function timerCreator(flip) {
-      var _state = this.state,
-          currTime = _state.currTime,
-          totalTime = _state.totalTime;
+      var _props = this.props,
+          currTime = _props.currTime,
+          totalTime = _props.totalTime;
 
       $('#progressbar').empty();
       this.bar = new _progressbar2.default.SemiCircle($('#progressbar')[0], {
@@ -18940,10 +18938,8 @@ var Timer = function (_Component) {
           bar.text.style.color = state.color;
         }
       });
-      if (flip) {
-        $('#progressbar').toggleClass('flip');
-        $('.progressbar-text').toggleClass('flip');
-      }
+      flip && $('#progressbar:first-child').toggleClass('flip'); // && $('.progressbar-text').toggleClass('flip');
+
       var text = this.bar.text;
       text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
       text.style.fontSize = '2rem';
@@ -18953,13 +18949,13 @@ var Timer = function (_Component) {
       this.bar.animate(1.0); // Number from 0.0 to 1.0
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
+    key: 'componentWillUpdate',
+    value: function componentWillUpdate() {
       var _this2 = this;
 
-      var _state2 = this.state,
-          currTime = _state2.currTime,
-          totalTime = _state2.totalTime;
+      var _props2 = this.props,
+          currTime = _props2.currTime,
+          totalTime = _props2.totalTime;
 
       this.timerCreator(false);
       setTimeout(function () {
@@ -18972,10 +18968,6 @@ var Timer = function (_Component) {
         var leadIn = setInterval(countDown, 1000);
 
         setTimeout(function () {
-          _this2.setState({
-            currTime: 0,
-            totalTime: 30000
-          });
           _this2.timerCreator(true);
         }, 6000);
       }, totalTime - currTime);
@@ -19826,54 +19818,38 @@ function resetConnection() {
       //rtcConnection.connect();
       //resetConnection();
     },
-    joinBroadcasters: function joinBroadcasters(broadcasterIds, callback) {
+    joinBroadcasters: function joinBroadcasters(broadcasterIds) {
       if (!broadcasterIds.length) return;
       rtcConnection.broadcasters = broadcasterIds;
       if (!broadcasterIds.includes(rtcConnection.USERID)) rtcConnection.session = { audio: true, video: true, oneway: true };
       if (broadcasterIds[1] === rtcConnection.USERID) return;
-      var runOnce = function runOnce(func) {
-        var once = false;
-        return function () {
-          if (once) return;
-          once = true;
-          return callback;
-        };
-      };
       broadcasterIds.forEach(function (broadcasterId) {
-        if (broadcasterId !== rtcConnection.USERID) rtcConnection.connect(broadcasterId, runOnce);
+        if (broadcasterId !== rtcConnection.USERID) rtcConnection.join(broadcasterId);
       });
     },
     toggleMute: function toggleMute(first) {
-      //roomState.mutedUser = broadcasterId;
-      //if(rtcConnection.streamEvents[broadcasterId])rtcConnection.streamEvents[broadcasterId].stream.mute('audio');
-      //var elem = $(`#${userId}`)[0];
       var _rtcConnection = rtcConnection,
           userid = _rtcConnection.USERID,
           broadcasters = _rtcConnection.broadcasters;
 
-      var _$ = $('video'),
-          _$2 = _slicedToArray(_$, 2),
-          v1 = _$2[0],
-          v2 = _$2[1];
-
-      var _$3 = $('.media-container'),
-          _$4 = _slicedToArray(_$3, 2),
-          mc1 = _$4[0],
-          mc2 = _$4[1];
-
       var isBroadcasting = broadcasters.includes(userid);
-      var isFirst = broadcasters[0] === userid && isBroadcasting;
-      var isSecond = broadcasters[1] === userid && isBroadcasting;
-      v1.muted = first;
-      v2.muted = !first;
+      if (!isBroadcasting) return;
 
-      if (!isFirst) mc1.toggle('mute-audio', true);
-      if (!isSecond) mc2.toggle('mute-audio', true);
-      //$('video')[1].muted = !first;
-      //if(elem) getMediaElement(elem).toggle(['mute-audio']);
+      var _broadcasters = _slicedToArray(broadcasters, 2),
+          b1 = _broadcasters[0],
+          b2 = _broadcasters[1];
+
+      var isFirst = b1 === userid;
+      var isSecond = b2 === userid;
+
+      var f = first && isFirst || !first && isSecond ? 'unmute' : 'mute';
+      var localStream = Object.keys(rtcConnection.streamEvents).reduce(function (old, e) {
+        return e.length > 12 && e.type === 'local' ? e : old;
+      }, undefined);
+      console.log('ugly children', rtcConnection.streamEvents, localStream);
+      localStream && localStream[f]('audio');
     },
     endStreams: function endStreams() {
-      console.log('killing streams');
       rtcConnection.session = { audio: false, video: false, oneway: true };
       /*rtcConnection.broadcasters.forEach(broadcasterId => {
         rtcConnection.onstreamended({ mediaElement: $(`#${broadcasterId}`)[0] });
@@ -19898,7 +19874,8 @@ function resetConnection() {
       //I'm gonna use jquery here and anyone and I challenge anyone reading this to find a better soloution
       $('#videos-container').append(mediaElement);
       if (e.type === 'local') {
-        mediaElement.toggle(['mute-audio']);
+        //mediaElement.toggle(['mute-audio']);
+        //e.stream.mute('audio');
         _socket.socket.emit('readyToBroadcast');
       }
     },
@@ -19957,30 +19934,39 @@ function enqueue() {
 }
 
 function offsetTimeByPing(roomState, sentTime) {
+  roomState.time = Date.now() - sentTime;
   return roomState;
 }
 
 _socket.socket.on('prepareToBroadcast', function () {
   _rtcConnection2.default.userid = _rtcConnection2.default.USERID;
-  _rtcConnection2.default.session = { audio: true, video: true, broadcast: true };
+  _rtcConnection2.default.session = { audio: false, video: true, broadcast: true };
   _rtcConnection2.default.open(_rtcConnection2.default.USERID);
 });
 
 _socket.socket.on('setRoomState', function (roomState) {
   _rtcConnection2.default.roomState = offsetTimeByPing(roomState, roomState.sentTime);
-  if (roomState.time && roomState.active) 0 && _store2.default.dispatch((0, _store.setTimer)(roomState.time));
-  if (roomState.broadcasterIds && roomState.status === 'DEBATE') _rtcConnection2.default.joinBroadcasters(roomState.broadcasterIds, function () {
-    alert(1);
-    _rtcConnection2.default.toggleMute(roomState.first);
-  });
+  if (roomState.time && roomState.active) _store2.default.dispatch((0, _store.setTime)(roomState.time, roomState.maxTime * 1000));
+  if (roomState.broadcasterIds && roomState.status === 'DEBATE') _rtcConnection2.default.joinBroadcasters(roomState.broadcasterIds);
+  //rtcConnection.first = roomState.first;
+  //setTimeout(()=>{rtcConnection.toggleMute(roomState.first);},2000);
 });
 
-_socket.socket.on('switchMutedUser', function () {
-  _rtcConnection2.default.broadcasters.forEach(function (broadcasterId) {
-    return _rtcConnection2.default.toggleMute(broadcasterId);
-  });
-  0 && _store2.default.dispatch((0, _store.setTimer)(_rtcConnection2.default.roomState.time = _rtcConnection2.default.roomState.maxTime));
+_socket.socket.on('unmute', function () {
+  //rtcConnection.attachStreams[0].unmute('audio');
+  _rtcConnection2.default.session = Object.assign(_rtcConnection2.default.session, { audio: true });
 });
+
+_socket.socket.on('mute', function () {
+  _rtcConnection2.default.session = Object.assign(_rtcConnection2.default.session, { audio: false });
+  //rtcConnection.attachStreams[0].mute('audio');
+});
+
+/*socket.on('switchMutedUser', () => {
+  //rtcConnection.broadcasters.forEach(broadcasterId => rtcConnection.toggleMute(broadcasterId));
+  rtcConnection.toggleMute(false);
+  0 && store.dispatch(setTimer( rtcConnection.roomState.time = rtcConnection.roomState.maxTime));
+});*/
 
 _socket.socket.on('setUserId', function (id) {
   //rtcConnection.changeUserId(id);
@@ -20358,6 +20344,10 @@ exports.default = function () {
     case SET_TOTAL_TIME:
       newState.totalTime = action.totalTime;
       return newState;
+    case SET_TIME:
+      newState.totalTime = action.totalTime;
+      newState.currTime = action.currTime;
+      return newState;
     default:
       return state;
   }
@@ -20365,9 +20355,10 @@ exports.default = function () {
 
 var SET_CURR_TIME = 'SET_CURR_TIME';
 var SET_TOTAL_TIME = 'SET_TOTAL_TIME';
+var SET_TIME = 'SET_TIME';
 
 var defaultState = {
-  currTime: 0,
+  currTime: 30000,
   totalTime: 30000
 };
 
@@ -20376,6 +20367,13 @@ var setCurrTime = exports.setCurrTime = function setCurrTime(currTime) {
 };
 var setTotalTime = exports.setTotalTime = function setTotalTime(totaltime) {
   return { type: SET_TOTAL_TIME, totaltime: totaltime };
+};
+var setTime = exports.setTime = function setTime(currTime, totalTime) {
+  return {
+    type: SET_TIME,
+    currTime: currTime,
+    totalTime: totalTime
+  };
 };
 
 /***/ }),

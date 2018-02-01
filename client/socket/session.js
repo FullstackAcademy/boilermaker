@@ -1,6 +1,6 @@
 import { socket } from './socket';
 import rtcConnection from '../rtcConnection';
-import store, { setTimer } from '../store/';
+import store, { setTime } from '../store/';
 
 const formatChannelName = channelName => channelName.split(" ").join('');
 
@@ -19,28 +19,40 @@ export function enqueue(){
 }
 
 function offsetTimeByPing(roomState,sentTime){
+  roomState.time = Date.now() - sentTime;
   return roomState;
 }
 
 socket.on('prepareToBroadcast',() => {
   rtcConnection.userid = rtcConnection.USERID;
-  rtcConnection.session = {audio: true, video:true, broadcast:true};
+  rtcConnection.session = {audio: false, video:true, broadcast:true};
   rtcConnection.open(rtcConnection.USERID);
 });
 
 socket.on('setRoomState', roomState => {
   rtcConnection.roomState = offsetTimeByPing(roomState, roomState.sentTime);
-  if(roomState.time && roomState.active) 0 && store.dispatch(setTimer(roomState.time));
-  if(roomState.broadcasterIds && roomState.status === 'DEBATE') rtcConnection.joinBroadcasters(roomState.broadcasterIds, () => {
-    alert(1);
-    rtcConnection.toggleMute(roomState.first);
-  });
+  if(roomState.time && roomState.active) store.dispatch(setTime(roomState.time,roomState.maxTime*1000));
+  if(roomState.broadcasterIds && roomState.status === 'DEBATE') rtcConnection.joinBroadcasters(roomState.broadcasterIds);
+  //rtcConnection.first = roomState.first;
+  //setTimeout(()=>{rtcConnection.toggleMute(roomState.first);},2000);
 });
 
-socket.on('switchMutedUser', () => {
-  rtcConnection.broadcasters.forEach(broadcasterId => rtcConnection.toggleMute(broadcasterId));
-  0 && store.dispatch(setTimer( rtcConnection.roomState.time = rtcConnection.roomState.maxTime));
+socket.on('unmute',()=>{
+  //rtcConnection.attachStreams[0].unmute('audio');
+  rtcConnection.session = Object.assign(rtcConnection.session,{audio:true});
 });
+
+
+socket.on('mute',()=>{
+  rtcConnection.session = Object.assign(rtcConnection.session,{audio:false});
+  //rtcConnection.attachStreams[0].mute('audio');
+});
+
+/*socket.on('switchMutedUser', () => {
+  //rtcConnection.broadcasters.forEach(broadcasterId => rtcConnection.toggleMute(broadcasterId));
+  rtcConnection.toggleMute(false);
+  0 && store.dispatch(setTimer( rtcConnection.roomState.time = rtcConnection.roomState.maxTime));
+});*/
 
 socket.on('setUserId', id => {
   //rtcConnection.changeUserId(id);
