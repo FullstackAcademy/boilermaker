@@ -1,37 +1,41 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Route, Switch, Router} from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome} from './components'
-import {me} from './store'
+import { Main, Login, Signup, UserHome, Channel, Home, UserNamePrompt } from './components'
+import { me, fetchChannels } from './store'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount () {
+  constructor() {
+    super()
+  }
+
+  componentDidMount() {
     this.props.loadInitialData()
   }
 
-  render () {
-    const {isLoggedIn} = this.props
+  render() {
+    const { isLoggedIn } = this.props
 
     return (
       <Router history={history}>
         <Main>
           <Switch>
-            {/* Routes placed here are available to all visitors */}
+            <Route exact path="/" component={Home} />
+            <Route path="/channels/:channelName" component={Channel} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path='/new-user/:userId' component={UserNamePrompt} />
             {
               isLoggedIn &&
-                <Switch>
-                  {/* Routes placed here are only available after logging in */}
-                  <Route path="/home" component={UserHome} />
-                </Switch>
+              <Switch>
+                {/* <Route path="/home" component={UserHome} /> */}
+              </Switch>
             }
-            {/* Displays our Login component as a fallback */}
             <Route component={Login} />
           </Switch>
         </Main>
@@ -53,8 +57,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData () {
+    loadInitialData() {
       dispatch(me())
+      dispatch(fetchChannels())
     }
   }
 }
