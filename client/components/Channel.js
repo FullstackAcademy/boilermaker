@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Button, Panel } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
+<<<<<<< HEAD
 import rtcConnection from '../rtcConnection';
+=======
+>>>>>>> master
 import { setMessages } from '../store';
 import { changeChannel, enqueue } from '../socket';
 
@@ -13,8 +16,8 @@ import Timer from './Timer';
 
 class Channel extends Component {
   componentDidMount() {
-    let channelName = this.props.currentChannel;
-    this.props.setMessages(['- Joining ' + channelName + ' -']);
+    let channelName = this.props.match.params.channelName;
+    this.props.setMessages([]);
     changeChannel(channelName);
   }
 
@@ -25,7 +28,7 @@ class Channel extends Component {
         <div id='videos-container'></div>
         <h1>{currentChannel}</h1>
         <Timer />
-        <Chat />
+        <Chat channel={currentChannel} />
         <div>
           {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
           <Button onClick={enqueue}>Add Yourself To Queue</Button>
