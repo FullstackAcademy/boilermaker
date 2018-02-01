@@ -17,44 +17,34 @@ const Main = (props) => {
         {
           isLoggedIn ?
             <Navbar.Collapse>
-              <h3>
-                <Navbar.Text>
-                  <NavLink to="/">
-                    Home
+              <Navbar.Text>
+                <NavLink to="/">
+                  Home
                   </NavLink >
-                </Navbar.Text>
-              </h3>
-              <h3>
-                <Navbar.Text>
-                  <NavLink onClick={handleClick} to="/">
-                    Logout
+              </Navbar.Text>
+              <Navbar.Text>
+                <NavLink onClick={handleClick} to="/">
+                  Logout
                   </NavLink >
-                </Navbar.Text>
-              </h3>
+              </Navbar.Text>
             </Navbar.Collapse>
             :
             <Navbar.Collapse>
-              <h3>
-                <Navbar.Text>
-                  <NavLink to="/">
-                    Home
+              <Navbar.Text>
+                <NavLink to="/">
+                  Home
                   </NavLink >
-                </Navbar.Text>
-              </h3>
-              <h3>
-                <Navbar.Text>
-                  <NavLink to="/login">
-                    Login
+              </Navbar.Text>
+              <Navbar.Text>
+                <NavLink to="/login">
+                  Login
                   </NavLink >
-                </Navbar.Text>
-              </h3>
-              <h3>
-                <Navbar.Text>
-                  < NavLink to="/signup">
-                    Sign Up
+              </Navbar.Text>
+              <Navbar.Text>
+                < NavLink to="/signup">
+                  Sign Up
                   </NavLink >
-                </Navbar.Text>
-              </h3>
+              </Navbar.Text>
               <Navbar.Form>
                 <SearchBar channels={channels} users={users} getFilteredUsers={getFilteredUsers} history={history} handleSubmit={handleSubmit} />
               </Navbar.Form>
@@ -87,7 +77,7 @@ const mapDispatch = (dispatch, ownProps) => {
     },
     getFilteredUsers(searchTerm) {
       dispatch(fetchFilteredUsers(searchTerm))
-    }, 
+    },
     handleSubmit(evt, filteredUsers, filteredChannels) {
       evt.preventDefault();
       const userId = filteredUsers.find(user => user.userName === evt.target.search.value).id

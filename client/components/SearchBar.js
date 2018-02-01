@@ -1,30 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap'
-import Autosuggest from 'react-bootstrap-autosuggest';
+import { Typeahead } from 'react-bootstrap-typeahead';
 
-const SearchBar = (props) => {
-  const { channels, users, getFilteredUsers, fetchFilteredChannels, handleSubmit } = props
-  return (
-    <div>
-      <form onSubmit={evt => handleSubmit(evt, users.filteredUserList, channels.filteredChannelList)}>
-        <FormGroup>
-          <Autosuggest
-            datalist={users.filteredUserList}
-            name="search"
-            type="text"
-            placeholder="Search..."
-            itemValuePropName="userName"
-            onSearch={getFilteredUsers}
-            closeOnCompletion={false}
-            showToggle={false}
-            bsSize={'large'}
-          />
-        </FormGroup>
-      </form>
-    </div>
-  )
+class SearchBar extends Component {
+  constructor() {
+    super();
+    this.state = {
+      userList: {},
+      channelList: {}
+    };
+  }
+  render() {
+    return (
+      <div>
+        <Typeahead
+        options={[]}
+        minLength={3}
+        placeholder="Search..."
+        />
+      </div>
+    )
+  }
 }
-
 export default SearchBar
