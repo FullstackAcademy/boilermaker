@@ -48,10 +48,12 @@ class Main extends Component {
                 </NavLink >
                 </Navbar.Text>
                 <Navbar.Form>
-                  <SearchBar
-                    searchResults={channels.channelList}
-                    handleSearch={handleSearch}
-                  />
+                  <FormGroup>
+                    <SearchBar
+                      searchResults={channels.channelList}
+                      handleSearch={handleSearch}
+                    />
+                  </FormGroup>
                 </Navbar.Form>
               </Navbar.Collapse>
           }
