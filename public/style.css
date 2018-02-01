@@ -139,9 +139,9 @@ svg {
   transform: scale(-1, 1);
 }
 
-.progressbar-text.flip {
+/*.progressbar-text.flip {
   transform: translate(-50%, 50%) scale(-1,1)!important;
-}
+}*/
 
 /***************CHAT***********/
 .chat {
