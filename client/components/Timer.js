@@ -9,15 +9,10 @@ class Timer extends Component {
 
   constructor(props) {
     super(props);
-<<<<<<< HEAD
-=======
     this.state = {
-      currTime: props.currTime,
-      totalTime: props.totalTime,
       shake: false
     }
 
->>>>>>> master
     this.timerCreator = this.timerCreator.bind(this);
   }
   timerCreator(flip, currTime, forcedStartText) {
@@ -42,16 +37,13 @@ class Timer extends Component {
       step: (state, bar) => {
         bar.path.setAttribute('stroke', state.color);
         let value = Math.floor((bar.value() * totalTime / 1000));
-<<<<<<< HEAD
         if(!bar.textFrozen)bar.setText(forcedStartText || totalTime / 1000 - value);
-=======
         if (value === 25) {
           this.setState({ shake: true })
         } else if (value === 30) {
           this.setState({ shake: false })
         }
         bar.setText(totalTime / 1000 - value);
->>>>>>> master
         bar.text.style.color = state.color;
       }
     });
