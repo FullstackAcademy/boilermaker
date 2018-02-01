@@ -6,15 +6,25 @@ import { Button } from 'react-bootstrap';
 import { setMessages } from '../store';
 import { changeChannel, enqueue } from '../socket';
 
-import Chat from './chat';
+import Chat from './Chat';
 import VideoFeed from './VideoFeed';
 import Timer from './Timer';
+import Voting from './Voting';
 
 class Channel extends Component {
   componentDidMount() {
     let channelName = this.props.match.params.channelName;
     this.props.setMessages([]);
     changeChannel(channelName);
+  }
+
+  changeVote1() {
+    document.getElementById('vote-1').classList.toggle('active');
+    document.getElementById('vote-2').classList.remove('active');
+  }
+  changeVote2() {
+    document.getElementById('vote-2').classList.toggle('active');
+    document.getElementById('vote-1').classList.remove('active');
   }
 
   render() {
@@ -29,6 +39,7 @@ class Channel extends Component {
           {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
           <Button onClick={enqueue}>Add Yourself To Queue</Button>
         </div>
+        <Voting changeVote1={this.changeVote1} changeVote2={this.changeVote2} />
       </div>
     )
   }
