@@ -7,12 +7,12 @@ const CategoryList = (props) => {
   const { channels } = props;
   return (
     <div>
-    <h2 className="animated fadeIn">
+    <h2 className="home-category-list animated fadeIn">
       <Label bsStyle="warning">
         Category List
     </Label>
     </h2>
-    <div className="animated slideInLeft">
+    <div className="home-category-list animated slideInLeft">
       <ul>
         {
           channels.categoryList.map(categoryName => {

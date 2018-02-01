@@ -43,6 +43,20 @@ form div {
   background-image: none;
 }
 
+/*********************** HOME ***************************/
+
+#welcome-text {
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+}
+
+.home-category-list {
+  animation-delay: 1s;
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+}
+
 /************************ CHANNEL ***********************/
 
 video {
@@ -56,6 +70,36 @@ svg {
   margin-left: -50px;
   width: 100px;
   height: 100px;
+}
+
+.modal-content{
+  background-color: rgb(45, 45, 45);
+  color: rgb(255, 255, 255);
+  opacity: 0.98;
+}
+
+.modal-title{
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-size: 0.75em;
+}
+
+.modal-header{
+  color: #f08f36;
+  text-align: center;
+  font-size: 2em;
+}
+
+.open-button{
+  border-radius: 100%
+}
+
+/************************ CHANNEL LIST ********************/
+
+.channel-list-item {
+  animation-delay: .5s;
+  -webkit-animation-delay: .5s;
+  -moz-animation-delay: .5s;
 }
 
 /************************ USER PAGE ***********************/
@@ -99,11 +143,13 @@ svg {
 
 #chat-room-header {
   font-size: 30px;
-  overflow: scroll;
   background-color: #ff9001;
   color: #ffe1c7;
   padding: 5px;
   text-align: center;
+  text-shadow: 1px 1px 1px black;
+  box-shadow: 0px 2px 3px black;
+
 }
 
 #chat-body {
