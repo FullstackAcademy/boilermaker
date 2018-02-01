@@ -59,7 +59,7 @@ class Channel extends Component {
           <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>
             +
           </Button>
-          <button onClick={()=>{this.props.setTime(0,2,0,2)}}> -ga</button>
+          <button onClick={()=>{this.props.setTime(0,3,0,3)}}> -ga</button>
         </div>
         <Voting changeVote1={this.changeVote1} changeVote2={this.changeVote2} />
       </div >

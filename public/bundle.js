@@ -62,6 +62,17 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	// webpack-livereload-plugin
+/******/ 	(function() {
+/******/ 	  if (typeof window === "undefined") { return };
+/******/ 	  var id = "webpack-livereload-plugin-script";
+/******/ 	  if (document.getElementById(id)) { return; }
+/******/ 	  var el = document.createElement("script");
+/******/ 	  el.id = id;
+/******/ 	  el.async = true;
+/******/ 	  el.src = "//" + location.hostname + ":35729/livereload.js";
+/******/ 	  document.getElementsByTagName("head")[0].appendChild(el);
+/******/ 	}());
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 315);
 /******/ })
@@ -21922,7 +21933,7 @@ var Channel = function (_Component) {
           _react2.default.createElement(
             'button',
             { onClick: function onClick() {
-                _this2.props.setTime(0, 2, 0, 2);
+                _this2.props.setTime(0, 3, 0, 3);
               } },
             ' -ga'
           )
@@ -22863,6 +22874,7 @@ var Timer = function (_Component) {
     };
 
     _this.timerCreator = _this.timerCreator.bind(_this);
+    _this.createLeadIn = _this.createLeadIn.bind(_this);
     return _this;
   }
 
@@ -22917,16 +22929,38 @@ var Timer = function (_Component) {
       this.bar.animate(1.0); // Number from 0.0 to 1.0
     }
   }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
+    key: 'createLeadIn',
+    value: function createLeadIn() {
       var _this3 = this;
 
+      bar.textFrozen = true;
       var _props2 = this.props,
           startTime = _props2.leadinTime,
-          totalLeadinTime = _props2.totalLeadinTime,
-          currTime = _props2.currTime,
-          totalTime = _props2.totalTime,
-          timerIsActive = _props2.timerIsActive;
+          totalLeadinTime = _props2.totalLeadinTime;
+
+      var leadinTime = totalLeadinTime - startTime;
+      var count = leadinTime / 1000 - 1;
+
+      var countDown = function countDown() {
+        if (count <= 0 || !_this3.bar) window.clearInterval(leadIn);
+        if (!_this3.bar) return;
+        _this3.bar.setText(count);
+        count--;
+      };
+      var leadIn = setInterval(countDown, 1000);
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      var _this4 = this;
+
+      var _props3 = this.props,
+          startTime = _props3.leadinTime,
+          totalLeadinTime = _props3.totalLeadinTime,
+          currTime = _props3.currTime,
+          totalTime = _props3.totalTime,
+          timerIsActive = _props3.timerIsActive,
+          status = _props3.status;
 
       var leadinTime = totalLeadinTime - startTime;
       if (!timerIsActive) {
@@ -22937,44 +22971,45 @@ var Timer = function (_Component) {
         return;
       }
       this.timerCreator(false, totalTime, leadinTime / 1000);
-      var count = leadinTime / 1000 - 1;
-      //First Leadin
-      var countDown = function countDown() {
-        if (count <= 0 || !_this3.bar) window.clearInterval(leadIn);
-        if (!_this3.bar) return;
-        _this3.bar.setText(count);
-        count--;
-      };
-      var leadIn = setInterval(countDown, 1000);
 
-      //First Timer
-      (0, _timers.setTimeout)(function () {
-        _this3.timerCreator(false);
-        bar.textFrozen = false;
-      }, totalLeadinTime);
+      if (status <= 0) {
+        //First Leadin
+        this.createLeadIn();
+      }
 
-      //Second Leadin
-      (0, _timers.setTimeout)(function () {
-        bar.textFrozen = true;
-        leadIn = setInterval(countDown, 1000);
-        count = leadinTime / 1000;
-        countDown();
-      }, totalLeadinTime + totalTime);
+      if (status <= 1) {
+        //First Timer
+        (0, _timers.setTimeout)(function () {
+          _this4.timerCreator(false, currTime, leadinTime / 1000);
+          bar.textFrozen = false;
+        }, totalLeadinTime);
+      }
 
-      //Second Timer
-      (0, _timers.setTimeout)(function () {
-        _this3.timerCreator(true);
-        bar.textFrozen = false;
-      }, totalLeadinTime * 2 + totalTime);
+      if (status <= 2) {
+        //Second Leadin
+        (0, _timers.setTimeout)(function () {
+          _this4.createLeadIn();
+        }, totalLeadinTime + totalTime);
+      }
 
-      //Kill Everything
-      (0, _timers.setTimeout)(function () {
-        if (_this3.bar) {
-          _this3.bar.destroy();
-          bar = _this3.bar = null;
-          _this3.props.setTimerActive(false);
-        }
-      }, totalLeadinTime * 2 + totalTime * 2);
+      if (status <= 3) {
+        //Second Timer
+        (0, _timers.setTimeout)(function () {
+          _this4.timerCreator(true);
+          bar.textFrozen = false;
+        }, totalLeadinTime * 2 + totalTime);
+      }
+
+      if (status <= 4) {
+        //Kill Everything
+        (0, _timers.setTimeout)(function () {
+          if (_this4.bar) {
+            _this4.bar.destroy();
+            bar = _this4.bar = null;
+            _this4.props.setTimerActive(false);
+          }
+        }, totalLeadinTime * 2 + totalTime * 2);
+      }
     }
   }, {
     key: 'render',
@@ -22994,13 +23029,13 @@ var Timer = function (_Component) {
 }(_react.Component);
 
 var mapState = function mapState(state) {
-  console.log(state.timer);
   return {
     leadinTime: state.timer.leadinTime,
     currTime: state.timer.currTime,
     totalTime: state.timer.totalTime,
     totalLeadinTime: state.timer.totalLeadinTime,
-    timerIsActive: state.timer.active
+    timerIsActive: state.timer.active,
+    status: state.timer.status
   };
 };
 
@@ -24258,6 +24293,7 @@ exports.default = function () {
       newState.currTime = action.currTime * 1000;
       newState.totalLeadinTime = action.totalLeadinTime * 1000;
       newState.active = true;
+      newState.status = action.status;
       return newState;
     case SET_TIMER_ACTIVE:
       newState.active = action.active;
@@ -24277,7 +24313,8 @@ var defaultState = {
   totalTime: 0,
   leadinTime: 0,
   totalLeadinTime: 0,
-  active: false
+  active: false,
+  status: 0
 };
 
 var setCurrTime = exports.setCurrTime = function setCurrTime(currTime) {
@@ -24289,13 +24326,14 @@ var setTotalTime = exports.setTotalTime = function setTotalTime(totaltime) {
 var setTimerActive = exports.setTimerActive = function setTimerActive(val) {
   return { type: SET_TIMER_ACTIVE, active: val };
 };
-var setTime = exports.setTime = function setTime(leadinTime, totalLeadinTime, currTime, totalTime) {
+var setTime = exports.setTime = function setTime(leadinTime, totalLeadinTime, currTime, totalTime, status) {
   return {
     type: SET_TIME,
     leadinTime: leadinTime,
     currTime: currTime,
     totalTime: totalTime,
-    totalLeadinTime: totalLeadinTime
+    totalLeadinTime: totalLeadinTime,
+    status: status || 0
   };
 };
 
