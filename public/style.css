@@ -58,6 +58,28 @@ svg {
   height: 100px;
 }
 
+.modal-content{
+  background-color: rgb(45, 45, 45);
+  color: rgb(255, 255, 255);
+  opacity: 0.98;
+}
+
+.modal-title{
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-size: 0.75em;
+}
+
+.modal-header{
+  color: #f08f36;
+  text-align: center;
+  font-size: 2em;
+}
+
+.open-button{
+  border-radius: 100%
+}
+
 /************************ USER PAGE ***********************/
 
 .user-page-user-image {
