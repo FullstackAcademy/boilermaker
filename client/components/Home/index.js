@@ -6,11 +6,11 @@ import Welcome from './Welcome';
 import CategoryList from './CategoryList';
 
 const Home = (props) => {
-  const { channels } = props;
+  const { categories } = props;
   return (
     <div>
       <Welcome />
-      <CategoryList channels={channels} />
+      <CategoryList categories={categories} />
     </div>
   )
 }
@@ -18,7 +18,7 @@ const Home = (props) => {
 const mapState = (state) => {
 
   return {
-    channels: state.channels
+    categories: state.categories
   }
 }
 

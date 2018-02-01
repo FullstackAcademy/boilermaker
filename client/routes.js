@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import history from './history'
 import { Main, Login, Signup, Channel, Home, UserNamePrompt, Category, UserPage } from './components'
-import { me, fetchChannels, fetchUsers } from './store'
+import { me, fetchChannels, fetchUsers, fetchCategories } from './store'
 
 class Routes extends Component {
   constructor() {
@@ -56,6 +56,7 @@ const mapDispatch = (dispatch) => {
       dispatch(me())
       dispatch(fetchChannels())
       dispatch(fetchUsers())
+      dispatch(fetchCategories())
     }
   }
 }
