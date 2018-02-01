@@ -1,18 +1,21 @@
-import axios from 'axios'
-
-const GET_CHANNELS = 'GET_CHANNELS';
-const CREATE_CHANNEL = 'CREATE_CHANNEL';
-const GET_FILTERED_CHANNELS = 'GET_FILTERED_CHANNELS';
-const SET_CURRENT_CHANNEL = 'SET_CURRENT_CHANNEL';
+import axios from 'axios';
+import history from '../history';
 
 const defaultState = {
   channelList: [],
   filteredChannelList: [],
-  categoryList: []
+  categoryList: [],
+  searchChannelList: []
 };
+
+const GET_CHANNELS = 'GET_CHANNELS';
+const CREATE_CHANNEL = 'CREATE_CHANNEL';
+const GET_FILTERED_CHANNELS = 'GET_FILTERED_CHANNELS';
+const GET_SEARCH_CHANNELS = 'GET_SEARCH_CHANNELS';
 
 const getChannels = channels => ({ type: GET_CHANNELS, channels });
 const makeChannel = channel => ({ type: CREATE_CHANNEL, channel });
+const searchChannels = channels => ({ type: GET_SEARCH_CHANNELS, channels });
 
 /******************** DISPATCH FUNCTIONS ********************/
 
@@ -29,6 +32,13 @@ export const fetchChannels = () => {
   }
 }
 
+export const fetchSearchChannels = searchTerm =>
+  dispatch => {
+    return axios.get(`/api/channels?search=${searchTerm}`)
+      .then(res => dispatch(searchChannels(res.data)))
+      .catch(err => console.log(err));
+  }
+
 export const createChannel = (name, category, description) => {
   return function (dispatch) {
     return axios.post('/api/channels', {
@@ -36,7 +46,10 @@ export const createChannel = (name, category, description) => {
       category,
       description
     })
-      .then(res => dispatch(makeChannel(res.data)))
+      .then(res => {
+        dispatch(makeChannel(res.data))
+        history.push(`/channels/${res.data.name}`)
+      })
       .catch(err => console.log(err));
   }
 }
@@ -58,6 +71,11 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         filteredChannelList: state.channelList.filter(channel => channel.category === action.categoryName)
+      }
+    case GET_SEARCH_CHANNELS:
+      return {
+        ...state,
+        searchChannelList: action.channels
       }
     default:
       return state;

@@ -50,14 +50,14 @@ export const logout = () =>
       })
       .catch(err => console.log(err))
 
-export const createUserName = (user) =>
-  dispatch =>
-    axios.put(`/api/users/${user.userId}`, user)
-      .then(res => {
-        dispatch(updateUser(res.data));
-        history.push('/');
-      })
-      .catch(err => console.error(err))
+// export const createUserName = (user) =>
+//   dispatch =>
+//     axios.put(`/api/users/${user.userId}`, user)
+//       .then(res => {
+//         dispatch(updateUser(res.data));
+//         history.push('/');
+//       })
+//       .catch(err => console.error(err))
 
 export const deleteUser = (id) =>
   dispatch =>
@@ -68,11 +68,17 @@ export const deleteUser = (id) =>
       })
       .catch(console.error)
 
-export const editUser = (user) =>
+// export const editUser = (user) =>
+//   dispatch =>
+//     axios.put(`/api/users/${user.id}`, user)
+//       .then(res => dispatch(updateUser(res.data)))
+//       .catch(console.error)
+
+export const fetchUser = (id) =>
   dispatch =>
-    axios.put(`/api/users/${user.id}`, user)
-      .then(res => dispatch(updateUser(res.data)))
-      .catch(console.error)
+      axios.get(`/api/users/${id}`)
+        .then(res => dispatch(getUser(res.data)))
+        .catch(console.error)
 
 
 /**

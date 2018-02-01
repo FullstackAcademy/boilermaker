@@ -10,6 +10,7 @@ class CreateChannel extends Component {
         super(props, context);
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
             channelValue: '',
@@ -38,7 +39,7 @@ class CreateChannel extends Component {
         const categories = ['Anime', 'Gaming', 'Other', 'Politics', 'Sports', 'TV/Film'];
 
         return (
-            <form onSubmit={this.handleSubmit.bind(this)}>
+            <form onSubmit={this.handleSubmit}>
                 <FormGroup
                     controlId="formBasicText"
                     validationState={this.getValidationState('channelValue')}
@@ -85,7 +86,8 @@ class CreateChannel extends Component {
                         this.state.descriptionValue.length ? null : <HelpBlock>Please enter a value</HelpBlock>
                     }
                 </FormGroup><br />
-                <Button type="submit">Submit</Button>
+                <Button type="submit" bsStyle="success">Submit</Button>
+                <Button onClick={() => this.props.hide('displayCreate')}>Cancel</Button>
             </form>
         );
     }
