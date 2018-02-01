@@ -1,18 +1,25 @@
 const SET_CURR_TIME = 'SET_CURR_TIME';
 const SET_TOTAL_TIME = 'SET_TOTAL_TIME';
 const SET_TIME =  'SET_TIME';
+const SET_TIMER_ACTIVE = 'SET_TIMER_ACTIVE';
 
 const defaultState = {
-  currTime: 30000,
-  totalTime: 30000
+  currTime: 0,
+  totalTime: 0,
+  leadinTime:0,
+  totalLeadinTime:0,
+  active:false,
 }
 
 export const setCurrTime = currTime => ({ type: SET_CURR_TIME, currTime});
-export const setTotalTime = totaltime => ({ type: SET_TOTAL_TIME, totaltime })
-export const setTime = (currTime,totalTime) => ({
+export const setTotalTime = totaltime => ({ type: SET_TOTAL_TIME, totaltime });
+export const setTimerActive = val => ({type: SET_TIMER_ACTIVE,active:val});
+export const setTime = (leadinTime, totalLeadinTime, currTime, totalTime) => ({
   type:SET_TIME,
+  leadinTime,
   currTime,
-  totalTime
+  totalTime,
+  totalLeadinTime
 }) 
 
 export default function (state = defaultState, action) {
@@ -25,8 +32,14 @@ export default function (state = defaultState, action) {
       newState.totalTime = action.totalTime;
       return newState;
     case SET_TIME:
-      newState.totalTime = action.totalTime;
-      newState.currTime = action.currTime;
+      newState.leadinTime = action.leadinTime * 1000;
+      newState.totalTime = action.totalTime * 1000;
+      newState.currTime = action.currTime * 1000;
+      newState.totalLeadinTime = action.totalLeadinTime * 1000;
+      newState.active = true;
+      return newState;
+    case SET_TIMER_ACTIVE:
+      newState.active = action.active;
       return newState;
     default:
       return state;

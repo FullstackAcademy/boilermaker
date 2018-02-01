@@ -78,7 +78,8 @@ function resetConnection() {
       //resetConnection();
     },
     joinBroadcasters(broadcasterIds) {
-      if (!broadcasterIds.length) return;
+      console.log('here',broadcasterIds);
+      if (!broadcasterIds.length||rtcConnection.broadcasters.length>1) return;
       rtcConnection.broadcasters = broadcasterIds;
       if (!broadcasterIds.includes(rtcConnection.USERID)) rtcConnection.session = { audio: true, video: true, oneway: true };
       if (broadcasterIds[1] === rtcConnection.USERID) return;
@@ -87,6 +88,7 @@ function resetConnection() {
       });
     },
     toggleMute(first) {
+      return;
       const { USERID: userid, broadcasters } = rtcConnection
       const isBroadcasting = broadcasters.includes(userid);
       if (!isBroadcasting) return;

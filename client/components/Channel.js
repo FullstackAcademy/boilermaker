@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
-import { setMessages } from '../store';
+import { setMessages, setTime } from '../store';
 import { changeChannel, enqueue } from '../socket';
 
 import Chat from './Chat';
@@ -41,12 +41,12 @@ class Channel extends Component {
   }
 
   render() {
-    const { currentChannel } = this.props;
+    const { currentChannel, timerIsActive } = this.props;
     return (
       <div>
         <div id='videos-container'></div>
         <h1>{currentChannel}</h1>
-        <Timer />
+        { <Timer/>}
         <Chat channel={currentChannel} />
         <div>
           {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
@@ -59,6 +59,7 @@ class Channel extends Component {
           <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>
             +
           </Button>
+          <button onClick={()=>{this.props.setTime(0,2,0,2)}}> -ga</button>
         </div>
         <Voting changeVote1={this.changeVote1} changeVote2={this.changeVote2} />
       </div >
@@ -69,7 +70,8 @@ class Channel extends Component {
 const mapState = (state, ownProps) => {
   const currentChannel = ownProps.match.params.channelName;
   return {
-    currentChannel
+    currentChannel,
+    timerIsActive: state.timer.active
   }
 };
 
@@ -77,6 +79,9 @@ const mapDispatch = (dispatch, ownProps) => {
   return {
     setMessages(messages) {
       dispatch(setMessages(messages));
+    },
+    setTime(){
+      dispatch(setTime(...arguments))
     }
   }
 }
