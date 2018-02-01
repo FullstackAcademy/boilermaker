@@ -2,10 +2,6 @@ body {
   font-family: sans-serif;
 }
 
-a {
-  text-decoration: none;
-}
-
 label {
   display: block;
 }
@@ -15,7 +11,234 @@ nav a {
   margin: 1em;
 }
 
+ul {
+  list-style-type: none;
+}
+
+a:link, a:visited, a:active {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f08f36;
+  text-decoration: none;
+}
+
 form div {
   margin: 1em;
   display: inline-block;
 }
+
+/************************ NAVBAR ***********************/
+
+#nav-bar-logo.navbar-brand{
+  width: 12.5vw;
+  height: auto;
+  margin: 0;
+}
+
+.navbar {
+  background-color: white;
+  background-image: none;
+}
+
+/*********************** HOME ***************************/
+
+#welcome-text {
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+}
+
+.home-category-list {
+  animation-delay: 1s;
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+}
+
+div.home-category-list-item {
+  text-align: center;
+  float:left;
+  margin-left: 3em;
+  margin-right: 3em;
+  width: 250px;
+  height: 300px;
+}
+
+.home-category-list-images {
+  width: 15vw;
+}
+
+/************************ CHANNEL ***********************/
+
+video {
+  width: 350px;
+  height: 350px;
+}
+
+svg {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  width: 100px;
+  height: 100px;
+}
+
+.modal-content{
+  background-color: rgb(45, 45, 45);
+  color: rgb(255, 255, 255);
+  opacity: 0.98;
+}
+
+.modal-title{
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-size: 0.75em;
+}
+
+.modal-header{
+  color: #f08f36;
+  text-align: center;
+  font-size: 2em;
+}
+
+.open-button{
+  border-radius: 100%
+}
+
+/************************ CHANNEL LIST ********************/
+
+.channel-list-item {
+  animation-delay: .5s;
+  -webkit-animation-delay: .5s;
+  -moz-animation-delay: .5s;
+}
+
+/************************ USER PAGE ***********************/
+
+.user-page-user-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin: 15px;
+}
+
+.user-page-header {
+  display: flex;
+}
+
+.user-page-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+/************************ TIMER ***********************/
+
+.flip {
+  transform: scale(-1, 1);
+}
+
+/*.progressbar-text.flip {
+  transform: translate(-50%, 50%) scale(-1,1)!important;
+}*/
+
+/***************CHAT***********/
+.chat {
+  /* width: 250px; */
+  height: 450px;
+  position: relative;
+  float: right;
+  border: 1px solid gray;
+  padding: 0;
+  box-shadow: 3px 3px 3px gray;
+}
+
+#chat-room-header {
+  font-size: 30px;
+  background-color: #ff9001;
+  color: #ffe1c7;
+  padding: 5px;
+  text-align: center;
+  text-shadow: 1px 1px 1px black;
+  box-shadow: 0px 2px 3px black;
+
+}
+
+#chat-body {
+  height: 370px;
+  overflow-y: auto;
+  overflow-wrap: break-word;
+  padding: 10px 5px 5px 5px;
+  background-color: #6d6464;
+}
+
+#send-message {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+#chat-input {
+  width: 100%;
+}
+
+.chat-message-even {
+  background-color: #ff8f02;
+  color: #ffdcbb;
+  padding: 0px 7px;
+  border-radius: 10px;
+}
+
+.chat-message-odd {
+  background-color: #ffe1c8;
+  color: #ff8e02;
+  padding: 0px 7px;
+  border-radius: 10px;
+}
+
+.message-author {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.message-date {
+  float: right;
+}
+
+.chat-message-header {
+  margin-bottom: -15px;
+}
+
+.container {
+  margin-right: 0;
+  margin-left: 0;
+  float: right;
+}
+
+.transition-appear {
+  opacity: 0.01;
+}
+
+.transition-appear.transition-appear-active {
+  opacity: 1;
+  transition: opacity .75s ease-in;
+}
+
+/* .shake {
+  animation: shake 0.1s ease-in alternate 5;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0%)
+  }
+
+  50% {
+    transform: translateX(20px)
+  }
+
+  100% {
+    transform: translateX(-20px)
+  }
+} */
