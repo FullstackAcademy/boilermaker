@@ -45,8 +45,8 @@ class Channel extends Component {
     return (
       <div>
         <div id='videos-container'></div>
-        <h1>{currentChannel}</h1>
-        { <Timer/>}
+        <h1 className="animated slideInLeft">{currentChannel}</h1>
+        <Timer />
         <Chat channel={currentChannel} />
         <div>
           {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}

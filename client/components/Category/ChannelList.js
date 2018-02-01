@@ -16,7 +16,7 @@ const ChannelList = (props) => {
         {
           channels.filteredChannelList.map(channel => {
             return (
-              <ListGroupItem key={channel.id}>
+              <ListGroupItem key={channel.id} className="channel-list-item animated flipInX">
                 <NavLink to={`/channels/${channel.name}`}>
                   <h3>{channel.name}</h3>
                 </NavLink>

@@ -6,7 +6,7 @@ const Voting = (props) => {
 
 
   return (
-    <div>
+    <div className="animated slideInUp">
       <div>
         <Button
           id="vote-1"
