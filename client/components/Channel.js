@@ -18,7 +18,7 @@ class Channel extends Component {
   }
 
   render() {
-    const { currentChannel, rtcConnection } = this.props;
+    const { currentChannel } = this.props;
     return (
       <div>
         <div id='videos-container'></div>
