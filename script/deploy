@@ -20,18 +20,18 @@ set -e
 # We trap any program EXIT and run this function.
 # Whether the deploy succeeds or fails, we'll clean up the deploy branch.
 
-function cleanup_at_exit {
-  # return to your master branch
-  git checkout master
+# function cleanup_at_exit {
+#   # return to your master branch
+#   git checkout master
   
-  # remove the deploy branch
-  git branch -D deploy
-}
-trap cleanup_at_exit EXIT
+#   # remove the deploy branch
+#   git branch -D deploy
+# }
+# trap cleanup_at_exit EXIT
 
 # checks out a new branch called "deploy". Note that the name "deploy" here isn't magical,
 # but it needs to match the name of the branch we specify when we push to our heroku remote.
-git checkout -b deploy
+#git checkout -b deploy
 
 # webpack will run in "production mode"
 webpack -p
