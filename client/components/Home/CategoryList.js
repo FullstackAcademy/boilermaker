@@ -1,11 +1,17 @@
 import React from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Label } from 'react-bootstrap';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const CategoryList = (props) => {
-  const { categoryList } = props;
+  const { channels } = props;
   return (
-    <div>
+    <ReactCSSTransitionGroup
+      transitionName="transition"
+      transitionAppear={true}
+      transitionAppearTimeout={750}
+      transitionEnter={false}
+      transitionLeave={false}>
       <h2>
         <Label bsStyle="warning">
           Category List
@@ -13,7 +19,7 @@ const CategoryList = (props) => {
       </h2>
       <ul>
         {
-          categoryList.map(categoryName => {
+          channels.categoryList.map(categoryName => {
             return (
               <li key={categoryName}>
                 <NavLink to={`/categories/${categoryName}/channels`} >
@@ -26,7 +32,7 @@ const CategoryList = (props) => {
           })
         }
       </ul>
-    </div>
+    </ReactCSSTransitionGroup>
   )
 }
 

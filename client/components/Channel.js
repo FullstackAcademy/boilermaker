@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Chat from './chat';
+import { Button } from 'react-bootstrap';
+
+import { setMessages } from '../store';
 import { changeChannel, enqueue } from '../socket';
-import { setChannel, setMessages } from '../store';
-import { Button, Panel } from 'react-bootstrap';
+
+import Chat from './chat';
 import VideoFeed from './VideoFeed';
 import Timer from './Timer';
 
 class Channel extends Component {
   componentDidMount() {
     let channelName = this.props.match.params.channelName;
-    this.props.setChannel(channelName);
     this.props.setMessages([]);
     changeChannel(channelName);
   }
 
   render() {
-    const { currChannel, rtcConnection } = this.props;
+    const { currentChannel, rtcConnection } = this.props;
     return (
       <div>
         <div id='videos-container'></div>
-        <h1>{currChannel.name}</h1>
+        <h1>{currentChannel}</h1>
         <Timer />
-        <Chat channel={currChannel.name} />
+        <Chat channel={currentChannel} />
         <div>
           {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
           <Button onClick={enqueue}>Add Yourself To Queue</Button>
@@ -32,25 +33,20 @@ class Channel extends Component {
     )
   }
 }
-const mapState = (state) => {
-  const { currChannel } = state;
+
+const mapState = (state, ownProps) => {
+  const currentChannel = ownProps.match.params.channelName;
   return {
-    currChannel,
+    currentChannel
   }
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
-    setChannel(channelId) {
-      dispatch(setChannel(channelId));
-    },
     setMessages(messages) {
       dispatch(setMessages(messages));
     }
   }
 }
 
-
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Channel));
