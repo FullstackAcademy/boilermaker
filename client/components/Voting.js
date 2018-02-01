@@ -32,18 +32,3 @@ const Voting = (props) => {
 }
 
 export default Voting;
-
-/*
-
-<Voting changeVote1={this.changeVote1} changeVote2={this.changeVote2} />
-
-changeVote1() {
-  document.getElementById('vote-1').classList.toggle('active');
-  document.getElementById('vote-2').classList.remove('active');
-}
-changeVote2() {
-  document.getElementById('vote-2').classList.toggle('active');
-  document.getElementById('vote-1').classList.remove('active');
-}
-
-*/
