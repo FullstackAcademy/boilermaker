@@ -14,6 +14,7 @@ import Voting from './Voting';
 class Channel extends Component {
   componentDidMount() {
     let channelName = this.props.match.params.channelName;
+    this.props.setMessages([]);
     changeChannel(channelName);
   }
 
@@ -27,7 +28,7 @@ class Channel extends Component {
   }
 
   render() {
-    const { currentChannel, rtcConnection } = this.props;
+    const { currentChannel } = this.props;
     return (
       <div>
         <div id='videos-container'></div>

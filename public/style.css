@@ -156,3 +156,30 @@ svg {
   margin-left: 0;
   float: right;
 }
+
+.transition-appear {
+  opacity: 0.01;
+}
+
+.transition-appear.transition-appear-active {
+  opacity: 1;
+  transition: opacity .75s ease-in;
+}
+
+/* .shake {
+  animation: shake 0.1s ease-in alternate 5;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0%)
+  }
+
+  50% {
+    transform: translateX(20px)
+  }
+
+  100% {
+    transform: translateX(-20px)
+  }
+} */
