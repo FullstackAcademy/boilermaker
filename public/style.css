@@ -2,10 +2,6 @@ body {
   font-family: sans-serif;
 }
 
-a {
-  text-decoration: none;
-}
-
 label {
   display: block;
 }
@@ -15,7 +11,67 @@ nav a {
   margin: 1em;
 }
 
+ul {
+  list-style-type: none;
+}
+
+a:link, a:visited, a:active {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f08f36;
+  text-decoration: none;
+}
+
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+/************************ NAVBAR ***********************/
+
+#nav-bar-logo.navbar-brand{
+  width: 12.5vw;
+  height: auto;
+  margin: 0;
+}
+
+.navbar {
+  background-color: white;
+  background-image: none;
+}
+
+/************************ CHANNEL ***********************/
+
+video {
+  width: 350px;
+  height: 350px;
+}
+
+svg {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  width: 100px;
+  height: 100px;
+}
+
+/************************ USER PAGE ***********************/
+
+.user-page-user-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin: 15px;
+}
+
+.user-page-header {
+  display: flex;
+}
+
+.user-page-header-text {
+  display: flex;
+  flex-direction: column;
 }
