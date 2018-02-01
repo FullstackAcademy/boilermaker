@@ -11,6 +11,7 @@ module.exports = function(io){
   }
   
   const roomList = new RoomList();
+  const LEAD_IN = -1;
   const WAITING_FOR_QUEUE = 0;
   const LOADING_BROADCASTERS = 1;
   const USERS_DEBATING = 2;
@@ -30,21 +31,22 @@ module.exports = function(io){
       this.tickRate = 0.5;
       this.gameLoop = this.gameLoop.bind(this);
       this.state = {};
-      this.debateTime = 15;
-      this.waitTime = 7;
+      this.debateLength = 10;
+      this.broadcasterTimeout = 5;
+      this.leadinTime = 5;
+      this.votingTime = 5;
     }
     gameLoop(){
       switch(this.currentAction){
+        case LEAD_IN:
+          if((this.state.leadinTime -= this.tickRate) <= 0)this.leadinCallback();
         case WAITING_FOR_QUEUE:
           if(this.queue.length < 2)return;
           //Start the Broadcasts
-          console.log(this.queue.length);
           this.startBroadcasting(this.queue.shift());
-          console.log(this.queue.length);
           this.startBroadcasting(this.queue.shift());
-          console.log(this.queue.length);
           this.state = {
-            time: this.waitTime,
+            time: this.broadcasterTimeout,
             broadcasterCount: 0,
             broadcasterIds: this.getBroadcasterIds(),
             status:'LOAD BROADCASTERS'
@@ -59,34 +61,40 @@ module.exports = function(io){
             if( (this.state.time -= this.tickRate) <= 0){
                 return this.reset(true);
             }
-            if(this.state.broadcasterCount < 2)return; 
-            //If we're ready to move on to the debate
-            this.state = {
-              time: this.debateTime,
-              maxTime: this.debateTime,
-              broadcasterIds: this.getBroadcasterIds(),
-              mutedUser: this.getBroadcasterIds()[0],
-              first:true,
-              active:true,
-              status:'DEBATE',
-            }
-            console.log('Broadcasters ready begining debate');
-            this.sendRoomState();
-            this.currentAction = USERS_DEBATING;
+            if(this.state.broadcasterCount < 2)return;
+            this.leadin(() => {
+              //If we're ready to move on to the debate
+              this.state = {
+                time: this.debateLength,
+                totalTime: this.debateLength,
+                leadinTime: 0,
+                totalLeadinTime: this.leadinTime,
+                broadcasterIds: this.getBroadcasterIds(),
+                active:true,
+                status:'DEBATE',
+              }
+              this.sendRoomState();
+              this.broadcasters[0].emit('unmute');
+              this.currentAction = USERS_DEBATING;
+              console.log('first user being debating');
+            });
             break;
           
           case USERS_DEBATING:
             if( (this.state.time -= this.tickRate) <= 0){
               if(this.state.first){
-                this.state.first = false;
-                io.to(this.name).emit('switchMutedUser');
-                this.state.time = this.state.maxTime;
-                console.log('first user finished debating')
+                this.leadin(()=>{
+                  this.state.first = false;
+                  this.broadcasters[0].emit('mute');
+                  this.broadcasters[1].emit('unmute');
+                  this.state.time = this.state.totalTime;
+                  console.log('second user begin debating')
+                });
               }else{
                 this.currentAction  = WAITING_FOR_SCORING;
                 this.state = {
-                  time: this.waitTime,
-                  maxTime: this.waitTime,
+                  time: this.votingTime,
+                  totalTime: this.votingTime,
                 }
                 console.log('second user finished debating waiting for scoring')
                 this.sendRoomState();
@@ -99,6 +107,22 @@ module.exports = function(io){
               this.reset();
             }
       }
+    }
+    leadin(f){
+      console.log('waiting between activities');
+      this.leadinCallback = f;
+      this.state = {
+        active:true,
+        totalTime:this.debateLength,
+        time:this.debateLength,
+        leadinTime: this.leadinTime,
+        totalLeadinTime: this.leadinTIme,
+        broadcasterIds: this.getBroadcasterIds(),
+        first:true,
+        status:'LEAD IN',
+      }
+      this.sendRoomState();
+      this.currentAction = LEAD_IN;
     }
     reset(wasCancelled){
       console.log(!wasCancelled?'reseting the room':'cancelling out the room');
@@ -152,12 +176,9 @@ module.exports = function(io){
     }
     sendRoomState(socket){  
       let state = Object.assign({},this.state,{sentTime:Date.now()});
-      let broadcastTarget = socket ? socket : io.to(this.name)
+      let broadcastTarget = socket ? socket : io.to(this.name);
       broadcastTarget.emit('setRoomState', state);
     }
   }
   return roomList;
-
 }
-
-
