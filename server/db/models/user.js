@@ -7,7 +7,7 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isAlphanumeric: true,
+      is: /^[a-zA-Z\s]*$/,
       notEmpty: true
     }
   },
@@ -17,8 +17,8 @@ const User = db.define('user', {
     allowNull: false,
     validate: {
       len: [3, 15],
-      notEmpty: true,
-      isAlphanumeric: true
+      isAlphanumeric: true,
+      notEmpty: true
     }
   },
   email: {

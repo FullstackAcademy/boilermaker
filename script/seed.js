@@ -9,7 +9,9 @@ async function seed() {
   console.log('db synced!')
 
   await seedUsers();
+  console.log('users')
   await seedCategories();
+  console.log('categories')
   await seedChannels();
   
   console.log(`seeded successfully`)

@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 
 const Voting = (props) => {
   const { changeVote1, changeVote2 } = props;
-
+  console.log(props);
 
   return (
     <div className="animated slideInUp">
