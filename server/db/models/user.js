@@ -4,21 +4,43 @@ const db = require('../db')
 
 const User = db.define('user', {
   name: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isAlphanumeric: true,
+      notEmpty: true
+    }
   },
   userName: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false,
+    validate: {
+      len: [3, 15],
+      notEmpty: true,
+      isAlphanumeric: true
+    }
   },
   email: {
     type: Sequelize.STRING,
-    unique: true
+    unique: true,
+    validate: {
+      isEmail: true,
+    }
   },
   photoURL: {
     type: Sequelize.STRING,
+    validate: {
+      isUrl: true,
+    }
   },
   score: {
     type: Sequelize.INTEGER,
-    defaultValue: 0
+    defaultValue: 0,
+    validate: {
+      isInt: true,
+      min: 0
+    }
   },
   googleId: {
     type: Sequelize.STRING
@@ -27,7 +49,8 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   admin: {
-    type: Sequelize.BOOLEAN
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
