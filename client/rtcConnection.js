@@ -54,7 +54,7 @@ function resetConnection() {
       video: {
         mandatory: {
           minFrameRate: 15,
-          maxFrameRate: 15,
+          maxFrameRate: 30,
           minWidth: 640,
           maxWidth: 640,
           minHeight: 360,
@@ -62,10 +62,10 @@ function resetConnection() {
         }
       }
     },
-    bandwidth: {
-      video: 256,    // 256kbps
-      screen: 300,    // 300kbps
-    },
+    // bandwidth: {
+    //   video: 256,    // 256kbps
+    //   screen: 300,    // 300kbps
+    // },
 
     refresh() {
       const channel = rtcConnection.channel;
