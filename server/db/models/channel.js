@@ -4,13 +4,24 @@ const db = require('../db');
 const Channel = db.define('channel', {
   name: {
     type: Sequelize.STRING,
-    unique: true
+    unique: true,
+    allowNull: false,
+    validate: {
+      isAlphanumeric: true,
+      len: [3, 25],
+      notEmpty: true
+    }
   },
   type: {
-    type: Sequelize.ENUM('Debate', 'Discussion', 'Rap-Battle')
+    type: Sequelize.ENUM('Debate', 'Discussion', 'Rap-Battle'),
+    allowNull: false,
   },
   description: {
     type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   imageURL: {
     type: Sequelize.STRING,
@@ -18,9 +29,6 @@ const Channel = db.define('channel', {
   },
   password: {
     type: Sequelize.STRING
-  },
-  size: {
-    type: Sequelize.INTEGER
   }
 })
 

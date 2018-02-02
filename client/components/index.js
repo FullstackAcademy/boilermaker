@@ -1,4 +1,4 @@
-export { default as Main } from './Main'
+export { default as Main } from './main'
 export { default as Home } from './Home'
 export { default as Channel } from './Channel'
 export { default as Category } from './Category';
