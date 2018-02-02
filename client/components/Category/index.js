@@ -16,9 +16,10 @@ class Category extends Component {
       <div>
         <PageHeader>
           {currentCategory.name} <small>Channel List</small>
+          <img className="category-page-header-img" src={`${currentCategory.imagePath}`} />
         </PageHeader>
         <ChannelList channels={channels} />
-      </div>
+      </div >
     )
   }
 }

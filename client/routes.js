@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, Router } from 'react-router-dom'
 import history from './history'
-import { Main, Login, Signup, Channel, Home, UserNamePrompt, Category, UserPage } from './components'
+import { Main, Login, Signup, Channel, Home, UserNamePrompt, Category, Categories, UserPage } from './components'
 import { me, fetchChannels, fetchUsers, fetchCategories } from './store'
 
 class Routes extends Component {
@@ -23,7 +23,10 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/channels/:channelName" component={Channel} />
+
             <Route path="/categories/:categoryName/channels" component={Category} />
+            <Route path="/categories" component={Categories} />
+
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/new-user/:userId" component={UserNamePrompt} />
