@@ -65,17 +65,14 @@ class Channel extends Component {
               <div className='button-group'>
                 <Button onClick={enqueue}>Add Yourself To Queue</Button>
                 <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>Prompts</Button>
-                <button onClick={() => { this.props.setTime(0, 2, 0, 2) }}>Test Timer</button>
+                <button onClick={() => { this.props.setTime(0, 3, 0, 3) }}>Test Timer</button>
                 <Voting changeVote1={this.changeVote1} changeVote2={this.changeVote2} />
+                <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>
+                  +
+                </Button>
               </div>
             </div>
           </div>
-        </div>
-        <div>
-          <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>
-            +
-          </Button>
-          <button onClick={() => { this.props.setTime(0, 3, 0, 3) }}> Test Timer Button</button>
         </div>
       </div >
     )

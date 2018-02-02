@@ -20,8 +20,8 @@ class CreateChannel extends Component {
 
   getValidationState(key) {
     const length = this.state[key].length;
-    if (length > 0) return 'success';
-    else if (length > 0) return 'error';
+    if (length > 2 && length < 26) return 'success';
+    else if (length < 3 || length > 25) return 'error';
     return null;
   }
 
