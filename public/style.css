@@ -190,9 +190,38 @@ svg {
   display: flex;
 }
 
+.user-page-buttons {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px 10px 20px;
+}
+
+.user-page-user-buttons {
+  margin-bottom: 10px;
+}
+
+.user-page-user-buttons > Button {
+  margin-right: 15px;
+}
+
 .user-page-header-text {
   display: flex;
   flex-direction: column;
+}
+
+.user-page-form {
+  position: absolute;
+  left: 50%;
+  margin-left: -115px;
+  top: 25%;
+  background-color: #ff9001;
+  color: #ffe1c7;
+  box-shadow: 3px 3px 3px grey;
+  border-radius: 10px;
+}
+
+.user-page-form-buttons {
+
 }
 
 /************************ TIMER ***********************/

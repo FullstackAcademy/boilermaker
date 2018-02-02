@@ -9,8 +9,17 @@ gatekeeperMiddleware.isLoggedIn = (req, res, next) => {
   }
 };
 
+gatekeeperMiddleware.isSelf = (req, res, next) => {
+  if (req.user.id === Number(req.params.userId)) {
+    next();
+  } else {
+    // forbidden: i.e. "you are not allowed to do this"
+    res.sendStatus(403);
+  }
+};
+
 gatekeeperMiddleware.isAdmin = (req, res, next) => {
-  if (req.user.isAdmin) {
+  if (req.user.admin) {
     next();
   } else {
     // forbidden: i.e. "you are not allowed to do this"
@@ -19,7 +28,7 @@ gatekeeperMiddleware.isAdmin = (req, res, next) => {
 };
 
 gatekeeperMiddleware.isAdminOrSelf = (req, res, next) => {
-  if (req.user.isAdmin || req.user.id === req.params.id) {
+  if (req.user.admin || req.user.id === Number(req.params.userId)) {
     next();
   } else {
     // forbidden: i.e. "you are not allowed to do this"
