@@ -1,6 +1,9 @@
 body {
   font-family: sans-serif;
 }
+html, body{
+  height:100vh;
+}
 
 label {
   display: block;
@@ -23,6 +26,7 @@ a:link, a:visited, a:active {
 a:hover {
   color: #f08f36;
   text-decoration: none;
+  transition:0.25s all;
 }
 
 form div {
@@ -33,14 +37,20 @@ form div {
 /************************ NAVBAR ***********************/
 
 #nav-bar-logo.navbar-brand{
-  width: 12.5vw;
+  width: 100px;
   height: auto;
-  margin: 0;
+  padding: 0;
 }
 
 .navbar {
   background-color: white;
   background-image: none;
+  margin:0;
+  height:65px;
+  overflow:hidden;
+}
+.navbar-text{
+  transition:0.25s all;
 }
 
 /*********************** HOME ***************************/
@@ -72,9 +82,61 @@ div.home-category-list-item {
 
 /************************ CHANNEL ***********************/
 
-video {
+/*video {
   width: 350px;
   height: 350px;
+}*/
+.channel-container{
+  height:calc(100vh - 65px);
+  overflow:hidden;
+}
+.main-channel-container{
+  height:100%;
+  width:100%;
+  float:left;
+}
+.media-box, .media-container{
+  width:100%!important;
+  height:100%!important;
+  border:none!important;
+  margin:0!important;
+}
+.videos-container{
+  padding-top:50px;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.empty-video{
+  margin-top:-25%;
+  height:270px;
+  width:480px;
+  background:#eee;
+  display:inline-block;
+  flex-grow:0;
+  flex-shrink:0;
+  overflow:hidden;
+}
+.empty-video.active{
+  box-shadow:0px 0px 20px green;
+  z-index:2;
+  position:relative;
+}
+#empty-video-1{
+  margin-right:50px;
+}
+
+.button-group{
+  position: element(.button-group-wrapper);
+  margin:0 auto;
+  left:0;
+  right:0;
+  width:400px;
+}
+.button-group-wrapper{
+  position: absolute;
+  bottom:0;
 }
 
 svg {
@@ -146,17 +208,38 @@ svg {
 /***************CHAT***********/
 .chat {
   /* width: 250px; */
-  height: 450px;
+  height: calc(100vh - 65px);/*450px;*/
   position: relative;
   float: right;
-  border: 1px solid gray;
+  border: 1px solid #aaa;
   padding: 0;
   box-shadow: 3px 3px 3px gray;
+  box-sizing: border-box;
+  overflow:hidden;
+}
+
+#chat-input{
+  width: 100%;
+  position: relative;
+  bottom:0;
+  height:40px;
+  transition:0.25s all;
+  box-sizing: border-box;
+  font-size:12px;
+  resize:none;
+  outline:none!important;
+  border-color:#aaa;
+}
+
+#chat-input:focus{
+  border-color:#FE9002;
+  box-shadow:0 0 6px -2px #FE9002
 }
 
 #chat-room-header {
+  width:100%;
   font-size: 30px;
-  background-color: #ff9001;
+  background-color: #FE9002;
   color: #ffe1c7;
   padding: 5px;
   text-align: center;
@@ -166,44 +249,45 @@ svg {
 }
 
 #chat-body {
-  height: 370px;
   overflow-y: auto;
   overflow-wrap: break-word;
-  padding: 10px 5px 5px 5px;
-  background-color: #6d6464;
+  height:100%;
+  /*padding: 10px 5px 5px 5px;*/
+  /* background-color: #6d6464; */
+  background-color: #eee;
 }
 
 #send-message {
   position: absolute;
-  bottom: 0;
+  bottom: -7px;
   width: 100%;
 }
 
-#chat-input {
-  width: 100%;
+.chat-message{
+  padding: 0px 7px;
+  border-radius: 2px;
+  font-size:0.9em;
+  margin:5px 0;
 }
 
 .chat-message-even {
-  background-color: #ff8f02;
-  color: #ffdcbb;
-  padding: 0px 7px;
-  border-radius: 10px;
+  /* background-color: #ff8f02; */
+  color: #B16401;
 }
-
 .chat-message-odd {
-  background-color: #ffe1c8;
-  color: #ff8e02;
-  padding: 0px 7px;
-  border-radius: 10px;
+  /* background-color: #ffe1c8; */
+  color: #FE9002;
 }
 
 .message-author {
-  font-size: 20px;
+  font-size:1.1em;
+  margin-right:5px;
   font-weight: bold;
 }
 
 .message-date {
   float: right;
+  font-size:0.6em;
 }
 
 .chat-message-header {
@@ -213,7 +297,6 @@ svg {
 .container {
   margin-right: 0;
   margin-left: 0;
-  float: right;
 }
 
 .transition-appear {

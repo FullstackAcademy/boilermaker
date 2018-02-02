@@ -58,7 +58,6 @@ class Main extends Component {
               </Navbar.Collapse>
           }
         </Navbar>
-        <hr />
         {children}
       </div >
     )
