@@ -48,7 +48,6 @@ form div {
   background-image: none;
   margin:0;
   height:65px;
-  overflow:hidden;
 }
 .navbar-text{
   transition:0.25s all;

@@ -21,7 +21,7 @@ class SearchBar extends Component {
   render() {
     const { searchResults, handleSearch, changePage } = this.props;
     return (
-      <div>
+      <div className="search-bar-container">
         <AsyncTypeahead
           options={searchResults}
           isLoading={this.state.isLoading}
