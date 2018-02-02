@@ -39,7 +39,7 @@ export default class EditUser extends Component {
   render() {
     // const { user } = this.props;
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
+      <form onSubmit={this.handleSubmit.bind(this)} className="user-page-form">
         <FormGroup
           controlId="formBasicText"
           validationState={this.getValidationState('name')}
@@ -88,8 +88,10 @@ export default class EditUser extends Component {
             this.state.photoURL.length ? null : <HelpBlock>Please enter a value</HelpBlock>
           }
         </FormGroup><br />
-        <Button type="submit" bsStyle="primary">Submit</Button>
-        <Button onClick={() => this.props.hide('displayEdit')}>Cancel</Button>
+        <div className="user-page-form-buttons">
+          <Button type="submit" bsStyle="primary">Submit</Button>
+          <Button onClick={() => this.props.hide('displayEdit')}>Cancel</Button>
+        </div>
       </form>
     );
   }

@@ -43,7 +43,7 @@ class UserPage extends Component {
   handleDelete(id) {
     this.props.deleteUser(id)
   }
-  
+
   render() {
     const { user } = this.props;
     const userId = Number(this.props.match.params.userId);
@@ -64,9 +64,13 @@ class UserPage extends Component {
             myId === userId
               ?
               <div className="user-page-buttons">
-                <Button bsStyle="info" onClick={() => this.display('displayEdit')}>Edit</Button>
-                <Button bsStyle="danger" onClick={() => this.display('displayWarning')}>Delete</Button>
-                <Button bsStyle="success" onClick={() => this.display('displayCreate')}>Create a channel</Button>
+                <div className="user-page-user-buttons">
+                  <Button bsStyle="info" onClick={() => this.display('displayEdit')}>Edit</Button>
+                  <Button bsStyle="danger" onClick={() => this.display('displayWarning')}>Delete</Button>
+                </div>
+                <div>
+                  <Button bsStyle="success" onClick={() => this.display('displayCreate')}>Create a channel</Button>
+                </div>
               </div>
               :
               null
@@ -87,9 +91,9 @@ class UserPage extends Component {
           this.state.displayEdit
             ?
             <EditUser
-            edit={this.handleEdit}
-            user={user}
-            hide={this.hide}
+              edit={this.handleEdit}
+              user={user}
+              hide={this.hide}
             />
             :
             null

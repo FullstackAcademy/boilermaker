@@ -24,17 +24,19 @@ class Main extends Component {
           {
             isLoggedIn ?
               <Navbar.Collapse>
-                <Navbar.Text>
+                <Nav>
+                <Navbar.Text eventKey={1}>
                   <NavLink to="/">
                     Home
-                </NavLink>
+                  </NavLink>
                 </Navbar.Text>
                 <Navbar.Text>
-                  <NavDropdown eventKey={3} title={user.userName} id="basic-nav-dropdown">
-                    <MenuItem eventKey={3.1} onClick={this.navToUser.bind(this)}>My page</MenuItem>
-                    <MenuItem eventKey={3.2} onClick={handleClick}>Logout</MenuItem>
+                  <NavDropdown eventKey={2} title={user.userName} id="basic-nav-dropdown">
+                    <MenuItem eventKey={2.1} onClick={this.navToUser.bind(this)}>My page</MenuItem>
+                    <MenuItem eventKey={2.2} onClick={handleClick}>Logout</MenuItem>
                   </NavDropdown>
                 </Navbar.Text>
+                </Nav>
               </Navbar.Collapse>
               :
               <Navbar.Collapse>
