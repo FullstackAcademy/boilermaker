@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProgressBar from 'progressbar.js';
 import { setTimeout } from 'timers';
-import { setTotalTime, setTimerActive } from '../store';
+import { setTimerActive } from '../store';
 
 var bar;
 class Timer extends Component {
@@ -45,11 +45,10 @@ class Timer extends Component {
         } else if (value === 30) {
           this.setState({ shake: false })
         }
-        bar.setText(totalTime / 1000 - value);
         bar.text.style.color = state.color;
       }
     });
-    flip && $('svg').addClass('flip');// && $('.progressbar-text').toggleClass('flip');
+    flip && $('svg').addClass('flip');
 
     let text = this.bar.text;
     text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
@@ -96,7 +95,7 @@ class Timer extends Component {
     if (status <= 1) {
       //First Timer
       setTimeout(() => {
-        this.timerCreator(false, currTime, leadinTime / 1000);
+        this.timerCreator(false, currTime);
         bar.textFrozen = false;
       }, totalLeadinTime);
     }
@@ -104,6 +103,7 @@ class Timer extends Component {
     if (status <= 2) {
       //Second Leadin
       setTimeout(() => {
+        this.timerCreator(false, totalTime, leadinTime / 1000);
         this.createLeadIn();
       }, totalLeadinTime + totalTime)
     }
