@@ -1,9 +1,9 @@
 body {
   font-family: sans-serif;
+  color: #FE9002;
 }
-
-a {
-  text-decoration: none;
+html, body{
+  height:100vh;
 }
 
 label {
@@ -15,7 +15,400 @@ nav a {
   margin: 1em;
 }
 
+ul {
+  list-style-type: none;
+}
+
+a:link, a:visited, a:active {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #FE9002;
+  text-decoration: none;
+  transition:0.25s all;
+}
+
 form div {
   margin: 1em;
   display: inline-block;
 }
+
+/************************ NAVBAR ***********************/
+
+#nav-bar-logo.navbar-brand{
+  width: 100px;
+  height: auto;
+  padding: 0;
+}
+
+.navbar {
+  background-color: white;
+  background-image: none;
+  margin:0;
+  height:65px;
+  overflow:hidden;
+}
+.navbar-text{
+  transition:0.25s all;
+}
+
+/*********************** HOME ***************************/
+div.home-jumbotron {
+  background-color: #FE9002;
+  text-align: center;
+  color: white;
+  height: 200px;
+  width: 100%;
+  margin-bottom: 5em;
+}
+
+div#welcome-text {
+  position: relative;
+  top: 15%;
+}
+
+#welcome-text h1 {
+  font-size: 6em
+}
+
+#welcome-text p {
+  font-size: 1.5em
+}
+
+#welcome-text {
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+}
+
+.home-category-list {
+  animation-delay: 1s;
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+}
+
+#home-category-list-title.panel{
+  text-align: center;
+  box-shadow: 2.5px 2.5px 5px grey;
+  background-color: #FE9002;
+  color: white;
+  width: 65%;
+  margin-bottom: 2em;
+}
+
+div.home-category-list-item {
+  font-size: 2em;
+  text-align: center;
+  float:left;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  width: 250px;
+  height: 300px;
+  border: 1px solid lightgray;
+}
+
+.home-category-list-item-image {
+  width: 15vw;
+}
+
+
+/************************ CHANNEL ***********************/
+
+/*video {
+  width: 350px;
+  height: 350px;
+}*/
+.channel-container{
+  height:calc(100vh - 65px);
+  overflow:hidden;
+}
+.main-channel-container{
+  height:100%;
+  width:100%;
+  float:left;
+}
+.media-box, .media-container{
+  width:100%!important;
+  height:100%!important;
+  border:none!important;
+  margin:0!important;
+}
+.videos-container{
+  padding-top:50px;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.empty-video{
+  margin-top:-25%;
+  height:270px;
+  width:480px;
+  background:#eee;
+  display:inline-block;
+  flex-grow:0;
+  flex-shrink:0;
+  overflow:hidden;
+}
+.empty-video.active{
+  box-shadow:0px 0px 20px green;
+  z-index:2;
+  position:relative;
+}
+#empty-video-1{
+  margin-right:50px;
+}
+
+.button-group{
+  position: element(.button-group-wrapper);
+  margin:0 auto;
+  left:0;
+  right:0;
+  width:400px;
+}
+.button-group-wrapper{
+  position: absolute;
+  bottom:0;
+}
+
+svg {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+  width: 100px;
+  height: 100px;
+}
+
+.modal-content{
+  background-color: rgb(45, 45, 45);
+  color: rgb(255, 255, 255);
+  opacity: 0.98;
+}
+
+.modal-title{
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-size: 0.75em;
+}
+
+.modal-header{
+  color: #FE9002;
+  text-align: center;
+  font-size: 2em;
+}
+
+.open-button{
+  border-radius: 100%
+}
+
+/************************ SINGLE CATEGORY CHANNEL LIST ***************/
+
+.category-page-header-img{
+  height: 100%;
+  max-height: 39px;
+  margin-left: 25px;
+}
+
+.category-channel-list-item{
+  animation-delay: .5s;
+  -webkit-animation-delay: .5s;
+  -moz-animation-delay: .5s;
+}
+
+div.category-channel-list-item {
+  font-size: 1em;
+  text-align: center;
+  float:left;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  width: 400px;
+  height: 200px;
+}
+
+category-channel-list-item-header{
+  
+}
+
+.category-channel-list-item-image {
+  width: 15vw;
+}
+
+/************************ USER PAGE ***********************/
+
+.user-page-user-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin: 15px;
+}
+
+.user-page-header {
+  display: flex;
+}
+
+.user-page-buttons {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px 10px 20px;
+}
+
+.user-page-user-buttons {
+  margin-bottom: 10px;
+}
+
+.user-page-user-buttons > Button {
+  margin-right: 15px;
+}
+
+.user-page-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-page-form {
+  position: absolute;
+  left: 50%;
+  margin-left: -115px;
+  top: 25%;
+  background-color: #ff9001;
+  color: #ffe1c7;
+  box-shadow: 3px 3px 3px grey;
+  border-radius: 10px;
+}
+
+.user-page-form-buttons {
+
+}
+
+/************************ TIMER ***********************/
+
+.flip {
+  transform: scale(-1, 1);
+}
+
+/*.progressbar-text.flip {
+  transform: translate(-50%, 50%) scale(-1,1)!important;
+}*/
+
+/***************CHAT***********/
+.chat {
+  /* width: 250px; */
+  height: calc(100vh - 65px);/*450px;*/
+  position: relative;
+  float: right;
+  border: 1px solid #aaa;
+  padding: 0;
+  box-shadow: 3px 3px 3px gray;
+  box-sizing: border-box;
+  overflow:hidden;
+}
+
+#chat-input{
+  width: 100%;
+  position: relative;
+  bottom:0;
+  height:40px;
+  transition:0.25s all;
+  box-sizing: border-box;
+  font-size:12px;
+  resize:none;
+  outline:none!important;
+  border-color:#aaa;
+}
+
+#chat-input:focus{
+  border-color:#FE9002;
+  box-shadow:0 0 6px -2px #FE9002
+}
+
+#chat-room-header {
+  width:100%;
+  font-size: 30px;
+  background-color: #FE9002;
+  color: #ffe1c7;
+  padding: 5px;
+  text-align: center;
+  text-shadow: 1px 1px 1px black;
+  box-shadow: 0px 2px 3px black;
+
+}
+
+#chat-body {
+  overflow-y: auto;
+  overflow-wrap: break-word;
+  height:100%;
+  /*padding: 10px 5px 5px 5px;*/
+  /* background-color: #6d6464; */
+  background-color: #eee;
+}
+
+#send-message {
+  position: absolute;
+  bottom: -7px;
+  width: 100%;
+}
+
+.chat-message{
+  padding: 0px 7px;
+  border-radius: 2px;
+  font-size:0.9em;
+  margin:5px 0;
+}
+
+.chat-message-even {
+  /* background-color: #ff8f02; */
+  color: #B16401;
+}
+.chat-message-odd {
+  /* background-color: #ffe1c8; */
+  color: #FE9002;
+}
+
+.message-author {
+  font-size:1.1em;
+  margin-right:5px;
+  font-weight: bold;
+}
+
+.message-date {
+  float: right;
+  font-size:0.6em;
+}
+
+.chat-message-header {
+  margin-bottom: -15px;
+}
+
+.container {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.transition-appear {
+  opacity: 0.01;
+}
+
+.transition-appear.transition-appear-active {
+  opacity: 1;
+  transition: opacity .75s ease-in;
+}
+
+/* .shake {
+  animation: shake 0.1s ease-in alternate 5;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0%)
+  }
+
+  50% {
+    transform: translateX(20px)
+  }
+
+  100% {
+    transform: translateX(-20px)
+  }
+} */
