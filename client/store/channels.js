@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
+import history from '../history';
 
 const defaultState = {
   channelList: [],
@@ -54,7 +55,10 @@ export const createChannel = (name, category, description) => {
       category,
       description
     })
-      .then(res => dispatch(makeChannel(res.data)))
+      .then(res => {
+        dispatch(makeChannel(res.data))
+        history.push(`/channels/${res.data.name}`)
+      })
       .catch(err => console.log(err));
   }
 }

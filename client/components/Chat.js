@@ -5,19 +5,36 @@ import { Button, Panel, Grid, Row, Col } from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Chat extends Component {
+  constructor(props) {
+    super(props);
+    this.sendMessage = this.sendMessage.bind(this);
+    this.onKeyUp = this.onKeyUp.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
+    this.shift = false;
+  }
 
   componentDidUpdate() {
     let chat = document.getElementById('chat-body')
     chat.scrollTop = chat.scrollHeight - 320;
   }
+  onKeyUp(e) {
+    if (e.key === 'Shift') this.shift = false;
+  }
+  onKeyDown(e) {
+    if (e.key === 'Shift') this.shift = true;
+    if (!this.shift && e.key === 'Enter') {
+      e.preventDefault();
+      this.sendMessage(e);
+    }
+  }
 
   sendMessage(evt) {
     evt.preventDefault();
-    let message = evt.target.input.value;
+    let message = evt.target.value;
     let username = this.props.user.userName;
     let messageObj = { message, username }
     socket.emit('message', messageObj);
-    evt.target.input.value = '';
+    evt.target.value = '';
   }
 
   render() {
@@ -33,9 +50,8 @@ class Chat extends Component {
         transitionAppearTimeout={1000}
         transitionEnter={false}
         transitionLeave={false}>
-      <Grid>
-        <Col xs={4} md={3} id='main-chat-room' className="chat">
-          <div xs={4} md={3} id="chat-room-header">{name}</div>
+        <Col xs={12} s={4} md={3} id='main-chat-room' className="chat">
+          <div id="chat-room-header">{name}</div>
           <div id="chat-body">
             {messages.map((message, i) => {
               let dateEndIdx = message.indexOf(']');
@@ -49,27 +65,23 @@ class Chat extends Component {
               i % 2 === 0 ? color += 'even' : color += 'odd';
 
               return (
-                <div key={`chat-message-${i}`} className={`${color}`}>
-                  <div className="chat-message-header">
-                    <p className='chat-message'>
-                      <span className="message-author">{name}</span>
-                      <span className="message-date">{date}</span>
-                    </p>
-                  </div>
-                  <p className='chat-message'>{text}</p>
+                <div key={`chat-message-${i}`} className={`chat-message ${color}`}>
+                  <span className="message-author">{name}</span>
+                  <span className='chat-message-text'>{text}</span>
+                  <span className="message-date">{date}</span>
                 </div>
               )
             })}
           </div>
-          <form xs={4} md={3} id="send-message" onSubmit={this.sendMessage.bind(this)}>
-            <input
+          <form xs={4} md={3} id="send-message" onKeyDown={this.onKeyDown} onKeyUp={this.onKeyUp} onSubmit={this.sendMessage}>
+            <textarea
               id='chat-input'
               name="input"
               autoComplete="off"
+              placeholder="Send a message"
             />
           </form>
         </Col>
-      </Grid>
       </ReactCSSTransitionGroup>
     )
   }

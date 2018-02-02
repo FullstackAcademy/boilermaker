@@ -44,24 +44,37 @@ class Channel extends Component {
     const { currentChannel, timerIsActive } = this.props;
     return (
       <div>
-        <div id='videos-container'></div>
-        <h1 className="animated slideInLeft">{currentChannel}</h1>
-        <Timer />
-        <Chat channel={currentChannel} />
-        <div>
-          {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
-          <Button onClick={enqueue}>Add Yourself To Queue</Button>
-        </div>
         {
           this.state.togglePrompt && <Prompts displayPrompt={this.displayPrompt} />
         }
+        <Chat channel={currentChannel} />
+        <div className='channel-container'>
+        <h1 className="animated slideInLeft">{currentChannel}</h1>
+        
+          {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
+          
+          <div className='main-channel-container'>
+            <div className='videos-container'>
+              <div id='empty-video-1' className='empty-video'/>
+              <div id='empty-video-2' className='empty-video'/>
+            </div>
+            <Timer />
+            <div className='button-group-wrapper'>
+              <div className='button-group'>
+                <Button onClick={enqueue}>Add Yourself To Queue</Button>
+                <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>Prompts</Button>
+                <button onClick={() => { this.props.setTime(0, 2, 0, 2) }}>Test Timer</button>
+                <Voting changeVote1={this.changeVote1} changeVote2={this.changeVote2} />
+              </div>
+          </div>
+          </div>
+        </div>
         <div>
           <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>
             +
           </Button>
-          <button onClick={()=>{this.props.setTime(0,3,0,3)}}> -ga</button>
+          <button onClick={()=>{this.props.setTime(0,3,0,3)}}> Test Timer Button</button>
         </div>
-        <Voting changeVote1={this.changeVote1} changeVote2={this.changeVote2} />
       </div >
     )
   }
@@ -80,7 +93,7 @@ const mapDispatch = (dispatch, ownProps) => {
     setMessages(messages) {
       dispatch(setMessages(messages));
     },
-    setTime(){
+    setTime() {
       dispatch(setTime(...arguments))
     }
   }

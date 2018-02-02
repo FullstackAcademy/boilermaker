@@ -49,16 +49,37 @@ export const logout = () =>
         history.push('/login')
       })
       .catch(err => console.log(err))
-            
-export const createUserName = (user) => 
+
+// export const createUserName = (user) =>
+//   dispatch =>
+//     axios.put(`/api/users/${user.userId}`, user)
+//       .then(res => {
+//         dispatch(updateUser(res.data));
+//         history.push('/');
+//       })
+//       .catch(err => console.error(err))
+
+export const deleteUser = (id) =>
   dispatch =>
-    axios.put(`/api/users/${user.userId}`, user)
-      .then(res => {
-        console.log(res.data);
-          dispatch(updateUser(res.data));
-          history.push('/');
+    axios.delete(`/api/users/${id}`)
+      .then(() => {
+        dispatch(removeUser())
+        history.push('/')
       })
-      .catch(err => console.error(err))
+      .catch(console.error)
+
+// export const editUser = (user) =>
+//   dispatch =>
+//     axios.put(`/api/users/${user.id}`, user)
+//       .then(res => dispatch(updateUser(res.data)))
+//       .catch(console.error)
+
+export const fetchUser = (id) =>
+  dispatch =>
+      axios.get(`/api/users/${id}`)
+        .then(res => dispatch(getUser(res.data)))
+        .catch(console.error)
+
 
 /**
  * REDUCER
