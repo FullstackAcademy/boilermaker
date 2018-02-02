@@ -295,14 +295,16 @@ category-channel-list-item-header{
 /***************CHAT***********/
 .chat {
   /* width: 250px; */
-  height: calc(100vh - 65px);/*450px;*/
+  height: calc(100vh - 65px);
   position: relative;
   float: right;
   border: 1px solid #aaa;
   padding: 0;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 3px 3px 3px grey;
   box-sizing: border-box;
-  overflow:hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 #chat-input{
@@ -324,7 +326,7 @@ category-channel-list-item-header{
 }
 
 #chat-room-header {
-  width:100%;
+  width: 100%;
   font-size: 30px;
   background-color: #FE9002;
   color: #ffe1c7;
@@ -332,22 +334,26 @@ category-channel-list-item-header{
   text-align: center;
   text-shadow: 1px 1px 1px black;
   box-shadow: 0px 2px 3px black;
-
+  position: relative;
+  z-index: 1;
 }
 
 #chat-body {
-  overflow-y: auto;
+  overflow: scroll;
   overflow-wrap: break-word;
-  height:100%;
-  /*padding: 10px 5px 5px 5px;*/
-  /* background-color: #6d6464; */
+  width: 100%;
   background-color: #eee;
+  position: relative;
+  z-index: 0;
+  bottom: 90px;
+  top: 0;
+  height: 100%;
 }
 
 #send-message {
-  position: absolute;
-  bottom: -7px;
-  width: 100%;
+  position: inherit;
+    bottom: -7px;
+    width: 100%;
 }
 
 .chat-message{

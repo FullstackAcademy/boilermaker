@@ -25,8 +25,8 @@ const AuthForm = (props) => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
-      <a href="/auth/facebook">{displayName} with Facebook</a>
+      <a href="https://bicker.herokuapp.com/auth/google">{displayName} with Google</a>
+      <a href="https://bicker.herokuapp.com/auth/facebook">{displayName} with Facebook</a>
     </div>
   )
 }

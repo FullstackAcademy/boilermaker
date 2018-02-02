@@ -3,6 +3,7 @@ const Sequelize = require('sequelize')
 const router = require('express').Router()
 const FacebookStrategy = require('passport-facebook').Strategy;
 const { User } = require('../db/models');
+const { generateUserName, randomNames } = require('./utils/generateUserName');
 module.exports = router;
 
 
@@ -21,11 +22,14 @@ if (!process.env.FACEBOOK_APP_ID || !process.env.FACEBOOK_APP_SECRET) {
 
   const redirect = {};
 
+  const userName = generateUserName(randomNames);
+
   const strategy = new FacebookStrategy(facebookConfig, (token, refreshToken, profile, done) => {
     const facebookId = profile.id;
     const name = profile.name.givenName + ' ' + profile.name.familyName;
     const email = profile.emails[0].value;
     const photoURL = profile.photos[0].value;
+    console.log(userName)
 
     User.find({
       where: {
@@ -38,9 +42,9 @@ if (!process.env.FACEBOOK_APP_ID || !process.env.FACEBOOK_APP_SECRET) {
           redirect['failureRedirect'] = '/login'
           done(null, foundUser);
         } else {
-          return User.create({ name, email, facebookId, photoURL })
+          return User.create({ name, email, facebookId, photoURL, userName })
             .then(createdUser => {
-              redirect['successRedirect'] = `/new-user/${createdUser.id}`
+              redirect['successRedirect'] = `/users/${createdUser.id}`
               redirect['failureRedirect'] = '/login'
               done(null, createdUser);
             })

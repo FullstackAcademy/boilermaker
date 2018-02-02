@@ -14,8 +14,8 @@ class Chat extends Component {
   }
 
   componentDidUpdate() {
-    let chat = document.getElementById('chat-body')
-    chat.scrollTop = chat.scrollHeight - 320;
+    let chat = document.getElementById('chat-body');
+    chat.scrollTop = chat.scrollHeight;
   }
   onKeyUp(e) {
     if (e.key === 'Shift') this.shift = false;
