@@ -21893,41 +21893,55 @@ var Channel = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement('div', { id: 'videos-container' }),
-        _react2.default.createElement(
-          'h1',
-          { className: 'animated slideInLeft' },
-          currentChannel
-        ),
-        _react2.default.createElement(_Timer2.default, null),
+        this.state.togglePrompt && _react2.default.createElement(_Prompts2.default, { displayPrompt: this.displayPrompt }),
         _react2.default.createElement(_Chat2.default, { channel: currentChannel }),
         _react2.default.createElement(
           'div',
-          null,
+          { className: 'channel-container' },
           _react2.default.createElement(
-            _reactBootstrap.Button,
-            { onClick: _socket.enqueue },
-            'Add Yourself To Queue'
-          )
-        ),
-        this.state.togglePrompt && _react2.default.createElement(_Prompts2.default, { displayPrompt: this.displayPrompt }),
-        _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(
-            _reactBootstrap.Button,
-            { className: 'open-button', bsSize: "large", onClick: this.displayPrompt },
-            '+'
+            'h1',
+            { className: 'animated slideInLeft' },
+            currentChannel
           ),
           _react2.default.createElement(
-            'button',
-            { onClick: function onClick() {
-                _this2.props.setTime(0, 2, 0, 2);
-              } },
-            ' -ga'
+            'div',
+            { className: 'main-channel-container' },
+            _react2.default.createElement(
+              'div',
+              { className: 'videos-container' },
+              _react2.default.createElement('div', { id: 'empty-video-1', className: 'empty-video' }),
+              _react2.default.createElement('div', { id: 'empty-video-2', className: 'empty-video' })
+            ),
+            _react2.default.createElement(_Timer2.default, null),
+            _react2.default.createElement(
+              'div',
+              { className: 'button-group-wrapper' },
+              _react2.default.createElement(
+                'div',
+                { className: 'button-group' },
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { onClick: _socket.enqueue },
+                  'Add Yourself To Queue'
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.Button,
+                  { className: 'open-button', bsSize: "large", onClick: this.displayPrompt },
+                  'Prompts'
+                ),
+                _react2.default.createElement(
+                  'button',
+                  { onClick: function onClick() {
+                      _this2.props.setTime(0, 2, 0, 2);
+                    } },
+                  'Test Timer'
+                ),
+                _react2.default.createElement(_Voting2.default, { changeVote1: this.changeVote1, changeVote2: this.changeVote2 })
+              )
+            )
           )
         ),
-        _react2.default.createElement(_Voting2.default, { changeVote1: this.changeVote1, changeVote2: this.changeVote2 })
+        _react2.default.createElement('div', null)
       );
     }
   }]);
@@ -21994,10 +22008,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Chat = function (_Component) {
   _inherits(Chat, _Component);
 
-  function Chat() {
+  function Chat(props) {
     _classCallCheck(this, Chat);
 
-    return _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, props));
+
+    _this.sendMessage = _this.sendMessage.bind(_this);
+    _this.onKeyUp = _this.onKeyUp.bind(_this);
+    _this.onKeyDown = _this.onKeyDown.bind(_this);
+    _this.shift = false;
+    return _this;
   }
 
   _createClass(Chat, [{
@@ -22007,14 +22027,28 @@ var Chat = function (_Component) {
       chat.scrollTop = chat.scrollHeight - 320;
     }
   }, {
+    key: 'onKeyUp',
+    value: function onKeyUp(e) {
+      if (e.key === 'Shift') this.shift = false;
+    }
+  }, {
+    key: 'onKeyDown',
+    value: function onKeyDown(e) {
+      if (e.key === 'Shift') this.shift = true;
+      if (!this.shift && e.key === 'Enter') {
+        e.preventDefault();
+        this.sendMessage(e);
+      }
+    }
+  }, {
     key: 'sendMessage',
     value: function sendMessage(evt) {
       evt.preventDefault();
-      var message = evt.target.input.value;
+      var message = evt.target.value;
       var username = this.props.user.userName;
       var messageObj = { message: message, username: username };
       _socket.socket.emit('message', messageObj);
-      evt.target.input.value = '';
+      evt.target.value = '';
     }
   }, {
     key: 'render',
@@ -22036,68 +22070,57 @@ var Chat = function (_Component) {
           transitionEnter: false,
           transitionLeave: false },
         _react2.default.createElement(
-          _reactBootstrap.Grid,
-          null,
+          _reactBootstrap.Col,
+          { xs: 12, s: 4, md: 3, id: 'main-chat-room', className: 'chat' },
           _react2.default.createElement(
-            _reactBootstrap.Col,
-            { xs: 4, md: 3, id: 'main-chat-room', className: 'chat' },
-            _react2.default.createElement(
-              'div',
-              { xs: 4, md: 3, id: 'chat-room-header' },
-              name
-            ),
-            _react2.default.createElement(
-              'div',
-              { id: 'chat-body' },
-              messages.map(function (message, i) {
-                var dateEndIdx = message.indexOf(']');
-                var date = message.slice(0, dateEndIdx + 1);
-                var body = message.slice(dateEndIdx + 2);
-                var nameEndIdx = body.indexOf(':');
-                var name = body.slice(0, nameEndIdx);
-                var text = body.slice(nameEndIdx + 2);
-                var color = 'chat-message-';
+            'div',
+            { id: 'chat-room-header' },
+            name
+          ),
+          _react2.default.createElement(
+            'div',
+            { id: 'chat-body' },
+            messages.map(function (message, i) {
+              var dateEndIdx = message.indexOf(']');
+              var date = message.slice(0, dateEndIdx + 1);
+              var body = message.slice(dateEndIdx + 2);
+              var nameEndIdx = body.indexOf(':');
+              var name = body.slice(0, nameEndIdx);
+              var text = body.slice(nameEndIdx + 2);
+              var color = 'chat-message-';
 
-                i % 2 === 0 ? color += 'even' : color += 'odd';
+              i % 2 === 0 ? color += 'even' : color += 'odd';
 
-                return _react2.default.createElement(
-                  'div',
-                  { key: 'chat-message-' + i, className: '' + color },
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'chat-message-header' },
-                    _react2.default.createElement(
-                      'p',
-                      { className: 'chat-message' },
-                      _react2.default.createElement(
-                        'span',
-                        { className: 'message-author' },
-                        name
-                      ),
-                      _react2.default.createElement(
-                        'span',
-                        { className: 'message-date' },
-                        date
-                      )
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'p',
-                    { className: 'chat-message' },
-                    text
-                  )
-                );
-              })
-            ),
-            _react2.default.createElement(
-              'form',
-              { xs: 4, md: 3, id: 'send-message', onSubmit: this.sendMessage.bind(this) },
-              _react2.default.createElement('input', {
-                id: 'chat-input',
-                name: 'input',
-                autoComplete: 'off'
-              })
-            )
+              return _react2.default.createElement(
+                'div',
+                { key: 'chat-message-' + i, className: 'chat-message ' + color },
+                _react2.default.createElement(
+                  'span',
+                  { className: 'message-author' },
+                  name
+                ),
+                _react2.default.createElement(
+                  'span',
+                  { className: 'chat-message-text' },
+                  text
+                ),
+                _react2.default.createElement(
+                  'span',
+                  { className: 'message-date' },
+                  date
+                )
+              );
+            })
+          ),
+          _react2.default.createElement(
+            'form',
+            { xs: 4, md: 3, id: 'send-message', onKeyDown: this.onKeyDown, onKeyUp: this.onKeyUp, onSubmit: this.sendMessage },
+            _react2.default.createElement('textarea', {
+              id: 'chat-input',
+              name: 'input',
+              autoComplete: 'off',
+              placeholder: 'Send a message'
+            })
           )
         )
       );
@@ -22599,7 +22622,6 @@ var Main = function (_Component) {
             )
           )
         ),
-        _react2.default.createElement('hr', null),
         children
       );
     }
@@ -22936,6 +22958,7 @@ var Timer = function (_Component) {
         }
         return;
       }
+      console.log('starting timer', this.props);
       this.timerCreator(false, totalTime, leadinTime / 1000);
       var count = leadinTime / 1000 - 1;
       //First Leadin
@@ -22994,7 +23017,6 @@ var Timer = function (_Component) {
 }(_react.Component);
 
 var mapState = function mapState(state) {
-  console.log(state.timer);
   return {
     leadinTime: state.timer.leadinTime,
     currTime: state.timer.currTime,
@@ -23695,7 +23717,8 @@ function resetConnection() {
     }
   }*/
   rtcConnection = Object.assign(rtcConnection, {
-    broadcasters: [],
+    broadcasters: {},
+    stream: null,
     session: { audio: false, video: false, oneway: true },
     dontOverrideSession: true,
     socketUrl: '/',
@@ -23721,6 +23744,10 @@ function resetConnection() {
         }
       }
     },
+    bandwidth: {
+      video: 256, // 256kbps
+      screen: 300 // 300kbps
+    },
 
     refresh: function refresh() {
       var channel = rtcConnection.channel;
@@ -23738,14 +23765,14 @@ function resetConnection() {
       //resetConnection();
     },
     joinBroadcasters: function joinBroadcasters(broadcasterIds) {
-      console.log('here', broadcasterIds);
-      if (!broadcasterIds.length || rtcConnection.broadcasters.length > 1) return;
-      rtcConnection.broadcasters = broadcasterIds;
+      if (!broadcasterIds.length || Object.keys(rtcConnection.broadcasters) > 1) return;
       if (!broadcasterIds.includes(rtcConnection.USERID)) rtcConnection.session = { audio: true, video: true, oneway: true };
       if (broadcasterIds[1] === rtcConnection.USERID) return;
-      broadcasterIds.forEach(function (broadcasterId) {
-        if (broadcasterId !== rtcConnection.USERID) rtcConnection.join(broadcasterId);
-      });
+      setTimeout(function () {
+        broadcasterIds.forEach(function (broadcasterId) {
+          if (broadcasterId !== rtcConnection.USERID) rtcConnection.join(broadcasterId);
+        });
+      }, 2000);
     },
     toggleMute: function toggleMute(first) {
       return;
@@ -23784,19 +23811,23 @@ function resetConnection() {
       video.srcObject = e.stream;
       var mediaElement = getMediaElement(video, {
         title: e.userid,
-        buttons: ['mute-audio'],
+        buttons: [],
         showOnMouseEnter: false,
-        height: '270px',
-        width: '480px'
+        height: '100%',
+        width: '100%'
       });
-      video.style.height = '270px';
-      video.style.width = '480px';
-      //if (e.userid === rtcConnection.mutedUser) 
+
+      rtcConnection.broadcasters[e.userid] = mediaElement;
+      mediaElement.volume = 0;
+
+      video.style.height = '100%';
+      video.style.width = '100%';
+
+      var container = Object.keys(rtcConnection.broadcasters).length < 2 ? '#empty-video-1' : '#empty-video-2';
+      console.log(container, Object.keys(rtcConnection.broadcasters));
       //I'm gonna use jquery here and anyone and I challenge anyone reading this to find a better soloution
-      $('#videos-container').append(mediaElement);
+      $(container).append(mediaElement);
       if (e.type === 'local') {
-        //mediaElement.toggle(['mute-audio']);
-        //e.stream.mute('audio');
         _socket.socket.emit('readyToBroadcast');
       }
     },
@@ -23855,14 +23886,15 @@ function enqueue() {
 }
 
 function offsetTimeByPing(roomState, sentTime) {
-  roomState.time = Date.now() - sentTime + roomState.time;
-  roomState.leadinTime = Date.now() - sentTime + roomState.leadinTime;
+  var dTime = (Date.now() - sentTime) / 1000;
+  roomState.time += dTime;
+  roomState.leadinTime += dTime;
   return roomState;
 }
 
 _socket.socket.on('prepareToBroadcast', function () {
   _rtcConnection2.default.userid = _rtcConnection2.default.USERID;
-  _rtcConnection2.default.session = { audio: false, video: true, broadcast: true };
+  _rtcConnection2.default.session = { audio: true, video: true, broadcast: true };
   _rtcConnection2.default.open(_rtcConnection2.default.USERID);
 });
 
@@ -23878,20 +23910,38 @@ _socket.socket.on('setRoomState', function (roomState) {
   //let currTime = 1000 * (roomState.status === 'LEAD IN' ? roomState.maxTime : roomState.time);
   //let currTime = roomState.time;
   //console.log(leadinTime,currTime,roomState.maxTime*1000);
-  if (!timerIsActive && roomState.time && roomState.active) _store2.default.dispatch((0, _store.setTime)(leadinTime, totalLeadinTime, time, totalTime));
+  console.log(totalLeadinTime, roomState.status);
+  if (!timerIsActive && roomState.active) _store2.default.dispatch((0, _store.setTime)(leadinTime, totalLeadinTime, time, totalTime));
   if (roomState.broadcasterIds) _rtcConnection2.default.joinBroadcasters(roomState.broadcasterIds);
   //rtcConnection.first = roomState.first;
   //setTimeout(()=>{rtcConnection.toggleMute(roomState.first);},2000);
 });
 
-_socket.socket.on('unmute', function () {
-  _rtcConnection2.default.attachStreams[0].unmute('audio');
+_socket.socket.on('unmute', function (id) {
   //rtcConnection.session = Object.assign({},rtcConnection.session,{audio:true});
+  //rtcConnection.stream.toggle('mute-audio');
+  /*console.warn('attempting to unumute...');
+  if (rtcConnection.muted) {
+    console.warn('UNMUTED!');
+    rtcConnection.muted = !rtcConnection.muted;
+    rtcConnection.stream.toggle('mute-audio');
+  }*/
+  var elem = _rtcConnection2.default.broadcasters[id];
+  if (id !== _rtcConnection2.default.userid) elem.volume = 1;
+  $(elem).parent().addClass('active');
 });
 
-_socket.socket.on('mute', function () {
-  _rtcConnection2.default.session = Object.assign({}, _rtcConnection2.default.session, { audio: false });
-  //rtcConnection.attachStreams[0].mute('audio');
+_socket.socket.on('mute', function (id) {
+  //rtcConnection.session = Object.assign({},rtcConnection.session,{audio:false});
+  /*console.warn('attempting to mute...');
+  if (!rtcConnection.muted) {
+    console.warn('MUTED!');
+    rtcConnection.muted = !rtcConnection.muted;
+    rtcConnection.stream.toggle('mute-audio');
+  }*/
+  var elem = _rtcConnection2.default.broadcasters[id];
+  if (id !== _rtcConnection2.default.userid) elem.volume = 0;
+  $(elem).parent().removeClass('active');
 });
 
 /*socket.on('switchMutedUser', () => {
@@ -23908,11 +23958,13 @@ _socket.socket.on('setUserId', function (id) {
 });
 
 _socket.socket.on('roomWasCancelled', function () {
+  $('.empty-video').removeClass('active');
   _rtcConnection2.default.endStreams();
   _store2.default.dispatch((0, _store.setTimerActive)(false));
 });
 
 _socket.socket.on('roomHasEnded', function () {
+  $('.empty-video').removeClass('active');
   _rtcConnection2.default.endStreams();
   _store2.default.dispatch((0, _store.setTimerActive)(false));
 });

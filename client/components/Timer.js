@@ -68,6 +68,7 @@ class Timer extends Component {
       }
       return;
     }
+    console.log('starting timer',this.props);
     this.timerCreator(false, totalTime, leadinTime / 1000);
     let count = leadinTime / 1000 - 1;
     //First Leadin
@@ -121,7 +122,6 @@ class Timer extends Component {
 }
 
 const mapState = (state) => {
-  console.log(state.timer);
   return {
     leadinTime: state.timer.leadinTime,
     currTime: state.timer.currTime,

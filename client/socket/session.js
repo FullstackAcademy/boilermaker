@@ -14,45 +14,64 @@ export function changeChannel(channelName) {
   //rtcConnection.connect(channelName);
 }
 
-export function enqueue(){
+export function enqueue() {
   socket.emit('enqueue');
 }
 
-function offsetTimeByPing(roomState,sentTime){
-  roomState.time = Date.now() - sentTime + roomState.time;
-  roomState.leadinTime = Date.now() - sentTime + roomState.leadinTime;
+function offsetTimeByPing(roomState, sentTime) {
+  let dTime = (Date.now() - sentTime) / 1000;
+  roomState.time += dTime;
+  roomState.leadinTime += dTime;
   return roomState;
 }
 
-socket.on('prepareToBroadcast',() => {
+socket.on('prepareToBroadcast', () => {
   rtcConnection.userid = rtcConnection.USERID;
-  rtcConnection.session = {audio: false, video:true, broadcast:true};
+  rtcConnection.session = { audio: true, video: true, broadcast: true };
   rtcConnection.open(rtcConnection.USERID);
 });
 
 socket.on('setRoomState', roomState => {
   let timerIsActive = store.getState().timer.active;
-  let {time, leadinTime, totalTime, totalLeadinTime} = roomState;
+  let { time, leadinTime, totalTime, totalLeadinTime } = roomState;
   rtcConnection.roomState = offsetTimeByPing(roomState, roomState.sentTime);
   //let leadinTime = 1000 * (roomState.status === 'LEAD IN' ? roomState.time : 0);
   //let currTime = 1000 * (roomState.status === 'LEAD IN' ? roomState.maxTime : roomState.time);
   //let currTime = roomState.time;
   //console.log(leadinTime,currTime,roomState.maxTime*1000);
-  if(!timerIsActive && roomState.time && roomState.active) store.dispatch(setTime(leadinTime, totalLeadinTime, time, totalTime));
-  if(roomState.broadcasterIds) rtcConnection.joinBroadcasters(roomState.broadcasterIds);
+  console.log(totalLeadinTime,roomState.status);
+  if (!timerIsActive && roomState.active) store.dispatch(setTime(leadinTime, totalLeadinTime, time, totalTime));
+  if (roomState.broadcasterIds) rtcConnection.joinBroadcasters(roomState.broadcasterIds);
   //rtcConnection.first = roomState.first;
   //setTimeout(()=>{rtcConnection.toggleMute(roomState.first);},2000);
 });
 
-socket.on('unmute',()=>{
-  rtcConnection.attachStreams[0].unmute('audio');
+socket.on('unmute', id => {
   //rtcConnection.session = Object.assign({},rtcConnection.session,{audio:true});
+  //rtcConnection.stream.toggle('mute-audio');
+  /*console.warn('attempting to unumute...');
+  if (rtcConnection.muted) {
+    console.warn('UNMUTED!');
+    rtcConnection.muted = !rtcConnection.muted;
+    rtcConnection.stream.toggle('mute-audio');
+  }*/
+  var elem = rtcConnection.broadcasters[id];
+  if(id !== rtcConnection.userid) elem.volume = 1;
+  $(elem).parent().addClass('active');
 });
 
 
-socket.on('mute',()=>{
-  rtcConnection.session = Object.assign({},rtcConnection.session,{audio:false});
-  //rtcConnection.attachStreams[0].mute('audio');
+socket.on('mute', id => {
+  //rtcConnection.session = Object.assign({},rtcConnection.session,{audio:false});
+  /*console.warn('attempting to mute...');
+  if (!rtcConnection.muted) {
+    console.warn('MUTED!');
+    rtcConnection.muted = !rtcConnection.muted;
+    rtcConnection.stream.toggle('mute-audio');
+  }*/
+  var elem = rtcConnection.broadcasters[id];
+  if(id !== rtcConnection.userid) elem.volume = 0;
+  $(elem).parent().removeClass('active');
 });
 
 /*socket.on('switchMutedUser', () => {
@@ -68,12 +87,14 @@ socket.on('setUserId', id => {
   socket.emit('getRoomState');
 });
 
-socket.on('roomWasCancelled',()=>{
+socket.on('roomWasCancelled', () => {
+  $('.empty-video').removeClass('active');
   rtcConnection.endStreams();
   store.dispatch(setTimerActive(false));
 });
 
-socket.on('roomHasEnded',()=>{
+socket.on('roomHasEnded', () => {
+  $('.empty-video').removeClass('active');
   rtcConnection.endStreams();
   store.dispatch(setTimerActive(false));
 });
