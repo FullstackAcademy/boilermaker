@@ -3,6 +3,7 @@ const Sequelize = require('sequelize')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const { User } = require('../db/models')
+const { generateUserName, randomNames } = require('./utils/generateUserName');
 module.exports = router
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
@@ -18,6 +19,8 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   }
 
   const redirect = {};
+
+  const userName = generateUserName(randomNames);
 
   const strategy = new GoogleStrategy(googleConfig, (token, refreshToken, profile, done) => {
     const googleId = profile.id;
@@ -36,9 +39,9 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
           redirect['failureRedirect'] = '/login'
           done(null, foundUser);
         } else {
-          return User.create({ name, email, googleId, photoURL })
+          return User.create({ name, email, googleId, photoURL, userName })
             .then(createdUser => {
-              redirect['successRedirect'] = `/new-user/${createdUser.id}`
+              redirect['successRedirect'] = `/users/${createdUser.id}`
               redirect['failureRedirect'] = '/login'
               done(null, createdUser);
             })
