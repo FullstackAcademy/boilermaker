@@ -7,8 +7,7 @@ const Channel = db.define('channel', {
     unique: true,
     allowNull: false,
     validate: {
-      isAlphanumeric: true,
-      len: [3, 25],
+      len: [3, 50],
       notEmpty: true
     }
   },
@@ -17,7 +16,7 @@ const Channel = db.define('channel', {
     allowNull: false,
   },
   description: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
     validate: {
       notEmpty: true

@@ -25,6 +25,7 @@ module.exports = function (io) {
       this.viewers = [];
       this.broadcasters = [];
       this.queue = [];
+      this.voteTally = [0, 0];
       this.id = ++roomId;
       this.roomActivity = null;
       this.currentAction = WAITING_FOR_QUEUE;
@@ -74,19 +75,26 @@ module.exports = function (io) {
               status: 'DEBATE',
               first: true
             }
-            io.to(this.name).emit('unmute',this.broadcasters[0].id);
+            io.to(this.name).emit('unmute', this.broadcasters[0].id);
             this.currentAction = USERS_DEBATING;
             console.log('first user debating');
           });
           break;
 
         case USERS_DEBATING:
+          io.to(this.name).on('chooseVote', (idx, castedVote) => {
+            this.voteTally[idx]++;
+            if (castedVote) {
+              if (idx) this.voteTally[idx - 1]--;
+              else this.voteTally[idx + 1]--;
+            }
+          })
           if ((this.state.time += this.tickRate) >= this.debateLength) {
             if (this.state.first) {
               this.leadin(() => {
                 this.state.first = false;
-                io.to(this.name).emit('mute',this.broadcasters[0].id);
-                io.to(this.name).emit('unmute',this.broadcasters[1].id);
+                io.to(this.name).emit('mute', this.broadcasters[0].id);
+                io.to(this.name).emit('unmute', this.broadcasters[1].id);
                 this.state.time = 0;
                 console.log('second user begin debating');
                 this.currentAction = USERS_DEBATING;

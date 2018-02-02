@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
 import { setMessages, setTime } from '../store';
-import { changeChannel, enqueue } from '../socket';
+import { changeChannel, enqueue, chooseVote } from '../socket';
 
 import Chat from './Chat';
 import VideoFeed from './VideoFeed';
@@ -16,7 +16,7 @@ class Channel extends Component {
   constructor() {
     super()
     this.state = {
-      togglePrompt: false
+      togglePrompt: false,
     }
     this.displayPrompt = this.displayPrompt.bind(this);
   }
@@ -34,12 +34,14 @@ class Channel extends Component {
   changeVote1() {
     document.getElementById('vote-1').classList.toggle('active');
     document.getElementById('vote-2').classList.remove('active');
+    chooseVote(0);
   }
   changeVote2() {
     document.getElementById('vote-2').classList.toggle('active');
     document.getElementById('vote-1').classList.remove('active');
+    chooseVote(1);
   }
-
+ 
   render() {
     const { currentChannel, timerIsActive } = this.props;
     return (
@@ -49,14 +51,14 @@ class Channel extends Component {
         }
         <Chat channel={currentChannel} />
         <div className='channel-container'>
-        <h1 className="animated slideInLeft">{currentChannel}</h1>
-        
+          <h1 className="animated slideInLeft">{currentChannel}</h1>
+
           {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
-          
+
           <div className='main-channel-container'>
             <div className='videos-container'>
-              <div id='empty-video-1' className='empty-video'/>
-              <div id='empty-video-2' className='empty-video'/>
+              <div id='empty-video-1' className='empty-video' />
+              <div id='empty-video-2' className='empty-video' />
             </div>
             <Timer />
             <div className='button-group-wrapper'>
@@ -66,14 +68,14 @@ class Channel extends Component {
                 <button onClick={() => { this.props.setTime(0, 2, 0, 2) }}>Test Timer</button>
                 <Voting changeVote1={this.changeVote1} changeVote2={this.changeVote2} />
               </div>
-          </div>
+            </div>
           </div>
         </div>
         <div>
           <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>
             +
           </Button>
-          <button onClick={()=>{this.props.setTime(0,3,0,3)}}> Test Timer Button</button>
+          <button onClick={() => { this.props.setTime(0, 3, 0, 3) }}> Test Timer Button</button>
         </div>
       </div >
     )

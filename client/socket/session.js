@@ -14,9 +14,16 @@ export function changeChannel(channelName) {
   //rtcConnection.connect(channelName);
 }
 
+/****************** Client interactions ******************/
 export function enqueue() {
   socket.emit('enqueue');
 }
+
+export function chooseVote(idx) {
+  socket.emit('chooseVote', idx); //sends corresponding broadcaster index i.e. [0 OR 1]
+}
+
+/****************** Client room ******************/
 
 function offsetTimeByPing(roomState, sentTime) {
   let dTime = (Date.now() - sentTime) / 1000;
@@ -39,7 +46,7 @@ socket.on('setRoomState', roomState => {
   //let currTime = 1000 * (roomState.status === 'LEAD IN' ? roomState.maxTime : roomState.time);
   //let currTime = roomState.time;
   //console.log(leadinTime,currTime,roomState.maxTime*1000);
-  console.log(totalLeadinTime,roomState.status);
+  console.log(totalLeadinTime, roomState.status);
   if (!timerIsActive && roomState.active) store.dispatch(setTime(leadinTime, totalLeadinTime, time, totalTime));
   if (roomState.broadcasterIds) rtcConnection.joinBroadcasters(roomState.broadcasterIds);
   //rtcConnection.first = roomState.first;
@@ -56,7 +63,7 @@ socket.on('unmute', id => {
     rtcConnection.stream.toggle('mute-audio');
   }*/
   var elem = rtcConnection.broadcasters[id];
-  if(id !== rtcConnection.userid) elem.volume = 1;
+  if (id !== rtcConnection.userid) elem.volume = 1;
   $(elem).parent().addClass('active');
 });
 
@@ -70,7 +77,7 @@ socket.on('mute', id => {
     rtcConnection.stream.toggle('mute-audio');
   }*/
   var elem = rtcConnection.broadcasters[id];
-  if(id !== rtcConnection.userid) elem.volume = 0;
+  if (id !== rtcConnection.userid) elem.volume = 0;
   $(elem).parent().removeClass('active');
 });
 
