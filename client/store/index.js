@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import me from './me';
 import messages from './messages';
 import channels from './channels';
+import categories from './categories';
 import users from './users'
 import timer from './timer';
 
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   me,
   messages,
   channels,
+  categories,
   users,
   timer,
 });
@@ -27,5 +29,6 @@ export default store;
 export * from './me';
 export * from './messages';
 export * from './channels';
+export * from './categories';
 export * from './users';
 export * from './timer';

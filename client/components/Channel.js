@@ -70,6 +70,10 @@ class Channel extends Component {
           </div>
         </div>
         <div>
+          <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>
+            +
+          </Button>
+          <button onClick={()=>{this.props.setTime(0,3,0,3)}}> Test Timer Button</button>
         </div>
       </div >
     )

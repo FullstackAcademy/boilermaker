@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProgressBar from 'progressbar.js';
 import { setTimeout } from 'timers';
-import { setTotalTime, setTimerActive } from '../store';
+import { setTimerActive } from '../store';
 
 var bar;
 class Timer extends Component {
@@ -14,7 +14,9 @@ class Timer extends Component {
     }
 
     this.timerCreator = this.timerCreator.bind(this);
+    this.createLeadIn = this.createLeadIn.bind(this);
   }
+
   timerCreator(flip, currTime, forcedStartText) {
     let { currTime: ct, totalTime, leadinTime } = this.props;
     currTime = currTime || ct;
@@ -26,7 +28,7 @@ class Timer extends Component {
       trailWidth: 1,
       duration: totalTime - currTime,
       svgStyle: null,
-      textFrozen:true,
+      textFrozen: true,
       text: {
         value: '',
         alignToBottom: false
@@ -37,18 +39,17 @@ class Timer extends Component {
       step: (state, bar) => {
         bar.path.setAttribute('stroke', state.color);
         let value = Math.floor((bar.value() * totalTime / 1000));
-        if(!bar.textFrozen)bar.setText(forcedStartText || totalTime / 1000 - value);
+        if (!bar.textFrozen) bar.setText(forcedStartText || totalTime / 1000 - value);
         if (value === 25) {
           this.setState({ shake: true })
         } else if (value === 30) {
           this.setState({ shake: false })
         }
-        bar.setText(totalTime / 1000 - value);
         bar.text.style.color = state.color;
       }
     });
-    flip && $('svg').addClass('flip');// && $('.progressbar-text').toggleClass('flip');
-    
+    flip && $('svg').addClass('flip');
+
     let text = this.bar.text;
     text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
     text.style.fontSize = '2rem';
@@ -57,58 +58,75 @@ class Timer extends Component {
     this.bar.set(currTime / totalTime);
     this.bar.animate(1.0);  // Number from 0.0 to 1.0
   }
-  
-  componentDidUpdate() {
-    let { leadinTime:startTime, totalLeadinTime, currTime, totalTime, timerIsActive } = this.props;
+
+  createLeadIn() {
+    bar.textFrozen = true;
+    let { leadinTime: startTime, totalLeadinTime } = this.props;
     let leadinTime = totalLeadinTime - startTime;
-    if(!timerIsActive){
-      if(bar){
-        bar.destroy();
-        bar = null;
-      }
-      return;
-    }
-    console.log('starting timer',this.props);
-    this.timerCreator(false, totalTime, leadinTime / 1000);
     let count = leadinTime / 1000 - 1;
-    //First Leadin
+
     const countDown = () => {
       if (count <= 0 || !this.bar) window.clearInterval(leadIn);
-      if(!this.bar)return;
+      if (!this.bar) return;
       this.bar.setText(count)
       count--
     }
     let leadIn = setInterval(countDown, 1000);
 
-    //First Timer
-    setTimeout(() => {
-      this.timerCreator(false);
-      bar.textFrozen = false;
-    }, totalLeadinTime);
-    
-    //Second Leadin
-    setTimeout(() => {
-      bar.textFrozen = true;
-      leadIn = setInterval(countDown, 1000);
-      count = leadinTime / 1000;
-      countDown();
+  }
 
-    },totalLeadinTime + totalTime)
-    
-    //Second Timer
-    setTimeout(() => {
-      this.timerCreator(true);
-      bar.textFrozen = false;
-    }, totalLeadinTime * 2 + totalTime);
-
-    //Kill Everything
-    setTimeout(() => {
-      if (this.bar) {
-        this.bar.destroy();
-        bar = (this.bar = null);
-        this.props.setTimerActive(false);
+  componentDidUpdate() {
+    let { leadinTime: startTime, totalLeadinTime, currTime, totalTime, timerIsActive, status } = this.props;
+    let leadinTime = totalLeadinTime - startTime;
+    if (!timerIsActive) {
+      if (bar) {
+        bar.destroy();
+        bar = null;
       }
-    }, totalLeadinTime * 2 + totalTime * 2);
+      return;
+    }
+    this.timerCreator(false, totalTime, leadinTime / 1000);
+
+    if (status <= 0) {
+      //First Leadin
+      this.createLeadIn();
+    }
+
+    if (status <= 1) {
+      //First Timer
+      setTimeout(() => {
+        this.timerCreator(false, currTime);
+        bar.textFrozen = false;
+      }, totalLeadinTime);
+    }
+
+    if (status <= 2) {
+      //Second Leadin
+      setTimeout(() => {
+        this.timerCreator(false, totalTime, leadinTime / 1000);
+        this.createLeadIn();
+      }, totalLeadinTime + totalTime)
+    }
+
+    if (status <= 3) {
+      //Second Timer
+      setTimeout(() => {
+        this.timerCreator(true);
+        bar.textFrozen = false;
+      }, totalLeadinTime * 2 + totalTime);
+    }
+
+    if (status <= 4) {
+      //Kill Everything
+      setTimeout(() => {
+        if (this.bar) {
+          this.bar.destroy();
+          bar = (this.bar = null);
+          this.props.setTimerActive(false);
+        }
+      }, totalLeadinTime * 2 + totalTime * 2);
+    }
+
   }
 
   render() {
@@ -128,6 +146,7 @@ const mapState = (state) => {
     totalTime: state.timer.totalTime,
     totalLeadinTime: state.timer.totalLeadinTime,
     timerIsActive: state.timer.active,
+    status: state.timer.status
   }
 }
 

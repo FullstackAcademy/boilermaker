@@ -67,6 +67,19 @@ form div {
   -moz-animation-delay: 1s;
 }
 
+div.home-category-list-item {
+  text-align: center;
+  float:left;
+  margin-left: 3em;
+  margin-right: 3em;
+  width: 250px;
+  height: 300px;
+}
+
+.home-category-list-images {
+  width: 15vw;
+}
+
 /************************ CHANNEL ***********************/
 
 /*video {
