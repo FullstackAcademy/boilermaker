@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { PanelGroup, Panel, Image } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -7,24 +7,37 @@ const ChannelList = (props) => {
   const { channels } = props;
   return (
     <ReactCSSTransitionGroup
-        transitionName="transition"
-        transitionAppear={true}
-        transitionAppearTimeout={750}
-        transitionEnter={false}
-        transitionLeave={false}>
-      <ListGroup>
+      transitionName="transition"
+      transitionAppear={true}
+      transitionAppearTimeout={750}
+      transitionEnter={false}
+      transitionLeave={false}>
+
+      <div className="category-channel-list animated slideInLeft">
         {
           channels.filteredChannelList.map(channel => {
             return (
-              <ListGroupItem key={channel.id} className="channel-list-item animated flipInX">
-                <NavLink to={`/channels/${channel.name}`}>
-                  <h3>{channel.name}</h3>
+              <div className="category-channel-list-item animated flipInX">
+                <NavLink to={`/channels/${channel.name}`} key={channel.id}>
+                  <Image src={`${channel.imageURL}`} className={"category-channel-list-item-image"} />
                 </NavLink>
-              </ListGroupItem>
+                <PanelGroup accordion id="category-channel-list-item-container" defaultActiveKey="2">
+                  <Panel eventKey="1">
+                    <Panel.Heading componentClass="category-channel-list-item-header">
+                      <Panel.Title toggle>
+                        {channel.name}
+                      </Panel.Title >
+                    </Panel.Heading>
+                    <Panel.Body collapsible>
+                      {channel.description} TEST DESCRIPTION, NEED TO FILL IN
+                    </Panel.Body>
+                  </Panel>
+                </PanelGroup>
+              </div>
             )
           })
         }
-      </ListGroup>
+      </div>
     </ReactCSSTransitionGroup>
   )
 }

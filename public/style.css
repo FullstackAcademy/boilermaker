@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  color: #FE9002;
 }
 
 label {
@@ -21,7 +22,7 @@ a:link, a:visited, a:active {
 }
 
 a:hover {
-  color: #f08f36;
+  color: #FE9002;
   text-decoration: none;
 }
 
@@ -44,6 +45,27 @@ form div {
 }
 
 /*********************** HOME ***************************/
+div.home-jumbotron {
+  background-color: #FE9002;
+  text-align: center;
+  color: white;
+  height: 200px;
+  width: 100%;
+  margin-bottom: 5em;
+}
+
+div#welcome-text {
+  position: relative;
+  top: 15%;
+}
+
+#welcome-text h1 {
+  font-size: 6em
+}
+
+#welcome-text p {
+  font-size: 1.5em
+}
 
 #welcome-text {
   animation-duration: 1s;
@@ -57,18 +79,30 @@ form div {
   -moz-animation-delay: 1s;
 }
 
-div.home-category-list-item {
+#home-category-list-title.panel{
   text-align: center;
-  float:left;
-  margin-left: 3em;
-  margin-right: 3em;
-  width: 250px;
-  height: 300px;
+  box-shadow: 2.5px 2.5px 5px grey;
+  background-color: #FE9002;
+  color: white;
+  width: 65%;
+  margin-bottom: 2em;
 }
 
-.home-category-list-images {
+div.home-category-list-item {
+  font-size: 2em;
+  text-align: center;
+  float:left;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  width: 250px;
+  height: 300px;
+  border: 1px solid lightgray;
+}
+
+.home-category-list-item-image {
   width: 15vw;
 }
+
 
 /************************ CHANNEL ***********************/
 
@@ -98,7 +132,7 @@ svg {
 }
 
 .modal-header{
-  color: #f08f36;
+  color: #FE9002;
   text-align: center;
   font-size: 2em;
 }
@@ -107,12 +141,36 @@ svg {
   border-radius: 100%
 }
 
-/************************ CHANNEL LIST ********************/
+/************************ SINGLE CATEGORY CHANNEL LIST ***************/
 
-.channel-list-item {
+.category-page-header-img{
+  height: 100%;
+  max-height: 39px;
+  margin-left: 25px;
+}
+
+.category-channel-list-item{
   animation-delay: .5s;
   -webkit-animation-delay: .5s;
   -moz-animation-delay: .5s;
+}
+
+div.category-channel-list-item {
+  font-size: 1em;
+  text-align: center;
+  float:left;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  width: 400px;
+  height: 200px;
+}
+
+category-channel-list-item-header{
+  
+}
+
+.category-channel-list-item-image {
+  width: 15vw;
 }
 
 /************************ USER PAGE ***********************/
@@ -156,7 +214,7 @@ svg {
 
 #chat-room-header {
   font-size: 30px;
-  background-color: #ff9001;
+  background-color: #FE9002;
   color: #ffe1c7;
   padding: 5px;
   text-align: center;
@@ -184,7 +242,7 @@ svg {
 }
 
 .chat-message-even {
-  background-color: #ff8f02;
+  background-color: #FE9002;
   color: #ffdcbb;
   padding: 0px 7px;
   border-radius: 10px;
@@ -192,7 +250,7 @@ svg {
 
 .chat-message-odd {
   background-color: #ffe1c8;
-  color: #ff8e02;
+  color: #FE9002;
   padding: 0px 7px;
   border-radius: 10px;
 }

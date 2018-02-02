@@ -25,6 +25,11 @@ class Main extends Component {
                 </NavLink >
                 </Navbar.Text>
                 <Navbar.Text>
+                  <NavLink to="/categories">
+                    Categories
+                </NavLink >
+                </Navbar.Text>
+                <Navbar.Text>
                   <NavLink onClick={handleClick} to="/">
                     Logout
                 </NavLink >
@@ -35,6 +40,11 @@ class Main extends Component {
                 <Navbar.Text>
                   <NavLink to="/">
                     Home
+                </NavLink >
+                </Navbar.Text>
+                <Navbar.Text>
+                  <NavLink to="/categories">
+                    Categories
                 </NavLink >
                 </Navbar.Text>
                 <Navbar.Text>
