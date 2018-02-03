@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import checkUserName from './store';
+import checkUserName from '../../store';
 
 class EditUser extends Component {
   constructor(props, context) {
