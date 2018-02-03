@@ -38,10 +38,9 @@ module.exports = (io, socket) => {
       socket.vote.castedVote = true;
     } else {
       socket.room.voteTally[idx]--;
-      socket.vote.choice = idx;
+      socket.vote.choice = 2;
       socket.vote.castedVote = false;
     }
-    console.log(socket.room.voteTally);
   })
 
   socket.on('message', messageObj => {

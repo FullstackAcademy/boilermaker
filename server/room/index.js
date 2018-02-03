@@ -82,13 +82,6 @@ module.exports = function (io) {
           break;
 
         case USERS_DEBATING:
-          io.to(this.name).on('chooseVote', (idx, castedVote) => {
-            this.voteTally[idx]++;
-            if (castedVote) {
-              if (idx) this.voteTally[idx - 1]--;
-              else this.voteTally[idx + 1]--;
-            }
-          })
           if ((this.state.time += this.tickRate) >= this.debateLength) {
             if (this.state.first) {
               this.leadin(() => {
