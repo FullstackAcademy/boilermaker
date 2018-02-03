@@ -7,7 +7,8 @@ const defaultState = {
     totalLeadinTime: 0,
     active: false,
     status: 0
-  }
+  },
+  winner: '',
 }
 
 
@@ -46,6 +47,16 @@ export const setTime = (leadinTime, totalLeadinTime, currTime, totalTime, status
   status: status || 0
 })
 
+// WINNER
+const SET_WINNER = 'SET_WINNER';
+
+export const setWinner = userName => ({
+  type: WINNER,
+  userName
+});
+
+// REDUCER
+
 export default function (state = defaultState, action) {
   switch (action.type) {
 
@@ -59,7 +70,7 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         messages: [...state.messages, action.message]
-      }
+      };
 
     // TIMER
     case SET_CURR_TIME:
@@ -90,7 +101,7 @@ export default function (state = defaultState, action) {
           active: true,
           status: action.status
         }
-      }
+      };
     case SET_TIMER_ACTIVE:
       return {
         ...state,
@@ -98,7 +109,14 @@ export default function (state = defaultState, action) {
           ...state.timer,
           active: action.active
         }
-      }
+      };
+
+    // WINNER 
+    case SET_WINNER:
+      return {
+        ...state,
+        winner: action.userName
+      };
     default:
       return state;
   }

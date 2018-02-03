@@ -11,13 +11,13 @@ import room from './room';
 // import messages from './messages';
 
 const reducer = combineReducers({
-  // messages,
-  // timer,
   me,
   channels,
   categories,
   users,
   room
+  // messages,
+  // timer,
 });
 
 const middleware = composeWithDevTools(applyMiddleware(

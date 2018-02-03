@@ -110,6 +110,10 @@ socket.on('roomHasEnded', () => {
   store.dispatch(setTimerActive(false));
 });
 
+socket.on('setWinner', userName => {
+  store.dispatch(setWinner(userName));
+});
+
 /*socket.on('broadcasterStarted', broadcasterId => {
   let { currChannel} = store.getState();
   rtcConnection.session = Object.assign({},rtcConnection.session,{audio:true,video:true});

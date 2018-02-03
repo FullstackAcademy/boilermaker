@@ -93,9 +93,10 @@ module.exports = function (io) {
                 this.currentAction = USERS_DEBATING;
               });
             } else {
-              let winner = this.broadcasters.reduce((a, b) => {
+              let indexOfWinner = this.voteTally.indexOf(this.voteTally.reduce((a, b) => {
                 return Math.max(a,b);
-              });
+              }));
+              socket.emit('setWinner', this.broadcasters[indexOfWinner].userName);
               this.currentAction = RESETTING_GAME;
               this.state = {
                 time: 0,
