@@ -32,6 +32,12 @@ export const editUser = (user) =>
       .then(res => dispatch(updateUser(res.data)))
       .catch(console.error)
 
+export const checkUserName = userName => {
+  return (defaultState.userList.find(user => {
+    return user.name === userName;
+  }))
+}
+
 export const createUserName = (user) =>
   dispatch =>
     axios.put(`/api/users/${user.userId}`, user)
