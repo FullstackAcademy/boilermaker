@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Label, PageHeader, Image, Panel } from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { Reaction } from '../';
 
 const CategoryList = (props) => {
   const { categories } = props;
@@ -15,7 +14,6 @@ const CategoryList = (props) => {
           </Panel.Heading>
         </Panel>
       </h1>
-      <Reaction />
       <div className="home-category-list animated slideInLeft">
         {
           categories.slice(0, 4).map(category => {

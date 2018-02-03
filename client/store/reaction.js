@@ -19,7 +19,7 @@ export const setReaction = reactionId => ({
 export default (state = defaultState, action) => {
   switch (action.type) {
     case SET_REACTION:
-      return action.reactionId;
+      return action.reaction;
     default:
       return state;
   }

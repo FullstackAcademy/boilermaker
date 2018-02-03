@@ -11,6 +11,7 @@ import VideoFeed from './VideoFeed';
 import Timer from './Timer';
 import Voting from './Voting';
 import Prompts from './Prompts';
+import { Reaction, ReactionButtons } from './';
 
 class Channel extends Component {
   constructor() {
@@ -46,6 +47,8 @@ class Channel extends Component {
     const { currentChannel, timerIsActive } = this.props;
     return (
       <div>
+        <Reaction />
+        <ReactionButtons />
         {
           this.state.togglePrompt && <Prompts displayPrompt={this.displayPrompt} />
         }

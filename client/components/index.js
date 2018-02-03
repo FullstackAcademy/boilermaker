@@ -7,5 +7,6 @@ export { default as CreateChannel } from './CreateChannel';
 export { default as UserPage } from './UserPage';
 export { default as UserNamePrompt } from './UserNamePrompt';
 export { default as Reaction } from './Reaction';
+export { default as ReactionButtons } from './ReactionButtons';
 
 export { Login, Signup } from './auth-form'
