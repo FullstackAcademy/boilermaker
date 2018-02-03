@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import checkUserName from '../../store';
 
-export default class EditUser extends Component {
+class EditUser extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -18,9 +19,9 @@ export default class EditUser extends Component {
 
   getValidationState(key) {
     const length = this.state[key].length;
-    if (length > 0) return 'success';
-    else if (length > 0) return 'error';
-    return null;
+    if (length < 0) return 'error';
+    if (key === 'user' && this.props.checkUserName(this.state.userName)) return 'error';
+    return 'success';
   }
 
   handleChange(key, e) {
@@ -96,3 +97,13 @@ export default class EditUser extends Component {
     );
   }
 }
+
+const mapDispatch = (dispatch) => {
+  return {
+      checkUserName() {
+        return (dispatch(checkUserName));
+    }
+  }
+}
+
+export default connect(null, mapDispatch)(EditUser);

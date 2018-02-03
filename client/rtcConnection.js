@@ -62,10 +62,10 @@ function resetConnection() {
         }
       }
     },
-    // bandwidth: {
-    //   video: 256,    // 256kbps
-    //   screen: 300,    // 300kbps
-    // },
+    bandwidth: {
+      video: 512,    // 256kbps
+      screen: 600,    // 300kbps
+    },
 
     refresh() {
       const channel = rtcConnection.channel;
