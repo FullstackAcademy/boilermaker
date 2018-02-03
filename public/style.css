@@ -418,3 +418,22 @@ category-channel-list-item-header{
     transform: translateX(-20px)
   }
 } */
+
+/********* REACTION **********/
+.reaction-enter {
+  opacity: 0;
+}
+
+.reaction-enter.reaction-enter-active {
+  opacity: 1;
+  transition: opacity .75s ease-in;
+}
+
+.reaction-leave {
+  opacity: 1;
+}
+
+.reaction-leave.reaction-leave-active {
+  opacity: 0;
+  transition: opacity .5s ease-in;
+}
