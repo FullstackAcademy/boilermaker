@@ -4,7 +4,13 @@ module.exports = (io, socket) => {
   if (!rl) {
     roomList = require('../room')(io);
   }
+  
   console.log(`A socket connection to the server has been made: ${socket.id}`);
+
+  socket.on('linkUserProfile', (userId, userName) => {
+    socket.userId = userId;
+    socket.userName = userName;
+  })
 
   socket.on('disconnect', () => {
     if (socket.room) {
@@ -41,7 +47,7 @@ module.exports = (io, socket) => {
       socket.vote.choice = 2;
       socket.vote.castedVote = false;
     }
-  })
+  });
 
   socket.on('message', messageObj => {
     let room = io;
@@ -50,9 +56,11 @@ module.exports = (io, socket) => {
     if (socket.room.name) room = io.to(socket.room.name);
     room.emit('message', `[${new Date().toLocaleTimeString('en-US')}] ${username}: ${message}`)
   });
+
   socket.on('readyToBroadcast', () => {
     if ('broadcasterCount' in socket.room.state) socket.room.state.broadcasterCount++;
   });
+
   socket.on('getRoomState', () => {
     socket.room.sendRoomState(socket);
   });

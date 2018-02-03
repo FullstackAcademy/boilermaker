@@ -6,6 +6,7 @@ import { logout, fetchSingleUser, fetchSearchChannels } from '../store';
 import { Navbar, Nav, NavItem, FormGroup, NavDropdown, MenuItem } from 'react-bootstrap';
 import SearchBar from './SearchBar';
 import history from '../history';
+import { linkUserProfile } from '../socket';
 
 class Main extends Component {
 
@@ -17,6 +18,9 @@ class Main extends Component {
     const { children, isLoggedIn, channels, handleClick, handleSearch, user } = this.props
     return (
       <div>
+        {
+          isLoggedIn && linkUserProfile(user.id, user.userName)
+        }
         <Navbar>
           <Navbar.Brand>
             <img src="/Bickr-logo.png" id="nav-bar-logo" />

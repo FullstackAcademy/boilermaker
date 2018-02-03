@@ -93,7 +93,10 @@ module.exports = function (io) {
                 this.currentAction = USERS_DEBATING;
               });
             } else {
-              this.currentAction = WAITING_FOR_SCORING;
+              let winner = this.broadcasters.reduce((a, b) => {
+                return Math.max(a,b);
+              });
+              this.currentAction = RESETTING_GAME;
               this.state = {
                 time: 0,
                 totalTime: this.votingTime,
@@ -103,8 +106,7 @@ module.exports = function (io) {
             }
           }
           break;
-
-        case WAITING_FOR_SCORING:
+        case RESETTING_GAME:
           if ((this.state.time += this.tickRate) >= this.votingTime) {
             this.reset();
           }

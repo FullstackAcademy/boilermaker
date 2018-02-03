@@ -23,6 +23,10 @@ export function chooseVote(idx) {
   socket.emit('chooseVote', idx); //sends corresponding broadcaster index i.e. [0 OR 1]
 }
 
+export function linkUserProfile(userId, userName) {
+  socket.emit('linkUserProfile', userId, userName);
+};
+
 /****************** Client room ******************/
 
 function offsetTimeByPing(roomState, sentTime) {
@@ -39,7 +43,7 @@ socket.on('prepareToBroadcast', () => {
 });
 
 socket.on('setRoomState', roomState => {
-  let timerIsActive = store.getState().timer.active;
+  let timerIsActive = store.getState().room.timer.active;
   let { time, leadinTime, totalTime, totalLeadinTime } = roomState;
   rtcConnection.roomState = offsetTimeByPing(roomState, roomState.sentTime);
   //let leadinTime = 1000 * (roomState.status === 'LEAD IN' ? roomState.time : 0);

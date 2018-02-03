@@ -141,12 +141,12 @@ class Timer extends Component {
 
 const mapState = (state) => {
   return {
-    leadinTime: state.timer.leadinTime,
-    currTime: state.timer.currTime,
-    totalTime: state.timer.totalTime,
-    totalLeadinTime: state.timer.totalLeadinTime,
-    timerIsActive: state.timer.active,
-    status: state.timer.status
+    leadinTime: state.room.timer.leadinTime,
+    currTime: state.room.timer.currTime,
+    totalTime: state.room.timer.totalTime,
+    totalLeadinTime: state.room.timer.totalLeadinTime,
+    timerIsActive: state.room.timer.active,
+    status: state.room.timer.status
   }
 }
 

@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import store, { newMessage } from '../store/';
+import store, { newMessage } from '../store';
 
 const socket = io('/',{reconnection: false});
 

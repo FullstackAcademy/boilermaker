@@ -90,7 +90,7 @@ class Chat extends Component {
 
 const mapState = (state) => {
   return {
-    messages: state.messages,
+    messages: state.room.messages,
     user: state.me
   }
 }

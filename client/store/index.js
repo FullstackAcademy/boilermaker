@@ -3,19 +3,21 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import me from './me';
-import messages from './messages';
 import channels from './channels';
 import categories from './categories';
 import users from './users'
-import timer from './timer';
+import room from './room';
+// import timer from './timer';
+// import messages from './messages';
 
 const reducer = combineReducers({
+  // messages,
+  // timer,
   me,
-  messages,
   channels,
   categories,
   users,
-  timer,
+  room
 });
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -27,8 +29,9 @@ const store = createStore(reducer, middleware)
 
 export default store;
 export * from './me';
-export * from './messages';
 export * from './channels';
 export * from './categories';
 export * from './users';
-export * from './timer';
+export * from './room';
+// export * from './timer';
+// export * from './messages';
