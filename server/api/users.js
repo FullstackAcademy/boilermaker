@@ -5,12 +5,12 @@ const gatekeeper = require('../../utils/gatekeeper');
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  let searchTerm = req.query.searchTerm;
+  let searchTerm = req.query.search;
   if (searchTerm) {
     User.findAll({
       where: {
-        name: {
-          $like: '%' + searchTerm + '%'
+        userName: {
+          $iLike: `%${searchTerm}%`
         }
       }
     })

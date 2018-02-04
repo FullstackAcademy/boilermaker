@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchSingleUser, deleteUser, editUser } from '../../store';
+import { fetchSingleUser, deleteUser, editUser, fetchSearchUsers } from '../../store';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Image, Button } from 'react-bootstrap';
@@ -46,10 +46,10 @@ class UserPage extends Component {
   }
 
   render() {
-    const { user, searchResults, handleSearch } = this.props;
+    const { users, searchResults, handleSearch, loadUser } = this.props;
+    const user = users.singleUser;
     const userId = Number(this.props.match.params.userId);
     const myId = this.props.me.id;
-
     return (
       <div>
         <div className="user-page-header">
@@ -106,7 +106,11 @@ class UserPage extends Component {
             :
             null
         }
-        {/* <SearchUser /> */}
+        <SearchUser 
+        searchResults={users.searchUserList} 
+        handleSearch={handleSearch} 
+        loadUser={loadUser}
+        />
       </div>
     )
   }
@@ -114,9 +118,8 @@ class UserPage extends Component {
 
 const mapState = (state) => {
   return {
-    user: state.users.singleUser,
+    users: state.users,
     me: state.me,
-    searchResults: state.users.searchUserList
   }
 }
 

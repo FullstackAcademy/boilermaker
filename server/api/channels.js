@@ -3,12 +3,12 @@ const { Channel } = require('../db/models');
 const gatekeeperMiddleware = require('../../utils/gatekeeper');
 
 router.get('/', (req, res, next) => {
-  let searchTerm = req.query.searchTerm;
+  let searchTerm = req.query.search;
   if (searchTerm) {
     Channel.findAll({
       where: {
         name: {
-          $like: '%' + searchTerm + '%'
+          $iLike: `%${searchTerm}%`
         }
       }
     })

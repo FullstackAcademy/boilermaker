@@ -77,7 +77,7 @@ class Main extends Component {
                 <Navbar.Form>
                   <FormGroup>
                     <SearchBar
-                      searchResults={channels.channelList}
+                      searchResults={channels.searchChannelList}
                       handleSearch={handleSearch}
                     />
                   </FormGroup>

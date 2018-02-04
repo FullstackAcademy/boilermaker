@@ -16,19 +16,25 @@ class SearchUser extends Component {
   }
 
   render() {
-    const { searchResults, handleSearch } = this.props;
+    const { searchResults, handleSearch, loadUser } = this.props;
+    console.log(searchResults);
     return (
       <div>
         <AsyncTypeahead
           options={searchResults}
           isLoading={this.state.isLoading}
-          delay={350}
+          delay={100}
           labelKey={'userName'}
           minLength={3}
           placeholder="Search..."
           bsSize={'large'}
           submitFormOnEnter={true}
-          onChange={(foundChannel) => history.push(`/users/${foundChannel[0].id}`)}
+          onChange={
+            foundUser => {
+            loadUser(foundUser[0].id);
+            history.push(`/users/${foundUser[0].id}`);
+            window.location.reload();
+            }}
           onSearch={
             query => {
               this.toggleLoading();

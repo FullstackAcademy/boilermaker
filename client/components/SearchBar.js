@@ -3,7 +3,6 @@ import history from '../history'
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
-import { Form, FormGroup } from 'react-bootstrap';
 
 class SearchBar extends Component {
   constructor() {
@@ -20,6 +19,7 @@ class SearchBar extends Component {
 
   render() {
     const { searchResults, handleSearch } = this.props;
+    console.log(searchResults);
     return (
       <div className="search-bar-container">
         <AsyncTypeahead
@@ -27,7 +27,7 @@ class SearchBar extends Component {
           isLoading={this.state.isLoading}
           delay={350}
           labelKey={'name'}
-          minLength={3}
+          minLength={2}
           placeholder="Search..."
           bsSize={'large'}
           submitFormOnEnter={true}
