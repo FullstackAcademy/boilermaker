@@ -3,8 +3,8 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
-import { setMessages, setTime } from '../store';
-import { changeChannel, enqueue, chooseVote } from '../socket';
+import { setMessages, setTime } from '../../store';
+import { changeChannel, enqueue, chooseVote } from '../../socket';
 
 import Chat from './Chat';
 import VideoFeed from './VideoFeed';

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProgressBar from 'progressbar.js';
 import { setTimeout } from 'timers';
-import { setTimerActive } from '../store';
+import { setTimerActive } from '../../store';
 
 var bar;
 class Timer extends Component {

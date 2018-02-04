@@ -93,10 +93,8 @@ module.exports = function (io) {
                 this.currentAction = USERS_DEBATING;
               });
             } else {
-              let indexOfWinner = this.voteTally.indexOf(this.voteTally.reduce((a, b) => {
-                return Math.max(a,b);
-              }));
-              socket.emit('setWinner', this.broadcasters[indexOfWinner].userName);
+              let indexOfWinner = this.calculateWinner();
+              io.to(this.name).emit('setWinner', this.broadcasters[indexOfWinner].userId);
               this.currentAction = RESETTING_GAME;
               this.state = {
                 time: 0,
@@ -148,6 +146,19 @@ module.exports = function (io) {
         this.roomActivity = null;
       }
     }
+    sendRoomState(socket) {
+      let state = Object.assign({
+        leadinTime: 0,
+        totalLeadinTime: this.leadinTime,
+        time: 0,
+        totalTime: this.debateLength
+      }, this.state, {
+          sentTime: Date.now()
+        });
+      let broadcastTarget = socket ? socket : io.to(this.name);
+
+      broadcastTarget.emit('setRoomState', state);
+    }
     addViewer(viewer) {
       this.setRoomActivity(true);
       this.viewers.push(viewer);
@@ -180,18 +191,10 @@ module.exports = function (io) {
     getBroadcasterIds() {
       return this.broadcasters.map(broadcaster => broadcaster.id);
     }
-    sendRoomState(socket) {
-      let state = Object.assign({
-        leadinTime: 0,
-        totalLeadinTime: this.leadinTime,
-        time: 0,
-        totalTime: this.debateLength
-      }, this.state, {
-          sentTime: Date.now()
-        });
-      let broadcastTarget = socket ? socket : io.to(this.name);
-
-      broadcastTarget.emit('setRoomState', state);
+    calculateWinner() {
+      return this.voteTally.indexOf(this.voteTally.reduce((a, b) => {
+        return Math.max(a, b);
+      }));
     }
   }
   return roomList;

@@ -1,10 +1,13 @@
+const { User } = require('../db/models');
 let roomList;
 module.exports = (io, socket) => {
   const rl = roomList;
   if (!rl) {
     roomList = require('../room')(io);
   }
-  
+
+  const axios = require('axios');
+
   console.log(`A socket connection to the server has been made: ${socket.id}`);
 
   socket.on('linkUserProfile', (userId, userName) => {

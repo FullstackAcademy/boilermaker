@@ -1,6 +1,7 @@
 import { socket } from './socket';
 import rtcConnection from '../rtcConnection';
 import store, { setTime, setTimerActive } from '../store/';
+import axios from 'axios';
 
 const formatChannelName = channelName => channelName.split(" ").join('');
 
@@ -110,8 +111,10 @@ socket.on('roomHasEnded', () => {
   store.dispatch(setTimerActive(false));
 });
 
-socket.on('setWinner', userName => {
-  store.dispatch(setWinner(userName));
+socket.on('setWinner', (userId) => {
+  return axios.put(`/api/users/${userId}`, userId)
+    .then(res => store.dispatch(setWinner(res.data.userName)))
+    .catch(err => console.error(err));
 });
 
 /*socket.on('broadcasterStarted', broadcasterId => {

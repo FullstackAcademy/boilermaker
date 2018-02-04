@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { socket } from '../socket';
+import { socket } from '../../socket';
 import { Button, Panel, Grid, Row, Col } from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
