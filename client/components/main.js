@@ -15,7 +15,7 @@ class Main extends Component {
   }
 
   render() {
-    const { children, isLoggedIn, channels, handleClick, handleSearch, user } = this.props
+    const { children, isLoggedIn, channels, user, handleClick, navToUser, handleSearch } = this.props
     return (
       <div>
         {
@@ -100,7 +100,6 @@ const mapState = (state, ownProps) => {
 }
 
 const mapDispatch = (dispatch, ownProps) => {
-  const history = ownProps.history;
   return {
     handleClick() {
       dispatch(logout())
