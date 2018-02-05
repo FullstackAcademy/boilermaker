@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Panel } from 'react-bootstrap';
 
-import socket from '../socket';
+import socket from '../../socket';
 
 const VideoFeed = props => {
   const { connection, channel } = props;

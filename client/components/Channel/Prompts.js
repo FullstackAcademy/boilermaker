@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap'
-import { } from '../store';
 
 const Prompts = (props) => {
   const { displayPrompt } = props;

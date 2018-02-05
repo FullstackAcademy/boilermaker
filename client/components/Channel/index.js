@@ -3,8 +3,8 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
-import { setMessages, setTime } from '../store';
-import { changeChannel, enqueue, chooseVote } from '../socket';
+import { setMessages, setTime } from '../../store';
+import { changeChannel, enqueue, chooseVote } from '../../socket';
 
 import Chat from './Chat';
 import VideoFeed from './VideoFeed';
@@ -67,9 +67,6 @@ class Channel extends Component {
                 <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>Prompts</Button>
                 <button onClick={() => { this.props.setTime(0, 3, 0, 3) }}>Test Timer</button>
                 <Voting changeVote1={this.changeVote1} changeVote2={this.changeVote2} />
-                <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>
-                  +
-                </Button>
               </div>
             </div>
           </div>
@@ -83,7 +80,7 @@ const mapState = (state, ownProps) => {
   const currentChannel = ownProps.match.params.channelName;
   return {
     currentChannel,
-    timerIsActive: state.timer.active
+    timerIsActive: state.room.timer.active
   }
 };
 
