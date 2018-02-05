@@ -2,8 +2,8 @@
 const reactions = {
   0: ' ',
   1: 'BIG FACTS',
-  2: '#FAKENEWS',
-  3: '[citation needed]'
+  2: '[citation needed]',
+  3: '#FAKENEWS'
 }
 
 /* Reaction store stuff */

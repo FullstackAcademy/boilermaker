@@ -4,18 +4,18 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const Reaction = (props) => {
   let { reaction } = props;
-  if (!reaction) reaction = ' ';
-  console.log('REACT: ', reaction);
-  //const reaction = 'What up';
   return (
-    <ReactCSSTransitionGroup
-      transitionName="reaction"
-      transitionAppear={true}
-      transitionAppearTimeout={1000}
-      transitionEnter={false}
-      transitionLeaveTimeout={5000}>
-      <div> {reaction} </div>
-    </ReactCSSTransitionGroup>
+  <div id="reaction-box">
+    {
+      reaction && reaction.length > 0 &&
+        <ReactCSSTransitionGroup
+          transitionName="reaction"
+          transitionEnterTimeout={100}
+          transitionLeaveTimeout={4000}>
+          <div> {reaction} </div>
+        </ReactCSSTransitionGroup>
+    } 
+  </div>
   )
 }
 
@@ -24,6 +24,5 @@ const mapState = (state) => {
     reaction: state.reaction
   }
 }
-
 
 export default connect(mapState)(Reaction)

@@ -420,13 +420,28 @@ category-channel-list-item-header{
 } */
 
 /********* REACTION **********/
-.reaction-enter {
+/* #reaction-box {
   opacity: 0;
+  transition: opacity .2s ease-in;
+  min-height: 24px;
+}
+
+#reaction-box.active {
+  opacity: 1;
+  transition: opacity .2s ease-in;
+} */
+
+#reaction-box {
+  min-height: 24px;
+}
+
+.reaction-enter {
+  opacity: 0.01;
 }
 
 .reaction-enter.reaction-enter-active {
   opacity: 1;
-  transition: opacity .75s ease-in;
+  transition: opacity 500ms ease-in;
 }
 
 .reaction-leave {
@@ -434,6 +449,6 @@ category-channel-list-item-header{
 }
 
 .reaction-leave.reaction-leave-active {
-  opacity: 0;
-  transition: opacity .5s ease-in;
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }
