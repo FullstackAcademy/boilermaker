@@ -8,7 +8,7 @@ const defaultState = {
     active: false,
     status: 0
   },
-  // winner: '',
+  winner: '',
 }
 
 
@@ -27,7 +27,6 @@ export const newMessage = function (message) {
     message
   };
 };
-
 
 // TIMER 
 const SET_CURR_TIME = 'SET_CURR_TIME';
@@ -48,12 +47,12 @@ export const setTime = (leadinTime, totalLeadinTime, currTime, totalTime, status
 })
 
 // WINNER
-// const SET_WINNER = 'SET_WINNER';
+const SET_WINNER = 'SET_WINNER';
 
-// export const setWinner = userName => ({
-//   type: WINNER,
-//   userName
-// });
+export const setWinner = userName => ({
+  type: SET_WINNER,
+  userName
+});
 
 // REDUCER
 
@@ -111,13 +110,13 @@ export default function (state = defaultState, action) {
         }
       };
 
-    // // WINNER 
-    // case SET_WINNER:
-    //   return {
-    //     ...state,
-    //     winner: action.userName
-    //   };
-    
+    // WINNER 
+    case SET_WINNER:
+      return {
+        ...state,
+        winner: action.userName
+      };
+
     default:
       return state;
   }

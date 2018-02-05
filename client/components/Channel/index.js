@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
 import { setMessages, setTime } from '../../store';
-import { changeChannel, enqueue, chooseVote } from '../../socket';
+import { changeChannel, enqueue, chooseVote, linkUserProfile } from '../../socket';
 
 import Chat from './Chat';
 import VideoFeed from './VideoFeed';
@@ -41,11 +41,14 @@ class Channel extends Component {
     document.getElementById('vote-1').classList.remove('active');
     chooseVote(1);
   }
- 
+
   render() {
-    const { currentChannel, timerIsActive } = this.props;
+    const { user, isLoggedIn, currentChannel, timerIsActive } = this.props;
     return (
       <div>
+        {
+          isLoggedIn && linkUserProfile(user.id, user.userName)
+        }
         {
           this.state.togglePrompt && <Prompts displayPrompt={this.displayPrompt} />
         }
@@ -79,6 +82,8 @@ class Channel extends Component {
 const mapState = (state, ownProps) => {
   const currentChannel = ownProps.match.params.channelName;
   return {
+    user: state.me,
+    isLoggedIn: !!state.me.id,
     currentChannel,
     timerIsActive: state.room.timer.active
   }

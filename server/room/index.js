@@ -1,3 +1,5 @@
+const { User } = require('../db/models');
+
 module.exports = function (io) {
   class RoomList {
     createOrFindRoom(name) {
@@ -9,14 +11,14 @@ module.exports = function (io) {
       return room;
     }
   }
-
   const roomList = new RoomList();
   const LEAD_IN = -1;
   const WAITING_FOR_QUEUE = 0;
   const LOADING_BROADCASTERS = 1;
   const USERS_DEBATING = 2;
-  const WAITING_FOR_SCORING = 3;
+  const RESETTING_GAME = 3;
   let roomId = -1;
+  const points = 25;
 
   class Room {
     constructor(name) {
@@ -32,12 +34,12 @@ module.exports = function (io) {
       this.tickRate = 0.25;
       this.gameLoop = this.gameLoop.bind(this);
       this.state = {};
-      this.debateLength = 10;
+      this.debateLength = 10;     // CHANGED TIMING
       this.broadcasterTimeout = 5;
-      this.leadinTime = 5;
-      this.votingTime = 5;
+      this.leadinTime = 5;      // CHANGED TIMING
+      this.votingTime = 5;       // CHANGED TIMING
     }
-    gameLoop() {
+    async gameLoop() {
       switch (this.currentAction) {
         case LEAD_IN:
           if ((this.state.leadinTime += this.tickRate) >= this.leadinTime) this.leadinCallback();
@@ -93,8 +95,8 @@ module.exports = function (io) {
                 this.currentAction = USERS_DEBATING;
               });
             } else {
-              // let indexOfWinner = this.calculateWinner();
-              // io.to(this.name).emit('setWinner', this.broadcasters[indexOfWinner].userId);
+              // let userName = await this.calculateWinner();
+              // io.to(this.name).emit('setWinner', userName);
               this.currentAction = RESETTING_GAME;
               this.state = {
                 time: 0,
@@ -128,7 +130,7 @@ module.exports = function (io) {
       this.currentAction = LEAD_IN;
     }
     reset(wasCancelled) {
-      console.log(!wasCancelled ? 'reseting the room' : 'cancelling out the room');
+      console.log(!wasCancelled ? 'resetting the room' : 'cancelling out the room');
       this.currentAction = WAITING_FOR_QUEUE;
       this.broadcasters = [];
       this.activePhase = 0;
@@ -191,10 +193,14 @@ module.exports = function (io) {
     getBroadcasterIds() {
       return this.broadcasters.map(broadcaster => broadcaster.id);
     }
-    // calculateWinner() {
-    //   return this.voteTally.indexOf(this.voteTally.reduce((a, b) => {
+    // async calculateWinner() {
+    //   let winnerId = Number(this.broadcasters[this.voteTally.indexOf(this.voteTally.reduce((a, b) => {
     //     return Math.max(a, b);
-    //   }));
+    //   }))].userId);
+    //   console.log(winnerId);
+    //   let winner = await User.findById(winnerId);
+    //   console.log(winner);
+    //   return user.data.userName;
     // }
   }
   return roomList;
