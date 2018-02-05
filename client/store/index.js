@@ -7,8 +7,6 @@ import channels from './channels';
 import categories from './categories';
 import users from './users'
 import room from './room';
-// import timer from './timer';
-// import messages from './messages';
 
 const reducer = combineReducers({
   me,
@@ -16,8 +14,6 @@ const reducer = combineReducers({
   categories,
   users,
   room
-  // messages,
-  // timer,
 });
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -33,5 +29,3 @@ export * from './channels';
 export * from './categories';
 export * from './users';
 export * from './room';
-// export * from './timer';
-// export * from './messages';

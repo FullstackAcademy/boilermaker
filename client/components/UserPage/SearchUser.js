@@ -17,7 +17,6 @@ class SearchUser extends Component {
 
   render() {
     const { searchResults, handleSearch, loadUser } = this.props;
-    console.log(searchResults);
     return (
       <div>
         <AsyncTypeahead

@@ -34,10 +34,10 @@ module.exports = function (io) {
       this.tickRate = 0.25;
       this.gameLoop = this.gameLoop.bind(this);
       this.state = {};
-      this.debateLength = 5;     // CHANGED TIMING
+      this.debateLength = 10; 
       this.broadcasterTimeout = 5;
-      this.leadinTime = 2;      // CHANGED TIMING
-      this.votingTime = 2;       // CHANGED TIMING
+      this.leadinTime = 5;      
+      this.votingTime = 5;       
     }
     async gameLoop() {
       switch (this.currentAction) {
@@ -60,7 +60,7 @@ module.exports = function (io) {
 
         case LOADING_BROADCASTERS:
           //Reset the room because the broadcasters timed out
-          console.log(this.state.time, this.state.broadcasterCount);
+
           if ((this.state.time += this.tickRate) >= this.broadcasterTimeout) {
             return this.reset(true);
           }
@@ -80,6 +80,8 @@ module.exports = function (io) {
             io.to(this.name).emit('unmute', this.broadcasters[0].id);
             this.currentAction = USERS_DEBATING;
             console.log('first user debating');
+            io.to(this.name).emit('setDebate', '_player1');
+            io.to(this.name).emit('setVoting', true);
           });
           break;
 
@@ -92,11 +94,13 @@ module.exports = function (io) {
                 io.to(this.name).emit('unmute', this.broadcasters[1].id);
                 this.state.time = 0;
                 console.log('second user begin debating');
+                io.to(this.name).emit('setDebate', '_player2');
                 this.currentAction = USERS_DEBATING;
               });
             } else {
+              io.to(this.name).emit('setDebate', false);
+              io.to(this.name).emit('setVoting', false);
               let userName = await this.calculateWinner();
-              console.log(userName);
               io.to(this.name).emit('setWinner', userName);
               this.currentAction = RESETTING_GAME;
               this.state = {
@@ -124,7 +128,7 @@ module.exports = function (io) {
         leadinTime: 0,
         totalLeadinTime: this.leadinTime,
         broadcasterIds: this.getBroadcasterIds(),
-        first: !this.state.first,
+        first: true,
         status: 'LEAD IN',
       }
       this.sendRoomState();
@@ -195,11 +199,14 @@ module.exports = function (io) {
       return this.broadcasters.map(broadcaster => broadcaster.id);
     }
     async calculateWinner() {
-      let winnerId = Number(this.broadcasters[this.voteTally.indexOf(this.voteTally.reduce((a, b) => {
+      let winningVote = this.voteTally.reduce((a, b) => {
+        if (a === b) return 2;
         return Math.max(a, b);
-      }))].userId);
-      let winner = await User.findById(winnerId)
-      let user = await winner.update({ score: winner.score + points })
+      });
+      if (winningVote === 2) return '_tie';
+      let winnerId = Number(this.broadcasters[this.voteTally.indexOf(winningVote)].userId);
+      let winner = await User.findById(winnerId);
+      let user = await winner.update({ score: winner.score + points });
       return user.userName;
     }
   }
