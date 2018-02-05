@@ -1,6 +1,6 @@
 /* Actual Reaction Data */
 const reactions = {
-  0: '',
+  0: ' ',
   1: 'BIG FACTS',
   2: '#FAKENEWS',
   3: '[citation needed]'
@@ -15,6 +15,7 @@ export const setReaction = reactionId => ({
   type: SET_REACTION,
   reaction: reactions[reactionId]
 });
+
 
 export default (state = defaultState, action) => {
   switch (action.type) {

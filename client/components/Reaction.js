@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-
 const Reaction = (props) => {
-  //const { reaction } = props;
-  const reaction = 'What up';
-  return reaction.length && (
+  let { reaction } = props;
+  if (!reaction) reaction = ' ';
+  console.log('REACT: ', reaction);
+  //const reaction = 'What up';
+  return (
     <ReactCSSTransitionGroup
       transitionName="reaction"
       transitionAppear={true}
@@ -23,5 +24,6 @@ const mapState = (state) => {
     reaction: state.reaction
   }
 }
+
 
 export default connect(mapState)(Reaction)

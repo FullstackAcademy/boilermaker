@@ -11,7 +11,6 @@ socket.on('connect', () => {
   });
 
   socket.on('reaction', reactionId => {
-    console.log('reaction sent');
     store.dispatch(setReaction(reactionId));
   })
 })
