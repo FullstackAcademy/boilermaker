@@ -97,6 +97,8 @@ div#welcome-text {
   animation-delay: 1s;
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
+  display:flex;
+  justify-content: center;
 }
 
 #home-category-list-title.panel{
@@ -104,8 +106,9 @@ div#welcome-text {
   box-shadow: 2.5px 2.5px 5px grey;
   background-color: #FE9002;
   color: white;
-  width: 65%;
+  width: 100%;
   margin-bottom: 2em;
+  padding:20px 0;
 }
 
 div.home-category-list-item {
@@ -120,7 +123,7 @@ div.home-category-list-item {
 }
 
 .home-category-list-item-image {
-  width: 15vw;
+  width: 100%;
 }
 
 

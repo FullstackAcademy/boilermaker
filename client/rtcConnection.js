@@ -54,17 +54,18 @@ function resetConnection() {
       video: {
         mandatory: {
           minFrameRate: 15,
-          maxFrameRate: 30,
-          minWidth: 640,
-          maxWidth: 640,
-          minHeight: 360,
-          maxHeight: 360,
+          maxFrameRate: 60,
+          minWidth: 480,
+          maxWidth: 480,
+          minHeight: 270,
+          maxHeight: 270,
         }
       }
     },
     bandwidth: {
-      video: 512,    // 256kbps
+      video: 1024,    // 256kbps
       screen: 600,    // 300kbps
+      audio: 64,
     },
 
     refresh() {
