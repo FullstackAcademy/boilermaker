@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchSingleUser, deleteUser, editUser } from '../../store';
+import { fetchSingleUser, deleteUser, editUser, fetchSearchUsers } from '../../store';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Image, Button } from 'react-bootstrap';
@@ -8,6 +8,7 @@ import Score from './Score';
 import CreateChannel from '../CreateChannel';
 import DeleteWarning from './DeleteWarning';
 import EditUser from './EditUser';
+import SearchUser from './SearchUser';
 
 class UserPage extends Component {
 
@@ -45,17 +46,17 @@ class UserPage extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { users, searchResults, handleSearch, loadUser } = this.props;
+    const user = users.singleUser;
     const userId = Number(this.props.match.params.userId);
     const myId = this.props.me.id;
-
     return (
       <div>
         <div className="user-page-header">
           <Image src={user.photoURL} rounded className="user-page-user-image" />
           <div className="user-page-header-text">
-            <h1>{user.name}</h1>
-            <h3>Cred</h3>
+            <h1>{user.userName}</h1>
+            <h3>Cred Points</h3>
             <h4>Level: {Math.floor(user.score / 100)}</h4>
             <h5>Current Level Progress:</h5>
             <Score user={user} />
@@ -105,6 +106,11 @@ class UserPage extends Component {
             :
             null
         }
+        <SearchUser 
+        searchResults={users.searchUserList} 
+        handleSearch={handleSearch} 
+        loadUser={loadUser}
+        />
       </div>
     )
   }
@@ -112,8 +118,8 @@ class UserPage extends Component {
 
 const mapState = (state) => {
   return {
-    user: state.users.singleUser,
-    me: state.me
+    users: state.users,
+    me: state.me,
   }
 }
 
@@ -127,6 +133,9 @@ const mapDispatch = (dispatch) => {
     },
     editUser(id) {
       dispatch(editUser(id))
+    },
+    handleSearch(query) {
+      dispatch(fetchSearchUsers(query))
     }
   }
 }

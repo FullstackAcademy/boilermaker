@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import history from '../history'
-import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
+import history from '../../history'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 
-class SearchBar extends Component {
+class SearchUser extends Component {
   constructor() {
     super();
     this.state = {
@@ -18,20 +16,25 @@ class SearchBar extends Component {
   }
 
   render() {
-    const { searchResults, handleSearch } = this.props;
+    const { searchResults, handleSearch, loadUser } = this.props;
     console.log(searchResults);
     return (
-      <div className="search-bar-container">
+      <div>
         <AsyncTypeahead
           options={searchResults}
           isLoading={this.state.isLoading}
-          delay={350}
-          labelKey={'name'}
-          minLength={2}
+          delay={100}
+          labelKey={'userName'}
+          minLength={3}
           placeholder="Search..."
           bsSize={'large'}
           submitFormOnEnter={true}
-          onChange={(foundChannel) => history.push(`/channels/${foundChannel[0].name}`)}
+          onChange={
+            foundUser => {
+            loadUser(foundUser[0].id);
+            history.push(`/users/${foundUser[0].id}`);
+            window.location.reload();
+            }}
           onSearch={
             query => {
               this.toggleLoading();
@@ -44,4 +47,4 @@ class SearchBar extends Component {
     )
   }
 }
-export default SearchBar;
+export default SearchUser;
