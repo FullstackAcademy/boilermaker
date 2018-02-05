@@ -7,6 +7,8 @@ const UserChannel = require('./userChannel');
 // Channel.belongsToMany(User, {through: 'Participants'});
 
 Channel.belongsTo(Category);
+Channel.belongsTo(User);
+User.hasMany(Channel);
 
 // User.belongsToMany(Channel, {through: UserChannel, as: 'Broadcasters'});
 // Channel.belongsToMany(User, {through: UserChannel, as: 'Broadcasters'});

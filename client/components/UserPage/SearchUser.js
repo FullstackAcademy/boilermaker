@@ -17,16 +17,15 @@ class SearchUser extends Component {
 
   render() {
     const { searchResults, handleSearch, loadUser } = this.props;
-    console.log(searchResults);
     return (
-      <div>
+      <div className="search-user">
         <AsyncTypeahead
           options={searchResults}
           isLoading={this.state.isLoading}
           delay={100}
           labelKey={'userName'}
           minLength={3}
-          placeholder="Search..."
+          placeholder="Search users..."
           bsSize={'large'}
           submitFormOnEnter={true}
           onChange={
