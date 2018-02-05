@@ -8,7 +8,10 @@ const defaultState = {
     active: false,
     status: 0
   },
-  winner: '',
+  status: {
+    winner: '',
+    voting: false
+  }
 }
 
 
@@ -46,12 +49,24 @@ export const setTime = (leadinTime, totalLeadinTime, currTime, totalTime, status
   status: status || 0
 })
 
-// WINNER
+// STATUS
+const SET_DEBATE = 'SET_DEBATE';
 const SET_WINNER = 'SET_WINNER';
+const SET_VOTING = 'SET_VOTING';
+
+export const setDebate = status => ({
+  type: SET_DEBATE,
+  status
+});
 
 export const setWinner = userName => ({
   type: SET_WINNER,
   userName
+});
+
+export const setVoting = boolean => ({
+  type: SET_VOTING,
+  boolean
 });
 
 // REDUCER
@@ -110,11 +125,30 @@ export default function (state = defaultState, action) {
         }
       };
 
-    // WINNER 
+    // Status 
+    case SET_DEBATE:
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          debate: action.status
+        }
+      };
     case SET_WINNER:
       return {
         ...state,
-        winner: action.userName
+        status: {
+          ...state.status,
+          winner: action.userName
+        }
+      };
+    case SET_VOTING:
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          voting: action.boolean
+        }
       };
 
     default:

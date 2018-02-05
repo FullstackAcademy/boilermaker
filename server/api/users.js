@@ -38,15 +38,6 @@ router.put('/:userId',
       .catch(next)
   })
 
-// router.put('/:userId/add-points',
-//   (req, res, next) => {
-//     console.log(req.body.score);
-//     User.findById(Number(req.params.userId))
-//       .then(user => user.update({ score: user.score + Number(req.body.score) }))
-//       .then(updatedUser => res.json(updatedUser))
-//       .catch(next)
-//   })
-
 router.delete('/:userId',
   gatekeeper.isAdminOrSelf,
   (req, res, next) => {
