@@ -34,10 +34,10 @@ module.exports = function (io) {
       this.tickRate = 0.25;
       this.gameLoop = this.gameLoop.bind(this);
       this.state = {};
-      this.debateLength = 10;     // CHANGED TIMING
+      this.debateLength = 5;     // CHANGED TIMING
       this.broadcasterTimeout = 5;
-      this.leadinTime = 5;      // CHANGED TIMING
-      this.votingTime = 5;       // CHANGED TIMING
+      this.leadinTime = 2;      // CHANGED TIMING
+      this.votingTime = 2;       // CHANGED TIMING
     }
     async gameLoop() {
       switch (this.currentAction) {
@@ -95,8 +95,9 @@ module.exports = function (io) {
                 this.currentAction = USERS_DEBATING;
               });
             } else {
-              // let userName = await this.calculateWinner();
-              // io.to(this.name).emit('setWinner', userName);
+              let userName = await this.calculateWinner();
+              console.log(userName);
+              io.to(this.name).emit('setWinner', userName);
               this.currentAction = RESETTING_GAME;
               this.state = {
                 time: 0,
@@ -193,15 +194,14 @@ module.exports = function (io) {
     getBroadcasterIds() {
       return this.broadcasters.map(broadcaster => broadcaster.id);
     }
-    // async calculateWinner() {
-    //   let winnerId = Number(this.broadcasters[this.voteTally.indexOf(this.voteTally.reduce((a, b) => {
-    //     return Math.max(a, b);
-    //   }))].userId);
-    //   console.log(winnerId);
-    //   let winner = await User.findById(winnerId);
-    //   console.log(winner);
-    //   return user.data.userName;
-    // }
+    async calculateWinner() {
+      let winnerId = Number(this.broadcasters[this.voteTally.indexOf(this.voteTally.reduce((a, b) => {
+        return Math.max(a, b);
+      }))].userId);
+      let winner = await User.findById(winnerId)
+      let user = await winner.update({ score: winner.score + points })
+      return user.userName;
+    }
   }
   return roomList;
 }
