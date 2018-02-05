@@ -38,8 +38,8 @@ form div {
 /************************ NAVBAR ***********************/
 
 #nav-bar-logo.navbar-brand{
-  width: 100px;
-  height: auto;
+  width: auto;
+  height: 60px;
   padding: 0;
 }
 
@@ -48,10 +48,18 @@ form div {
   background-image: none;
   margin:0;
   height:65px;
-  overflow:hidden;
 }
+
+.navbar-nav {
+  float: none;
+}
+
 .navbar-text{
   transition:0.25s all;
+}
+
+.navbar-search {
+  position: absolute;
 }
 
 /*********************** HOME ***************************/

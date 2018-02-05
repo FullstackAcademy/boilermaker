@@ -18,73 +18,57 @@ class Main extends Component {
     const { children, isLoggedIn, channels, user, handleClick, navToUser, handleSearch } = this.props
     return (
       <div>
-        {
-          isLoggedIn && linkUserProfile(user.id, user.userName)
-        }
-        <Navbar>
-          <Navbar.Brand>
-            <img src="/Bickr-logo.png" id="nav-bar-logo" />
-          </Navbar.Brand>
-          {
-            isLoggedIn ?
-              <Navbar.Collapse>
-                <Nav>
-                  <Navbar.Text eventKey={1}>
-                    <NavLink to="/">
-                      Home
-                  </NavLink>
-                  </Navbar.Text>
-                  <Navbar.Text>
-                    <NavLink to="/categories">
-                      Categories
-                </NavLink >
-                  </Navbar.Text>
-                  <Navbar.Text>
-                    <NavLink onClick={handleClick} to="/">
-                      Logout
-                </NavLink >
-                  </Navbar.Text>
-                  <Navbar.Text>
-                    <NavDropdown eventKey={2} title={user.userName} id="basic-nav-dropdown">
-                      <MenuItem eventKey={2.1} onClick={this.navToUser.bind(this)}>My page</MenuItem>
-                      <MenuItem eventKey={2.2} onClick={handleClick}>Logout</MenuItem>
-                    </NavDropdown>
-                  </Navbar.Text>
-                </Nav>
-              </Navbar.Collapse>
-              :
-              <Navbar.Collapse>
-                <Navbar.Text>
+        <div className="navbar-container">
+          <Navbar>
+            <Navbar.Brand>
+              <img src="/Bickr-logo.png" id="nav-bar-logo" />
+            </Navbar.Brand>
+            <Navbar.Collapse>
+              <Nav>
+                <Navbar.Text eventKey={1}>
                   <NavLink to="/">
                     Home
-                </NavLink>
+              </NavLink>
                 </Navbar.Text>
                 <Navbar.Text>
                   <NavLink to="/categories">
                     Categories
-                </NavLink >
-                </Navbar.Text>
-                <Navbar.Text>
-                  <NavLink to="/login">
-                    Login
                 </NavLink>
                 </Navbar.Text>
-                <Navbar.Text>
-                  <NavLink to="/signup">
-                    Sign Up
-                </NavLink>
-                </Navbar.Text>
+                {
+                  isLoggedIn ?
+                      <Navbar.Text>
+                        <NavDropdown eventKey={2} title={user.userName} id="basic-nav-dropdown">
+                          <MenuItem eventKey={2.1} onClick={this.navToUser.bind(this)}>My page</MenuItem>
+                          <MenuItem eventKey={2.2} onClick={handleClick}>Logout</MenuItem>
+                        </NavDropdown>
+                      </Navbar.Text>
+                    :
+                    [
+                      <Navbar.Text key="1">
+                        <NavLink to="/login">
+                          Login
+                    </NavLink>
+                      </Navbar.Text>,
+                      <Navbar.Text key="2">
+                        <NavLink to="/signup">
+                          Sign Up
+                    </NavLink>
+                      </Navbar.Text>
+                    ]
+                }
                 <Navbar.Form>
-                  <FormGroup>
+                  <FormGroup className="navbar-search">
                     <SearchBar
                       searchResults={channels.searchChannelList}
                       handleSearch={handleSearch}
                     />
                   </FormGroup>
                 </Navbar.Form>
-              </Navbar.Collapse>
-          }
-        </Navbar>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+        </div>
         {children}
       </div>
     )
