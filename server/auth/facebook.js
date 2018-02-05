@@ -29,7 +29,6 @@ if (!process.env.FACEBOOK_APP_ID || !process.env.FACEBOOK_APP_SECRET) {
     const name = profile.name.givenName + ' ' + profile.name.familyName;
     const email = profile.emails[0].value;
     const photoURL = profile.photos[0].value;
-    console.log(userName)
 
     User.find({
       where: {

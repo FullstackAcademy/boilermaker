@@ -1,3 +1,5 @@
+const { User } = require('../db/models');
+
 module.exports = function (io) {
   class RoomList {
     createOrFindRoom(name) {
@@ -9,14 +11,14 @@ module.exports = function (io) {
       return room;
     }
   }
-
   const roomList = new RoomList();
   const LEAD_IN = -1;
   const WAITING_FOR_QUEUE = 0;
   const LOADING_BROADCASTERS = 1;
   const USERS_DEBATING = 2;
-  const WAITING_FOR_SCORING = 3;
+  const RESETTING_GAME = 3;
   let roomId = -1;
+  const points = 25;
 
   class Room {
     constructor(name) {
@@ -32,12 +34,12 @@ module.exports = function (io) {
       this.tickRate = 0.25;
       this.gameLoop = this.gameLoop.bind(this);
       this.state = {};
-      this.debateLength = 10;
+      this.debateLength = 10; 
       this.broadcasterTimeout = 5;
-      this.leadinTime = 5;
-      this.votingTime = 5;
+      this.leadinTime = 5;      
+      this.votingTime = 5;       
     }
-    gameLoop() {
+    async gameLoop() {
       switch (this.currentAction) {
         case LEAD_IN:
           if ((this.state.leadinTime += this.tickRate) >= this.leadinTime) this.leadinCallback();
@@ -58,7 +60,7 @@ module.exports = function (io) {
 
         case LOADING_BROADCASTERS:
           //Reset the room because the broadcasters timed out
-          console.log(this.state.time, this.state.broadcasterCount);
+
           if ((this.state.time += this.tickRate) >= this.broadcasterTimeout) {
             return this.reset(true);
           }
@@ -78,6 +80,8 @@ module.exports = function (io) {
             io.to(this.name).emit('unmute', this.broadcasters[0].id);
             this.currentAction = USERS_DEBATING;
             console.log('first user debating');
+            io.to(this.name).emit('setDebate', '_player1');
+            io.to(this.name).emit('setVoting', true);
           });
           break;
 
@@ -90,11 +94,14 @@ module.exports = function (io) {
                 io.to(this.name).emit('unmute', this.broadcasters[1].id);
                 this.state.time = 0;
                 console.log('second user begin debating');
+                io.to(this.name).emit('setDebate', '_player2');
                 this.currentAction = USERS_DEBATING;
               });
             } else {
-              // let indexOfWinner = this.calculateWinner();
-              // io.to(this.name).emit('setWinner', this.broadcasters[indexOfWinner].userId);
+              io.to(this.name).emit('setDebate', false);
+              io.to(this.name).emit('setVoting', false);
+              let userName = await this.calculateWinner();
+              io.to(this.name).emit('setWinner', userName);
               this.currentAction = RESETTING_GAME;
               this.state = {
                 time: 0,
@@ -121,14 +128,14 @@ module.exports = function (io) {
         leadinTime: 0,
         totalLeadinTime: this.leadinTime,
         broadcasterIds: this.getBroadcasterIds(),
-        first: !this.state.first,
+        first: true,
         status: 'LEAD IN',
       }
       this.sendRoomState();
       this.currentAction = LEAD_IN;
     }
     reset(wasCancelled) {
-      console.log(!wasCancelled ? 'reseting the room' : 'cancelling out the room');
+      console.log(!wasCancelled ? 'resetting the room' : 'cancelling out the room');
       this.currentAction = WAITING_FOR_QUEUE;
       this.broadcasters = [];
       this.activePhase = 0;
@@ -191,11 +198,17 @@ module.exports = function (io) {
     getBroadcasterIds() {
       return this.broadcasters.map(broadcaster => broadcaster.id);
     }
-    // calculateWinner() {
-    //   return this.voteTally.indexOf(this.voteTally.reduce((a, b) => {
-    //     return Math.max(a, b);
-    //   }));
-    // }
+    async calculateWinner() {
+      let winningVote = this.voteTally.reduce((a, b) => {
+        if (a === b) return 2;
+        return Math.max(a, b);
+      });
+      if (winningVote === 2) return '_tie';
+      let winnerId = Number(this.broadcasters[this.voteTally.indexOf(winningVote)].userId);
+      let winner = await User.findById(winnerId);
+      let user = await winner.update({ score: winner.score + points });
+      return user.userName;
+    }
   }
   return roomList;
 }

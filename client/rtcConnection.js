@@ -83,14 +83,15 @@ function resetConnection() {
       //resetConnection();
     },
     joinBroadcasters(broadcasterIds) {
-      if (!broadcasterIds.length || Object.keys(rtcConnection.broadcasters)>1) return;
+      if (!broadcasterIds.length || Object.keys(rtcConnection.broadcasters) > 1) return;
       if (!broadcasterIds.includes(rtcConnection.USERID)) rtcConnection.session = { audio: true, video: true, oneway: true };
+      rtcConnection.broadcastersArray = broadcasterIds;
       if (broadcasterIds[1] === rtcConnection.USERID) return;
-      setTimeout(()=>{
+      setTimeout(() => {
         broadcasterIds.forEach(broadcasterId => {
           if (broadcasterId !== rtcConnection.USERID) rtcConnection.join(broadcasterId);
         });
-      },2000);
+      }, 2000);
     },
     toggleMute(first) {
       return;
@@ -102,8 +103,8 @@ function resetConnection() {
       const isSecond = b2 === userid;
 
       const f = (first && isFirst) || (!first && isSecond) ? 'unmute' : 'mute';
-      const localStream = Object.keys(rtcConnection.streamEvents).reduce(((old,e)=>e.length>12&&e.type==='local' ? e: old),undefined);
-      console.log('ugly children',rtcConnection.streamEvents,localStream);
+      const localStream = Object.keys(rtcConnection.streamEvents).reduce(((old, e) => e.length > 12 && e.type === 'local' ? e : old), undefined);
+      console.log('ugly children', rtcConnection.streamEvents, localStream);
       localStream && localStream[f]('audio');
     },
 
@@ -133,12 +134,12 @@ function resetConnection() {
 
       video.style.height = '100%';
       video.style.width = '100%';
-      
-      let container = Object.keys(rtcConnection.broadcasters).length<2 ? '#empty-video-1' : '#empty-video-2';
-      console.log(container,Object.keys(rtcConnection.broadcasters)) 
+      let num = rtcConnection.broadcastersArray.indexOf(e.userid) + 1;
+      let container = `#empty-video-${num}`;
+      console.log(container, Object.keys(rtcConnection.broadcasters))
       //I'm gonna use jquery here and anyone and I challenge anyone reading this to find a better soloution
       $(container).append(mediaElement);
-      if(e.type === 'local') {
+      if (e.type === 'local') {
         socket.emit('readyToBroadcast');
       }
     },
@@ -147,8 +148,8 @@ function resetConnection() {
       e.mediaEvent && $(e.mediaEvent).remove();
     },
   });
-rtcConnection.onstream = rtcConnection.onStream;
-rtcConnection.onstreamended = rtcConnection.onStreamEnded;
+  rtcConnection.onstream = rtcConnection.onStream;
+  rtcConnection.onstreamended = rtcConnection.onStreamEnded;
 }
 
 export default rtcConnection;

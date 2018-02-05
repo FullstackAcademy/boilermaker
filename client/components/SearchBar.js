@@ -19,7 +19,6 @@ class SearchBar extends Component {
 
   render() {
     const { searchResults, handleSearch } = this.props;
-    console.log(searchResults);
     return (
       <div className="search-bar-container">
         <AsyncTypeahead
