@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../db/models');
+const { User, Channel } = require('../db/models');
 const gatekeeper = require('../../utils/gatekeeper');
 
 module.exports = router
@@ -23,8 +23,20 @@ router.get('/', (req, res, next) => {
   }
 })
 
+router.get('/:userId/channels', (req, res, next) => {
+  Channel.findAll({
+    where: {
+      userId: Number(req.params.userId)
+    }
+  })
+    .then(channels => res.json(channels))
+    .catch(next);
+})
+
 router.get('/:userId', (req, res, next) => {
-  User.findById(Number(req.params.userId))
+  User.findById(Number(req.params.userId), {
+    include: [{all: true}]
+  })
     .then(user => res.json(user))
     .catch(next);
 })
