@@ -11,8 +11,20 @@ const getCategories = categories => ({ type: GET_CATEGORIES, categories });
 export const fetchCategories = () => {
   return function (dispatch) {
     return axios.get('/api/categories')
-      .then(res =>
-        dispatch(getCategories(res.data)))
+      .then(res => {
+        res.data.sort((a, b) => {
+          let nameA = a.name.toUpperCase();
+          let nameB = b.name.toUpperCase();
+          if (nameA < nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        })
+        dispatch(getCategories(res.data))
+      })
       .catch(err => console.log(err));
   }
 }
