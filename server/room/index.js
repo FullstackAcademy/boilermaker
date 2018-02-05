@@ -93,8 +93,8 @@ module.exports = function (io) {
                 this.currentAction = USERS_DEBATING;
               });
             } else {
-              let indexOfWinner = this.calculateWinner();
-              io.to(this.name).emit('setWinner', this.broadcasters[indexOfWinner].userId);
+              // let indexOfWinner = this.calculateWinner();
+              // io.to(this.name).emit('setWinner', this.broadcasters[indexOfWinner].userId);
               this.currentAction = RESETTING_GAME;
               this.state = {
                 time: 0,
@@ -191,11 +191,11 @@ module.exports = function (io) {
     getBroadcasterIds() {
       return this.broadcasters.map(broadcaster => broadcaster.id);
     }
-    calculateWinner() {
-      return this.voteTally.indexOf(this.voteTally.reduce((a, b) => {
-        return Math.max(a, b);
-      }));
-    }
+    // calculateWinner() {
+    //   return this.voteTally.indexOf(this.voteTally.reduce((a, b) => {
+    //     return Math.max(a, b);
+    //   }));
+    // }
   }
   return roomList;
 }

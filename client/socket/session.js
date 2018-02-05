@@ -111,11 +111,11 @@ socket.on('roomHasEnded', () => {
   store.dispatch(setTimerActive(false));
 });
 
-socket.on('setWinner', (userId) => {
-  return axios.put(`/api/users/${userId}`, userId)
-    .then(res => store.dispatch(setWinner(res.data.userName)))
-    .catch(err => console.error(err));
-});
+// socket.on('setWinner', (userId) => {
+//   return axios.put(`/api/users/${userId}`, userId)
+//     .then(res => store.dispatch(setWinner(res.data.userName)))
+//     .catch(err => console.error(err));
+// });
 
 /*socket.on('broadcasterStarted', broadcasterId => {
   let { currChannel} = store.getState();
