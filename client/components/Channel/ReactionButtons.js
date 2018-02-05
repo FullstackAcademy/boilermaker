@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { socket } from '../socket';
+import { socket } from '../../socket';
 import { Button } from 'react-bootstrap';
 
 class ReactionButtons extends Component {

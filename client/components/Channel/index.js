@@ -11,7 +11,8 @@ import VideoFeed from './VideoFeed';
 import Timer from './Timer';
 import Voting from './Voting';
 import Prompts from './Prompts';
-import { Reaction, ReactionButtons } from './';
+import Reaction from './Reaction';
+import ReactionButtons from './ReactionButtons';
 
 class Channel extends Component {
   constructor() {
