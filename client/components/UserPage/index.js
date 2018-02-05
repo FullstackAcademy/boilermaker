@@ -9,6 +9,7 @@ import CreateChannel from '../CreateChannel';
 import DeleteWarning from './DeleteWarning';
 import EditUser from './EditUser';
 import SearchUser from './SearchUser';
+import StatsSidebar from './StatsSidebar';
 
 class UserPage extends Component {
 
@@ -51,7 +52,7 @@ class UserPage extends Component {
     const userId = Number(this.props.match.params.userId);
     const myId = this.props.me.id;
     return (
-      <div>
+      <div className="user-page-container">
         <div className="user-page-header">
           <Image src={user.photoURL} rounded className="user-page-user-image" />
           <div className="user-page-header-text">
@@ -106,7 +107,8 @@ class UserPage extends Component {
             :
             null
         }
-        <SearchUser 
+        <StatsSidebar user={user} />
+        <SearchUser
         searchResults={users.searchUserList} 
         handleSearch={handleSearch} 
         loadUser={loadUser}

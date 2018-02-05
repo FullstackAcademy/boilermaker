@@ -95,6 +95,10 @@ div#welcome-text {
   animation-delay: 1s;
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 #home-category-list-title.panel{
@@ -110,8 +114,7 @@ div.home-category-list-item {
   font-size: 2em;
   text-align: center;
   float:left;
-  margin-left: 1.5em;
-  margin-right: 1.5em;
+  margin: 1.5em;
   width: 250px;
   height: 300px;
   border: 1px solid lightgray;
@@ -219,6 +222,11 @@ svg {
   margin-left: 25px;
 }
 
+.category-channel-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .category-channel-list-item{
   animation-delay: .5s;
   -webkit-animation-delay: .5s;
@@ -228,15 +236,9 @@ svg {
 div.category-channel-list-item {
   font-size: 1em;
   text-align: center;
-  float:left;
-  margin-left: 1.5em;
-  margin-right: 1.5em;
+  margin: 1.5em;
   width: 400px;
   height: 200px;
-}
-
-category-channel-list-item-header{
-  
 }
 
 .category-channel-list-item-image {
@@ -244,6 +246,11 @@ category-channel-list-item-header{
 }
 
 /************************ USER PAGE ***********************/
+.user-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .user-page-user-image {
   width: 50px;
@@ -254,6 +261,7 @@ category-channel-list-item-header{
 
 .user-page-header {
   display: flex;
+  justify-content: center;
 }
 
 .user-page-buttons {
@@ -284,10 +292,16 @@ category-channel-list-item-header{
   color: #ffe1c7;
   box-shadow: 3px 3px 3px grey;
   border-radius: 10px;
+  z-index: 2;
 }
 
 .user-page-form-buttons {
 
+}
+
+.search-user {
+  width: 25%;
+  align-self: center;
 }
 
 /************************ TIMER ***********************/
