@@ -27,7 +27,7 @@ class SearchBar extends Component {
           delay={350}
           labelKey={'name'}
           minLength={2}
-          placeholder="Search..."
+          placeholder="Search categories..."
           bsSize={'large'}
           submitFormOnEnter={true}
           onChange={(foundChannel) => history.push(`/channels/${foundChannel[0].name}`)}

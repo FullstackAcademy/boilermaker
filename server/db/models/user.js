@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Channel = require('./channel');
 
 const User = db.define('user', {
   name: {
@@ -42,6 +43,14 @@ const User = db.define('user', {
       min: 0
     }
   },
+  wins: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
+  losses: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
   googleId: {
     type: Sequelize.STRING
   },
@@ -54,4 +63,4 @@ const User = db.define('user', {
   }
 })
 
-module.exports = User
+module.exports = User;
