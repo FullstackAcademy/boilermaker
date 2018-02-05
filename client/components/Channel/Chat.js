@@ -87,7 +87,6 @@ class Chat extends Component {
   }
 }
 
-
 const mapState = (state) => {
   return {
     messages: state.room.messages,
@@ -95,7 +94,4 @@ const mapState = (state) => {
   }
 }
 
-
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
 export default connect(mapState)(Chat)
