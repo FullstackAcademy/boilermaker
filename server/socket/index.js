@@ -59,7 +59,11 @@ module.exports = (io, socket) => {
     if (socket.room.name) room = io.to(socket.room.name);
     room.emit('message', `[${new Date().toLocaleTimeString('en-US')}] ${username}: ${message}`)
   });
-
+  socket.on('reaction', reactionId => {
+    let room = io;
+    if (socket.room.name) room = io.to(socket.room.name);
+    room.emit('reaction', reactionId)
+  })
   socket.on('readyToBroadcast', () => {
     if ('broadcasterCount' in socket.room.state) socket.room.state.broadcasterCount++;
   });
