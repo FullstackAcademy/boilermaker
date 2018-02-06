@@ -50,7 +50,7 @@ class Chat extends Component {
         transitionAppearTimeout={1000}
         transitionEnter={false}
         transitionLeave={false}>
-        <Col xs={12} s={4} md={3} id='main-chat-room' className="chat">
+        <div id='main-chat-room' className="chat">
           <div id="chat-room-header">{name}</div>
           <div id="chat-body">
             {messages.map((message, i) => {
@@ -81,7 +81,7 @@ class Chat extends Component {
               placeholder="Send a message"
             />
           </form>
-        </Col>
+        </div>
       </ReactCSSTransitionGroup>
     )
   }

@@ -2,30 +2,19 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 
 const Voting = (props) => {
-  const { changeVote1, changeVote2 } = props;
+  const { vote, id, title } = props;
 
   return (
-    <div className="animated slideInUp">
-      <div>
-        <Button
-          id="vote-1"
-          bsStyle="primary"
-          bsSize="large"
-          onClick={changeVote1}
-        >
-          VOTE 1
-        </Button>
-      </div>
-      <div>
-        <Button
-          id="vote-2"
-          bsStyle="primary"
-          bsSize="large"
-          onClick={changeVote2}
-        >
-          VOTE 2
-        </Button>
-      </div>
+    <div className="animated slideInUp vote-button">
+      <Button
+        id={id}
+        bsStyle="success"
+        bsSize="large"
+        onClick={vote}
+        bsClass="vote-button-btn"
+      >
+      <i className="fas fa-arrow-alt-circle-up vote-up"></i>
+      </Button>
     </div>
   )
 }
