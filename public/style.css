@@ -122,7 +122,6 @@ div#welcome-text {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  margin-bottom:40px;
 }
 
 #home-category-list-title.panel{
@@ -139,7 +138,7 @@ div.home-category-list-item {
   font-size: 2em;
   text-align: center;
   float:left;
-  margin: 1.5em;
+  margin: 0.5em;
   width: 250px;
   height: 300px;
   border: 1px solid lightgray;
@@ -204,7 +203,7 @@ div.home-category-list-item {
 }
 .empty-video.active{
   box-shadow:0px 0px 20px green;
-  z-index:2;
+  z-index: -1;
   position:relative;
 }
 #empty-video-1{
@@ -273,6 +272,28 @@ svg {
 .open-button{
   border-radius: 100%
 }
+
+/************************* PROMPTS ***********************************/
+
+#prompt-box {
+  position: absolute;
+    z-index: 3;
+    background-color: rgba(0,0,0,0.5);
+    left: 50%;
+    margin-left: -253.5px;
+    top: 15%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    color: #f5dbc5;
+    text-shadow: 1px 1px 2px #fe8f02;
+    box-shadow: 3px 3px 3px grey;
+}
+
+#prompt-box-subheader {
+  font-size: 12px;
+}
+
 /************************* ANNOUNCEMENTS *****************************/
 
 @keyframes fadeInFadeOut {
@@ -314,7 +335,6 @@ svg {
   -moz-animation-name: fadeInFadeOut;
   -moz-animation-duration: 4s;
   -moz-animation-timing-function: linear; 
-  z-index: 2;
 }
 
 #announcement-winner-container {
@@ -339,7 +359,6 @@ svg {
   -moz-animation-name: stretch;
   -moz-animation-duration: 1s;
   -moz-animation-timing-function: linear; 
-  z-index: 2;
 }
 
 #announcement-debate-headline, #announcement-voting-headline {
@@ -426,7 +445,7 @@ div.category-channel-list-item {
   left: 50%;
   margin-left: -115px;
   top: 25%;
-  background-color: #ff9001;
+  background-color: #FE9002;
   color: #ffe1c7;
   box-shadow: 3px 3px 3px grey;
   border-radius: 10px;
@@ -527,7 +546,7 @@ div.category-channel-list-item {
   overflow: scroll;
   overflow-wrap: break-word;
   width: 100%;
-  background-color: #eee;
+  background-color: #eeeeee;
   position: relative;
   z-index: 0;
   bottom: 90px;
