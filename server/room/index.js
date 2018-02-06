@@ -113,7 +113,7 @@ module.exports = (io) => {
     sendRoomState(socket) {
       let leadinTime = 0;
       let time = 0;
-      if (this.action.status === LEAD_IN) leadinTime = this.action.timestamp - Date.now();
+      if (this.action.status === LEAD_IN) leadinTime = Date.now() - this.action.timestamp;
       else time = Date.now() - this.action.timestamp;
       
       let phaseStatus = false;

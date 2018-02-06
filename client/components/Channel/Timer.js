@@ -39,7 +39,7 @@ class Timer extends Component {
       step: (state, bar) => {
         bar.path.setAttribute('stroke', state.color);
         let value = Math.floor((bar.value() * totalTime / 1000));
-        if (!bar.textFrozen) bar.setText(Math.floor(forcedStartText) || totalTime / 1000 - value);
+        if (!bar.textFrozen) bar.setText(Math.ceil(forcedStartText) || totalTime / 1000 - value);
         // if (value === 25) {
         //   this.setState({ shake: true })
         // } else if (value === 30) {
@@ -63,15 +63,15 @@ class Timer extends Component {
     bar.textFrozen = true;
     let { leadinTime: startTime, totalLeadinTime } = this.props;
     let leadinTime = totalLeadinTime - startTime;
-    let count = Math.ceil(leadinTime / 1000 - 1);
+    let count = leadinTime - 1000;
 
     const countDown = () => {
       if (count <= 0 || !this.bar) window.clearInterval(leadIn);
       if (!this.bar) return;
-      this.bar.setText(count)
-      count--
+      this.bar.setText(Math.ceil(count / 1000));
+      count -= 100;
     }
-    let leadIn = setInterval(countDown, 1000);
+    let leadIn = setInterval(countDown, 100);
 
   }
 
@@ -140,13 +140,29 @@ class Timer extends Component {
 }
 
 const mapState = (state) => {
+  let status = (() => {
+    switch (state.room.timer.status.phase) {
+      case '_player1ToStart':
+        return 0;
+      case '_player1Debating':
+        return 1;
+      case '_player2ToStart':
+        return 2;
+      case '_player2Debating':
+        return 3;
+      case '_announcingWinner':
+        return 4;
+      default:
+        return 0;
+    }
+  })()
   return {
     leadinTime: state.room.timer.leadinTime,
     currTime: state.room.timer.currTime,
     totalTime: state.room.timer.totalTime,
     totalLeadinTime: state.room.timer.totalLeadinTime,
     timerIsActive: state.room.timer.active,
-    status: state.room.timer.status
+    status
   }
 }
 
