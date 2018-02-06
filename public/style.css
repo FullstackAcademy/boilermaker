@@ -252,6 +252,7 @@ div.category-channel-list-item {
   justify-content: center;
   height: 100vh;
   margin-top: -100px;
+
 }
 
 .user-page-user-image {
@@ -323,6 +324,11 @@ div.category-channel-list-item {
   width: 25%;
   align-self: center;
   margin-top: 25px;
+}
+
+.search-user {
+  width: 25%;
+  align-self: center;
 }
 
 /************************ TIMER ***********************/
