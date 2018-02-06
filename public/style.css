@@ -310,9 +310,11 @@ div.category-channel-list-item {
   transform: scale(-1, 1);
 }
 
-/*.progressbar-text.flip {
-  transform: translate(-50%, 50%) scale(-1,1)!important;
-}*/
+#progressbar {
+  position: relative !important;
+  bottom: 20%;
+  right: 3%;
+}
 
 /***************CHAT***********/
 .chat {
