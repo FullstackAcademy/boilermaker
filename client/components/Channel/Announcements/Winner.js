@@ -1,14 +1,13 @@
 import React from 'react';
 
 const Winner = (props) => {
-  const { debateStatus } = props;
-  let test = true;
+  const { winnerStatus } = props;
   return (
     <div>
       {
-        test === true &&
+        winnerStatus !== false && winnerStatus !== '_tie' &&
         <div id="announcement-winner-container">
-          <h1 id="announcement-winner-headline">Player 2 has won!</h1>
+          <h1 id="announcement-winner-headline">{winnerStatus} has won!</h1>
         </div>
       }
     </div>

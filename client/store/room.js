@@ -9,10 +9,10 @@ const defaultState = {
     status: 0
   },
   status: {
-    phase: '',
+    phase: false,
     debate: false,
-    winner: '',
-    voting: false
+    winner: false,
+    voting: 'default'
   }
 }
 
