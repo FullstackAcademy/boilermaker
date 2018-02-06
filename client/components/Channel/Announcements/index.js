@@ -2,13 +2,17 @@ import React from 'react';
 import { } from 'react-bootstrap'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import StartDebate from './StartDebate';
+import Debate from './Debate';
+import Voting from './Voting';
+import Winner from './Winner';
 
 const Announcements = (props) => {
-  const { } = props;
+  const { status } = props;
   return (
     <div>
-      <h1 className="animated fadeIn tester">HELLLLLLOOO</h1>
+      {/* <Debate debateStatus={status.debate} /> */}
+      {/* <Voting votingStatus={status.voting} /> */}
+      <Winner winnerStatus={status.winner} />
     </div>
   )
 }

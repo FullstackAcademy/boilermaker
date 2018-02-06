@@ -215,33 +215,79 @@ svg {
 }
 /************************* ANNOUNCEMENTS *****************************/
 
-.tester {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
-  transition-duration: 0.2s;
+@keyframes fadeInFadeOut {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0 } 
 }
 
+@keyframes stretch {
+  0% {
+    transform: scale(.1) rotate(300deg);
+    background-color: rgba(50, 50, 50, 1);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    background-color: #FE9002;
+   } 
+}
 
-
-
-/* .announcement-container{
-  width: 100%;
-  top: 50%;
-  bottom: 50%;
+#announcement-debate-container, #announcement-voting-container {
   position: absolute;
+  left: 20%;
+  bottom: 50%;
+  height: 85px;
+  opacity: 0;
+  background-color: rgba(50, 50, 50, 1);
+  color: white;
+  box-shadow: 2px 2px 5px black;
+  width: 55%;
+  border-radius: 10px;
+  font-size: 4em;
+  text-align: center;
+  animation-name: fadeInFadeOut;
+  animation-duration: 4s;
+  animation-timing-function: linear; 
+  -webkit-animation-name: fadeInFadeOut;
+  -webkit-animation-duration: 4s;
+  -webkit-animation-timing-function: linear; 
+  -moz-animation-name: fadeInFadeOut;
+  -moz-animation-duration: 4s;
+  -moz-animation-timing-function: linear; 
+  z-index: 2;
 }
 
-.announcement-appear {
-  opacity: 0.01;
+#announcement-winner-container {
+  position: absolute;
+  left: 15%;
+  bottom: 50%;
+  height: 150px;
+  background-color: #FE9002;
+  color: white;
+  box-shadow: 2px 2px 5px black;
+  width: 55%;
+  border-radius: 10px;
+  font-size: 4em;
+  text-align: center;
+  animation-name: stretch;
+  animation-duration: 1s;
+  animation-timing-function: linear; 
+  -webkit-animation-name: stretch;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: linear; 
+  -moz-animation-name: stretch;
+  -moz-animation-duration: 1s;
+  -moz-animation-timing-function: linear; 
+  z-index: 2;
 }
 
-.announcement-appear.announcement-appear-active {
-  opacity: 1;
-  transition: opacity 5s ease-in;
-} */
+#announcement-debate-headline, #announcement-voting-headline {
+  line-height: 47.5px;
+}
 
+#announcement-winner-headline {
+  line-height: 105px;
+}
 /************************ SINGLE CATEGORY CHANNEL LIST ***************/
 
 .category-page-header-img{
