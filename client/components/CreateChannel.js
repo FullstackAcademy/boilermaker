@@ -31,12 +31,13 @@ class CreateChannel extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.makeChannel(evt.target.channel.value, evt.target.category.value, evt.target.description.value);
+    let et = evt.target;
+    this.props.makeChannel(et.channel.value, et.category.value, et.description.value, et.type.value, this.props.id);
     this.setState({ channelValue: '', descriptionValue: '' })
   }
 
   render() {
-    const categories = ['Anime', 'Gaming', 'Other', 'Politics', 'Sports', 'TV/Film'];
+    const categories = this.props.categories;
 
     return (
       <form onSubmit={this.handleSubmit} className="user-page-form">
@@ -63,10 +64,17 @@ class CreateChannel extends Component {
             {
               categories.map(category => {
                 return (
-                  <option key={category} value={category}>{category}</option>
+                  <option key={category.id} value={category.id}>{category.name}</option>
                 )
               })
             }
+          </FormControl>
+        </FormGroup><br />
+        <FormGroup controlId="formControlsSelect">
+          <ControlLabel>Type</ControlLabel>
+          <FormControl componentClass="select" placeholder="select" name="type">
+              <option key={1} value="Debate">Debate</option>
+              <option key={2} value="Rap Battle">Rap Battle</option>
           </FormControl>
         </FormGroup><br />
         <FormGroup
@@ -95,16 +103,24 @@ class CreateChannel extends Component {
   }
 }
 
+const mapState = (state) => {
+  return {
+    categories: state.categories
+  }
+}
+
 const mapDispatch = (dispatch) => {
   return {
-    makeChannel(channel, category, description) {
+    makeChannel(channel, categoryId, description, type, userId) {
       dispatch(createChannel(
         channel,
-        category,
-        description
+        categoryId,
+        description,
+        type,
+        userId
       ))
     }
   }
 }
 
-export default withRouter(connect(null, mapDispatch)(CreateChannel));
+export default withRouter(connect(mapState, mapDispatch)(CreateChannel));

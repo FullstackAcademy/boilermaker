@@ -250,6 +250,8 @@ div.category-channel-list-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100vh;
+  margin-top: -100px;
 }
 
 .user-page-user-image {
@@ -295,13 +297,32 @@ div.category-channel-list-item {
   z-index: 2;
 }
 
-.user-page-form-buttons {
-
+.user-page-stats-sidebar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.user-page-stats-sidebar-form {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.user-page-stats-sidebar div {
+  margin: 10px;
+}
+
+.user-page-stats-sidebar-submit {
+  width: 180px;
+  margin-left: 10px;
+}
+
 
 .search-user {
   width: 25%;
   align-self: center;
+  margin-top: 25px;
 }
 
 /************************ TIMER ***********************/
