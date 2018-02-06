@@ -18,7 +18,7 @@ class SearchUser extends Component {
   render() {
     const { searchResults, handleSearch, loadUser } = this.props;
     return (
-      <div className="search-user">
+      <div className="search-user animated slideInUp">
         <AsyncTypeahead
           options={searchResults}
           isLoading={this.state.isLoading}
