@@ -1,43 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { PageHeader } from 'react-bootstrap'
 
-import { fetchCategoryChannels } from '../../store'
 import ChannelList from './ChannelList';
 
-class Category extends Component {
-  componentDidMount() {
-    this.props.getFilteredChannels(this.props.currentCategory.id)
-  }
-  render() {
-    const { channels, currentCategory } = this.props;
-    return (
-      <div>
-        <PageHeader>
-          {currentCategory.name} <small>Channel List</small>
-          <img className="category-page-header-img" src={`${currentCategory.imagePath}`} />
-        </PageHeader>
-        <ChannelList channels={channels} />
-      </div >
-    )
-  }
+const Category = (props) => {
+  const { channels, currentCategory } = props;
+  return currentCategory ? (
+    <div>
+      <PageHeader>
+        {currentCategory.name} <small>Channel List</small>
+        <img className="category-page-header-img" src={`${currentCategory.imagePath}`} />
+      </PageHeader>
+      <ChannelList channels={channels} />
+    </div >
+  ) : null
 }
 
 const mapState = (state, ownProps) => {
   const currentCategory = state.categories.find(category => category.name === ownProps.match.params.categoryName);
+  const filteredChannels = state.channels.channelList.filter(channel => channel.categoryId === currentCategory.id);
   return {
-    channels: state.channels,
+    channels: filteredChannels,
     currentCategory
   }
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-    getFilteredChannels(categoryName) {
-      dispatch(fetchCategoryChannels(categoryName))
-    }
-  }
-}
-
-export default withRouter(connect(mapState, mapDispatch)(Category));
+export default withRouter(connect(mapState)(Category));

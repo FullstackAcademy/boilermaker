@@ -116,10 +116,10 @@ export default function (state = defaultState, action) {
         ...state,
         timer: {
           ...state.timer,
-          leadinTime: action.leadinTime * 1000,
-          totalTime: action.totalTime * 1000,
-          currTime: action.currTime * 1000,
-          totalLeadinTime: action.totalLeadinTime * 1000,
+          leadinTime: action.leadinTime,
+          totalTime: action.totalTime,
+          currTime: action.currTime,
+          totalLeadinTime: action.totalLeadinTime,
           active: true,
           status: action.status
         }

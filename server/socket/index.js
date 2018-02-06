@@ -22,7 +22,7 @@ module.exports = (io,socket,Room) => {
     room.addViewer(socket);
     socket.room = room;
     socket.vote = { choice: 2, castedVote: false };
-    console.log('chainging room to', roomName, room.id);
+    console.log('changing room to', roomName, room.id);
   });
 
   socket.on('enqueue', () => {
