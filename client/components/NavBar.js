@@ -36,19 +36,19 @@ class NavBar extends Component {
             <img src="/Bickr-logo.png" id="nav-bar-logo" />
           </Navbar.Brand>
           <Navbar.Collapse>
-            <Nav>
-              <Navbar.Text eventKey={1}>
+            <Nav activeKey="1">
+              <Navbar.Text eventKey="1">
                 <NavLink to="/">
                   Home
               </NavLink>
               </Navbar.Text>
               <Navbar.Text>
-                <NavDropdown eventKey={3} title="Categories" id="basic-nav-dropdown">
-                  <MenuItem eventKey={3.0} onClick={() => this.navToCat('/categories')}>All</MenuItem>
+                <NavDropdown eventKey="3" title="Categories" id="basic-nav-dropdown">
+                  <MenuItem eventKey="3.0" onClick={() => this.navToCat('/categories')}>All</MenuItem>
                   {
                     categories.map(category => {
                       return (
-                        <MenuItem key={category.name} eventKey={3 + category.id} onClick={() => this.navToCat(`/categories/${category.name}/channels`)}>{category.name}</MenuItem>
+                        <MenuItem key={category.name} eventKey={(3 + category.id).toString()} onClick={() => this.navToCat(`/categories/${category.name}/channels`)}>{category.name}</MenuItem>
                       )
                     })
                   }
@@ -57,9 +57,9 @@ class NavBar extends Component {
               {
                 isLoggedIn ?
                   <Navbar.Text>
-                    <NavDropdown eventKey={2} title={user.userName} id="basic-nav-dropdown">
-                      <MenuItem eventKey={2.1} onClick={this.navToUser}>My page</MenuItem>
-                      <MenuItem eventKey={2.2} onClick={handleClick}>Logout</MenuItem>
+                    <NavDropdown eventKey="2" title={user.userName} id="basic-nav-dropdown">
+                      <MenuItem eventKey="2.1" onClick={this.navToUser}>My page</MenuItem>
+                      <MenuItem eventKey="2.2" onClick={handleClick}>Logout</MenuItem>
                     </NavDropdown>
                   </Navbar.Text>
                   :

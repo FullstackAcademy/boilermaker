@@ -17,8 +17,8 @@ const ChannelList = (props) => {
         {
           channels.filteredChannelList.map(channel => {
             return (
-              <div className="category-channel-list-item animated flipInX">
-                <NavLink to={`/channels/${channel.name}`} key={channel.id}>
+              <div key={channel.id} className="category-channel-list-item animated flipInX">
+                <NavLink to={`/channels/${channel.name}`}>
                   <Image src={`${channel.imageURL}`} className={"category-channel-list-item-image"} />
                 </NavLink>
                 <PanelGroup accordion id="category-channel-list-item-container" defaultActiveKey="2">

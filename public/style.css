@@ -136,9 +136,9 @@ div.home-category-list-item {
   overflow:hidden;
 }
 .main-channel-container{
-  height:100%;
-  width:100%;
-  float:left;
+  height: 100%;
+    width: 100%;
+    float: left;
 }
 .media-box, .media-container{
   width:100%!important;
@@ -147,12 +147,20 @@ div.home-category-list-item {
   margin:0!important;
 }
 .videos-container{
-  padding-top:50px;
-  height:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  padding-top: 50px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
+
+.video-feeds {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
 .empty-video{
   margin-top:-25%;
   height:270px;
@@ -162,6 +170,7 @@ div.home-category-list-item {
   flex-grow:0;
   flex-shrink:0;
   overflow:hidden;
+  position: relative;
 }
 .empty-video.active{
   box-shadow:0px 0px 20px green;
@@ -182,6 +191,27 @@ div.home-category-list-item {
 .button-group-wrapper{
   position: absolute;
   bottom:0;
+}
+.vote-button {
+  position: absolute;
+    bottom: 0px;
+    left: 50%;
+    margin-left: -25px;
+}
+
+.vote-button-btn {
+  height: 50px;
+    width: 50px;
+    color: #4ebf4e;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+.vote-up {
+  font-size: 49px;
+    position: absolute;
+    left: 50px;
+    top: 0px;
 }
 
 svg {
@@ -356,6 +386,7 @@ div.category-channel-list-item {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background-color: #eeeeee;
 }
 
 #chat-input{
