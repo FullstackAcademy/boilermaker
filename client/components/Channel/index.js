@@ -44,10 +44,10 @@ class Channel extends Component {
   }
 
   render() {
-    const { user, isLoggedIn, currentChannel, timerIsActive } = this.props;
+    const { user, isLoggedIn, currentChannel, timerIsActive, status } = this.props;
     return (
       <div>
-        <Announcements />
+        <Announcements status={status} />
         {
           isLoggedIn && linkUserProfile(user.id, user.userName)
         }
@@ -87,7 +87,8 @@ const mapState = (state, ownProps) => {
     user: state.me,
     isLoggedIn: !!state.me.id,
     currentChannel,
-    timerIsActive: state.room.timer.active
+    timerIsActive: state.room.timer.active,
+    status: state.room.status
   }
 };
 
