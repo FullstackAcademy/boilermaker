@@ -98,6 +98,11 @@ class EditUser extends Component {
   }
 }
 
+const mapState = (state) => {
+  return {
+  }
+}
+
 const mapDispatch = (dispatch) => {
   return {
       checkUserName() {
@@ -106,4 +111,4 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatch)(EditUser);
+export default connect(mapState, mapDispatch)(EditUser);

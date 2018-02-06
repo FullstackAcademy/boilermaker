@@ -11,6 +11,7 @@ import VideoFeed from './VideoFeed';
 import Timer from './Timer';
 import Voting from './Voting';
 import Prompts from './Prompts';
+import Announcements from './Announcements';
 
 class Channel extends Component {
   constructor() {
@@ -46,6 +47,7 @@ class Channel extends Component {
     const { user, isLoggedIn, currentChannel, timerIsActive } = this.props;
     return (
       <div>
+        <Announcements />
         {
           isLoggedIn && linkUserProfile(user.id, user.userName)
         }

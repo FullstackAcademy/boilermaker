@@ -13,7 +13,6 @@ export default class StatsSidebar extends Component {
 
   render() {
     const { user } = this.props;
-    console.log(user)
     return (
       <div className="user-page-stats-sidebar">
         <h3>Channels: {user.channels && user.channels.length}</h3>

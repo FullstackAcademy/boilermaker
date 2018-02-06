@@ -16,7 +16,6 @@ const Home = (props) => {
 }
 
 const mapState = (state) => {
-
   return {
     categories: state.categories
   }

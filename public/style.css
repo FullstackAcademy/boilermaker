@@ -213,6 +213,34 @@ svg {
 .open-button{
   border-radius: 100%
 }
+/************************* ANNOUNCEMENTS *****************************/
+
+.tester {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+
+
+
+/* .announcement-container{
+  width: 100%;
+  top: 50%;
+  bottom: 50%;
+  position: absolute;
+}
+
+.announcement-appear {
+  opacity: 0.01;
+}
+
+.announcement-appear.announcement-appear-active {
+  opacity: 1;
+  transition: opacity 5s ease-in;
+} */
 
 /************************ SINGLE CATEGORY CHANNEL LIST ***************/
 
@@ -422,6 +450,7 @@ div.category-channel-list-item {
   opacity: 1;
   transition: opacity .75s ease-in;
 }
+
 
 /* .shake {
   animation: shake 0.1s ease-in alternate 5;
