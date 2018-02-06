@@ -41,7 +41,7 @@ class Chat extends Component {
     const { messages, channel } = this.props;
     let name = '';
 
-    channel.length > 12 ? name = channel.slice(0, 12) + '...' : name = channel
+    // channel.length > 21 ? name = channel.slice(0, 22) + '...' : name = channel
 
     return (
       <ReactCSSTransitionGroup
@@ -51,7 +51,7 @@ class Chat extends Component {
         transitionEnter={false}
         transitionLeave={false}>
         <div id='main-chat-room' className="chat">
-          <div id="chat-room-header">{name}</div>
+          <div id="chat-room-header">Chat</div>
           <div id="chat-body">
             {messages.map((message, i) => {
               let dateEndIdx = message.indexOf(']');

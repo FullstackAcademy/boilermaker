@@ -37,6 +37,7 @@ form div {
 
 .center-text {
   text-align: center;
+  padding-top: 5vh;
 }
 
 /************************ NAVBAR ***********************/
@@ -121,7 +122,6 @@ div#welcome-text {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  margin-bottom:40px;
 }
 
 #home-category-list-title.panel{
@@ -138,7 +138,7 @@ div.home-category-list-item {
   font-size: 2em;
   text-align: center;
   float:left;
-  margin: 1.5em;
+  margin: 0.5em;
   width: 250px;
   height: 300px;
   border: 1px solid lightgray;
@@ -177,17 +177,17 @@ div.home-category-list-item {
   margin:0!important;
 }
 .videos-container{
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 5vh;
 }
 
 .video-feeds {
   display: flex;
   flex-direction: row;
-  margin-bottom: 10px;
+  margin-bottom: 5vh;
   flex-wrap: wrap;
 }
 
@@ -272,6 +272,28 @@ svg {
 .open-button{
   border-radius: 100%
 }
+
+/************************* PROMPTS ***********************************/
+
+#prompt-box {
+  position: absolute;
+    z-index: 3;
+    background-color: rgba(0,0,0,0.5);
+    left: 50%;
+    margin-left: -253.5px;
+    top: 15%;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    color: #f5dbc5;
+    text-shadow: 1px 1px 2px #fe8f02;
+    box-shadow: 3px 3px 3px grey;
+}
+
+#prompt-box-subheader {
+  font-size: 12px;
+}
+
 /************************* ANNOUNCEMENTS *****************************/
 
 @keyframes fadeInFadeOut {
@@ -324,7 +346,7 @@ svg {
   background-color: #FE9002;
   color: white;
   box-shadow: 2px 2px 5px black;
-  width: 55%;
+  width: 436px;
   border-radius: 10px;
   font-size: 4em;
   text-align: center;
@@ -477,7 +499,7 @@ div.category-channel-list-item {
 
 /***************CHAT***********/
 .chat {
-  max-width: 250px;
+  width: 250px;
   height: calc(100vh - 58px);
   border: 1px solid #aaa;
   padding: 0;
@@ -509,7 +531,7 @@ div.category-channel-list-item {
 
 #chat-room-header {
   width: 100%;
-  font-size: 30px;
+  font-size: 14px;
   background-color: #FE9002;
   color: #ffe1c7;
   padding: 5px;
@@ -524,7 +546,7 @@ div.category-channel-list-item {
   overflow: scroll;
   overflow-wrap: break-word;
   width: 100%;
-  background-color: white;
+  background-color: #eeeeee;
   position: relative;
   z-index: 0;
   bottom: 90px;
