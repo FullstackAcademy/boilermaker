@@ -1,4 +1,5 @@
 const { User } = require('../db/models');
+
 module.exports = (io) => {
 const rooms = {};
 const LEAD_IN = -1;
@@ -77,13 +78,13 @@ class Room {
 
   async finishGame() {
     clearTimeout(this.action.timeout);
-    io.to(this.name).emit('setDebate', false);
-    io.to(this.name).emit('setVoting', false);
+    //io.to(this.name).emit('setDebate', false);
+    //io.to(this.name).emit('setVoting', false);
     let userName = await this.calculateWinner();
-    io.to(this.name).emit('setWinner', userName);
+    //io.to(this.name).emit('setWinner', userName);
     this.action.status = RESETTING_GAME;
     this.action.timestamp = Date.now();
-    this.state = {}
+    this.state = {winner:userName};
     this.sendRoomState();
     this.action.timeout = setTimeout(() => {
       this.reset();
@@ -117,11 +118,20 @@ class Room {
     let time = 0;
     if (this.action.status === LEAD_IN) leadinTime = Date.now() - this.action.timestamp;
     else time = Date.now() - this.action.timestamp;
+
+    let debateStatus = false;
+    if(this.state.active){
+      if(this.state.firstDebator)debateStatus = "_player1";
+      else debateStatus = '_player2';
+    }
     let state = Object.assign({
       leadinTime,
       totalLeadinTime: this.leadinTime,
       time,
-      totalTime: this.debateLength
+      totalTime: this.debateLength,
+      canVote: this.action.status === USERS_DEBATING,
+      debateStatus
+
     }, this.state, {
         sentTime: Date.now()
       });

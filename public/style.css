@@ -74,6 +74,11 @@ form div {
   position: absolute;
   top:10px;
 }
+.dropdown.open > .dropdown-menu{
+  display: block;
+  position:absolute;
+  top:99%;
+}
 
 /*********************** HOME ***************************/
 div.home-jumbotron {
@@ -110,8 +115,9 @@ div#welcome-text {
   -moz-animation-delay: 1s;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  margin-bottom:40px;
 }
 
 #home-category-list-title.panel{
@@ -124,7 +130,7 @@ div#welcome-text {
   padding:20px 0;
 }
 
-yydiv.home-category-list-item {
+div.home-category-list-item {
   font-size: 2em;
   text-align: center;
   float:left;
@@ -135,7 +141,7 @@ yydiv.home-category-list-item {
 }
 
 .home-category-list-item-image {
-  width: 100%;
+  width: 15vw;
 }
 
 
