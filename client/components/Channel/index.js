@@ -98,7 +98,7 @@ const mapState = (state, ownProps) => {
     isLoggedIn: !!state.me.id,
     currentChannel,
     timerIsActive: state.room.timer.active,
-    room: state.room
+    room: state.room,
     status: state.room.status
   }
 };
