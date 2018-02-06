@@ -53,7 +53,7 @@ class UserPage extends Component {
     const myId = this.props.me.id;
     return (
       <div className="user-page-container">
-        <div className="user-page-header">
+        <div className="user-page-header animated slideInDown">
           <Image src={user.photoURL} rounded className="user-page-user-image" />
           <div className="user-page-header-text">
             <h1>{user.userName}</h1>
@@ -103,7 +103,7 @@ class UserPage extends Component {
         {
           this.state.displayCreate
             ?
-            <CreateChannel hide={this.hide} />
+            <CreateChannel hide={this.hide} id={userId} />
             :
             null
         }
