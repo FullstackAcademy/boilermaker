@@ -2,7 +2,7 @@
 // MIT License    - www.WebRTC-Experiment.com/licence
 // Documentation  - github.com/muaz-khan/RTCMultiConnection
 
-module.exports = exports = function(app, socketCallback) {
+module.exports = exports = function(io, socketCallback) {
     // stores all sockets, user-ids, extra-data and connected sockets
     // you can check presence as following:
     // var isRoomExist = listOfUsers['room-id'] != null;
@@ -13,11 +13,9 @@ module.exports = exports = function(app, socketCallback) {
     // for scalable-broadcast demos
     var ScalableBroadcast;
 
-    var io = require('socket.io');
-
     try {
         // use latest socket.io
-        io = io(app);
+        
         io.on('connection', onConnection);
     } catch (e) {
         // otherwise fallback
@@ -487,7 +485,7 @@ module.exports = exports = function(app, socketCallback) {
         });
 
         if (socketCallback) {
-            socketCallback(io,socket);
+            socketCallback(socket);
         }
     }
 };

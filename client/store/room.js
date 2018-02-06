@@ -9,6 +9,7 @@ const defaultState = {
     status: 0
   },
   status: {
+    debate: '',
     winner: '',
     voting: false
   }

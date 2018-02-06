@@ -11,6 +11,7 @@ import VideoFeed from './VideoFeed';
 import Timer from './Timer';
 import Voting from './Voting';
 import Prompts from './Prompts';
+import Announcements from './Announcements';
 import Reaction from './Reaction';
 import ReactionButtons from './ReactionButtons';
 
@@ -45,9 +46,11 @@ class Channel extends Component {
   }
 
   render() {
-    const { user, isLoggedIn, currentChannel, timerIsActive, room } = this.props;
+    const { user, isLoggedIn, currentChannel, timerIsActive, room, status } = this.props;
+
     return (
       <div>
+        <Announcements status={status} />
         {
           isLoggedIn && linkUserProfile(user.id, user.userName)
         }
@@ -96,6 +99,7 @@ const mapState = (state, ownProps) => {
     currentChannel,
     timerIsActive: state.room.timer.active,
     room: state.room
+    status: state.room.status
   }
 };
 

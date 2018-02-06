@@ -41,6 +41,7 @@ form div {
   width: auto;
   height: 60px;
   padding: 0;
+  cursor: pointer;
 }
 
 .navbar {
@@ -52,14 +53,31 @@ form div {
 
 .navbar-nav {
   float: none;
+  flex-direction: row;
+  margin-top:10px;
 }
 
 .navbar-text{
   transition:0.25s all;
 }
 
+.navbar-collapse{
+  display:flex;
+}
+
+.navbar>.container{
+  flex-wrap:nowrap;
+  max-width:none;
+  margin-top:10px;
+}
 .navbar-search {
   position: absolute;
+  top:10px;
+}
+.dropdown.open > .dropdown-menu{
+  display: block;
+  position:absolute;
+  top:99%;
 }
 
 /*********************** HOME ***************************/
@@ -97,8 +115,9 @@ div#welcome-text {
   -moz-animation-delay: 1s;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  margin-bottom:40px;
 }
 
 #home-category-list-title.panel{
@@ -106,8 +125,9 @@ div#welcome-text {
   box-shadow: 2.5px 2.5px 5px grey;
   background-color: #FE9002;
   color: white;
-  width: 65%;
+  width: 100%;
   margin-bottom: 2em;
+  padding:20px 0;
 }
 
 div.home-category-list-item {
@@ -243,7 +263,81 @@ svg {
 .open-button{
   border-radius: 100%
 }
+/************************* ANNOUNCEMENTS *****************************/
 
+@keyframes fadeInFadeOut {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0 } 
+}
+
+@keyframes stretch {
+  0% {
+    transform: scale(.1) rotate(300deg);
+    background-color: rgba(50, 50, 50, 1);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    background-color: #FE9002;
+   } 
+}
+
+#announcement-debate-container, #announcement-voting-container {
+  position: absolute;
+  left: 20%;
+  bottom: 50%;
+  height: 85px;
+  opacity: 0;
+  background-color: rgba(50, 50, 50, 1);
+  color: white;
+  box-shadow: 2px 2px 5px black;
+  width: 55%;
+  border-radius: 10px;
+  font-size: 4em;
+  text-align: center;
+  animation-name: fadeInFadeOut;
+  animation-duration: 4s;
+  animation-timing-function: linear; 
+  -webkit-animation-name: fadeInFadeOut;
+  -webkit-animation-duration: 4s;
+  -webkit-animation-timing-function: linear; 
+  -moz-animation-name: fadeInFadeOut;
+  -moz-animation-duration: 4s;
+  -moz-animation-timing-function: linear; 
+  z-index: 2;
+}
+
+#announcement-winner-container {
+  position: absolute;
+  left: 15%;
+  bottom: 50%;
+  height: 150px;
+  background-color: #FE9002;
+  color: white;
+  box-shadow: 2px 2px 5px black;
+  width: 55%;
+  border-radius: 10px;
+  font-size: 4em;
+  text-align: center;
+  animation-name: stretch;
+  animation-duration: 1s;
+  animation-timing-function: linear; 
+  -webkit-animation-name: stretch;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: linear; 
+  -moz-animation-name: stretch;
+  -moz-animation-duration: 1s;
+  -moz-animation-timing-function: linear; 
+  z-index: 2;
+}
+
+#announcement-debate-headline, #announcement-voting-headline {
+  line-height: 47.5px;
+}
+
+#announcement-winner-headline {
+  line-height: 105px;
+}
 /************************ SINGLE CATEGORY CHANNEL LIST ***************/
 
 .category-page-header-img{
@@ -482,6 +576,7 @@ div.category-channel-list-item {
   opacity: 1;
   transition: opacity .75s ease-in;
 }
+
 
 /* .shake {
   animation: shake 0.1s ease-in alternate 5;
