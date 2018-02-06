@@ -11,6 +11,8 @@ import VideoFeed from './VideoFeed';
 import Timer from './Timer';
 import Voting from './Voting';
 import Prompts from './Prompts';
+import Reaction from './Reaction';
+import ReactionButtons from './ReactionButtons';
 
 class Channel extends Component {
   constructor() {
@@ -61,14 +63,14 @@ class Channel extends Component {
           <div className='main-channel-container'>
             <div className='videos-container'>
               <div id='empty-video-1' className='empty-video' />
+              <Timer />
               <div id='empty-video-2' className='empty-video' />
             </div>
-            <Timer />
             <div className='button-group-wrapper'>
               <div className='button-group'>
                 <Button onClick={enqueue}>Add Yourself To Queue</Button>
                 <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>Prompts</Button>
-                <button onClick={() => { this.props.setTime(0, 3, 0, 3) }}>Test Timer</button>
+                <button onClick={() => { this.props.setTime(0, 5, 0, 30) }}>Test Timer</button>
                 <Voting changeVote1={this.changeVote1} changeVote2={this.changeVote2} />
               </div>
             </div>

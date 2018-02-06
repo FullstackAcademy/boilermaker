@@ -264,6 +264,9 @@ div.category-channel-list-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100vh;
+  margin-top: -100px;
+
 }
 
 .user-page-user-image {
@@ -309,8 +312,32 @@ div.category-channel-list-item {
   z-index: 2;
 }
 
-.user-page-form-buttons {
+.user-page-stats-sidebar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.user-page-stats-sidebar-form {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.user-page-stats-sidebar div {
+  margin: 10px;
+}
+
+.user-page-stats-sidebar-submit {
+  width: 180px;
+  margin-left: 10px;
+}
+
+
+.search-user {
+  width: 25%;
+  align-self: center;
+  margin-top: 25px;
 }
 
 .search-user {
@@ -324,9 +351,11 @@ div.category-channel-list-item {
   transform: scale(-1, 1);
 }
 
-/*.progressbar-text.flip {
-  transform: translate(-50%, 50%) scale(-1,1)!important;
-}*/
+#progressbar {
+  position: relative !important;
+  bottom: 20%;
+  right: 3%;
+}
 
 /***************CHAT***********/
 .chat {
@@ -454,3 +483,26 @@ div.category-channel-list-item {
     transform: translateX(-20px)
   }
 } */
+
+/********* REACTIONS **********/
+#reaction-box {
+  min-height: 24px;
+}
+
+.reaction-enter {
+  opacity: 0.01;
+}
+
+.reaction-enter.reaction-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.reaction-leave {
+  opacity: 1;
+}
+
+.reaction-leave.reaction-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
