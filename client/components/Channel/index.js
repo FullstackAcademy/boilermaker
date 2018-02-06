@@ -48,8 +48,6 @@ class Channel extends Component {
     const { user, isLoggedIn, currentChannel, timerIsActive } = this.props;
     return (
       <div>
-        <Reaction />
-        <ReactionButtons />
         {
           isLoggedIn && linkUserProfile(user.id, user.userName)
         }
