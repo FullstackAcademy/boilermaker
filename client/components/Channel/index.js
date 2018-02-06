@@ -46,7 +46,8 @@ class Channel extends Component {
   }
 
   render() {
-    const { user, isLoggedIn, currentChannel, timerIsActive, status } = this.props;
+    const { user, isLoggedIn, currentChannel, timerIsActive, room, status } = this.props;
+
     return (
       <div>
         <Announcements status={status} />
@@ -64,24 +65,31 @@ class Channel extends Component {
 
           <div className='main-channel-container'>
             <div className='videos-container'>
-              <div id='empty-video-1' className='empty-video' />
-              <Timer />
-              <div id='empty-video-2' className='empty-video' />
-            </div>
-            <div className='button-group-wrapper'>
-              <div className='button-group'>
-                <Button onClick={enqueue}>Add Yourself To Queue</Button>
-                <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>Prompts</Button>
-                <button onClick={() => { this.props.setTime(0, 5, 0, 30) }}>Test Timer</button>
-                <Voting changeVote1={this.changeVote1} changeVote2={this.changeVote2} />
+              <div className="video-feeds">
+                <div id='empty-video-1' className='empty-video'>
+                  <Voting vote={this.changeVote1} id={'vote-1'} />
+                </div>
+                <Timer />
+                <div id='empty-video-2' className='empty-video'>
+                  <Voting vote={this.changeVote2} id={'vote-2'} />
+                </div>
               </div>
+              <Button className="queue-up" onClick={enqueue}>Queue Up</Button>
+              <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>Prompts</Button>
+              <Reaction />
+              <ReactionButtons />
             </div>
           </div>
         </div>
-      </div >
+      </div>
     )
   }
 }
+// <div className='button-group-wrapper'>
+//   <div className='button-group'>
+//     <button onClick={() => { this.props.setTime(0, 5, 0, 30) }}>Test Timer</button>
+//   </div>
+// </div>
 
 const mapState = (state, ownProps) => {
   const currentChannel = ownProps.match.params.channelName;
@@ -90,6 +98,7 @@ const mapState = (state, ownProps) => {
     isLoggedIn: !!state.me.id,
     currentChannel,
     timerIsActive: state.room.timer.active,
+    room: state.room
     status: state.room.status
   }
 };
