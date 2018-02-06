@@ -1,5 +1,4 @@
 import React from 'react';
-import { Modal } from 'react-bootstrap'
 
 const Debate = (props) => {
   const { debateStatus } = props;
