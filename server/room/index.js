@@ -19,10 +19,10 @@ module.exports = (io) => {
       this.voteTally = [0, 0];
       this.id = ++roomId;
       this.state = {};
-      this.debateLength = 10;
-      this.broadcasterTimeout = 5;
-      this.leadinTime = 5;
-      this.votingTime = 5;
+      this.debateLength = 10000;
+      this.broadcasterTimeout = 5000;
+      this.leadinTime = 5000;
+      this.votingTime = 5000;
       this.action = { status: WAITING_FOR_QUEUE };
       this.firstDebator = true;
       rooms[name] = this;
@@ -40,7 +40,7 @@ module.exports = (io) => {
       this.sendRoomState();
       this.action.timeout = setTimeout(() => {
         if (this.action.status === LOADING_BROADCASTERS) this.reset(true);
-      }, this.broadcasterTimeout * 1000);
+      }, this.broadcasterTimeout);
     }
 
     startDebating(firstDebator = true) {
@@ -61,7 +61,7 @@ module.exports = (io) => {
             }
             else this.finishGame();
           }
-        }, this.debateLength * 1000);
+        }, this.debateLength);
 
         let action = ['unmute', 'mute'];
         if (!firstDebator) action = ['mute', 'unmute'];
@@ -85,11 +85,11 @@ module.exports = (io) => {
       this.sendRoomState();
       this.action.timeout = setTimeout(() => {
         this.reset();
-      }, this.votingTime * 1000);
+      }, this.votingTime);
     }
     leadin(f) {
       console.log('waiting between activities');
-      this.action.timeout = setTimeout(() => { if (this.action.status === LEAD_IN) f() }, this.leadinTime * 1000);
+      this.action.timeout = setTimeout(() => { if (this.action.status === LEAD_IN) f() }, this.leadinTime);
       this.leadinCallback = f;
       this.state = {
         active: true,
@@ -135,7 +135,8 @@ module.exports = (io) => {
         totalTime: this.debateLength,
         canVote: this.action.status === USERS_DEBATING || this.action.status === LEAD_IN,
         debateStatus,
-        phaseStatus
+        phaseStatus,
+        viewerCount: this.viewers.length
       }, this.state, {
         sentTime: Date.now()
       });

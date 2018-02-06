@@ -39,7 +39,7 @@ class Timer extends Component {
       step: (state, bar) => {
         bar.path.setAttribute('stroke', state.color);
         let value = Math.floor((bar.value() * totalTime / 1000));
-        if (!bar.textFrozen) bar.setText(forcedStartText || totalTime / 1000 - value);
+        if (!bar.textFrozen) bar.setText(Math.floor(forcedStartText) || totalTime / 1000 - value);
         // if (value === 25) {
         //   this.setState({ shake: true })
         // } else if (value === 30) {
@@ -63,7 +63,7 @@ class Timer extends Component {
     bar.textFrozen = true;
     let { leadinTime: startTime, totalLeadinTime } = this.props;
     let leadinTime = totalLeadinTime - startTime;
-    let count = leadinTime / 1000 - 1;
+    let count = Math.ceil(leadinTime / 1000 - 1);
 
     const countDown = () => {
       if (count <= 0 || !this.bar) window.clearInterval(leadIn);
