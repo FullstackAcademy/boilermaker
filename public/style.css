@@ -35,6 +35,10 @@ form div {
   display: inline-block;
 }
 
+.center-text {
+  text-align: center;
+}
+
 /************************ NAVBAR ***********************/
 
 #nav-bar-logo.navbar-brand{
@@ -157,9 +161,15 @@ div.home-category-list-item {
 }
 .main-channel-container{
   height: 100%;
-    width: 100%;
-    float: left;
+  width: 100%;
+    display: flex;
 }
+
+.main-channel-child {
+  flex: 2;
+  position: relative;
+}
+
 .media-box, .media-container{
   width:100%!important;
   height:100%!important;
@@ -167,7 +177,6 @@ div.home-category-list-item {
   margin:0!important;
 }
 .videos-container{
-  padding-top: 50px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -179,12 +188,12 @@ div.home-category-list-item {
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .empty-video{
-  margin-top:-25%;
-  height:270px;
-  width:480px;
+  height:35vh;
+  width:32vw;
   background:#eee;
   display:inline-block;
   flex-grow:0;
@@ -309,7 +318,8 @@ svg {
 
 #announcement-winner-container {
   position: absolute;
-  left: 15%;
+  left: 50%;
+  margin-left: -218px;  
   bottom: 50%;
   height: 150px;
   background-color: #FE9002;
@@ -469,10 +479,8 @@ div.category-channel-list-item {
 
 /***************CHAT***********/
 .chat {
-  /* width: 250px; */
-  height: calc(100vh - 65px);
-  position: relative;
-  float: right;
+  max-width: 250px;
+  height: calc(100vh - 58px);
   border: 1px solid #aaa;
   padding: 0;
   box-shadow: 3px 3px 3px grey;
@@ -617,4 +625,10 @@ div.category-channel-list-item {
 .reaction-leave.reaction-leave-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
+}
+
+#reaction-buttons {
+  animation-delay: 1.5s;
+  -webkit-animation-delay: 1.5s;
+  -moz-animation-delay: 1.5s;
 }
