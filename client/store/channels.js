@@ -9,19 +9,13 @@ const defaultState = {
 
 const GET_CHANNELS = 'GET_CHANNELS';
 const CREATE_CHANNEL = 'CREATE_CHANNEL';
-const GET_FILTERED_CHANNELS = 'GET_FILTERED_CHANNELS';
 const GET_SEARCH_CHANNELS = 'GET_SEARCH_CHANNELS';
 
 const getChannels = channels => ({ type: GET_CHANNELS, channels });
 const makeChannel = channel => ({ type: CREATE_CHANNEL, channel });
-const filterChannels = channels => ({ type: GET_FILTERED_CHANNELS, channels })
 const searchChannels = channels => ({ type: GET_SEARCH_CHANNELS, channels });
 
 /******************** DISPATCH FUNCTIONS ********************/
-
-export const fetchFilteredChannels = categoryName => (
-  { type: GET_FILTERED_CHANNELS, categoryName }
-)
 
 export const fetchChannels = () => {
   return function (dispatch) {
@@ -31,13 +25,6 @@ export const fetchChannels = () => {
       .catch(err => console.log(err));
   }
 }
-
-export const fetchCategoryChannels = categoryId =>
-  dispatch => {
-    return axios.get(`/api/channels/${categoryId}`)
-      .then(res => dispatch(filterChannels(res.data)))
-      .catch(err => console.log(err));
-  }
 
 export const fetchSearchChannels = searchTerm =>
   dispatch => {
@@ -74,11 +61,6 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         channelList: [...state.channelList, action.channel]
-      }
-    case GET_FILTERED_CHANNELS:
-      return {
-        ...state,
-        filteredChannelList: action.channels
       }
     case GET_SEARCH_CHANNELS:
       return {

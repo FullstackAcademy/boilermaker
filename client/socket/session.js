@@ -31,7 +31,7 @@ export function linkUserProfile(userId, userName) {
 /****************** Client room ******************/
 
 function offsetTimeByPing(roomState, sentTime) {
-  let dTime = (Date.now() - sentTime) / 1000;
+  let dTime = (Date.now() - sentTime);
   roomState.time += dTime;
   roomState.leadinTime += dTime;
   return roomState;
