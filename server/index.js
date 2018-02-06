@@ -88,7 +88,10 @@ const createApp = () => {
   })
 }
 
-require('./rtcmulticonnection/Signaling-Server.js')(server, function (io,socket) {
+const io = require('socket.io')(server);
+const Room = require('./room')(io);
+
+require('./rtcmulticonnection/Signaling-Server.js')(io, function (socket) {
   try {
     var params = socket.handshake.query;
 
@@ -110,7 +113,7 @@ require('./rtcmulticonnection/Signaling-Server.js')(server, function (io,socket)
       } catch (e) { }
     });
   } catch (e) { }
-  require('./socket')(io,socket)
+  require('./socket')(io,socket,Room);
 });
 
 // const startListening = () => {
