@@ -53,15 +53,15 @@ class Channel extends Component {
         {
           isLoggedIn && linkUserProfile(user.id, user.userName)
         }
-        {
-          this.state.togglePrompt && <Prompts displayPrompt={this.displayPrompt} />
-        }
         <div className='channel-container'>
-
-          {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
-
-          <div className='main-channel-container'>
-            <div className="main-channel-child">
+        
+        {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
+        
+        <div className='main-channel-container'>
+        <div className="main-channel-child">
+            {
+              this.state.togglePrompt && <Prompts displayPrompt={this.displayPrompt} display={this.state.togglePrompt} />
+            }
               <Announcements status={status} />
               <h1 className="animated slideInLeft center-text">{currentChannel}</h1>
               <div className='videos-container'>
