@@ -1,12 +1,5 @@
 const { User } = require('../db/models');
-let roomList;
-module.exports = (io, socket) => {
-  const rl = roomList;
-  if (!rl) {
-    roomList = require('../room')(io);
-  }
-
-  const axios = require('axios');
+module.exports = (io,socket,Room) => {
 
   console.log(`A socket connection to the server has been made: ${socket.id}`);
 
@@ -25,7 +18,7 @@ module.exports = (io, socket) => {
 
   socket.on('changeChannel', roomName => {
     socket.join(roomName);
-    let room = roomList.createOrFindRoom(roomName);
+    let room = Room.createOrFindRoom(roomName);
     room.addViewer(socket);
     socket.room = room;
     socket.vote = { choice: 2, castedVote: false };
@@ -61,7 +54,9 @@ module.exports = (io, socket) => {
   });
 
   socket.on('readyToBroadcast', () => {
-    if ('broadcasterCount' in socket.room.state) socket.room.state.broadcasterCount++;
+    if ('broadcasterCount' in socket.room.state && ++socket.room.state.broadcasterCount > 1){
+      socket.room.startDebating()
+    }
   });
 
   socket.on('getRoomState', () => {

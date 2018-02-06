@@ -59,6 +59,7 @@ socket.on('setRoomState', roomState => {
 });
 
 socket.on('unmute', id => {
+  console.log('unmuting',id);
   //rtcConnection.session = Object.assign({},rtcConnection.session,{audio:true});
   //rtcConnection.stream.toggle('mute-audio');
   /*console.warn('attempting to unumute...');
@@ -67,7 +68,7 @@ socket.on('unmute', id => {
     rtcConnection.muted = !rtcConnection.muted;
     rtcConnection.stream.toggle('mute-audio');
   }*/
-  var elem = rtcConnection.broadcasters[id];
+  var elem = rtcConnection.broadcastersObj[id];
   if (id !== rtcConnection.userid) elem.volume = 1;
   $(elem).parent().addClass('active');
 });
@@ -81,7 +82,8 @@ socket.on('mute', id => {
     rtcConnection.muted = !rtcConnection.muted;
     rtcConnection.stream.toggle('mute-audio');
   }*/
-  var elem = rtcConnection.broadcasters[id];
+  console.log('muting',id);
+  var elem = rtcConnection.broadcastersObj[id];
   if (id !== rtcConnection.userid) elem.volume = 0;
   $(elem).parent().removeClass('active');
 });

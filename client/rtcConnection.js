@@ -35,7 +35,8 @@ function resetConnection() {
     }
   }*/
   rtcConnection = Object.assign(rtcConnection, {
-    broadcasters: {},
+    broadcastersObj: {},
+    broadcastersArray: [],
     stream: null,
     session: { audio: false, video: false, oneway: true },
     dontOverrideSession: true,
@@ -79,12 +80,14 @@ function resetConnection() {
       rtcConnection.attachStreams.forEach(stream => {
         stream.stop();
       })
+      rtcConnection.broadcastersObj = {};
+      rtcConnection.broadcastersArray = [];
       //rtcConnection = new RTCMultiConnection(channel);
       //rtcConnection.connect();
       //resetConnection();
     },
     joinBroadcasters(broadcasterIds) {
-      if (!broadcasterIds.length || Object.keys(rtcConnection.broadcasters) > 1) return;
+      if (!broadcasterIds.length || rtcConnection.broadcastersArray.length > 1) return;
       if (!broadcasterIds.includes(rtcConnection.USERID)) rtcConnection.session = { audio: true, video: true, oneway: true };
       rtcConnection.broadcastersArray = broadcasterIds;
       if (broadcasterIds[1] === rtcConnection.USERID) return;
@@ -115,7 +118,6 @@ function resetConnection() {
         rtcConnection.onstreamended({ mediaElement: $(`#${broadcasterId}`)[0] });
       });*/
       $('.media-container').remove();
-      rtcConnection.broadcasters = [];
       rtcConnection.refresh();
     },
 
@@ -130,14 +132,13 @@ function resetConnection() {
         width: '100%',
       });
 
-      rtcConnection.broadcasters[e.userid] = mediaElement;
+      rtcConnection.broadcastersObj[e.userid] = mediaElement;
       mediaElement.volume = 0;
 
       video.style.height = '100%';
       video.style.width = '100%';
       let num = rtcConnection.broadcastersArray.indexOf(e.userid) + 1;
       let container = `#empty-video-${num}`;
-      console.log(container, Object.keys(rtcConnection.broadcasters))
       //I'm gonna use jquery here and anyone and I challenge anyone reading this to find a better soloution
       $(container).append(mediaElement);
       if (e.type === 'local') {

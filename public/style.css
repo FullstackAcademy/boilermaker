@@ -41,6 +41,7 @@ form div {
   width: auto;
   height: 60px;
   padding: 0;
+  cursor: pointer;
 }
 
 .navbar {
@@ -52,6 +53,8 @@ form div {
 
 .navbar-nav {
   float: none;
+  flex-direction: row;
+  margin-top:10px;
 }
 
 .navbar-text{
@@ -69,6 +72,7 @@ form div {
 }
 .navbar-search {
   position: absolute;
+  top:10px;
 }
 
 /*********************** HOME ***************************/
