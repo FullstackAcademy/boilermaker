@@ -297,10 +297,18 @@ svg {
 
 /************************* ANNOUNCEMENTS *****************************/
 
+@keyframes fadeInFadeOutFromTop {
+  0% { opacity: 0; bottom: -5% }
+  50% { opacity: 1; bottom: 10%; }
+  100% { opacity: 0; bottom: -5% } 
+}
+
 @keyframes fadeInFadeOut {
-  0% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { opacity: 0 } 
+  0% { opacity: 0; top: -5% }
+  1% { opacity: 0; top: 40% }
+  50% { opacity: 1; top: 40% }
+  99% { opacity: 0; top: 40% }
+  100% { opacity: 0; top: -5% } 
 }
 
 @keyframes stretch {
@@ -317,7 +325,6 @@ svg {
 #announcement-debate-container {
   position: absolute;
   left: 20%;
-  bottom: 50%;
   height: 85px;
   opacity: 0;
   background-color: rgba(50, 50, 50, 1);
@@ -341,8 +348,7 @@ svg {
 #announcement-voting-container {
   position: absolute;
   left: 48.5%;
-  margin-left: -218px;  
-  bottom: 35%;
+  margin-left: -218px;
   height: 50px;
   opacity: 0;
   background-color: rgba(50, 50, 50, 1);
@@ -351,13 +357,13 @@ svg {
   width: 40%;
   border-radius: 10px;
   text-align: center;
-  animation-name: fadeInFadeOut;
+  animation-name: fadeInFadeOutFromTop;
   animation-duration: 4s;
   animation-timing-function: linear; 
-  -webkit-animation-name: fadeInFadeOut;
+  -webkit-animation-name: fadeInFadeOutFromTop;
   -webkit-animation-duration: 4s;
   -webkit-animation-timing-function: linear; 
-  -moz-animation-name: fadeInFadeOut;
+  -moz-animation-name: fadeInFadeOutFromTop;
   -moz-animation-duration: 4s;
   -moz-animation-timing-function: linear; 
 }
