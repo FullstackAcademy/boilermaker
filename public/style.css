@@ -185,7 +185,7 @@ div.home-category-list-item {
 }
 .empty-video.active{
   box-shadow:0px 0px 20px green;
-  z-index:2;
+  z-index: -1;
   position:relative;
 }
 #empty-video-1{
@@ -274,7 +274,6 @@ svg {
   -moz-animation-name: fadeInFadeOut;
   -moz-animation-duration: 4s;
   -moz-animation-timing-function: linear; 
-  z-index: 2;
 }
 
 #announcement-winner-container {
@@ -298,7 +297,6 @@ svg {
   -moz-animation-name: stretch;
   -moz-animation-duration: 1s;
   -moz-animation-timing-function: linear; 
-  z-index: 2;
 }
 
 #announcement-debate-headline, #announcement-voting-headline {

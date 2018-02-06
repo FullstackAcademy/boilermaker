@@ -1,6 +1,6 @@
 import { socket } from './socket';
 import rtcConnection from '../rtcConnection';
-import store, { setTime, setTimerActive, setDebate, setWinner, setVoting } from '../store/';
+import store, { setTime, setTimerActive, setPhase, setDebate, setWinner, setVoting } from '../store/';
 import axios from 'axios';
 
 const formatChannelName = channelName => channelName.split(" ").join('');
@@ -54,6 +54,8 @@ socket.on('setRoomState', roomState => {
   
   //Set the users ability to vote
   store.dispatch(setVoting(roomState.canVote));
+
+  if(roomState.phaseStatus) store.dispatch(setPhase(roomState.phaseStatus));
 
   if(roomState.winner) store.dispatch(setWinner(roomState.winner));
 
