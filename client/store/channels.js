@@ -46,12 +46,14 @@ export const fetchSearchChannels = searchTerm =>
       .catch(err => console.log(err));
   }
 
-export const createChannel = (name, category, description) => {
+export const createChannel = (name, categoryId, description, type, userId) => {
   return function (dispatch) {
     return axios.post('/api/channels', {
       name,
-      category,
-      description
+      categoryId,
+      description,
+      type,
+      userId
     })
       .then(res => {
         dispatch(makeChannel(res.data))

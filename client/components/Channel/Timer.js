@@ -40,11 +40,11 @@ class Timer extends Component {
         bar.path.setAttribute('stroke', state.color);
         let value = Math.floor((bar.value() * totalTime / 1000));
         if (!bar.textFrozen) bar.setText(forcedStartText || totalTime / 1000 - value);
-        if (value === 25) {
-          this.setState({ shake: true })
-        } else if (value === 30) {
-          this.setState({ shake: false })
-        }
+        // if (value === 25) {
+        //   this.setState({ shake: true })
+        // } else if (value === 30) {
+        //   this.setState({ shake: false })
+        // }
         bar.text.style.color = state.color;
       }
     });
