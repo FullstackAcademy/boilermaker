@@ -9,7 +9,8 @@ const defaultState = {
     status: 0
   },
   status: {
-    debate: '',
+    phase: '',
+    debate: false,
     winner: '',
     voting: false
   }
@@ -51,9 +52,15 @@ export const setTime = (leadinTime, totalLeadinTime, currTime, totalTime, status
 })
 
 // STATUS
+const SET_PHASE = 'SET_PHASE';
 const SET_DEBATE = 'SET_DEBATE';
 const SET_WINNER = 'SET_WINNER';
 const SET_VOTING = 'SET_VOTING';
+
+export const setPhase = phase => ({
+  type: SET_PHASE,
+  phase
+});
 
 export const setDebate = status => ({
   type: SET_DEBATE,
@@ -127,6 +134,14 @@ export default function (state = defaultState, action) {
       };
 
     // Status 
+    case SET_PHASE:
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          phase: action.phase
+        }
+      };
     case SET_DEBATE:
       return {
         ...state,

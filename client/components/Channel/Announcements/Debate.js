@@ -1,20 +1,19 @@
 import React from 'react';
 
 const Debate = (props) => {
-  const { debateStatus } = props;
-  let test = true;
+  const { debateStatus, phaseStatus } = props;
   return (
     <div>
       {
-        test === false &&
+        phaseStatus === '_player1ToStart' &&
         <div id="announcement-debate-container">
-          <h1 id="announcement-debate-headline">Player 1 will begin the debate</h1>
+          <h1 id="announcement-debate-headline">{debateStatus} will begin the debate</h1>
         </div>
       }
       {
-        test === true &&
+        phaseStatus === '_player2ToStart' &&
         <div id="announcement-debate-container">
-          <h1 id="announcement-debate-headline">Player 2 will now begin the debate</h1>
+          <h1 id="announcement-debate-headline">{debateStatus} will now begin their rebuttal</h1>
         </div>
       }
     </div>
