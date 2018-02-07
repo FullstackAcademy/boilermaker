@@ -543,8 +543,14 @@ div.category-channel-list-item {
   transform: scale(-1, 1);
 }
 
+svg {
+  size: 50px !important;
+}
+
 #progressbar {
-  size: 50px;
+  top: 40%;
+  width: 100px;
+  height: 70px;
 }
 
 /***************CHAT***********/

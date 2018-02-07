@@ -76,7 +76,6 @@ class Channel extends Component {
           isLoggedIn && linkUserProfile(user.id, user.userName)
         }
         <div className='channel-container'>
-          <Timer />
           <div className='main-channel-container'>
             <div className="main-channel-child">
               {
@@ -94,6 +93,7 @@ class Channel extends Component {
                       <div id='empty-video-1' className='empty-video'></div>
                       <Voting vote={this.changeVote1} elementId={'1'} />
                     </div>
+                    <Timer />
                     <div id="video-room-2">
                       <div id='empty-video-2' className='empty-video'></div>
                       <Voting vote={this.changeVote2} elementId={'2'} />
@@ -130,7 +130,6 @@ class Channel extends Component {
                 {
                   isLoggedIn && this.isChannelOwner(channelName) && <Button className="create-prompt-button" onClick={() => this.display('toggleCreatePrompt')}>Create a Prompt</Button>
                 }
-                <button onClick={() => this.props.setTime(0, 100000, 0, 100000)}> TIMER </button>
                 <Reaction />
                 <ReactionButtons />
               </div>
