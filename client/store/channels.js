@@ -5,7 +5,7 @@ import { getUser } from './index';
 const defaultState = {
   channelList: [],
   filteredChannelList: [],
-  searchChannelList: []
+  searchChannelList: [],
 };
 
 const GET_CHANNELS = 'GET_CHANNELS';

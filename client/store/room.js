@@ -15,7 +15,8 @@ const defaultState = {
     debate: false,
     winner: false,
     voting: 'default'
-  }
+  },
+  prompts: []
 }
 
 // CHAT
@@ -182,7 +183,8 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         prompts: [...state.prompts, action.prompt]
-      }
+      };
+
     default:
       return state;
   }

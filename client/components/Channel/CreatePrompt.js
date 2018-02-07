@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
 import store, { addPrompt } from '../../store';
 
-class CreatePrompt extends Component {
+export default class CreatePrompt extends Component {
 
   constructor() {
     super();
@@ -25,12 +25,14 @@ class CreatePrompt extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    store.dispatch(addPrompt(evt.target.prompt.value))
+    store.dispatch(addPrompt(evt.target.prompt.value));
+    this.setState({ promptValue: '' });
+    this.props.display('toggleCreatePrompt');
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="create-prompt-form">
+      <form onSubmit={this.handleSubmit} className="create-prompt-form prompt-box">
         <FormGroup
           controlId="formBasicText"
           validationState={this.getValidationState('promptValue')}
@@ -41,18 +43,18 @@ class CreatePrompt extends Component {
             value={this.state.promptValue}
             name="prompt"
             placeholder="Enter prompt"
-            onChange={() => this.handleChange('promptValue')}
+            onChange={this.handleChange.bind(this, 'promptValue')}
           />
           <FormControl.Feedback />
           {
             this.state.promptValue.length < 7 ? <HelpBlock>Prompts must be longer than six characters</HelpBlock> : null
           }
         </FormGroup><br />
+        <div className="create-prompt-form-buttons">
+          <Button type="submit" bsStyle="success">Submit</Button>
+          <Button onClick={() => this.props.display('toggleCreatePrompt')}>Cancel</Button>
+        </div>
       </form>
-      <div className="create-prompt-form-buttons">
-        <Button type="submit" bsStyle="success">Submit</Button>
-        <Button onClick={() => this.props.hide('displayPrompt')}>Cancel</Button>
-      </div>
     )
   }
 }
