@@ -340,7 +340,7 @@ div.home-category-list-item {
 
 #announcement-debate-container {
   position: absolute;
-  left: 20%;
+  left: 50%;
   height: 85px;
   opacity: 0;
   background-color: rgba(50, 50, 50, 1);
@@ -363,7 +363,7 @@ div.home-category-list-item {
 
 #announcement-voting-container {
   position: absolute;
-  left: 48.5%;
+  left: 50%;
   margin-left: -218px;
   height: 50px;
   opacity: 0;
