@@ -528,8 +528,7 @@ div.category-channel-list-item {
 }
 
 #progressbar {
-  position: relative !important;
-  bottom: 20%;
+  top: 100%;
   right: 3%;
 }
 

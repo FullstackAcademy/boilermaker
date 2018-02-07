@@ -18,10 +18,11 @@ class Timer extends Component {
   }
 
   timerCreator(flip, currTime, forcedStartText) {
-    let { currTime: ct, totalTime, leadinTime } = this.props;
+    let { currTime: ct, totalTime } = this.props;
     currTime = currTime || ct;
-    $('#progressbar').empty();
-    bar = this.bar = new ProgressBar.SemiCircle($('#progressbar')[0], {
+    let barDiv = document.getElementById('progressbar');
+    barDiv.innerHTML = '';
+    bar = this.bar = new ProgressBar.SemiCircle(barDiv, {
       // Set default step function for all animate calls
       strokeWidth: 6,
       trailColor: '#eee',
@@ -45,16 +46,17 @@ class Timer extends Component {
         // } else if (value === 30) {
         //   this.setState({ shake: false })
         // }
-        bar.text.style.color = state.color;
+        let text = bar.text;
+        text.style.color = state.color;
+        text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+        text.style.fontSize = '2rem';
+        text.style.top = '0';
+        text.style.bottom = '70%';
+        //text.style.marginTop = '50px';
       }
     });
-    flip && $('svg').addClass('flip');
+    flip && barDiv.firstChild.classList.add('flip');
 
-    let text = this.bar.text;
-    text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-    text.style.fontSize = '2rem';
-    text.style.top = '30%';
-    text.style.marginTop = '50px';
     this.bar.set(currTime / totalTime);
     this.bar.animate(1.0);  // Number from 0.0 to 1.0
   }
@@ -134,7 +136,7 @@ class Timer extends Component {
     this.state.shake ? animate = 'animated infinite shake' : animate = ''
 
     return (
-      <div id="progressbar" className={animate} alt={$`{this.props.totalTime}`}> </div>
+      <div id="progressbar" className={animate} alt={$`{this.props.totalTime}`} />
     )
   }
 }
