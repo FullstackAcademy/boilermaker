@@ -81,7 +81,7 @@ class Channel extends Component {
                   </div>
                 </div>
                 <Button onClick={()=> {
-                  this.props.setTime(0,1000000,0,1000000)
+                  this.props.setTime(0, 6000, 0, 100000)
                 }}>
                 TEST TIMER
                 </Button>
