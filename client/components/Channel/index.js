@@ -74,7 +74,7 @@ class Channel extends Component {
                     <Voting vote={this.changeVote2} id={'vote-2'} />
                   </div>
                 </div>
-                <Button className="queue-up" onClick={enqueue}>Queue Up</Button>
+                <Button className="queue-up" onClick={enqueue}>Join the Queue</Button>
                 <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>Prompts</Button>
                 <Reaction />
                 <ReactionButtons />

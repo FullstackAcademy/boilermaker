@@ -11,8 +11,8 @@ const Announcements = (props) => {
   return (
     <div>
       <Debate debateStatus={status.debate} phaseStatus={status.phase}/>
-      {/* <Voting votingStatus={status.voting} /> */}
-      {/* <Winner winnerStatus={status.winner} /> */}
+      <Voting votingStatus={status.voting} />
+      <Winner winnerStatus={status.winner} />
     </div>
   )
 }

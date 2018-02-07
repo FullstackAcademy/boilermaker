@@ -1,7 +1,8 @@
 import { socket } from './socket';
 import rtcConnection from '../rtcConnection';
-import store, { setTime, setTimerActive, setPhase, setDebate, setWinner, setVoting } from '../store/';
+import store, { setTime, setTimerActive, setPhase, setDebate, setWinner, setVoting, setViewerCount, setMain } from '../store/';
 import axios from 'axios';
+
 
 const formatChannelName = channelName => channelName.split(" ").join('');
 
@@ -47,24 +48,25 @@ socket.on('setRoomState', roomState => {
   let timerIsActive = store.getState().room.timer.active;
   let { time, leadinTime, totalTime, totalLeadinTime } = roomState;
   rtcConnection.roomState = offsetTimeByPing(roomState, roomState.sentTime);
-  
+
   if (!timerIsActive && roomState.active) store.dispatch(setTime(leadinTime, totalLeadinTime, time, totalTime));
- 
+
   if (roomState.broadcasterIds) rtcConnection.joinBroadcasters(roomState.broadcasterIds);
-  
+
+  let { phaseStatus, viewerCount, queue } = roomState;
   //Set the users ability to vote
   store.dispatch(setVoting(roomState.canVote));
 
-  if(roomState.phaseStatus) store.dispatch(setPhase(roomState.phaseStatus));
+  store.dispatch(setMain(phaseStatus, viewerCount, queue));
 
-  if(roomState.winner) store.dispatch(setWinner(roomState.winner));
+  if (roomState.winner) store.dispatch(setWinner(roomState.winner));
 
-  if(roomState.debateStatus) store.dispatch(setDebate(roomState.debateStatus));
+  if (roomState.debateStatus) store.dispatch(setDebate(roomState.debateStatus));
 
 });
 
 socket.on('unmute', id => {
-  console.log('unmuting',id);
+  console.log('unmuting', id);
   var elem = rtcConnection.broadcastersObj[id];
   if (id !== rtcConnection.userid) elem.volume = 1;
   $(elem).parent().addClass('active');
@@ -72,7 +74,7 @@ socket.on('unmute', id => {
 
 
 socket.on('mute', id => {
-  console.log('muting',id);
+  console.log('muting', id);
   var elem = rtcConnection.broadcastersObj[id];
   if (id !== rtcConnection.userid) elem.volume = 0;
   $(elem).parent().removeClass('active');

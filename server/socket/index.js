@@ -11,6 +11,7 @@ module.exports = (io,socket,Room) => {
   socket.on('disconnect', () => {
     if (socket.room) {
       socket.room.removeViewer(socket);
+      socket.room.sendRoomState();
       socket.vote = { choice: 2, castedVote: false };
     }
     console.log(`Connection ${socket.id} has left the building`);
@@ -27,6 +28,7 @@ module.exports = (io,socket,Room) => {
 
   socket.on('enqueue', () => {
     socket.room.addToQueue(socket);
+    socket.room.sendRoomState();
   });
 
   socket.on('chooseVote', idx => {
@@ -64,6 +66,6 @@ module.exports = (io,socket,Room) => {
   });
 
   socket.on('getRoomState', () => {
-    socket.room.sendRoomState(socket);
+    socket.room.sendRoomState();
   });
 }
