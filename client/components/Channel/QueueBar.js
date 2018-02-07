@@ -1,21 +1,27 @@
-// import React from 'react';
-// import { Button } from 'react-bootstrap';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { Breadcrumb } from 'react-bootstrap';
 
-// const Voting = (props) => {
-//   const { vote, elementId } = props;
-//   return (
-//     <div id={"vote-button-container-" + elementId} className="animated slideInUp vote-button">
-//       <Button
-//         id={'vote-'+elementId}
-//         bsStyle="success"
-//         bsSize="large"
-//         onClick={vote}
-//       >
-//         Vote
-//       </Button>
-//     </div>
-//   )
-// }
+const QueueBar = (props) => {
+  const { queueList } = props;
+  return (
+    <div className="queue-bar-container">
+      <h1 className="queue-bar-headline">Players in Queue:</h1>
+      <Breadcrumb className="queue-bar">
+        {
+          queueList.slice(0,7).map(queue => {
+            return (
+              <Breadcrumb.Item>
+                <NavLink to={`/users/${queue.userId}`}>
+                  {queue.userName},
+                </NavLink>
+              </Breadcrumb.Item>
+            )
+          })
+        }
+      </Breadcrumb>
+    </div>
+  )
+}
 
-// export default Voting;
-
+export default QueueBar;

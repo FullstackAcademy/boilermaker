@@ -1,10 +1,11 @@
 import axios from 'axios';
 import history from '../history';
+import { getUser } from './index';
 
 const defaultState = {
   channelList: [],
   filteredChannelList: [],
-  searchChannelList: []
+  searchChannelList: [],
 };
 
 const GET_CHANNELS = 'GET_CHANNELS';
@@ -33,7 +34,7 @@ export const fetchSearchChannels = searchTerm =>
       .catch(err => console.log(err));
   }
 
-export const createChannel = (name, categoryId, description, type, userId) => {
+export const createChannel = (name, categoryId, description, type, userId, user) => {
   return function (dispatch) {
     return axios.post('/api/channels', {
       name,
@@ -46,6 +47,8 @@ export const createChannel = (name, categoryId, description, type, userId) => {
         dispatch(makeChannel(res.data))
         history.push(`/channels/${res.data.name}`)
       })
+      .then(() => axios.get(`/api/users/${userId}`))
+      .then(res => dispatch(getUser(res.data)))
       .catch(err => console.log(err));
   }
 }

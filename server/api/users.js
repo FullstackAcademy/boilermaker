@@ -35,7 +35,7 @@ router.get('/:userId/channels', (req, res, next) => {
 
 router.get('/:userId', (req, res, next) => {
   User.findById(Number(req.params.userId), {
-    include: [{all: true}]
+    include: [{ model: Channel }]
   })
     .then(user => res.json(user))
     .catch(next);
@@ -44,7 +44,9 @@ router.get('/:userId', (req, res, next) => {
 router.put('/:userId',
   gatekeeper.isSelf,
   (req, res, next) => {
-    User.findById(Number(req.params.userId))
+    User.findById(Number(req.params.userId), {
+      include: [{ model: Channel }]
+    })
       .then(user => user.update(req.body))
       .then(updatedUser => res.json(updatedUser))
       .catch(next)

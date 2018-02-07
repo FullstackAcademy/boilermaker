@@ -15,7 +15,8 @@ const defaultState = {
     debate: false,
     winner: false,
     voting: 'default'
-  }
+  },
+  prompts: []
 }
 
 // CHAT
@@ -79,6 +80,11 @@ export const setVoting = boolean => ({
   type: SET_VOTING,
   boolean
 });
+
+//PROMPTS
+const ADD_PROMPT = 'ADD_PROMPT';
+
+export const addPrompt = prompt => ({ type: ADD_PROMPT, prompt });
 
 // REDUCER
 
@@ -170,6 +176,13 @@ export default function (state = defaultState, action) {
           ...state.status,
           voting: action.boolean
         }
+      };
+    
+    // PROMPTS
+    case ADD_PROMPT:
+      return {
+        ...state,
+        prompts: [...state.prompts, action.prompt]
       };
 
     default:

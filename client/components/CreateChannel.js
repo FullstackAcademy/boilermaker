@@ -3,7 +3,8 @@ import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-b
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { createChannel } from '../store';
+import { createChannel, editUser } from '../store';
+
 
 class CreateChannel extends Component {
   constructor(props, context) {
@@ -32,8 +33,10 @@ class CreateChannel extends Component {
   handleSubmit(evt) {
     evt.preventDefault();
     let et = evt.target;
-    this.props.makeChannel(et.channel.value, et.category.value, et.description.value, et.type.value, this.props.id);
+    let { user, updateUser } = this.props;
+    this.props.makeChannel(et.channel.value, et.category.value, et.description.value, et.type.value, user.id, user);
     this.setState({ channelValue: '', descriptionValue: '' })
+    //update me
   }
 
   render() {
@@ -111,14 +114,18 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    makeChannel(channel, categoryId, description, type, userId) {
+    makeChannel(channel, categoryId, description, type, userId, user) {
       dispatch(createChannel(
         channel,
         categoryId,
         description,
         type,
-        userId
+        userId,
+        user
       ))
+    },
+    updateUser(user) {
+      dispatch(editUser(user))
     }
   }
 }
