@@ -329,19 +329,28 @@ div.home-category-list-item {
 }
 
 @keyframes stretch {
-  0% {
+  0% { opacity: 0; top: -50% }
+  1% { 
+    opacity: 0; 
+    top: 40%;     
     transform: scale(.1) rotate(300deg);
-    background-color: rgba(50, 50, 50, 1);
+    background-color: rgba(50, 50, 50, 1); 
   }
-  100% {
+  99% {
+    opacity: 1;
+    top: 40%;
     transform: scale(1) rotate(360deg);
     background-color: #FE9002;
+  }
+  100% {
+    opacity: 0;
+    top: -50%;
    } 
 }
 
 #announcement-debate-container {
   position: absolute;
-  left: 50%;
+  left: 25%;
   height: 85px;
   opacity: 0;
   background-color: rgba(50, 50, 50, 1);
@@ -360,12 +369,12 @@ div.home-category-list-item {
   -moz-animation-name: fadeInFadeOut;
   -moz-animation-duration: 4s;
   -moz-animation-timing-function: linear; 
+  z-index: 5;
 }
 
 #announcement-voting-container {
   position: absolute;
-  left: 50%;
-  margin-left: -218px;
+  left: 30%;
   height: 50px;
   opacity: 0;
   background-color: rgba(50, 50, 50, 1);
@@ -383,13 +392,15 @@ div.home-category-list-item {
   -moz-animation-name: fadeInFadeOutFromTop;
   -moz-animation-duration: 4s;
   -moz-animation-timing-function: linear; 
+  z-index: 5;
 }
 
 #announcement-winner-container {
   position: absolute;
   left: 50%;
+  top: 40%;
+  opacity: 0;
   margin-left: -218px;  
-  bottom: 50%;
   height: 150px;
   background-color: #FE9002;
   color: white;
@@ -399,14 +410,15 @@ div.home-category-list-item {
   font-size: 4em;
   text-align: center;
   animation-name: stretch;
-  animation-duration: 1s;
+  animation-duration: 4s;
   animation-timing-function: linear; 
   -webkit-animation-name: stretch;
-  -webkit-animation-duration: 1s;
+  -webkit-animation-duration: 4s;
   -webkit-animation-timing-function: linear; 
   -moz-animation-name: stretch;
-  -moz-animation-duration: 1s;
+  -moz-animation-duration: 4s;
   -moz-animation-timing-function: linear; 
+  z-index: 5;
 }
 
 #announcement-debate-headline {

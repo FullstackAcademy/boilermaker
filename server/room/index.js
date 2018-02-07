@@ -128,7 +128,7 @@ module.exports = (io) => {
         unmutedUser = this.broadcasters[0].id;
         if(!this.state.firstDebator){
           unmutedUser = this.broadcasters[1].id;
-          mutedUser = this.broadcaster[0].id;
+          mutedUser = this.broadcasters[0].id;
         }
       }
       if (this.state.active) {

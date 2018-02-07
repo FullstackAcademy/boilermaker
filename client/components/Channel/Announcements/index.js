@@ -9,7 +9,7 @@ import Winner from './Winner';
 const Announcements = (props) => {
   const { status } = props;
   return (
-    <div>
+    <div className="announcement-container">
       <Debate debateStatus={status.debate} phaseStatus={status.phase}/>
       <Voting votingStatus={status.voting} />
       <Winner winnerStatus={status.winner} />
