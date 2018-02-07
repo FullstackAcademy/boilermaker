@@ -64,11 +64,11 @@ module.exports = (io) => {
           }
         }, this.debateLength);
 
-        let action = ['unmute', 'mute'];
+        /*let action = ['unmute', 'mute'];
         if (!firstDebator) action = ['mute', 'unmute'];
 
         io.to(this.name).emit(action[0], this.broadcasters[0].id);
-        io.to(this.name).emit(action[1], this.broadcasters[1].id);
+        io.to(this.name).emit(action[1], this.broadcasters[1].id);*/
 
         this.action.status = USERS_DEBATING;
         this.action.timestamp = Date.now();
@@ -123,6 +123,14 @@ module.exports = (io) => {
       else if (this.action.status === USERS_DEBATING && !this.state.firstDebator) phaseStatus = '_player2Debating';
       else if (this.action.status === RESETTING_GAME) phaseStatus = '_announcingWinner';
       let debateStatus = false;
+
+      let mutedUser = this.broadcasters[1].id;
+      let unmutedUser = this.broadcasters[0].id;
+
+      if(!this.state.firstDebator){
+        unmutedUser = this.broadcasters[1].id;
+        mutedUser = this.broadcaster[0].id;
+      }
       if (this.state.active) {
         if (this.state.firstDebator) debateStatus = this.broadcasters[0].userName;
         else debateStatus = this.broadcasters[0].userName;
@@ -137,6 +145,8 @@ module.exports = (io) => {
         phaseStatus,
         viewerCount: this.viewers.length,
         queue: this.queue,
+        mutedUser,
+        unmutedUser,
       }, this.state, {
         sentTime: Date.now()
       });

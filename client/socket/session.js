@@ -63,9 +63,13 @@ socket.on('setRoomState', roomState => {
 
   if (roomState.debateStatus) store.dispatch(setDebate(roomState.debateStatus));
 
+  roomState.muteUser && rtcConnection.muteUser(muteUser);
+
+  roomState.unmuteUser && rtcConnection.unmuteUser(unmuteUser);
+
 });
 
-socket.on('unmute', id => {
+/*socket.on('unmute', id => {
   console.log('unmuting', id);
   var elem = rtcConnection.broadcastersObj[id];
   if (id !== rtcConnection.userid) elem.volume = 1;
@@ -78,7 +82,7 @@ socket.on('mute', id => {
   var elem = rtcConnection.broadcastersObj[id];
   if (id !== rtcConnection.userid) elem.volume = 0;
   $(elem).parent().removeClass('active');
-});
+});*/
 
 socket.on('setUserId', id => {
   //rtcConnection.changeUserId(id);
