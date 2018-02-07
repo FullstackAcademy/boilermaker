@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const {Channel} = require('../db/models');
 module.exports = router
 
 router.post('/login', (req, res, next) => {
-  User.findOne({where: {email: req.body.email}})
+  User.findOne({ where: { email: req.body.email } })
     .then(user => {
       if (!user) {
         res.status(401).send('User not found')
@@ -36,8 +37,17 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/me', (req, res) => {
-  res.json(req.user)
+router.get('/me', async (req, res) => {
+  try {
+  if (!req.user) return;
+  let user = await User.findById(req.user.id, {
+    include: [{ model: Channel }]
+  })
+  res.json(user)
+  } catch (error) {
+    console.error(error)
+  }
 })
 
-router.use('/google', require('./google'))
+router.use('/google', require('./google'));
+router.use('/facebook', require('./facebook'));

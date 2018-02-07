@@ -1,0 +1,9 @@
+heroku buildpacks:set heroku/ruby
+
+cat .buildpacks https://github.com/issueapp/heroku-buildpack-ffmpeg https://github.com/heroku/heroku-buildpack-ruby
+
+heroku buildpacks:set https://github.com/ddollar/heroku-buildpack-multi
+
+heroku config:set FFMPEG_BIN_URL="http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz"
+
+git push heroku master

@@ -1,57 +1,66 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Channel = require('./channel');
 
 const User = db.define('user', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      is: /^[a-zA-Z\s]*$/,
+      notEmpty: true
+    }
+  },
+  userName: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false,
+    validate: {
+      len: [3, 15],
+      isAlphanumeric: true,
+      notEmpty: true
+    }
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    validate: {
+      isEmail: true,
+    }
   },
-  password: {
-    type: Sequelize.STRING
+  photoURL: {
+    type: Sequelize.STRING,
+    validate: {
+      isUrl: true,
+    }
   },
-  salt: {
-    type: Sequelize.STRING
+  score: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+    validate: {
+      isInt: true,
+      min: 0
+    }
+  },
+  wins: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
+  losses: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  facebookId: {
+    type: Sequelize.STRING
+  },
+  admin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
-module.exports = User
-
-/**
- * instanceMethods
- */
-User.prototype.correctPassword = function (candidatePwd) {
-  return User.encryptPassword(candidatePwd, this.salt) === this.password
-}
-
-/**
- * classMethods
- */
-User.generateSalt = function () {
-  return crypto.randomBytes(16).toString('base64')
-}
-
-User.encryptPassword = function (plainText, salt) {
-  return crypto
-    .createHash('RSA-SHA256')
-    .update(plainText)
-    .update(salt)
-    .digest('hex')
-}
-
-/**
- * hooks
- */
-const setSaltAndPassword = user => {
-  if (user.changed('password')) {
-    user.salt = User.generateSalt()
-    user.password = User.encryptPassword(user.password, user.salt)
-  }
-}
-
-User.beforeCreate(setSaltAndPassword)
-User.beforeUpdate(setSaltAndPassword)
+module.exports = User;
