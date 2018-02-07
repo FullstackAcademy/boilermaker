@@ -12,6 +12,7 @@ const defaultState = {
     phase: false,
     viewerCount: 0,
     queue: [],
+    broadcasters: [],
     debate: false,
     winner: false,
     voting: 'default'
@@ -55,6 +56,7 @@ export const setTime = (leadinTime, totalLeadinTime, currTime, totalTime, status
 
 // STATUS
 const SET_MAIN = 'SET_MAIN';
+const SET_BROADCASTERS = 'SET_BROADCASTERS';
 const SET_DEBATE = 'SET_DEBATE';
 const SET_WINNER = 'SET_WINNER';
 const SET_VOTING = 'SET_VOTING';
@@ -64,6 +66,11 @@ export const setMain = (phase, viewerCount, queue) => ({
   phase,
   viewerCount,
   queue
+});
+
+export const setBroadcasters = broadcasters => ({
+  type: SET_BROADCASTERS,
+  broadcasters
 });
 
 export const setDebate = status => ({
@@ -151,6 +158,14 @@ export default function (state = defaultState, action) {
           phase: action.phase,
           viewerCount: action.viewerCount,
           queue: action.queue
+        }
+      };
+    case SET_BROADCASTERS:
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          broadcasters: action.broadcasters
         }
       };
     case SET_DEBATE:

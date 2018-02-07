@@ -1,6 +1,6 @@
 import { socket } from './socket';
 import rtcConnection from '../rtcConnection';
-import store, { setTime, setTimerActive, setPhase, setDebate, setWinner, setVoting, setViewerCount, setMain } from '../store/';
+import store, { setTime, setTimerActive, setPhase, setDebate, setWinner, setVoting, setViewerCount, setMain, setBroadcasters } from '../store/';
 import axios from 'axios';
 
 
@@ -70,6 +70,8 @@ socket.on('setRoomState', roomState => {
   roomState.muteUser && rtcConnection.muteUser(muteUser);
 
   roomState.unmuteUser && rtcConnection.unmuteUser(unmuteUser);
+
+  if (roomState.broadcasters) store.dispatch(setBroadcasters(roomState.broadcasters));
 
 });
 

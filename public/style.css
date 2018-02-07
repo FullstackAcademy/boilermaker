@@ -322,9 +322,9 @@ div.home-category-list-item {
 
 @keyframes fadeInFadeOut {
   0% { opacity: 0; top: -5% }
-  1% { opacity: 0; top: 40% }
-  50% { opacity: 1; top: 40% }
-  99% { opacity: 0; top: 40% }
+  1% { opacity: 0; top: 20% }
+  50% { opacity: 1; top: 20% }
+  99% { opacity: 0; top: 20% }
   100% { opacity: 0; top: -5% } 
 }
 
@@ -336,11 +336,15 @@ div.home-category-list-item {
     transform: scale(.1) rotate(300deg);
     background-color: rgba(50, 50, 50, 1); 
   }
-  99% {
+  75% {
     opacity: 1;
     top: 40%;
     transform: scale(1) rotate(360deg);
     background-color: #FE9002;
+  }
+  99% {
+    opacity: 1;
+    top: 40%;
   }
   100% {
     opacity: 0;

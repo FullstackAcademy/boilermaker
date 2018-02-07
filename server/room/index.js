@@ -147,6 +147,7 @@ module.exports = (io) => {
         queue: this.queue.map(queuer => { return { 'userId': queuer.userId, 'userName': queuer.userName } }),
         mutedUser,
         unmutedUser,
+        broadcasters: this.broadcasters.map(socket => socket.userId),
       }, this.state, {
           sentTime: Date.now()
         });
