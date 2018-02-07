@@ -200,6 +200,7 @@ div.home-category-list-item {
   flex-shrink:0;
   overflow:hidden;
   position: relative;
+  z-index: -1;
 }
 .empty-video.active{
   box-shadow:0px 0px 20px green;
@@ -296,10 +297,18 @@ svg {
 
 /************************* ANNOUNCEMENTS *****************************/
 
+@keyframes fadeInFadeOutFromTop {
+  0% { opacity: 0; bottom: -5% }
+  50% { opacity: 1; bottom: 10%; }
+  100% { opacity: 0; bottom: -5% } 
+}
+
 @keyframes fadeInFadeOut {
-  0% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { opacity: 0 } 
+  0% { opacity: 0; top: -5% }
+  1% { opacity: 0; top: 40% }
+  50% { opacity: 1; top: 40% }
+  99% { opacity: 0; top: 40% }
+  100% { opacity: 0; top: -5% } 
 }
 
 @keyframes stretch {
@@ -313,10 +322,9 @@ svg {
    } 
 }
 
-#announcement-debate-container, #announcement-voting-container {
+#announcement-debate-container {
   position: absolute;
   left: 20%;
-  bottom: 50%;
   height: 85px;
   opacity: 0;
   background-color: rgba(50, 50, 50, 1);
@@ -333,6 +341,29 @@ svg {
   -webkit-animation-duration: 4s;
   -webkit-animation-timing-function: linear; 
   -moz-animation-name: fadeInFadeOut;
+  -moz-animation-duration: 4s;
+  -moz-animation-timing-function: linear; 
+}
+
+#announcement-voting-container {
+  position: absolute;
+  left: 48.5%;
+  margin-left: -218px;
+  height: 50px;
+  opacity: 0;
+  background-color: rgba(50, 50, 50, 1);
+  color: white;
+  box-shadow: 2px 2px 5px black;
+  width: 40%;
+  border-radius: 10px;
+  text-align: center;
+  animation-name: fadeInFadeOutFromTop;
+  animation-duration: 4s;
+  animation-timing-function: linear; 
+  -webkit-animation-name: fadeInFadeOutFromTop;
+  -webkit-animation-duration: 4s;
+  -webkit-animation-timing-function: linear; 
+  -moz-animation-name: fadeInFadeOutFromTop;
   -moz-animation-duration: 4s;
   -moz-animation-timing-function: linear; 
 }
@@ -361,8 +392,13 @@ svg {
   -moz-animation-timing-function: linear; 
 }
 
-#announcement-debate-headline, #announcement-voting-headline {
+#announcement-debate-headline {
   line-height: 47.5px;
+}
+
+#announcement-voting-headline {
+  font-size: 2em;
+  line-height: 50px;
 }
 
 #announcement-winner-headline {
