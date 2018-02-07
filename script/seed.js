@@ -1,5 +1,4 @@
 const db = require('../server/db')
-const { User, Channel } = require('../server/db/models')
 const seedUsers = require('./userSeed.js');
 const seedChannels = require('./channelSeed.js');
 const seedCategories = require('./categorySeed.js');
@@ -8,12 +7,12 @@ async function seed() {
   await db.sync({ force: true });
   console.log('db synced!')
 
-  await seedUsers();
-  console.log('users')
   await seedCategories();
   console.log('categories')
+  await seedUsers();
+  console.log('users');
   await seedChannels();
-  
+
   console.log(`seeded successfully`)
 }
 

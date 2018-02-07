@@ -22,6 +22,8 @@ class Channel extends Component {
       togglePrompt: false,
     }
     this.displayPrompt = this.displayPrompt.bind(this);
+    this.changeVote1 = this.changeVote1.bind(this);
+    this.changeVote2 = this.changeVote2.bind(this);
   }
 
   componentDidMount() {
@@ -54,26 +56,35 @@ class Channel extends Component {
           isLoggedIn && linkUserProfile(user.id, user.userName)
         }
         <div className='channel-container'>
-        
-        {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
-        
-        <div className='main-channel-container'>
-        <div className="main-channel-child">
-            {
-              this.state.togglePrompt && <Prompts displayPrompt={this.displayPrompt} display={this.state.togglePrompt} />
-            }
+
+          {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
+
+          <div className='main-channel-container'>
+            <div className="main-channel-child">
+              {
+                this.state.togglePrompt && <Prompts displayPrompt={this.displayPrompt} display={this.state.togglePrompt} />
+              }
               <Announcements status={status} />
               <h1 className="animated slideInLeft center-text">{currentChannel}</h1>
               <div className='videos-container'>
                 <div className="video-feeds">
-                  <div id='empty-video-1' className='empty-video'>
-                    <Voting vote={this.changeVote1} id={'vote-1'} />
-                  </div>
-                  <Timer />
-                  <div id='empty-video-2' className='empty-video'>
-                    <Voting vote={this.changeVote2} id={'vote-2'} />
+                  <div className="video-rooms-container">
+                    <div id="video-room-1">
+                      <div id='empty-video-1' className='empty-video'></div>
+                      <Voting vote={this.changeVote1} elementId={'1'} />
+                    </div>
+                    <Timer />
+                    <div id="video-room-2">
+                      <div id='empty-video-2' className='empty-video'></div>
+                      <Voting vote={this.changeVote2} elementId={'2'} />
+                    </div>
                   </div>
                 </div>
+                <Button onClick={()=> {
+                  this.props.setTime(0,1000000,0,1000000)
+                }}>
+                TEST TIMER
+                </Button>
                 <Button className="queue-up" onClick={enqueue}>Join the Queue</Button>
                 <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>Prompts</Button>
                 <Reaction />
