@@ -15,17 +15,20 @@ import Announcements from './Announcements';
 import Reaction from './Reaction';
 import ReactionButtons from './ReactionButtons';
 import QueueBar from './QueueBar';
+import CreatePrompt from './CreatePrompt';
 
 class Channel extends Component {
   constructor() {
     super()
     this.state = {
       togglePrompt: false,
-      toggleQueue: false
+      toggleQueue: false,
+      toggleCreatePrompt: false
     }
-    this.displayPrompt = this.displayPrompt.bind(this);
+    this.display = this.display.bind(this);
     this.changeVote1 = this.changeVote1.bind(this);
     this.changeVote2 = this.changeVote2.bind(this);
+    this.isChannelOwner = this.isChannelOwner.bind(this);
   }
 
   componentDidMount() {
@@ -34,8 +37,8 @@ class Channel extends Component {
     changeChannel(channelName);
   }
 
-  displayPrompt() {
-    this.state.togglePrompt ? this.setState({ togglePrompt: false }) : this.setState({ togglePrompt: true });
+  display(key) {
+    this.state[key] ? this.setState({ [key]: false }) : this.setState({ [key]: true });
   }
 
   toggleDisable() {
@@ -53,8 +56,19 @@ class Channel extends Component {
     chooseVote(1);
   }
 
+  isChannelOwner(channelName) {
+    const { user } = this.props
+    for (let i = 0; i < user.channels.length; i++) {
+      if (user.channels[i].name === channelName) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   render() {
-    const { user, isLoggedIn, currentChannel, timerIsActive, room, status } = this.props;
+    const { user, isLoggedIn, timerIsActive, room, status } = this.props;
+    const channelName = this.props.match.params.channelName;
 
     return (
       <div>
@@ -67,10 +81,13 @@ class Channel extends Component {
           <div className='main-channel-container'>
             <div className="main-channel-child">
               {
-                this.state.togglePrompt && <Prompts displayPrompt={this.displayPrompt} display={this.state.togglePrompt} />
+                this.state.togglePrompt && <Prompts display={this.display} prompts={room.prompts} />
+              }
+              {
+                this.state.toggleCreatePrompt && <CreatePrompt display={this.display} />
               }
               <Announcements status={status} />
-              <h1 className="animated slideInLeft center-text">{currentChannel}</h1>
+              <h1 className="animated slideInLeft center-text">{channelName}</h1>
               <div className='videos-container'>
                 <div className="video-feeds">
                   <div className="video-rooms-container">
@@ -111,12 +128,15 @@ class Channel extends Component {
                     Leave the Queue
                   </Button>
                 </div>
-                <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>Prompts</Button>
+                <Button className="open-button" bsSize={"large"} onClick={() => this.display('togglePrompt')}>Prompts</Button>
+                {
+                  isLoggedIn && this.isChannelOwner(channelName) && <Button className="create-prompt-button" onClick={() => this.display('toggleCreatePrompt')}>Create a Prompt</Button>
+                }
                 <Reaction />
                 <ReactionButtons />
               </div>
             </div>
-            <Chat channel={currentChannel} />
+            <Chat channel={channelName} />
           </div>
         </div>
       </div>
@@ -125,11 +145,10 @@ class Channel extends Component {
 }
 
 const mapState = (state, ownProps) => {
-  const currentChannel = ownProps.match.params.channelName;
   return {
     user: state.me,
+    
     isLoggedIn: !!state.me.id,
-    currentChannel,
     timerIsActive: state.room.timer.active,
     room: state.room,
     status: state.room.status
@@ -142,7 +161,7 @@ const mapDispatch = (dispatch, ownProps) => {
       dispatch(setMessages(messages));
     },
     setTime() {
-      dispatch(setTime(...arguments))
+      dispatch(setTime(...arguments));
     }
   }
 }

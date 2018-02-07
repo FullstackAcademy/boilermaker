@@ -292,11 +292,12 @@ div.home-category-list-item {
 
 /************************* PROMPTS ***********************************/
 
-#prompt-box {
+.prompt-box {
   position: absolute;
     z-index: 3;
     background-color: rgba(0,0,0,0.5);
     left: 50%;
+    width: 507px;
     margin-left: -253.5px;
     top: 15%;
     padding: 10px;
