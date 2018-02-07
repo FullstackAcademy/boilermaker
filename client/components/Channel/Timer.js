@@ -54,7 +54,7 @@ class Timer extends Component {
         //text.style.marginTop = '50px';
       }
     });
-    flip && barDiv.firstChild.add('flip');
+    flip && barDiv.firstChild.classList.add('flip');
 
     this.bar.set(currTime / totalTime);
     this.bar.animate(1.0);  // Number from 0.0 to 1.0
