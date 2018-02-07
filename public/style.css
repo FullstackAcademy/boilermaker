@@ -151,10 +151,6 @@ div.home-category-list-item {
 
 /************************ CHANNEL ***********************/
 
-/*video {
-  width: 350px;
-  height: 350px;
-}*/
 .channel-container{
   height:calc(100vh - 65px);
   overflow:hidden;
@@ -266,6 +262,34 @@ div.home-category-list-item {
   border-radius: 100%
 }
 
+.queue-buttons {
+  display: flex;
+  width: 65%;
+  justify-content: space-evenly;
+}
+
+.queue-bar-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0.5em;
+  width: 75%
+}
+
+.queue-bar-headline {
+  font-size: 3em;
+  width: 24%;
+  margin-bottom: 10px;
+}
+
+.queue-bar.breadcrumb {
+  align-items: center;
+  width: 76%;
+  font-size: 2.0em;
+  margin-bottom: 10px;
+  height: 45px;
+}
+
 /************************* PROMPTS ***********************************/
 
 .prompt-box {
@@ -317,7 +341,7 @@ div.home-category-list-item {
 
 #announcement-debate-container {
   position: absolute;
-  left: 20%;
+  left: 50%;
   height: 85px;
   opacity: 0;
   background-color: rgba(50, 50, 50, 1);
@@ -340,7 +364,7 @@ div.home-category-list-item {
 
 #announcement-voting-container {
   position: absolute;
-  left: 48.5%;
+  left: 50%;
   margin-left: -218px;
   height: 50px;
   opacity: 0;
@@ -501,7 +525,6 @@ div.category-channel-list-item {
   width: 180px;
   margin-left: 10px;
 }
-
 
 .search-user {
   width: 25%;
