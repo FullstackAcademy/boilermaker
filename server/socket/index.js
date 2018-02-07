@@ -31,6 +31,11 @@ module.exports = (io,socket,Room) => {
     socket.room.sendRoomState();
   });
 
+  socket.on('dequeue', () => {
+    socket.room.removeFromQueue(socket);
+    socket.room.sendRoomState();
+  });
+
   socket.on('chooseVote', idx => {
     if (socket.vote.choice !== idx) {
       socket.room.voteTally[idx]++;

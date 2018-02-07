@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
 import { setMessages, setTime } from '../../store';
-import { changeChannel, enqueue, chooseVote, linkUserProfile } from '../../socket';
+import { changeChannel, enqueue, dequeue, chooseVote, linkUserProfile } from '../../socket';
 
 import Chat from './Chat';
 import VideoFeed from './VideoFeed';
@@ -14,12 +14,14 @@ import Prompts from './Prompts';
 import Announcements from './Announcements';
 import Reaction from './Reaction';
 import ReactionButtons from './ReactionButtons';
+import QueueBar from './QueueBar';
 
 class Channel extends Component {
   constructor() {
     super()
     this.state = {
       togglePrompt: false,
+      toggleQueue: false
     }
     this.displayPrompt = this.displayPrompt.bind(this);
     this.changeVote1 = this.changeVote1.bind(this);
@@ -34,6 +36,10 @@ class Channel extends Component {
 
   displayPrompt() {
     this.state.togglePrompt ? this.setState({ togglePrompt: false }) : this.setState({ togglePrompt: true });
+  }
+
+  toggleDisable() {
+    this.state.toggleQueue ? this.setState({ toggleQueue: false }) : this.setState({ toggleQueue: true });
   }
 
   changeVote1() {
@@ -57,7 +63,6 @@ class Channel extends Component {
         }
         <div className='channel-container'>
 
-          {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
 
           <div className='main-channel-container'>
             <div className="main-channel-child">
@@ -80,12 +85,32 @@ class Channel extends Component {
                     </div>
                   </div>
                 </div>
-                <Button onClick={()=> {
-                  this.props.setTime(0,1000000,0,1000000)
-                }}>
-                TEST TIMER
-                </Button>
-                <Button className="queue-up" onClick={enqueue}>Join the Queue</Button>
+                <QueueBar queueList={status.queue} />
+                <div className="queue-buttons">
+                  <Button
+                    className="queue-up"
+                    bsStyle="primary"
+                    disabled={this.state.toggleQueue}
+                    onClick={() => {
+                      enqueue();
+                      this.toggleDisable();
+                    }}
+                  >
+                    Join the Queue
+                  </Button>
+                  <Button
+                    className="queue-up"
+                    bsStyle="danger"
+                    onClick={() => {
+                      if (this.state.toggleQueue) {
+                        dequeue();
+                        this.toggleDisable();
+                      }
+                    }}
+                  >
+                    Leave the Queue
+                  </Button>
+                </div>
                 <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>Prompts</Button>
                 <Reaction />
                 <ReactionButtons />
@@ -98,11 +123,6 @@ class Channel extends Component {
     )
   }
 }
-// <div className='button-group-wrapper'>
-//   <div className='button-group'>
-//     <button onClick={() => { this.props.setTime(0, 5, 0, 30) }}>Test Timer</button>
-//   </div>
-// </div>
 
 const mapState = (state, ownProps) => {
   const currentChannel = ownProps.match.params.channelName;

@@ -29,6 +29,10 @@ export function linkUserProfile(userId, userName) {
   socket.emit('linkUserProfile', userId, userName);
 };
 
+export function dequeue() {
+  socket.emit('dequeue');
+}
+
 /****************** Client room ******************/
 
 function offsetTimeByPing(roomState, sentTime) {

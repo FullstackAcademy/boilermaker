@@ -15,7 +15,6 @@ module.exports = (io) => {
       this.name = name;
       this.viewers = [];
       this.broadcasters = [];
-      this.queueSockets = [];
       this.queue = [];
       this.voteTally = [0, 0];
       this.id = ++roomId;
@@ -29,8 +28,8 @@ module.exports = (io) => {
       rooms[name] = this;
     }
     startLoadingBroadcasters() {
-      this.startBroadcasting(this.queueSockets.shift());
-      this.startBroadcasting(this.queueSockets.shift());
+      this.startBroadcasting(this.queue.shift());
+      this.startBroadcasting(this.queue.shift());
       this.state = {
         broadcasterCount: 0,
         broadcasterIds: this.getBroadcasterIds(),
@@ -136,15 +135,15 @@ module.exports = (io) => {
         debateStatus,
         phaseStatus,
         viewerCount: this.viewers.length,
-        queue: this.queue,
+        queue: this.queue.map(queuer => { return { 'userId': queuer.userId, 'userName': queuer.userName } })
       }, this.state, {
-        sentTime: Date.now()
-      });
+          sentTime: Date.now()
+        });
       let broadcastTarget = socket ? socket : io.to(this.name);
       broadcastTarget.emit('setRoomState', state);
     }
     addViewer(viewer) {
-      this.viewers.push(viewer.userName);
+      this.viewers.push(viewer);
       viewer.emit('setUserId', viewer.id);
     }
     removeViewer(viewer) {
@@ -164,14 +163,12 @@ module.exports = (io) => {
       this.broadcasters.splice(this.broadcasters.indexOf(broadcaster), 1);
     }
     addToQueue(queuer) {
-      this.queueSockets.push(queuer);
-      this.queue.push(queuer.userName);
-      if (this.queueSockets.length > 1 && this.action.status === WAITING_FOR_QUEUE) this.startLoadingBroadcasters();
+      this.queue.push(queuer);
+      if (this.queue.length > 1 && this.action.status === WAITING_FOR_QUEUE) this.startLoadingBroadcasters();
     }
     removeFromQueue(queuer) {
-      if (this.queueSockets.indexOf(queuer) < 0) return;
-      this.queueSockets.splice(this.queueSockets.indexOf(queuer), 1);
-      this.queue.splice(this.queue.indexOf(queuer.userName), 1);
+      if (this.queue.indexOf(queuer) < 0) return;
+      this.queue.splice(this.queue.indexOf(queuer), 1);
     }
     getBroadcasterIds() {
       return this.broadcasters.map(broadcaster => broadcaster.id);
