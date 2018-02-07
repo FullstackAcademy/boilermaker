@@ -97,19 +97,15 @@ function resetConnection() {
         });
       }, 2000);
     },
-    toggleMute(first) {
-      return;
-      const { USERID: userid, broadcasters } = rtcConnection
-      const isBroadcasting = broadcasters.includes(userid);
-      if (!isBroadcasting) return;
-      const [b1, b2] = broadcasters;
-      const isFirst = b1 === userid;
-      const isSecond = b2 === userid;
-
-      const f = (first && isFirst) || (!first && isSecond) ? 'unmute' : 'mute';
-      const localStream = Object.keys(rtcConnection.streamEvents).reduce(((old, e) => e.length > 12 && e.type === 'local' ? e : old), undefined);
-      console.log('ugly children', rtcConnection.streamEvents, localStream);
-      localStream && localStream[f]('audio');
+    muteUser(id){
+      var elem = rtcConnection.broadcastersObj[id];
+      if (id !== rtcConnection.userid) elem.volume = 1;
+      $(elem).parent().addClass('active');
+    },
+    unmuteUser(id){
+      var elem = rtcConnection.broadcastersObj[id];
+      if (id !== rtcConnection.userid) elem.volume = 0;
+      $(elem).parent().removeClass('active');
     },
 
     endStreams() {
