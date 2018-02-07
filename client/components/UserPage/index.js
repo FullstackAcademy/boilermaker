@@ -103,7 +103,7 @@ class UserPage extends Component {
         {
           this.state.displayCreate
             ?
-            <CreateChannel hide={this.hide} id={userId} />
+            <CreateChannel hide={this.hide} user={user} />
             :
             null
         }

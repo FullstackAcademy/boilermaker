@@ -80,6 +80,11 @@ export const setVoting = boolean => ({
   boolean
 });
 
+//PROMPTS
+const ADD_PROMPT = 'ADD_PROMPT';
+
+export const addPrompt = prompt => ({ type: ADD_PROMPT, prompt });
+
 // REDUCER
 
 export default function (state = defaultState, action) {
@@ -171,7 +176,13 @@ export default function (state = defaultState, action) {
           voting: action.boolean
         }
       };
-
+    
+    // PROMPTS
+    case ADD_PROMPT:
+      return {
+        ...state,
+        prompts: [...state.prompts, action.prompt]
+      }
     default:
       return state;
   }
