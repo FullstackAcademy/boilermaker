@@ -80,6 +80,11 @@ class Channel extends Component {
                     </div>
                   </div>
                 </div>
+                <Button onClick={()=> {
+                  this.props.setTime(0,1000000,0,1000000)
+                }}>
+                TEST TIMER
+                </Button>
                 <Button className="queue-up" onClick={enqueue}>Join the Queue</Button>
                 <Button className="open-button" bsSize={"large"} onClick={this.displayPrompt}>Prompts</Button>
                 <Reaction />

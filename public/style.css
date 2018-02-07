@@ -244,20 +244,6 @@ div.home-category-list-item {
   align-self: center;
 }
 
-/* #vote-1.vote-button-btn { 
-    position: absolute;
-    top: 75%;
-    left: 100%;
-} */
-
-
-.vote-up {
-  font-size: 49px;
-    position: absolute;
-    left: 50px;
-    top: 0px;
-}
-
 .modal-content{
   background-color: rgb(45, 45, 45);
   color: rgb(255, 255, 255);
@@ -531,11 +517,6 @@ div.category-channel-list-item {
 
 .flip {
   transform: scale(-1, 1);
-}
-
-#progressbar {
-  top: 100%;
-  right: 3%;
 }
 
 /***************CHAT***********/

@@ -50,8 +50,8 @@ class Timer extends Component {
         text.style.color = state.color;
         text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
         text.style.fontSize = '2rem';
-        text.style.top = '0';
-        text.style.bottom = '70%';
+        text.style.bottom = '50%'
+        text.style.display = 'flex';
         //text.style.marginTop = '50px';
       }
     });
