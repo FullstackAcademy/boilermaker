@@ -189,6 +189,13 @@ div.home-category-list-item {
   flex-direction: row;
   margin-bottom: 5vh;
   flex-wrap: wrap;
+  width: 100%
+}
+
+.video-rooms-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
 .empty-video{
@@ -222,20 +229,31 @@ div.home-category-list-item {
   position: absolute;
   bottom:0;
 }
-.vote-button {
-  position: absolute;
-    bottom: 0px;
-    left: 50%;
-    margin-left: -25px;
-}
 
 .vote-button-btn {
-  height: 50px;
+    height: 50px;
     width: 50px;
     color: #4ebf4e;
     background-color: rgba(0, 0, 0, 0);
     border: none;
 }
+
+div#vote-button-container-1.animated.slideInUp.vote-button { 
+  display: flex;
+}
+
+/* #vote-1.vote-button-btn { 
+    position: absolute;
+    top: 75%;
+    left: 100%;
+} */
+
+#vote-2.vote-button-btn { 
+    position: absolute;
+    top: 100%;
+    right: 100%;
+}
+
 
 .vote-up {
   font-size: 49px;
