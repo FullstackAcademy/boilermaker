@@ -10,12 +10,13 @@ const defaultState = {
   },
   status: {
     phase: false,
+    viewerCount: 0,
+    queue: [],
     debate: false,
     winner: false,
     voting: 'default'
   }
 }
-
 
 // CHAT
 const SET_MESSAGES = 'SET_MESSAGES';
@@ -52,14 +53,16 @@ export const setTime = (leadinTime, totalLeadinTime, currTime, totalTime, status
 })
 
 // STATUS
-const SET_PHASE = 'SET_PHASE';
+const SET_MAIN = 'SET_MAIN';
 const SET_DEBATE = 'SET_DEBATE';
 const SET_WINNER = 'SET_WINNER';
 const SET_VOTING = 'SET_VOTING';
 
-export const setPhase = phase => ({
-  type: SET_PHASE,
-  phase
+export const setMain = (phase, viewerCount, queue) => ({
+  type: SET_MAIN,
+  phase,
+  viewerCount,
+  queue
 });
 
 export const setDebate = status => ({
@@ -134,12 +137,14 @@ export default function (state = defaultState, action) {
       };
 
     // Status 
-    case SET_PHASE:
+    case SET_MAIN:
       return {
         ...state,
         status: {
           ...state.status,
-          phase: action.phase
+          phase: action.phase,
+          viewerCount: action.viewerCount,
+          queue: action.queue
         }
       };
     case SET_DEBATE:

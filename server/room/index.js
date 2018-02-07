@@ -15,6 +15,7 @@ module.exports = (io) => {
       this.name = name;
       this.viewers = [];
       this.broadcasters = [];
+      this.queueSockets = [];
       this.queue = [];
       this.voteTally = [0, 0];
       this.id = ++roomId;
@@ -28,8 +29,8 @@ module.exports = (io) => {
       rooms[name] = this;
     }
     startLoadingBroadcasters() {
-      this.startBroadcasting(this.queue.shift());
-      this.startBroadcasting(this.queue.shift());
+      this.startBroadcasting(this.queueSockets.shift());
+      this.startBroadcasting(this.queueSockets.shift());
       this.state = {
         broadcasterCount: 0,
         broadcasterIds: this.getBroadcasterIds(),
@@ -115,14 +116,12 @@ module.exports = (io) => {
       let time = 0;
       if (this.action.status === LEAD_IN) leadinTime = Date.now() - this.action.timestamp;
       else time = Date.now() - this.action.timestamp;
-      
       let phaseStatus = false;
       if (this.action.status === LEAD_IN && this.firstDebator) phaseStatus = '_player1ToStart';
       else if (this.action.status === USERS_DEBATING && this.state.firstDebator) phaseStatus = '_player1Debating';
       else if (this.action.status === LEAD_IN && !this.firstDebator) phaseStatus = '_player2ToStart';
       else if (this.action.status === USERS_DEBATING && !this.state.firstDebator) phaseStatus = '_player2Debating';
       else if (this.action.status === RESETTING_GAME) phaseStatus = '_announcingWinner';
-
       let debateStatus = false;
       if (this.state.active) {
         if (this.state.firstDebator) debateStatus = this.broadcasters[0].userName;
@@ -136,16 +135,16 @@ module.exports = (io) => {
         canVote: this.action.status === USERS_DEBATING || this.action.status === LEAD_IN,
         debateStatus,
         phaseStatus,
-        viewerCount: this.viewers.length
+        viewerCount: this.viewers.length,
+        queue: this.queue,
       }, this.state, {
         sentTime: Date.now()
       });
       let broadcastTarget = socket ? socket : io.to(this.name);
-
       broadcastTarget.emit('setRoomState', state);
     }
     addViewer(viewer) {
-      this.viewers.push(viewer);
+      this.viewers.push(viewer.userName);
       viewer.emit('setUserId', viewer.id);
     }
     removeViewer(viewer) {
@@ -165,12 +164,14 @@ module.exports = (io) => {
       this.broadcasters.splice(this.broadcasters.indexOf(broadcaster), 1);
     }
     addToQueue(queuer) {
-      this.queue.push(queuer);
-      if (this.queue.length > 1 && this.action.status === WAITING_FOR_QUEUE) this.startLoadingBroadcasters();
+      this.queueSockets.push(queuer);
+      this.queue.push(queuer.userName);
+      if (this.queueSockets.length > 1 && this.action.status === WAITING_FOR_QUEUE) this.startLoadingBroadcasters();
     }
     removeFromQueue(queuer) {
-      if (this.queue.indexOf(queuer) < 0) return;
-      this.queue.splice(this.queue.indexOf(queuer), 1);
+      if (this.queueSockets.indexOf(queuer) < 0) return;
+      this.queueSockets.splice(this.queueSockets.indexOf(queuer), 1);
+      this.queue.splice(this.queue.indexOf(queuer.userName), 1);
     }
     getBroadcasterIds() {
       return this.broadcasters.map(broadcaster => broadcaster.id);
