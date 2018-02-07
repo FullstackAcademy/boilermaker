@@ -76,8 +76,6 @@ class Channel extends Component {
           isLoggedIn && linkUserProfile(user.id, user.userName)
         }
         <div className='channel-container'>
-
-
           <div className='main-channel-container'>
             <div className="main-channel-child">
               {

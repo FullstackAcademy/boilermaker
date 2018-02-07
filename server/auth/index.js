@@ -39,6 +39,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/me', async (req, res) => {
   try {
+  if (!req.user) return;
   let user = await User.findById(req.user.id, {
     include: [{ model: Channel }]
   })
