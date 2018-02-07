@@ -37,17 +37,13 @@ class Channel extends Component {
   }
 
   changeVote1() {
-    console.log('CHANGE VOTE 1');
-    console.log(document.getElementById('vote-1'));
     document.getElementById('vote-1').classList.toggle('active');
-    // document.getElementById('vote-2').classList.remove('active');
+    document.getElementById('vote-2').classList.remove('active');
     chooseVote(0);
   }
   changeVote2() {
-    console.log('CHANGE VOTE 2');
-    console.log(document.getElementById('vote-1'));
     document.getElementById('vote-2').classList.toggle('active');
-    // document.getElementById('vote-1').classList.remove('active');
+    document.getElementById('vote-1').classList.remove('active');
     chooseVote(1);
   }
 
@@ -73,12 +69,14 @@ class Channel extends Component {
               <div className='videos-container'>
                 <div className="video-feeds">
                   <div className="video-rooms-container">
-                    <Voting vote={this.changeVote1} elementId={'1'} />
-                    <div id='empty-video-1' className='empty-video'>
+                    <div id="video-room-1">
+                      <div id='empty-video-1' className='empty-video'></div>
+                      <Voting vote={this.changeVote1} elementId={'1'} />
                     </div>
                     <Timer />
-                    <Voting vote={this.changeVote2} elementId={'2'} />
-                    <div id='empty-video-2' className='empty-video'>
+                    <div id="video-room-2">
+                      <div id='empty-video-2' className='empty-video'></div>
+                      <Voting vote={this.changeVote2} elementId={'2'} />
                     </div>
                   </div>
                 </div>

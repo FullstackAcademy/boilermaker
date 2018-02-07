@@ -176,6 +176,7 @@ div.home-category-list-item {
   border:none!important;
   margin:0!important;
 }
+
 .videos-container{
   display: flex;
   justify-content: center;
@@ -214,9 +215,6 @@ div.home-category-list-item {
   z-index: -1;
   position:relative;
 }
-#empty-video-1{
-  margin-right:50px;
-}
 
 .button-group{
   position: element(.button-group-wrapper);
@@ -225,6 +223,7 @@ div.home-category-list-item {
   right:0;
   width:400px;
 }
+
 .button-group-wrapper{
   position: absolute;
   bottom:0;
@@ -238,8 +237,11 @@ div.home-category-list-item {
     border: none;
 }
 
-div#vote-button-container-1.animated.slideInUp.vote-button { 
+#vote-button-container-1, #vote-button-container-2 { 
   display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
 }
 
 /* #vote-1.vote-button-btn { 
@@ -248,26 +250,12 @@ div#vote-button-container-1.animated.slideInUp.vote-button {
     left: 100%;
 } */
 
-#vote-2.vote-button-btn { 
-    position: absolute;
-    top: 100%;
-    right: 100%;
-}
-
 
 .vote-up {
   font-size: 49px;
     position: absolute;
     left: 50px;
     top: 0px;
-}
-
-svg {
-  position: absolute;
-  left: 50%;
-  margin-left: -50px;
-  width: 100px;
-  height: 100px;
 }
 
 .modal-content{
