@@ -519,6 +519,10 @@ div.category-channel-list-item {
   transform: scale(-1, 1);
 }
 
+#progressbar {
+  size: 50px;
+}
+
 /***************CHAT***********/
 .chat {
   width: 250px;

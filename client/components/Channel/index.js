@@ -56,7 +56,7 @@ class Channel extends Component {
           isLoggedIn && linkUserProfile(user.id, user.userName)
         }
         <div className='channel-container'>
-
+          <Timer />
           {/*<VideoFeed connection={rtcConnection} channel={currChannel} />*/}
 
           <div className='main-channel-container'>
@@ -73,7 +73,6 @@ class Channel extends Component {
                       <div id='empty-video-1' className='empty-video'></div>
                       <Voting vote={this.changeVote1} elementId={'1'} />
                     </div>
-                    <Timer />
                     <div id="video-room-2">
                       <div id='empty-video-2' className='empty-video'></div>
                       <Voting vote={this.changeVote2} elementId={'2'} />
