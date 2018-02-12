@@ -30,11 +30,12 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     callbackURL: process.env.GOOGLE_CALLBACK
   }
 
+  // when google sends ut he user (and everything is ok), we get tocken, refreshtocken and profile
   const strategy = new GoogleStrategy(googleConfig, (token, refreshToken, profile, done) => {
     const googleId = profile.id
     const name = profile.displayName
     const email = profile.emails[0].value
-
+    console.log('strategy is running-------------')
     User.find({where: {googleId}})
       .then(foundUser => (foundUser
         ? done(null, foundUser)
@@ -46,10 +47,13 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
 
   passport.use(strategy)
 
+  //Passport: when someone gones to this route, I wkl send them to google to authenticate
   router.get('/', passport.authenticate('google', {scope: 'email'}))
 
+  //Passport: oh hey i see you back from google.  I am going to check with google to make sure you did indeed log in ok.
+  // this call back route is set in the google api
   router.get('/callback', passport.authenticate('google', {
-    successRedirect: '/home',
+    successRedirect: '/',
     failureRedirect: '/login'
   }))
 

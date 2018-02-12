@@ -21,6 +21,8 @@ module.exports = app
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
+
+// NODE_ENV is set in the package.json
 if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 // passport registration
