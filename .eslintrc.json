@@ -4,6 +4,5 @@
 	"extends": "fullstack",
 	"rules": {
 		"semi": 0,
-		"new-cap": [1, { "capIsNewExceptions": ["Router"] }]
 	}
 }
