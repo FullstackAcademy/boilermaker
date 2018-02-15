@@ -9,14 +9,12 @@ import Routes from './routes'
 const App = () => {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <Routes />
     </div>
   )
 }
 
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
 export default App
 
 
