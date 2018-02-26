@@ -14,7 +14,6 @@ const User = db.define('user', {
     // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
       return () => this.getDataValue('password')
-      // return function () { return this.getDataValue('password') }
     }
   },
   salt: {
