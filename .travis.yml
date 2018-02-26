@@ -7,11 +7,13 @@ addons:
   postgresql: '9.6' # highest available postgres version on Travis
 dist: trusty # uses trusty environment
 sudo: false # when on trusty, uses Docker containers for speed
-cache: yarn # speeds up yarn installs
 notifications:
   email:
     on_success: change # default: change (only when going from broken to fixed)
     on_failure: always # default: always (which is annoying, as it should be)
+install:
+  - npm i -g npm@5.7.1 # delete once 5.7.X is out of "pre-release"
+  - npm ci             # faster, goes only from package-lock
 before_script:
   - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
