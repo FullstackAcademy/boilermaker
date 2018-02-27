@@ -17,7 +17,7 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --compilers js:babel-register"
+    "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --require @babel/polyfill --require @babel/register"
   },
   "author": "",
   "license": "ISC",
@@ -46,14 +46,15 @@
     "socket.io": "^2.0.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/polyfill": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "@babel/preset-react": "^7.0.0-beta.40",
+    "@babel/preset-stage-2": "^7.0.0-beta.40",
+    "@babel/register": "^7.0.0-beta.40",
     "axios-mock-adapter": "^1.9.0",
-    "babel-core": "^6.22.1",
     "babel-eslint": "^8.0.1",
-    "babel-loader": "^6.2.10",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.22.0",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-register": "^6.24.1",
+    "babel-loader": "^8.0.0-beta.2",
     "chai": "^3.5.0",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
@@ -67,7 +68,7 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-mock-store": "^1.2.3",
     "supertest": "^3.0.0",
-    "webpack": "^2.2.1",
-    "webpack-livereload-plugin": "^1.0.0"
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9"
   }
 }
