@@ -17,9 +17,12 @@ install:
 before_script:
   - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# # see https://docs.travis-ci.com/user/deployment/heroku/
+# before_deploy:
+#   - npm run build-client # make the bundle
+#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
 # deploy:
 #   skip_cleanup: true # prevents travis from deleting the build
 #   provider: heroku
+#   app: YOUR-HEROKU-APP-NAME-HERE # see README
 #   api_key:
-#     secure: "YOUR ***ENCRYPTED*** API KEY HERE"
+#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
