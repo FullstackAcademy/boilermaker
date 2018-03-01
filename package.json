@@ -17,7 +17,8 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --require @babel/polyfill --require @babel/register"
+    "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --require @babel/polyfill --require @babel/register",
+    "start-wds": "NODE_ENV='development' webpack-dev-server & npm run start-server"
   },
   "author": "Fullstack Academy of Code",
   "license": "MIT",
@@ -69,6 +70,7 @@
     "redux-mock-store": "^1.2.3",
     "supertest": "^3.0.0",
     "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.9"
+    "webpack-cli": "^2.0.9",
+    "webpack-dev-server": "^3.1.0"
   }
 }
