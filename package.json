@@ -14,7 +14,7 @@
     "lint-fix": "npm run lint -- --fix",
     "precommit": "lint-staged",
     "prepush": "npm run lint && npm test",
-    "prettify": "prettier --write",
+    "prettify": "prettier --write \"**/*.js?(x)\" --ignore-path .gitignore",
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
     "start": "node server",
@@ -23,7 +23,7 @@
     "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --require @babel/polyfill --require @babel/register"
   },
   "lint-staged": {
-    "*.{js,jsx}": ["npm run prettify", "npm run lint-fix", "git add"]
+    "*.{js,jsx}": ["prettier --write", "npm run lint-fix", "git add"]
   },
   "author": "Fullstack Academy of Code",
   "license": "MIT",
