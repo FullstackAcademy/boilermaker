@@ -1,9 +1,9 @@
 {
-	"root": true,
-	"parser": "babel-eslint",
-	"extends": "fullstack",
-	"rules": {
-		"semi": 0,
-		"new-cap": [1, { "capIsNewExceptions": ["Router"] }]
-	}
+  "root": true,
+  "parser": "babel-eslint",
+  "extends": ["fullstack", "prettier", "prettier/react"],
+  "rules": {
+    "semi": 0,
+    "new-cap": [1, { "capIsNewExceptions": ["Router"] }]
+  }
 }
