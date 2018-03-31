@@ -1,8 +1,8 @@
 ### Assignee Tasks
 
-- [ ] added unit tests (or none needed)
-- [ ] written relevant docs (or none needed)
-- [ ] referenced any relevant issues (or none exist)
+* [ ] added unit tests (or none needed)
+* [ ] written relevant docs (or none needed)
+* [ ] referenced any relevant issues (or none exist)
 
 ### Guidelines
 
@@ -10,4 +10,4 @@ Please add a description of this Pull Request's motivation, scope, outstanding i
 
 ---
 
-*Your PR Notes Here*
+_Your PR Notes Here_

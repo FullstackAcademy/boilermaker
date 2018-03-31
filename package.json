@@ -14,16 +14,20 @@
     "lint-fix": "npm run lint -- --fix",
     "precommit": "lint-staged",
     "prepush": "npm run lint && npm test",
-    "prettify": "prettier --write \"**/*.js?(x)\" --ignore-path .gitignore",
+    "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
     "start": "node server",
-    "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
-    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --require @babel/polyfill --require @babel/register"
+    "start-dev":
+      "NODE_ENV='development' npm run build-client-watch & npm run start-server",
+    "start-server":
+      "nodemon server -e html,js,scss --ignore public --ignore client",
+    "test":
+      "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --require @babel/polyfill --require @babel/register"
   },
   "lint-staged": {
-    "*.{js,jsx}": ["prettier --write", "npm run lint-fix", "git add"]
+    "*.{js,jsx}": ["prettier --write", "npm run lint-fix", "git add"],
+    "*.{css,scss,json,md}": ["prettier --write", "git add"]
   },
   "author": "Fullstack Academy of Code",
   "license": "MIT",
