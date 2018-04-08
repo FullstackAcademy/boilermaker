@@ -17,7 +17,7 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --require @babel/polyfill --require @babel/register"
+    "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js ./script/**/*.spec.js --require @babel/polyfill --require @babel/register"
   },
   "author": "Fullstack Academy of Code",
   "license": "MIT",
@@ -56,6 +56,7 @@
     "babel-eslint": "^8.0.1",
     "babel-loader": "^8.0.0-beta.2",
     "chai": "^3.5.0",
+    "chalk": "^2.3.2",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
     "eslint": "^4.10.0",
