@@ -12,7 +12,7 @@
     "deploy": "script/deploy",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint-fix": "npm run lint -- --fix",
-    "precommit": "lint-staged",
+    "precommit": "# lint-staged # un-comment to enable",
     "prepush": "npm run lint && npm test",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
