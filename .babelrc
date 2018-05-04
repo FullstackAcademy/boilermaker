@@ -1,5 +1,5 @@
 {
-  presets: ['@babel/react', '@babel/env', '@babel/stage-2']
+  presets: ['@babel/react', '@babel/env', ['@babel/stage-2', {"decoratorsLegacy": true}]]
   /*
     Babel uses these "presets" to know how to transpile your Javascript code. Here's what we're saying with these:
 
