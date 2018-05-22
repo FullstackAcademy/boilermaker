@@ -10,7 +10,7 @@ describe('seed script', () => {
     const { stderr } = await exec('node ./seed', {
       cwd: __dirname,
       env: process.env,
-      timeout: 10e3 // 20 secs
+      timeout: 10e3 // 10 secs
     })
     console.log(dim('Seed script exited successfully but with stderr:', stderr))
   })
