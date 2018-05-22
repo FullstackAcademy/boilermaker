@@ -12,7 +12,8 @@ notifications:
     on_success: change # default: change (only when going from broken to fixed)
     on_failure: always # default: always (which is annoying, as it should be)
 install:
-  - npm ci             # faster, goes only from package-lock
+  - npm i -g npm # delete once default travis npm supports `ci` command
+  - npm ci       # faster, goes only from package-lock
 before_script:
   - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
