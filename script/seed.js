@@ -15,7 +15,7 @@ const {User} = require('../server/db/models')
  * Now that you've got the main idea, check it out in practice below!
  */
 
-async function seed () {
+async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
@@ -35,15 +35,16 @@ async function seed () {
 // any errors that might occur inside of `seed`.
 if (module === require.main) {
   seed()
-  .catch(err => {
-    console.error(err)
-    process.exitCode = 1
-  })
-  .finally(() => { // `finally` is like then + catch. It runs no matter what.
-    console.log('closing db connection')
-    db.close()
-    console.log('db connection closed')
-  })
+    .catch(err => {
+      console.error(err)
+      process.exitCode = 1
+    })
+    .finally(() => {
+      // `finally` is like then + catch. It runs no matter what.
+      console.log('closing db connection')
+      db.close()
+      console.log('db connection closed')
+    })
   /*
    * note: everything outside of the async function is totally synchronous
    * The console.log below will occur before any of the logs that occur inside

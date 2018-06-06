@@ -17,10 +17,9 @@ describe('User model', () => {
         return User.create({
           email: 'cody@puppybook.com',
           password: 'bones'
+        }).then(user => {
+          cody = user
         })
-          .then(user => {
-            cody = user
-          })
       })
 
       it('returns true if the password is correct', () => {

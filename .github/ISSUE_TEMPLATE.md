@@ -12,4 +12,4 @@ For features, please specify at least minimal requirements, e.g.:
 
 ---
 
-*Issue description here…*
+_Issue description here…_
