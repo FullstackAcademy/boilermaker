@@ -2,10 +2,11 @@
 import React, { Component } from 'react';
 // import './App.css';
 // import the Google Maps API Wrapper from google-maps-react
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
+import { Map, InfoWindow, GoogleApiWrapper, Marker} from 'google-maps-react'
 // import child component
 import MapContainer from './mapcontainer'
 import courts from '../courts'
+import axios from 'axios'
 // import Marker from './marker'
 
 
@@ -15,8 +16,48 @@ const style = {
 }
 
 class HoopMap extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
+      courtInfo: {}
+    }
+    this.onMapClicked = this.onMapClicked.bind(this)
+
+  }
+
+
+  // async componentDidMount() {
+  //   const res = await axios.get(`/api/courts/`)
+  //   this.setState({courts: res.data})
+  // }
+
+
+  onMarkerClick = async (props, marker, event) => {
+    const res = await axios.get(`/api/courts/${props.courtId}`)
+    console.log(res.data)
+
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true,
+      courtInfo: res.data
+    });
+  }
+
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  };
+
   render() {
-    console.log(courts.features)
+
     return (
       <div>
         <h1> FIND A PICKUP GAME </h1>
@@ -25,13 +66,21 @@ class HoopMap extends Component {
         initialCenter={{lat: 40.7485722, lng: -74.0068633}}
         zoom={12}>
         {
-        courts.features.map(court => {
+        courts.map((court) => {
           return <Marker position={{lat: court.geometry.coordinates[1], lng: court.geometry.coordinates[0]}} icon={{
             url: "http://www.clker.com/cliparts/j/N/m/m/d/2/glossy-red-icon-button-md.png",
             anchor: new google.maps.Point(10,10),
             scaledSize: new google.maps.Size(10,10)
-          }}/>
+          }} onClick={this.onMarkerClick} courtId={court.courtId} />
         })}
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            <div>
+              <h1>{this.state.courtInfo.name}</h1>
+              <h3>{this.state.courtInfo.location}</h3>
+            </div>
+        </InfoWindow>
         </Map>
       </div>
     );

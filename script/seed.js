@@ -1,8 +1,13 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Court, Game} = require('../server/db/models')
+const courtsInfo = require('./courts')
 
+const courts = courtsInfo.features.map(court => {
+  return {name: court.properties.Name,
+  location: court.properties.Location}
+})
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
  *
@@ -20,13 +25,22 @@ async function seed() {
   console.log('db synced!')
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+  const createdCourts = await Court.bulkCreate(
+    courts, {
+      returning: true
+    }
+  )
+  // const users = await Promise.all([
+  //   User.create({email: 'cody@email.com', password: '123'}),
+  //   User.create({email: 'murphy@email.com', password: '123'})
+  // ])
+
+  await Promise.all([
+    createdCourts
   ])
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
-  console.log(`seeded ${users.length} users`)
+  // console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }
 

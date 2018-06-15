@@ -1,4 +1,4 @@
-const data = {
+const courts = {
   "features": [
     {
       "type": "Feature",
@@ -3710,7 +3710,8 @@ const data = {
       "type": "Feature",
       "properties": {
         "Accessible": "Y",
-        "Name": "Astoria Park Courts"
+        "Name": "Astoria Park Courts",
+        "Location": "19 19th Street",
       },
       "geometry": {
         "coordinates": [
@@ -5506,8 +5507,8 @@ const data = {
       "type": "Feature",
       "properties": {
         "Accessible": "Y",
-        "Location": "46th St. & 31st Ave.",
         "Name": "Astoria Heights Playground",
+        "Location": "46th St. & 31st Ave.",
         "Num_of_Courts": 2.5
       },
       "geometry": {
@@ -9876,8 +9877,4 @@ const data = {
   "type": "FeatureCollection"
 }
 
-const courts = data.features.map((court, index) => {
-  return {...court, courtId: index+1}
-})
-
-export default courts
+module.exports = courts
