@@ -34,7 +34,16 @@ class HeatMap extends Component {
 
   async componentDidMount() {
     const res = await axios.get(`/api/courts/`)
-    console.log(res.data)
+    const activeCourts = res.data.filter(court => {
+      if (court.users.length) {
+        return court
+      }
+
+    })
+    console.log(activeCourts)
+    this.setState({
+      activeCourts: activeCourts
+    })
   }
 
 
@@ -78,12 +87,12 @@ class HeatMap extends Component {
         initialCenter={{lat: 40.7485722, lng: -74.0068633}}
         zoom={12}>
         {
-        courts.map((court) => {
-          return <Marker position={{lat: court.geometry.coordinates[1], lng: court.geometry.coordinates[0]}} icon={{
+        this.state.activeCourts.map((court) => {
+          return <Marker position={{lat: Number(court.latitude), lng: Number(court.longitude)}} icon={{
             url: "http://www.clker.com/cliparts/g/p/S/V/L/0/fire-ball-icon-hi.png",
             anchor: new google.maps.Point(10,10),
             scaledSize: new google.maps.Size(15,15)
-          }} onClick={this.onMarkerClick} courtId={court.courtId} />
+          }} onClick={this.onMarkerClick} courtId={court.id} />
         })}
         <InfoWindow
           marker={this.state.activeMarker}

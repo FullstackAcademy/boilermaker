@@ -6,7 +6,9 @@ const courtsInfo = require('./courts')
 
 const courts = courtsInfo.features.map(court => {
   return {name: court.properties.Name,
-  location: court.properties.Location}
+  location: court.properties.Location,
+  latitude: court.geometry.coordinates[1],
+  longitude: court.geometry.coordinates[0]}
 })
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...

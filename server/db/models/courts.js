@@ -9,7 +9,13 @@ const Court = db.define('court', {
   location: {
     type: Sequelize.STRING,
     allowNull: false
-  }
+  },
+  latitude: {
+    type: Sequelize.DECIMAL
+  },
+  longitude: {
+    type: Sequelize.DECIMAL
+  },
 })
 
 module.exports = Court;
