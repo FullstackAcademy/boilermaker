@@ -24,7 +24,8 @@ class HoopMap extends Component {
       showingInfoWindow: false,
       showCourtInfo: false,
       activeMarker: {},
-      courtInfo: {}
+      courtInfo: {},
+      activePlayers: 0
     }
     this.onMapClicked = this.onMapClicked.bind(this)
     this.onInfoClick = this.onInfoClick.bind(this)
@@ -46,7 +47,8 @@ class HoopMap extends Component {
       activeMarker: marker,
       showingInfoWindow: true,
       showCourtInfo: true,
-      courtInfo: res.data
+      courtInfo: res.data,
+      activePlayers: res.data.users.length
     });
   }
 
@@ -89,6 +91,7 @@ class HoopMap extends Component {
             <div>
               <h1>{this.state.courtInfo.name}</h1>
               <h3>{this.state.courtInfo.location}</h3>
+              <h3>Current Players: {this.state.activePlayers}</h3>
             </div>
         </InfoWindow>
         </Map>
