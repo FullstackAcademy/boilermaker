@@ -19,6 +19,7 @@ class CourtPage extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleCheckIn = this.handleCheckIn.bind(this)
   }
 
   async componentDidMount () {
@@ -36,12 +37,24 @@ class CourtPage extends Component {
 
   }
 
-  handleCheckIn (event) {
-
+  async handleCheckIn (event) {
+    console.log(this.state.courtId)
+    console.log(this.props.user)
+    const checkInUser = {
+      id: this.props.user.id,
+      courtId: this.state.courtId
+    }
+    await axios.put(`/api/users/`, checkInUser)
   }
 
-  handleCheckOut (event) {
-
+  async handleCheckOut (event) {
+    console.log(this.state.courtId)
+    console.log(this.props.user)
+    const checkOutUser = {
+      id: this.props.user.id,
+      courtId: null
+    }
+    await axios.put(`/api/users/`, checkOutUser)
   }
 
   async handleSubmit (event) {
@@ -63,9 +76,10 @@ class CourtPage extends Component {
       <div>
         <h3>{this.state.courtName}</h3>
         <h4>{this.state.courtLocation}</h4>
-        <button>Check In</button>
+        <button onClick={this.handleCheckIn}>Check In</button>
         <button>Check Out</button>
         <form onSubmit={this.handleSubmit}>
+          <h4>Schedule A Game</h4>
           <label>
             Time:
             <input type="text" value = {this.props.time} name="time" onChange={this.handleChange} />

@@ -23,8 +23,8 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-        const court = await Court.create(req.body)
-        res.json(court)
+        const addUserToCourt = await User.addUser(req.body, { where: {id: req.body.id} })
+        res.json(addUserToCourt)
     } catch (err) {
         next(err)
     }

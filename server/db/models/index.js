@@ -14,6 +14,7 @@ User.hasMany(Game)
 Game.belongsTo(Court)
 Court.hasMany(Game)
 
+//Make a checking model for users
 
 
 /**
