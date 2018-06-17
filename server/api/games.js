@@ -1,10 +1,10 @@
 const router = require('express').Router()
-const {Court} = require('../db/models')
+const {Game} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
     try {
-        const feelings = await Court.findAll({include: [{all: true}]})
+        const feelings = await Game.findAll({include: [{all: true}]})
         res.json(feelings)
     } catch (error) {
         next(error)
@@ -13,9 +13,9 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const court = await Court.findById(req.params.id)
-        console.log(court)
-        res.json(court)
+        const game = await Game.findAll({where: {courtId: req.params.id}})
+        console.log(game)
+        res.json(game)
     } catch (error){
         next(error)
     }
@@ -23,8 +23,8 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-        const court = await Court.create(req.body)
-        res.json(court)
+        const game = await Game.create(req.body)
+        res.json(game)
     } catch (err) {
         next(err)
     }
@@ -32,8 +32,8 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-      const court = await Court.update(req.body, { where: {id: req.body.id} })
-      res.json(court)
+      const game = await Game.update(req.body, { where: {id: req.body.id} })
+      res.json(game)
   } catch (err){
       next(err)
   }
@@ -41,9 +41,10 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-      await Court.destroy({where: {id: +req.params.id}})
+      await Game.destroy({where: {id: +req.params.id}})
       res.json(req.params.id)
   } catch (err){
       next(err)
+
   }
 })

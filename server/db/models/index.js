@@ -2,11 +2,14 @@ const User = require('./user')
 const Court = require('./courts')
 const Game = require('./games')
 
-Court.belongsTo(User)
-User.hasMany(Court)
+Court.belongsToMany(User, {through: 'courtPlayers'})
+User.belongsToMany(Court, {through: 'courtPlayers'})
 
 Game.belongsTo(User)
 User.hasMany(Game)
+
+Game.belongsTo(Court)
+Court.hasMany(Game)
 
 /**
  * If we had any associations to make, this would be a great place to put them!

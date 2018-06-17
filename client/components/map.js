@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 // import './App.css';
 // import the Google Maps API Wrapper from google-maps-react
 import { Map, InfoWindow, GoogleApiWrapper, Marker} from 'google-maps-react'
+import {Link} from "react-router-dom"
 // import child component
 import MapContainer from './mapcontainer'
 import courts from '../courts'
 import axios from 'axios'
-// import Marker from './marker'
+import CourtPage from './courtPage'
+import { withRouter } from "react-router-dom";
 
 
 const style = {
@@ -20,12 +22,12 @@ class HoopMap extends Component {
     super(props)
     this.state = {
       showingInfoWindow: false,
+      showCourtInfo: false,
       activeMarker: {},
-      selectedPlace: {},
       courtInfo: {}
     }
     this.onMapClicked = this.onMapClicked.bind(this)
-
+    this.onInfoClick = this.onInfoClick.bind(this)
   }
 
 
@@ -43,14 +45,21 @@ class HoopMap extends Component {
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
+      showCourtInfo: true,
       courtInfo: res.data
     });
+  }
+
+  onInfoClick = () => {
+    this.props.history.push(`/courts/${this.state.courtInfo.id}`);
+    console.log("Hello")
   }
 
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
+        showCourtInfo: false,
         activeMarker: null
       })
     }
@@ -61,8 +70,10 @@ class HoopMap extends Component {
     return (
       <div>
         <h1> FIND A PICKUP GAME </h1>
+        {this.state.showingInfoWindow&&this.state.showCourtInfo?<button onClick={this.onInfoClick}>Court Info</button>:null}
         <Map google={this.props.google}
         style={style}
+        onClick={this.onMapClicked}
         initialCenter={{lat: 40.7485722, lng: -74.0068633}}
         zoom={12}>
         {
@@ -87,6 +98,6 @@ class HoopMap extends Component {
   }
 }
 // OTHER MOST IMPORTANT: Here we are exporting the App component WITH the GoogleApiWrapper. You pass it down with an object containing your API key
-export default GoogleApiWrapper({
+export default withRouter(GoogleApiWrapper({
   apiKey: 'AIzaSyBL6XBWAiP5STkl9nRcE8x3XTtywDqWDu4',
-})(HoopMap)
+})(HoopMap))

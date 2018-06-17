@@ -2,11 +2,6 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Game = db.define('game', {
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true
-  },
   location: {
     type: Sequelize.STRING,
     allowNull: false
@@ -16,7 +11,7 @@ const Game = db.define('game', {
     allowNull: false
   },
   date: {
-    type: Sequelize.DATE,
+    type: Sequelize.STRING,
     allowNull: false
   },
   time: {
