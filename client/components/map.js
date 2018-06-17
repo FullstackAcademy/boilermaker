@@ -66,7 +66,6 @@ class HoopMap extends Component {
   };
 
   render() {
-
     return (
       <div>
         <h1> FIND A PICKUP GAME </h1>

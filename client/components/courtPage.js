@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux'
 import { me } from '../store/user'
 import Games from './games'
-import Players from './'
+// import Players from './players'
 
 class CourtPage extends Component {
   constructor(props) {
@@ -67,7 +67,7 @@ class CourtPage extends Component {
           <button type="submit">Submit</button>
         </form>
       <Games courtId={this.state.courtId}/>
-      <Players />
+      {/* <Players /> */}
       </div>
     )
   }
