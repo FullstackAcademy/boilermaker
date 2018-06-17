@@ -36,6 +36,14 @@ class CourtPage extends Component {
 
   }
 
+  handleCheckIn (event) {
+
+  }
+
+  handleCheckOut (event) {
+
+  }
+
   async handleSubmit (event) {
     event.preventDefault()
     const game = {
@@ -55,6 +63,8 @@ class CourtPage extends Component {
       <div>
         <h3>{this.state.courtName}</h3>
         <h4>{this.state.courtLocation}</h4>
+        <button>Check In</button>
+        <button>Check Out</button>
         <form onSubmit={this.handleSubmit}>
           <label>
             Time:

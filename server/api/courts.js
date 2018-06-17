@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const court = await Court.findById(req.params.id)
+        const court = await Court.findById(req.params.id, {include: [{all: true}]})
         console.log(court)
         res.json(court)
     } catch (error){
