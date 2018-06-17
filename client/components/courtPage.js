@@ -15,7 +15,7 @@ class CourtPage extends Component {
       courtId: Number(this.props.match.params.courtId),
       date: "",
       time: "",
-      games: ""
+      games: []
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -74,6 +74,11 @@ class CourtPage extends Component {
       courtId: this.state.courtId
     }
     await axios.post('/api/games/', game);
+    const resGames= await axios.get(`/api/courts/${this.state.courtId}`)
+    console.log(resGames.data)
+    this.setState({
+      games: resGames.data.games
+    })
   }
 
   render() {
@@ -82,8 +87,7 @@ class CourtPage extends Component {
       <div>
         <h3>{this.state.courtName}</h3>
         <h4>{this.state.courtLocation}</h4>
-        <button onClick={this.handleCheckIn}>Check In</button>
-        <button>Check Out</button>
+        <button id="court-info" onClick={this.handleCheckIn}>Check In</button>
         <form onSubmit={this.handleSubmit}>
           <h4>Schedule A Game</h4>
           <label>

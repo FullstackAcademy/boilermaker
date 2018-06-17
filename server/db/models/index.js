@@ -1,6 +1,7 @@
 const User = require('./user')
 const Court = require('./courts')
 const Game = require('./games')
+const Transaction = require('./transactions')
 
 Court.belongsToMany(User, {through: 'courtPlayers'})
 User.belongsToMany(Court, {through: 'courtPlayers'})
@@ -8,11 +9,17 @@ User.belongsToMany(Court, {through: 'courtPlayers'})
 User.belongsTo(Court)
 Court.hasMany(User)
 
-Game.belongsTo(User)
-User.hasMany(Game)
+User.belongsTo(Game)
+Game.hasMany(User)
 
 Game.belongsTo(Court)
 Court.hasMany(Game)
+
+Transaction.belongsTo(Game)
+Game.hasMany(Transaction)
+
+Transaction.belongsTo(User)
+User.hasMany(Transaction)
 
 //Make a checking model for users
 
