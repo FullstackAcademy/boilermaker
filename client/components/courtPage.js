@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import axios from 'axios';
+import axios from 'axios'
 import { connect } from 'react-redux'
 import { me } from '../store/user'
 import Games from './games'
-// import Players from './players'
+import Players from './players'
 
 class CourtPage extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class CourtPage extends Component {
     this.state = {
       courtName: "",
       courtLocation: "",
-      players: 0,
+      players: [],
       courtId: Number(this.props.match.params.courtId),
       date: "",
       time: "",
@@ -26,9 +26,11 @@ class CourtPage extends Component {
     this.props.getUser()
     const res = await axios.get(`/api/courts/${this.state.courtId}`)
     console.log(res.data)
+    const resCourt = await axios.get(`/api/courts/${this.state.courtId}`)
     this.setState({
       courtName: res.data.name,
       courtLocation: res.data.location,
+      players: resCourt.data.users
     })
   }
 
@@ -38,13 +40,17 @@ class CourtPage extends Component {
   }
 
   async handleCheckIn (event) {
-    console.log(this.state.courtId)
-    console.log(this.props.user)
+    event.preventDefault()
     const checkInUser = {
       id: this.props.user.id,
       courtId: this.state.courtId
     }
     await axios.put(`/api/users/`, checkInUser)
+    const resCourt = await axios.get(`/api/courts/${this.state.courtId}`)
+    this.setState({
+      players: resCourt.data.users
+    })
+    console.log(this.state)
   }
 
   async handleCheckOut (event) {
@@ -91,7 +97,7 @@ class CourtPage extends Component {
           <button type="submit">Submit</button>
         </form>
       <Games courtId={this.state.courtId}/>
-      {/* <Players /> */}
+      <Players players={this.state.players}/>
       </div>
     )
   }

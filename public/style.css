@@ -20,4 +20,8 @@ form div {
   display: inline-block;
 }
 
+#player-list {
+  margin: 0 0 3px 0;
+}
+
 
