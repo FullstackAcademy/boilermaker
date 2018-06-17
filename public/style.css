@@ -2,6 +2,30 @@ body {
   font-family: sans-serif;
 }
 
+#navbar {
+  overflow: hidden;
+  background-color: rgb(28, 143, 196);
+}
+
+#navbar a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+#navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#navbar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
 a {
   text-decoration: none;
 }
@@ -10,10 +34,10 @@ label {
   display: block;
 }
 
-nav a {
+/* nav a {
   display: inline-block;
   margin: 1em;
-}
+} */
 
 form div {
   margin: 1em;
