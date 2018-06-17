@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import './App.css';
 // import the Google Maps API Wrapper from google-maps-react
-import { Map, InfoWindow, GoogleApiWrapper, Marker, HeatMap} from 'google-maps-react'
+import { Map, InfoWindow, GoogleApiWrapper, Marker} from 'google-maps-react'
 import {Link} from "react-router-dom"
 // import child component
 import MapContainer from './mapcontainer'
@@ -11,61 +11,96 @@ import CourtPage from './courtPage'
 import { withRouter } from "react-router-dom";
 
 
-const WithHeatMap = props => {
-  console.log(props)
-  if (props) return <div>Loading...</div>;
+const style = {
+  width: '75%',
+  height: '75%',
+}
 
-  const gradient = [
-    'rgba(0, 255, 255, 0)',
-    'rgba(0, 255, 255, 1)',
-    'rgba(0, 191, 255, 1)',
-    'rgba(0, 127, 255, 1)',
-    'rgba(0, 63, 255, 1)',
-    'rgba(0, 0, 255, 1)',
-    'rgba(0, 0, 223, 1)',
-    'rgba(0, 0, 191, 1)',
-    'rgba(0, 0, 159, 1)',
-    'rgba(0, 0, 127, 1)',
-    'rgba(63, 0, 91, 1)',
-    'rgba(127, 0, 63, 1)',
-    'rgba(191, 0, 31, 1)',
-    'rgba(255, 0, 0, 1)'
-  ];
+class HeatMap extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showingInfoWindow: false,
+      showCourtInfo: false,
+      activeMarker: {},
+      courtInfo: {},
+      activePlayers: 0,
+      activeCourts: []
+    }
+    this.onMapClicked = this.onMapClicked.bind(this)
+    this.onInfoClick = this.onInfoClick.bind(this)
+  }
 
-  const positions = [
-    { lat: 37.782551, lng: -122.445368 },
-    { lat: 37.782745, lng: -122.444586 },
-    { lat: 37.782842, lng: -122.443688 },
-    { lat: 37.782919, lng: -122.442815 },
-    { lat: 37.782992, lng: -122.442112 },
-    { lat: 37.7831, lng: -122.441461 },
-    { lat: 37.783206, lng: -122.440829 },
-    { lat: 37.783273, lng: -122.440324 },
-    { lat: 37.783316, lng: -122.440023 },
-    { lat: 37.783357, lng: -122.439794 },
-    { lat: 37.783371, lng: -122.439687 },
-    { lat: 37.783368, lng: -122.439666 },
-    { lat: 37.783383, lng: -122.439594 },
-    { lat: 37.783508, lng: -122.439525 },
-    { lat: 37.783842, lng: -122.439591 },
-    { lat: 37.784147, lng: -122.439668 }
-  ];
 
-  return (
-    <Map
-      google={props.google}
-      className="map"
-      style={{ height: '100%', position: 'relative', width: '100%' }}
-      zoom={14}>
-      <HeatMap
-        gradient={gradient}
-        opacity={0.3}
-        positions={positions}
-        radius={20}
-      />
-    </Map>
-  );
-};
+  async componentDidMount() {
+    const res = await axios.get(`/api/courts/`)
+    console.log(res.data)
+  }
 
-export default WithHeatMap;
+
+  onMarkerClick = async (props, marker, event) => {
+    const res = await axios.get(`/api/courts/${props.courtId}`)
+    console.log(res.data)
+
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true,
+      showCourtInfo: true,
+      courtInfo: res.data,
+      activePlayers: res.data.users.length
+    });
+  }
+
+  onInfoClick = () => {
+    this.props.history.push(`/courts/${this.state.courtInfo.id}`);
+    console.log("Hello")
+  }
+
+  onMapClicked = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        showCourtInfo: false,
+        activeMarker: null
+      })
+    }
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>HEAT MAP</h1>
+        {this.state.showingInfoWindow&&this.state.showCourtInfo?<button onClick={this.onInfoClick}>Court Info</button>:null}
+        <Map google={this.props.google}
+        style={style}
+        onClick={this.onMapClicked}
+        initialCenter={{lat: 40.7485722, lng: -74.0068633}}
+        zoom={12}>
+        {
+        courts.map((court) => {
+          return <Marker position={{lat: court.geometry.coordinates[1], lng: court.geometry.coordinates[0]}} icon={{
+            url: "http://www.clker.com/cliparts/g/p/S/V/L/0/fire-ball-icon-hi.png",
+            anchor: new google.maps.Point(10,10),
+            scaledSize: new google.maps.Size(15,15)
+          }} onClick={this.onMarkerClick} courtId={court.courtId} />
+        })}
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            <div>
+              <h1>{this.state.courtInfo.name}</h1>
+              <h3>{this.state.courtInfo.location}</h3>
+              <h3>Current Players: {this.state.activePlayers}</h3>
+            </div>
+        </InfoWindow>
+        </Map>
+      </div>
+    );
+  }
+}
+// OTHER MOST IMPORTANT: Here we are exporting the App component WITH the GoogleApiWrapper. You pass it down with an object containing your API key
+export default withRouter(GoogleApiWrapper({
+  apiKey: 'AIzaSyBL6XBWAiP5STkl9nRcE8x3XTtywDqWDu4',
+})(HeatMap))
 
