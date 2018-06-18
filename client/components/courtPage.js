@@ -27,10 +27,12 @@ class CourtPage extends Component {
     const res = await axios.get(`/api/courts/${this.state.courtId}`)
     console.log(res.data)
     const resCourt = await axios.get(`/api/courts/${this.state.courtId}`)
+    const resGames = await axios.get(`/api/games/${this.state.courtId}`)
     this.setState({
       courtName: res.data.name,
       courtLocation: res.data.location,
-      players: resCourt.data.users
+      players: resCourt.data.users,
+      games: resGames.data
     })
   }
 
@@ -82,7 +84,6 @@ class CourtPage extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <h3>{this.state.courtName}</h3>
@@ -100,7 +101,7 @@ class CourtPage extends Component {
           </label>
           <button type="submit">Submit</button>
         </form>
-      <Games courtId={this.state.courtId}/>
+      <Games games={this.state.games} userId={this.props.user.id} courtId={this.state.courtId}/>
       <Players players={this.state.players}/>
       </div>
     )

@@ -38,5 +38,5 @@ User.hasMany(Transaction)
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
-  User, Game, Court
+  User, Game, Court, Transaction
 }

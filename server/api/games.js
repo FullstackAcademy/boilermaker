@@ -13,13 +13,24 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-        const game = await Game.findAll({where: {courtId: req.params.id}})
+        const game = await Game.findAll({where: {courtId: req.params.id}, include: [{all: true}]})
         console.log(game)
         res.json(game)
     } catch (error){
         next(error)
     }
 })
+
+router.get('/players/:id', async (req, res, next) => {
+  try {
+      const game = await Game.findAll({where: {id: req.params.id}, include: [{all: true}]})
+      console.log(game)
+      res.json(game)
+  } catch (error){
+      next(error)
+  }
+})
+
 
 router.post('/', async (req, res, next) => {
     try {
