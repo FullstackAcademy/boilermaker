@@ -71,7 +71,7 @@ class HoopMap extends Component {
     return (
       <div>
         <h1> FIND A PICKUP GAME </h1>
-        {this.state.showingInfoWindow&&this.state.showCourtInfo?<button onClick={this.onInfoClick}>Court Info</button>:null}
+        {this.state.showingInfoWindow&&this.state.showCourtInfo?<button className="w3-button w3-red" onClick={this.onInfoClick}>Court Info</button>:null}
         <Map google={this.props.google}
         style={style}
         onClick={this.onMapClicked}

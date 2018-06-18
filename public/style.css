@@ -49,10 +49,15 @@ form div {
 }
 
 body {
-  background-color: lightblue;
+  background-color: white;
 }
 
 #title {
   text-align: center;
+}
+
+.w3-card-4 {
+  width:35%;
+  background-color: white;
 }
 

@@ -88,7 +88,7 @@ class CourtPage extends Component {
       <div>
         <h3>{this.state.courtName}</h3>
         <h4>{this.state.courtLocation}</h4>
-        <button id="court-info" onClick={this.handleCheckIn}>Check In</button>
+        <button className="w3-button w3-green w3-round" id="court-info" onClick={this.handleCheckIn}>Check In</button>
         <form onSubmit={this.handleSubmit}>
           <h4>Schedule A Game</h4>
           <label>
@@ -99,7 +99,7 @@ class CourtPage extends Component {
             Date:
             <input type="text" value = {this.props.date} name="date" onChange={this.handleChange} />
           </label>
-          <button type="submit">Submit</button>
+          <button className="w3-button w3-indigo w3-round" type="submit">Submit</button>
         </form>
       <Games games={this.state.games} userId={this.props.user.id} courtId={this.state.courtId}/>
       <Players players={this.state.players}/>

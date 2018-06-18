@@ -8,9 +8,11 @@ const Players = (props) => {
     <h3>Current Players</h3>
     {players.map(player => {
       return (
-        <li id="player-list">
-         Player: {player.email.slice(0, player.email.indexOf('@'))} CheckIn: {new Date (player.updatedAt).toLocaleString()}
-        </li>
+        <ul className="w3-ul w3-card-4">
+          <li id="player-list">
+          Player: {player.email.slice(0, player.email.indexOf('@'))} CheckIn: {new Date (player.updatedAt).toLocaleString()}
+          </li>
+        </ul>
       )
     })}
     </div>

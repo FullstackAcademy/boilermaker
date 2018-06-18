@@ -44,8 +44,7 @@ class Games extends Component {
       {this.props.games.map(game => (
         <ul>
           <li key={game.id}>
-            Date: {game.date} Time: {game.time}
-            <button type="submit" onClick={this.handleJoinGame} value={game.id}>
+            Date: {game.date} Time: {game.time}   <button className="w3-button w3-indigo w3-round" type="submit" onClick={this.handleJoinGame} value={game.id}>
             Join Game
             </button>
           </li>
