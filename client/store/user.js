@@ -21,35 +21,40 @@ const removeUser = () => ({type: REMOVE_USER})
 /**
  * THUNK CREATORS
  */
-export const me = () => dispatch =>
-  axios
-    .get('/auth/me')
-    .then(res => dispatch(getUser(res.data || defaultUser)))
-    .catch(err => console.error(err))
+export const me = () => async dispatch => {
+  try {
+    const res = await axios.get('/auth/me')
+    dispatch(getUser(res.data || defaultUser))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
-export const auth = (email, password, method) => dispatch =>
-  axios
-    .post(`/auth/${method}`, {email, password})
-    .then(
-      res => {
-        dispatch(getUser(res.data))
-        history.push('/home')
-      },
-      authError => {
-        // rare example: a good use case for parallel (non-catch) error handler
-        dispatch(getUser({error: authError}))
-      }
-    )
-    .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
+export const auth = (email, password, method) => async dispatch => {
+  let res
+  try {
+    res = await axios.post(`/auth/${method}`, {email, password})
+  } catch (authError) {
+    return dispatch(getUser({error: authError}))
+  }
 
-export const logout = () => dispatch =>
-  axios
-    .post('/auth/logout')
-    .then(_ => {
-      dispatch(removeUser())
-      history.push('/login')
-    })
-    .catch(err => console.error(err))
+  try {
+    dispatch(getUser(res.data))
+    history.push('/home')
+  } catch (dispatchOrHistoryErr) {
+    console.error(dispatchOrHistoryErr)
+  }
+}
+
+export const logout = () => async dispatch => {
+  try {
+    await axios.post('/auth/logout')
+    dispatch(removeUser())
+    history.push('/login')
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 /**
  * REDUCER
