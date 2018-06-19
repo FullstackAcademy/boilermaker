@@ -31,16 +31,14 @@ async function seed() {
 }
 
 // We've separated the `seed` function from the `runSeed` function.
-// This way we can isolate the specific error handling and exit trapping
-// from the `seed` function that is more specifici to the task of seeding data
-// specific to our application domain.
+// This way we can isolate the error handling and exit trapping.
+// The `seed` function is concerned only with modifying the database.
 async function runSeed() {
   console.log('seeding...')
   try {
     await seed()
   } catch (err) {
-    console.error(err.message)
-    console.error(err.stack)
+    console.error(err)
     process.exitCode = 1
   } finally {
     console.log('closing db connection')
@@ -53,9 +51,8 @@ async function runSeed() {
 // `Async` functions always return a promise, so we can use `catch` to handle
 // any errors that might occur inside of `seed`.
 if (module === require.main) {
-  // We're execiting `runSeed` immediately after defining it
   runSeed()
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = runSeed
+module.exports = seed
