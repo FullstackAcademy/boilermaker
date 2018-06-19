@@ -13,6 +13,12 @@ const app = express()
 const socketio = require('socket.io')
 module.exports = app
 
+// This is a global Mocha hook, used for resource cleanup.
+// Otherwise, Mocha v4+ never quits after tests.
+if (process.env.NODE_ENV === 'test') {
+  after('close the session store', () => sessionStore.stopExpiringSessions())
+}
+
 /**
  * In your development environment, you can keep all of your
  * app's secret API keys in a file called `secrets.js`, in your project
@@ -25,6 +31,7 @@ if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
+
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await db.models.user.findById(id)
@@ -41,18 +48,20 @@ const createApp = () => {
 
   // body parsing middleware
   app.use(bodyParser.json())
-  app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(bodyParser.urlencoded({extended: true}))
 
   // compression middleware
   app.use(compression())
 
   // session middleware with passport
-  app.use(session({
-    secret: process.env.SESSION_SECRET || 'my best friend is Cody',
-    store: sessionStore,
-    resave: false,
-    saveUninitialized: false
-  }))
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+      store: sessionStore,
+      resave: false,
+      saveUninitialized: false
+    })
+  )
   app.use(passport.initialize())
   app.use(passport.session())
 
@@ -62,6 +71,17 @@ const createApp = () => {
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
+
+  // any remaining requests with an extension (.js, .css, etc.) send 404
+  app.use((req, res, next) => {
+    if (path.extname(req.path).length) {
+      const err = new Error('Not found')
+      err.status = 404
+      next(err)
+    } else {
+      next()
+    }
+  })
 
   // sends index.html
   app.use('*', (req, res) => {
@@ -78,7 +98,9 @@ const createApp = () => {
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
+  const server = app.listen(PORT, () =>
+    console.log(`Mixing it up on port ${PORT}`)
+  )
 
   // set up our socket control center
   const io = socketio(server)
@@ -98,7 +120,15 @@ async function bootApp () {
 // It will evaluate false when this module is required by another module - for example,
 // if we wanted to require our app in a test spec
 if (require.main === module) {
+<<<<<<< HEAD
   bootApp();
+=======
+  sessionStore
+    .sync()
+    .then(syncDb)
+    .then(createApp)
+    .then(startListening)
+>>>>>>> 58fe9c9b10b98b21769b41d6add8398b01e7e1ed
 } else {
   createApp()
 }

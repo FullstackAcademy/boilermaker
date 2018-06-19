@@ -1,3 +1,8 @@
+'use strict'
+
+const db = require('../server/db')
+const {User} = require('../server/db/models')
+
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
  *
@@ -9,15 +14,12 @@
  *
  * Now that you've got the main idea, check it out in practice below!
  */
-const db = require('../server/db')
-const {User} = require('../server/db/models')
 
-async function seed () {
+async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
-
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'})
@@ -28,27 +30,34 @@ async function seed () {
   console.log(`seeded successfully`)
 }
 
-// Execute the `seed` function
-// `Async` functions always return a promise, so we can use `catch` to handle any errors
-// that might occur inside of `seed`
+// We've separated the `seed` function from the `runSeed` function.
+// This way we can isolate the specific error handling and exit trapping
+// from the `seed` function that is more specifici to the task of seeding data
+// specific to our application domain.
 async function runSeed () {
+  console.log('seeding...')
   try {
     await seed()
-    console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
   }
   catch (err) {
     console.error(err.message)
     console.error(err.stack)
     process.exitCode = 1
   }
+  finally {
+    console.log('closing db connection')
+    await db.close()
+    console.log('db connection closed')
+  }
 }
 
+// Execute the `seed` function, IF we ran this module directly (`node seed`).
+// `Async` functions always return a promise, so we can use `catch` to handle
+// any errors that might occur inside of `seed`.
+if (module === require.main) {
+  // We're execiting `runSeed` immediately after defining it
+  runSeed()
+}
 
-/*
- * note: everything outside of the async function is totally synchronous
- * The console.log below will occur before any of the logs that occur inside
- * of the async function
- */
-console.log('seeding...')
+// we export the seed function for testing purposes (see `./seed.spec.js`)
+module.exports = runSeed
