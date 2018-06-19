@@ -36,8 +36,7 @@ passport.deserializeUser(async (id, done) => {
   try {
     const user = await db.models.user.findById(id)
     done(null, user)
-  }
-  catch (err) {
+  } catch (err) {
     done(err)
   }
 })
@@ -109,7 +108,7 @@ const startListening = () => {
 
 const syncDb = () => db.sync()
 
-async function bootApp () {
+async function bootApp() {
   await sessionStore.sync()
   await syncDb()
   await createApp()
@@ -120,7 +119,7 @@ async function bootApp () {
 // It will evaluate false when this module is required by another module - for example,
 // if we wanted to require our app in a test spec
 if (require.main === module) {
-  bootApp();
+  bootApp()
 } else {
   createApp()
 }

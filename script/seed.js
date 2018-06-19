@@ -34,17 +34,15 @@ async function seed() {
 // This way we can isolate the specific error handling and exit trapping
 // from the `seed` function that is more specifici to the task of seeding data
 // specific to our application domain.
-async function runSeed () {
+async function runSeed() {
   console.log('seeding...')
   try {
     await seed()
-  }
-  catch (err) {
+  } catch (err) {
     console.error(err.message)
     console.error(err.stack)
     process.exitCode = 1
-  }
-  finally {
+  } finally {
     console.log('closing db connection')
     await db.close()
     console.log('db connection closed')

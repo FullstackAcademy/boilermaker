@@ -21,41 +21,37 @@ const removeUser = () => ({type: REMOVE_USER})
 /**
  * THUNK CREATORS
  */
-export const me = () => async(dispatch) => {
+export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
-  }
-  catch (err) {
+  } catch (err) {
     console.error(err)
   }
 }
 
-export const auth = (email, password, method) => async (dispatch) => {
+export const auth = (email, password, method) => async dispatch => {
   let res
   try {
     res = await axios.post(`/auth/${method}`, {email, password})
-  }
-  catch (authError) {
+  } catch (authError) {
     dispatch(getUser({error: authError}))
   }
 
   try {
     dispatch(getUser(res.data))
     history.push('/home')
-  }
-  catch (dispatchOrHistoryErr) {
+  } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
 }
 
-export const logout = () => async (dispatch) => {
+export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
     dispatch(removeUser())
     history.push('/login')
-  }
-  catch (err) {
+  } catch (err) {
     console.error(err)
   }
 }
