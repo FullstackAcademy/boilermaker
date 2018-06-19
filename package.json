@@ -11,13 +11,26 @@
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
     "lint": "eslint ./ --ignore-path .gitignore",
-    "prepush": "npm run lint && npm test",
+    "lint-fix": "npm run lint -- --fix",
+    "precommit": "# lint-staged # un-comment to enable",
+    "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/**/*.spec.js --require @babel/polyfill --require @babel/register"
+    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "prettier --write",
+      "npm run lint-fix",
+      "git add"
+    ],
+    "*.{css,scss,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "author": "Fullstack Academy of Code",
   "license": "MIT",
@@ -35,7 +48,7 @@
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
     "prop-types": "^15.5.8",
-    "react": "^16.0.0",
+    "react": "^16.3.1",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.2",
     "react-router-dom": "^4.1.1",
@@ -53,22 +66,25 @@
     "@babel/preset-stage-2": "^7.0.0-beta.40",
     "@babel/register": "^7.0.0-beta.40",
     "axios-mock-adapter": "^1.9.0",
-    "babel-eslint": "^8.0.1",
+    "babel-eslint": "^8.2.2",
     "babel-loader": "^8.0.0-beta.2",
     "chai": "^3.5.0",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.0",
-    "eslint": "^4.10.0",
-    "eslint-config-fullstack": "^3.0.0",
-    "eslint-plugin-react": "^7.4.0",
+    "eslint": "^4.19.1",
+    "eslint-config-fullstack": "^5.0.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-react": "^7.7.0",
     "husky": "^0.14.3",
-    "mocha": "^3.3.0",
-    "nodemon": "^1.12.1",
+    "lint-staged": "^7.1.3",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.17.5",
+    "prettier": "1.11.1",
     "react-test-renderer": "^16.0.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-mock-store": "^1.2.3",
     "supertest": "^3.0.0",
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.9"
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.3"
   }
 }
