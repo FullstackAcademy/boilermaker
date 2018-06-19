@@ -120,15 +120,7 @@ async function bootApp () {
 // It will evaluate false when this module is required by another module - for example,
 // if we wanted to require our app in a test spec
 if (require.main === module) {
-<<<<<<< HEAD
   bootApp();
-=======
-  sessionStore
-    .sync()
-    .then(syncDb)
-    .then(createApp)
-    .then(startListening)
->>>>>>> 58fe9c9b10b98b21769b41d6add8398b01e7e1ed
 } else {
   createApp()
 }
