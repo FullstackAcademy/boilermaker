@@ -1,14 +1,10 @@
 
 import React, { Component } from 'react';
-// import './App.css';
 // import the Google Maps API Wrapper from google-maps-react
 import { Map, InfoWindow, GoogleApiWrapper, Marker} from 'google-maps-react'
-import {Link} from "react-router-dom"
 // import child component
-import MapContainer from './mapcontainer'
 import courts from '../courts'
 import axios from 'axios'
-import CourtPage from './courtPage'
 import { withRouter } from "react-router-dom";
 
 
@@ -101,5 +97,5 @@ class HoopMap extends Component {
 }
 // OTHER MOST IMPORTANT: Here we are exporting the App component WITH the GoogleApiWrapper. You pass it down with an object containing your API key
 export default withRouter(GoogleApiWrapper({
-  apiKey: 'AIzaSyBL6XBWAiP5STkl9nRcE8x3XTtywDqWDu4',
+  apiKey: 'yourAPiKey',
 })(HoopMap))

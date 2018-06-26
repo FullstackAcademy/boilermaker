@@ -7,9 +7,10 @@ import { HoopMap } from './'
  * COMPONENT
  */
 export const UserHome = props => {
-
+  const {email} = props
   return (
     <div>
+      <h3>Welcome, {email.slice(0, email.indexOf('@'))}</h3>
       <HoopMap />
     </div>
   )
