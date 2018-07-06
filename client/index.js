@@ -17,3 +17,6 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app')
 )
+
+
+//Added for testing
