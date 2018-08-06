@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "chatterbox",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Peer-to-Peer web chat application",
   "engines": {
     "node": ">= 7.0.0"
   },
@@ -18,7 +18,7 @@
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
   },
-  "author": "Fullstack Academy of Code",
+  "author": "github.com/chansiky",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
@@ -42,7 +42,8 @@
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
     "sequelize": "^4.3.1",
-    "socket.io": "^2.0.3"
+    "socket.io": "^2.0.3",
+    "websocket": "^1.0.26"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",

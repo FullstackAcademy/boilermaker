@@ -10,7 +10,18 @@ const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
-const socketio = require('socket.io')
+const websocket = require('websocket')
+const WebSocketServer = websocket.server;
+const websocketSetup = require('./socket')
+//websocketSetup
+//const socketio = require('socket.io')
+//const socketShort = require('./socket')
+//const ws = require('express-ws')
+//const expressWs = require('express-ws')(app)
+//const WebSocket = require('ws')
+//const ws = require('ws')
+//const WebSocketServer = ws.Server
+
 module.exports = app
 
 /**
@@ -22,6 +33,7 @@ module.exports = app
  * Node process on process.env
  */
 if (process.env.NODE_ENV !== 'production') require('../secrets')
+
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
@@ -69,6 +81,7 @@ const createApp = () => {
     }
   })
 
+
   // sends index.html
   app.use('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public/index.html'))
@@ -80,15 +93,38 @@ const createApp = () => {
     console.error(err.stack)
     res.status(err.status || 500).send(err.message || 'Internal server error.')
   })
+
+
 }
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
   const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
+  console.log('server is', server)
+  /*
+  //The app.listen() method returns an http.Server object and (for HTTP)
+  ////is a convenience method for the following:
+  app.listen = function() {
+  var server = http.createServer(this)
+  return server.listen.apply(server, arguments)
+  }
+  */
 
-  // set up our socket control center
+  const wsServer = new WebSocketServer({
+      httpServer: server,
+      autoAcceptConnections: true // You should use false here!
+  });
+
+
+  const connectionArray = []
+  let nextID = Date.now()
+  let appendToMakeUnique = 1
+
+  websocketSetup(wsServer, connectionArray, nextID, appendToMakeUnique)
+  /*from original code
+  //set up our socket control center
   const io = socketio(server)
-  require('./socket')(io)
+  */
 }
 
 const syncDb = () => db.sync()
@@ -105,3 +141,19 @@ if (require.main === module) {
 } else {
   createApp()
 }
+
+
+/*
+  app.ws('/', (s, req) => {
+    console.error('websocket connection')
+    for (var t = 0; t < 3; t++)
+      setTimeout(() => s.send('message from server', ()=>{}), 1000*t)
+  })
+
+  app.ws('/echo', function(ws, req) {
+    ws.on('message', function(msg) {
+      console.log(msg)
+      ws.send(msg)
+    })
+    console.log('socket', req.testing)
+*/

@@ -1,16 +1,21 @@
 import React from 'react'
 
-import {Navbar} from './components'
+import {Navbar, VideoTestComponent, DataChat} from './components'
 import Routes from './routes'
 
 
 const App = () => {
   return (
     <div>
-      <Navbar />
-      <Routes />
+      <DataChat />
     </div>
   )
 }
 
 export default App
+
+/*
+      <Navbar />
+      <Routes />
+      <VideoTestComponent />
+*/

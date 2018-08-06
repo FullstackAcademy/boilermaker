@@ -5,9 +5,10 @@ import {Router} from 'react-router-dom'
 import history from './history'
 import store from './store'
 import App from './app'
+import './ws-client'
 
 // establishes socket connection
-import './socket'
+// import './socket'
 
 ReactDOM.render(
   <Provider store={store}>
