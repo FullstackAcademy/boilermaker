@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./client/components/componentStyles/navbar.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA,C","file":"./public/main.css","sourcesContent":[".navbar__example___2g8oC{\n    border: 4px solid red;\n    background-color: pink;\n    color: red;\n    width: 100px;\n}"],"sourceRoot":""}

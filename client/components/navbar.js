@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import styles from './componentStyles/navbar.css'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <h1>BOILERMAKER</h1>
+    <div class={styles.example}>This is an example of a component styled by a CSS module!</div>
     <nav>
       {isLoggedIn ? (
         <div>
