@@ -47,6 +47,12 @@ router.get('/:userId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try{
+    if(req.user && !req.user.admin){
+      // only logged-out user or admin can create a new user
+      res.status(403).send('Forbidden')
+      return
+    }
+
     // Note that in the User db definition, duplicate email is not allowed.
     const {email, password, googleId} = req.body;
 
