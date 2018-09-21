@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {Class, Lecture} = require('../db/models');
+const {Course, Lecture} = require('../db/models');
 module.exports = router;
 
 router.get('/:classId', async(req, res, next) => {
@@ -7,8 +7,8 @@ router.get('/:classId', async(req, res, next) => {
   try{
     // TODO: user privilege check
 
-    const classFound = await Class.findById(classId);
-    if(!classFound){
+    const course = await Course.findById(classId);
+    if(!course){
       res.status(404).send("Not Found");
       return;
     }
@@ -27,14 +27,14 @@ router.get('/:classId/lectures/:lectureId', async(req, res, next) => {
   try{
     // TODO: user privilege check
 
-    const classFound = await Class.findById(classId, {include: Lecture});
-    if(!classFound){
+    const course = await Course.findById(classId, {include: Lecture});
+    if(!course){
       res.status(404).send('Not Found');
       return;
     }
 
     let lectureFound;
-    for(let lecture of classFound.lectures){
+    for(let lecture of course.lectures){
       if(lecture.id === lectureId){
         lectureFound = lecture;
       }
