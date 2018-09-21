@@ -7,7 +7,7 @@ import UserHome from './user-home'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>BOILERMAKER</h1>
+    <h1>YouNote</h1>
     <nav>
       {isLoggedIn ? ( <UserHome />
         // <div>
