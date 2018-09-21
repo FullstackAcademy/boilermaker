@@ -11,6 +11,10 @@ const Lecture = db.define('lecture', {
   note:{
     type: Sequelize.TEXT,
   },
+  player_head_pos:{
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  }
 });
 
 module.exports = Lecture;
