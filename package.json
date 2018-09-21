@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "younote",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Enhancing learning experience with Youtube videos!",
   "engines": {
     "node": ">= 7.0.0"
   },
@@ -19,8 +19,7 @@
     "seed": "node script/seed.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
-    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
+    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -36,6 +35,7 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^3.0.3",
     "axios": "^0.15.3",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^4.1.0",
