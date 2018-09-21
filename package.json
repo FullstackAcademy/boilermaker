@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "younote",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Enhancing learning experience with Youtube videos!",
   "engines": {
     "node": ">= 7.0.0"
   },
@@ -36,6 +36,7 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^3.0.3",
     "axios": "^0.15.3",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^4.1.0",
