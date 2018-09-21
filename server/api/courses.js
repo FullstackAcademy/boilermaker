@@ -39,7 +39,7 @@ router.put('/:courseId', async (req, res, next) => {
       return;
     }
 
-    if(req.user.admin || Number(req.user.id) === req.tempCourse.userId){
+    if(req.user.admin || req.user.id === req.tempCourse.userId){
       const courseBody = {
         name: req.body.name,
         userId: req.body.userId,

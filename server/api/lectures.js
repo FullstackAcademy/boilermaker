@@ -13,6 +13,13 @@ router.post('/', async(req, res, next) => {
       }
     });
 
+    if(lecture){
+      console.log(`There is already a lecture with the same youtube_url created by the current user`);
+    }else{
+      lecture = await Lecture.create({title, note, userId, courseId, youtube_url});
+    }
+
+    res.json(lecture);
   }catch(err){
     next(err);
   }
