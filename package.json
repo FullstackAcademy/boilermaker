@@ -1,7 +1,7 @@
 {
   "name": "younote",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "Enhancing learning experience with Youtube videos!",
   "engines": {
     "node": ">= 7.0.0"
   },
