@@ -1,51 +1,59 @@
 const router = require('express').Router();
-const {Course, Lecture} = require('../db/models');
+const {Course} = require('../db/models');
 module.exports = router;
 
-router.get('/:classId', async(req, res, next) => {
-  const classId = req.params.classId;
+// POST /api/courses/
+router.post('/', async(req, res, next) => {
   try{
-    // TODO: user privilege check
+    const {name, userId} = req.body;
 
-    const course = await Course.findById(classId);
-    if(!course){
-      res.status(404).send("Not Found");
-      return;
+    // check if user has been created a course with the same name
+    let course = await Course.findOne({
+      where: {
+        name, userId
+      }
+    });
+
+    if(course){
+      console.log(`There is already a course with the same course created by given user - ${userId}, ${name}`);
+    }else{
+      course = await Course.create( {name, userId});
     }
 
-    return res.status(200).json(course);
+    res.json(course);
   }catch(err){
     next(err);
   }
 });
 
-
-router.get('/:classId/lectures/:lectureId', async(req, res, next) => {
-  const classId = req.params.classId;
-  const lectureId = req.params.lectureId;
-
+// PUT /api/courses/:courseId
+router.put('/:courseId', async (req, res, next) => {
   try{
-    // TODO: user privilege check
-
-    const course = await Course.findById(classId, {include: [Lecture]});
-    if(!course){
-      res.status(404).send('Not Found');
-      return;
+    if(!req.user || !req.user.admin){
+      res.status(403).send('Forbidden');
     }
 
-    let lectureFound;
-    for(let lecture of course.lectures){
-      if(lecture.id === lectureId){
-        lectureFound = lecture;
+    const courseBody = {
+      name: req.body.name,
+      userId: req.body.userId,
+    }
+
+    if(req.user.admin || req.user.id === Number(req.params.userId)){
+      const course = await Course.update(courseBody, {
+        where: {
+          id: req.params.courseId,
+        },
+        returning: true,
+      });
+
+      if(!course){
+        res.status(404).send('Course Not Found');
+        return;
+      }else{
+        res.json(course);
       }
     }
-
-    if(!lectureFound){
-      res.status(404).send('Lecture Found');
-    }
-
-    return res.status(200).json(lectureFound);
   }catch(err){
     next(err);
-  };
-});
+  }
+})
