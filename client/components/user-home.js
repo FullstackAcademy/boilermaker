@@ -1,18 +1,22 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {logout} from '../store/user'
+import {Button} from '@material-ui/core'
+
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {email} = props
-
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-  )
+class UserHome extends Component {
+  render(){
+    return (
+      <div>
+        <h3>Welcome, {this.props.email}</h3>
+        <Button onClick={this.props.handleClick}>Logout</Button>
+      </div>
+    )
+  }
 }
 
 /**
@@ -20,11 +24,17 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    email: state.user.user.email
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatch = dispatch => {
+  return {
+    handleClick: () => dispatch(logout())
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)
 
 /**
  * PROP TYPES
