@@ -27,7 +27,7 @@ router.get('/:classId/lectures/:lectureId', async(req, res, next) => {
   try{
     // TODO: user privilege check
 
-    const course = await Course.findById(classId, {include: Lecture});
+    const course = await Course.findById(classId, {include: [Lecture]});
     if(!course){
       res.status(404).send('Not Found');
       return;

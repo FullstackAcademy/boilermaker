@@ -75,7 +75,7 @@ router.put('/:userId', async (req, res, next) => {
 
     // Note that only either admin or the account holder is allowed to update the user account.
     if (!req.user || !req.user.admin || req.user.id !== Number(userId)) {
-      res.status(403).send('Forbidden to update a user info')
+      res.status(403).send('Forbidden')
       return
     }
 
@@ -124,9 +124,7 @@ router.get('/:userId/courses', async (req, res, next) => {
       return
     }
 
-    const user = await User.findById(userId, {
-      include: Course
-    });
+    const user = await User.findById(userId, {include: [Course]});
     // in case user is not, found send back 404 with a message.
     if(!user){
       res.status(404).send("User Not Found");
@@ -156,8 +154,9 @@ router.get('/:userId/courses/:courseId', async (req, res, next) => {
         id: courseId,
         userId: userId,
       },
-      include: Lecture
-    })
+      include: [Lecture]
+    });
+
     if(!course){
       res.status(404).send('Course Not Found');
       return;
