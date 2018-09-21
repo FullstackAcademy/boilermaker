@@ -10,7 +10,6 @@ import {Button} from '@material-ui/core'
  */
 class UserHome extends Component {
   render(){
-    console.log("EMAIL", this.props.email)
     return (
       <div>
         <h3>Welcome, {this.props.email}</h3>

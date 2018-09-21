@@ -24,29 +24,33 @@ const getSingleCourse = course => ({
 // THUNKS: All thunks named with 'fetch'
 export const fetchAllCoursesThunk = () => async dispatch => {
   try {
-    const {data: courses} = await axios.get(`/api/courses`)
-    dispatch(getAllCourses(courses))
+    const {data: user} = await axios.get('/auth/me')
+    if (user) {
+      const res = await axios.get(`/api/users/${user.id}/courses`)
+      const {courses} = res.data;
+      dispatch(getAllCourses(courses))
+    }
   } catch (error) {
     console.log(error)
   }
 }
 
-export const fetchSingleCourseThunk = id => async dispatch => {
-  try {
-    const {data: course} = await axios.get(`/api/courses/${id}`)
-    dispatch(getSingleCourse(course))
-  } catch (error) {
-    console.log(error)
-  }
-}
+// export const fetchSingleCourseThunk = (userId, courseId) => async dispatch => {
+//   try {
+//     const {data: course} = await axios.get(`/api/users/${userId}/courses/${courseId}`)
+//     dispatch(getSingleCourse(course))
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
 
 // REDUCER
 const courses = (state = initialCourseState, action) => {
   switch (action.type) {
     case GET_ALL_COURSES:
       return {...state, allCourses: action.courses}
-    case GET_SINGLE_COURSE:
-      return {...state, selected: action.course}
+    // case GET_SINGLE_COURSE:
+    //   return {...state, selected: action.course}
     default:
       return state
   }

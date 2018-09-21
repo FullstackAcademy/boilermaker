@@ -1,19 +1,26 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import { fetchAllCoursesThunk } from '../store/courses';
+import { Link } from 'react-router-dom'
+import CourseCard from './CourseCard'
 
-// AllCourse Component: ONLY APPLIES TO USERS WHO ARE LOGGED IN
+// AllCourses Component: ONLY APPLIES TO USERS WHO ARE LOGGED IN
+
 class AllCourses extends Component {
   componentDidMount(){
+    console.log("params checking", this.props.match.params)
     this.props.getAllCourses()
   }
   render(){
-    const courses = this.props.courses
+    const {allCourses} =  this.props.courses
     return (
       <div>
-        {courses.map(course => {
-          return <h3 key={course.id}>{course.name}</h3>
-        })}
+        {allCourses.map(course => (
+          <CourseCard
+            key={course.id}
+            course={course}
+          />
+        ))}
       </div>
     )
   }
@@ -21,7 +28,7 @@ class AllCourses extends Component {
 
 const mapState = state => {
   return {
-    courses: state.courses.allCourses
+    courses: state.courses
   }
 }
 
