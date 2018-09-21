@@ -122,9 +122,7 @@ router.get('/:userId/courses', async (req, res, next) => {
   try{
     // only logged-in admin or its own user can get the result of this api route.
     if (
-      !req.user ||
-      !req.user.admin ||
-      req.user.id !== Number(userId)
+      !req.user || (!req.user.admin && req.user.id !== Number(userId))
     ) {
       res.status(403).send('Forbidden')
       return
