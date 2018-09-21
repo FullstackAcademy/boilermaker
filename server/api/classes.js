@@ -13,7 +13,7 @@ router.get('/:classId', async(req, res, next) => {
       return;
     }
 
-    return res.status(200).json(classFound);
+    return res.status(200).json(course);
   }catch(err){
     next(err);
   }
