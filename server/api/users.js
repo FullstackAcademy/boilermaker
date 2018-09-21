@@ -110,8 +110,8 @@ router.delete('/:userId', async (req, res, next) => {
   }
 });
 
-// GET /api/users/:userId/classes - getting all the list of classes of this user(userId)
-router.get('/:userId/classes', async (req, res, next) => {
+// GET /api/users/:userId/courses - getting all the list of courses of this user(userId)
+router.get('/:userId/courses', async (req, res, next) => {
   const userId = req.params.userId;
   try{
     // only logged-in admin or its own user can get the result of this api route.
@@ -124,7 +124,9 @@ router.get('/:userId/classes', async (req, res, next) => {
       return
     }
 
-    const user = await User.findById(userId);
+    const user = await User.findById(userId, {
+      include: Course
+    });
     // in case user is not, found send back 404 with a message.
     if(!user){
       res.status(404).send("User Not Found");
@@ -137,10 +139,31 @@ router.get('/:userId/classes', async (req, res, next) => {
   }
 });
 
-// GET /api/users/:userId/classes/:classId - getting a class of this user(userId) including all the lectures associated with the class
-router.get('/:userId/classes/:classId', async (req, res, next) => {
+// GET /api/users/:userId/courses/:courseId - getting a class of this user(userId) including all the lectures associated with the courses
+router.get('/:userId/courses/:courseId', async (req, res, next) => {
   try{
+    const userId = req.params.userId;
+    const courseId = req.params.courseId;
 
+    const user = await User.findById(userId);
+    if(!user){
+      res.status(404).send('User Not Found');
+      return;
+    }
+
+    const course = await Course.findOne({
+      where: {
+        id: courseId,
+        userId: userId,
+      },
+      include: Lecture
+    })
+    if(!course){
+      res.status(404).send('Course Not Found');
+      return;
+    }
+
+    res.json(course);
   }catch(err){
     next(err);
   }

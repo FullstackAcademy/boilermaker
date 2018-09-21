@@ -8,6 +8,7 @@ const Lecture = require('./Lecture');
 Course.belongsTo(User);
 User.hasMany(Course);
 Lecture.belongsTo(User, {through: Course});
+Course.hasMany(Lecture);
 
 module.exports = {
   User,
