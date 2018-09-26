@@ -1,30 +1,6 @@
-# Boilermaker
+# Wirehead
 
-_Good things come in pairs_
-
-Looking to mix up a backend with express/sequelize and a frontend with react/redux? That's `boilermaker`!
-
-Follow along with the workshop to make your own! This canonical version can serve as a reference, or a starting point all on its own.
-
-## Setup
-
-To use this boilerplate, you'll need to take the following steps:
-
-* Don't fork or clone this repo! Instead, create a new, empty directory on your machine and `git init` (or create an empty repo on Github and clone it to your local machine)
-* Run the following commands:
-
-```
-git remote add boilermaker https://github.com/FullstackAcademy/boilermaker.git
-git fetch boilermaker
-git merge boilermaker/master
-```
-
-Why did we do that? Because every once in a while, `boilermaker` may be updated with additional features or bug fixes, and you can easily get those changes from now on by entering:
-
-```
-git fetch boilermaker
-git merge boilermaker/master
-```
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/wirehead-extension/wirehead.svg?columns=all)](https://waffle.io/wirehead-extension/wirehead)
 
 ## Customize
 
