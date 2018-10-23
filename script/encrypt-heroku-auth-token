@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -e
+
+function cleanup_at_exit {
+  # remove temporary key file
+  rm tmp.pem
+}
+
+trap cleanup_at_exit EXIT
+
+# Get the repo name from the `origin` git remote.
+export REPO=$(git remote get-url origin | \
+    sed 's/^.*[\/:]\([^\/:]*\)\/\([^\/]*\)$/\1\/\2/' | \
+    sed 's/^\(.*\)\.git$/\1/'
+)
+
+# Get the Travis public key for this repo.
+export TRAVIS_KEY=$(curl --silent https://api.travis-ci.org/repos/$REPO/key)
+
+# Save the key to a file.
+node -e "console.log($TRAVIS_KEY['key'])" > tmp.pem
+
+# Generate a Heroku token, encrypt and encode it and print it in YAML.
+echo -n $(heroku auth:token) | \
+    openssl rsautl -encrypt -pubin -inkey tmp.pem | \
+    base64 | awk '{print "    secure: "$1}'
