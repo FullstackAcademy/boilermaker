@@ -1,8 +1,8 @@
-# Boilermaker
+# Grace Shopper
 
 _Good things come in pairs_
 
-Looking to mix up a backend with express/sequelize and a frontend with react/redux? That's `boilermaker`!
+Looking to mix up a backend with express/sequelize and a frontend with react/redux? That's `Grace Shopper`!
 
 Follow along with the workshop to make your own! This canonical version can serve as a reference, or a starting point all on its own.
 
@@ -14,16 +14,16 @@ To use this boilerplate, you'll need to take the following steps:
 * Run the following commands:
 
 ```
-git remote add boilermaker https://github.com/FullstackAcademy/boilermaker.git
-git fetch boilermaker
-git merge boilermaker/master
+git remote add Grace Shopper https://github.com/FullstackAcademy/Grace Shopper.git
+git fetch Grace Shopper
+git merge Grace Shopper/master
 ```
 
-Why did we do that? Because every once in a while, `boilermaker` may be updated with additional features or bug fixes, and you can easily get those changes from now on by entering:
+Why did we do that? Because every once in a while, `Grace Shopper` may be updated with additional features or bug fixes, and you can easily get those changes from now on by entering:
 
 ```
-git fetch boilermaker
-git merge boilermaker/master
+git fetch Grace Shopper
+git merge Grace Shopper/master
 ```
 
 ## Customize
@@ -32,8 +32,8 @@ Now that you've got the code, follow these steps to get acclimated:
 
 * Update project name and description in `package.json` and `.travis.yml` files
 * `npm install`, or `yarn install` - whatever you're into
-* Create two postgres databases: `boilermaker` and `boilermaker-test` (you can substitute these with the name of your own application - just be sure to go through and change the `package.json` and `.travis.yml` to refer to the new name)
-  * By default, running `npm test` will use `boilermaker-test`, while regular development uses `boilermaker`
+* Create two postgres databases: `Grace Shopper` and `Grace Shopper-test` (you can substitute these with the name of your own application - just be sure to go through and change the `package.json` and `.travis.yml` to refer to the new name)
+  * By default, running `npm test` will use `Grace Shopper-test`, while regular development uses `Grace Shopper`
 * Create a file called `secrets.js` in the project root
 
   * This file is `.gitignore`'d, and will _only_ be required in your _development_ environment
@@ -55,7 +55,7 @@ Now that you've got the code, follow these steps to get acclimated:
 
 Linters are fundamental to any project - they ensure that your code has a consistent style, which is critical to writing readable code.
 
-Boilermaker comes with a working linter (ESLint, with `eslint-config-fullstack`) "out of the box." However, everyone has their own style, so we recommend that you and your team work out yours and stick to it. Any linter rule that you object to can be "turned off" in `.eslintrc.json`. You may also choose an entirely different config if you don't like ours:
+Grace Shopper comes with a working linter (ESLint, with `eslint-config-fullstack`) "out of the box." However, everyone has their own style, so we recommend that you and your team work out yours and stick to it. Any linter rule that you object to can be "turned off" in `.eslintrc.json`. You may also choose an entirely different config if you don't like ours:
 
 * [Standard style guide](https://standardjs.com/)
 * [Airbnb style guide](https://github.com/airbnb/javascript)
@@ -99,7 +99,7 @@ Either way, you'll need to set up your deployment server to start:
 
 (_**NOTE**: This step assumes that you already have Travis-CI testing your code._)
 
-CI is not about testing per se – it's about _continuously integrating_ your changes into the live application, instead of periodically _releasing_ new versions. CI tools can not only test your code, but then automatically deploy your app. Boilermaker comes with a `.travis.yml` configuration almost ready for deployment; follow these steps to complete the job.
+CI is not about testing per se – it's about _continuously integrating_ your changes into the live application, instead of periodically _releasing_ new versions. CI tools can not only test your code, but then automatically deploy your app. Grace Shopper comes with a `.travis.yml` configuration almost ready for deployment; follow these steps to complete the job.
 
 1.  Run `git checkout master && git pull && git checkout -b f/travis-deploy` (or use some other new branch name).
 2.  Un-comment the bottom part of `.travis.yml` (the `before_deploy` and `deploy` sections)
@@ -114,7 +114,7 @@ That's it! From now on, whenever `master` is updated on GitHub, Travis will auto
 
 #### Option B: Manual Deployment from your Local Machine
 
-Some developers may prefer to control deployment rather than rely on automation. Your local copy of the application can be pushed up to Heroku at will, using Boilermaker's handy deployment script:
+Some developers may prefer to control deployment rather than rely on automation. Your local copy of the application can be pushed up to Heroku at will, using Grace Shopper's handy deployment script:
 
 1.  Make sure that all your work is fully committed and pushed to your master branch on Github.
 2.  If you currently have an existing branch called "deploy", delete it now (`git branch -d deploy`). We're going to use a dummy branch with the name "deploy" (see below), so if you have one lying around, the script below will error
