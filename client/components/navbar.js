@@ -11,7 +11,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <div className="header-nav">
     <h1>Iron Flown Grocery</h1>
     <AppBar position="static">
-      <ToolBar>
+      <ToolBar className="navbar">
         <nav>
           {isLoggedIn ? (
             <div>
@@ -30,6 +30,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               <Button component={Link} to="/signup">
                 Signup
               </Button>
+              <Button>Cart</Button>
             </div>
           )}
         </nav>
