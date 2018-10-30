@@ -7,8 +7,12 @@ const CartProduct = require('./cartProducts')
  * associations
  */
 
-Cart.belongsToMany(Product, {through: CartProduct})
-Product.belongsToMany(Cart, {through: CartProduct})
+Cart.belongsToMany(Product, {
+  through: CartProduct
+})
+Product.belongsToMany(Cart, {
+  through: CartProduct
+})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

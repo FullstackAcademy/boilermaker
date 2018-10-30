@@ -1,6 +1,12 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {getProductsThunk} from '../store/products'
+import React, {
+  Component
+} from 'react'
+import {
+  connect
+} from 'react-redux'
+import {
+  getProductsThunk
+} from '../store/products'
 
 class ProductList extends Component {
   constructor(props) {
@@ -11,27 +17,33 @@ class ProductList extends Component {
     this.props.getProducts()
   }
   render() {
-    return (
-      <div>
-        {this.props.products.map(product => {
-          return (
-            <div>
-              {product.name} -- {product.price}
-            </div>
+    return ( <
+      div > {
+        this.props.products.map(product => {
+          return ( <
+            div > {
+              product.name
+            }--{
+              product.price
+            } <
+            /div>
           )
-        })}
-      </div>
+        })
+      } <
+      /div>
     )
   }
 }
 
-const mapStateToProps = state => {
-  return {products: state.products.products}
-}
+const mapStateToProps = state => ({
 
-const mapDispatchToProps = dispatch => {
-  return {getProducts: () => dispatch(getProductsThunk())}
-}
+  products: state.products.products
+
+})
+
+const mapDispatchToProps = dispatch => ({
+  getProducts: () => dispatch(getProductsThunk())
+})
 
 const ConnectedProductList = connect(
   mapStateToProps,
