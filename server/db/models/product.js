@@ -10,6 +10,11 @@ const Product = db.define('product', {
   price: {
     type: Sequelize.INTEGER, //Sequelize.FLOAT
     allowNull: false
+  },
+  imageUrl: {
+    type: Sequelize.STRING,
+    defaultValue:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCeE-XUkjXgBWaqNaMprbN58CCXIOo8UxSQickhEYJw2b3Bae2dA'
   }
 })
 
