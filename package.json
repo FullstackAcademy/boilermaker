@@ -17,7 +17,7 @@
     "prepare": "if [ -d .git ]; then npm-merge-driver install; fi",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
-    "seed": "node script/seed.js",
+    "seed": "node seed.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
@@ -38,6 +38,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
+    "chalk": "^2.4.1",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^4.1.0",
     "express": "^4.16.3",
