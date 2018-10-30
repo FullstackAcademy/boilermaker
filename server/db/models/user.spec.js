@@ -2,7 +2,7 @@
 
 const {expect} = require('chai')
 const db = require('../index')
-const User = db.model('user')
+const {User, Cart, CartProduct} = db.model('./index')
 
 describe('User model', () => {
   beforeEach(() => {
@@ -30,3 +30,18 @@ describe('User model', () => {
     }) // end describe('correctPassword')
   }) // end describe('instanceMethods')
 }) // end describe('User model')
+
+// describe("cartProduct association table", () => {
+//   beforeEach(( => {
+//     return db.sync({force: true})
+//   }))
+//
+//   let product;
+//   beforeEach(() => {
+//     product = Product.create({
+//       name: 'soap',
+//       price: 12
+//     })
+//   })
+//   describe()
+// })
