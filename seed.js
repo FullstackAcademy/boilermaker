@@ -14,24 +14,24 @@ const users = [{
     firstName: "Bob",
     lastName: "Builder",
     email: "bob.builder@fullstack.com",
-
+    password: "AlwaysBeCoding"
   },
   {
     firstName: "Bill",
     lastName: "Nye",
     email: "Bill.Nye@fullstack.com",
-
+    password: "BILLBILLBILL"
   },
   {
     firstName: "Arthur",
     lastName: "Read",
     email: "arthur.read@fullstack.com",
-
+    password: "AndISayHey"
   }, {
     firstName: "Curios",
     lastName: "George",
     email: "curios.george@fullstack.com",
-
+    password: "GetDownFromThatTree"
   }
 ]
 
