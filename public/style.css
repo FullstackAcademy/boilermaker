@@ -27,13 +27,20 @@ form div {
 
 .product-block {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   height: 500px;
   width: 600px;
 }
 
 .product-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.header-nav {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

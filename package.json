@@ -37,6 +37,7 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^3.3.2",
     "axios": "^0.15.3",
     "chalk": "^2.4.1",
     "compression": "^1.7.3",

@@ -16,11 +16,15 @@ class ProductList extends Component {
         {this.props.products.map(product => {
           return (
             <div className="product-block">
-              <h2>{product.name}</h2>
+              <div>
+                <h2>{product.name}</h2>
+              </div>
               <div>
                 <h3> Price: ${product.price} </h3>
               </div>
-              <img className="product-img" src={product.imageUrl} />
+              <div>
+                <img className="product-img" src={product.imageUrl} />
+              </div>
             </div>
           )
         })}
