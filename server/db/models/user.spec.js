@@ -15,6 +15,8 @@ describe('User model', () => {
 
       beforeEach(async () => {
         cody = await User.create({
+          firstName: 'Cody',
+          lastName: 'puppy',
           email: 'cody@puppybook.com',
           password: 'bones'
         })
@@ -31,6 +33,7 @@ describe('User model', () => {
   }) // end describe('instanceMethods')
 }) // end describe('User model')
 
+//
 describe('cartProduct association table attributes should autofill when a product/cart instance is created', () => {
   beforeEach(() => {
     return db.sync({force: true})
@@ -55,10 +58,10 @@ describe('cartProduct association table attributes should autofill when a produc
       productId: oneProduct.id,
       quantity: 2
     })
-    console.log('oneAssociation', oneAssociation)
+    // console.log('oneAssociation', oneAssociation)
 
     const sampleTable = await CartProduct.findAll()
-    console.log('sampletable123', sampleTable)
+    // console.log('sampletable123', sampleTable)
     // expect(sampleTable.id).to.equal(1)
     expect(sampleTable[0].cartId).to.exist
     expect(sampleTable[0].productId).to.exist
