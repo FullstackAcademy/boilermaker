@@ -5,8 +5,8 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>BOILERMAKER</h1>
+  <div className="header-nav">
+    <h1>Iron Flown Grocery please work ASDGFASDF</h1>
     <nav>
       {isLoggedIn ? (
         <div>
@@ -20,7 +20,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <div>
           {/* The navbar will show these links before you log in */}
           <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/signup">Signup</Link>
+          <Link to="/addproduct">Add Product</Link>
         </div>
       )}
     </nav>
@@ -45,7 +46,10 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default connect(
+  mapState,
+  mapDispatch
+)(Navbar)
 
 /**
  * PROP TYPES

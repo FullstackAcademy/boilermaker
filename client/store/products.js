@@ -10,13 +10,20 @@ const GET_PRODUCTS = 'GET_PRODUCTS'
 /**
  * INITIAL STATE
  */
-const initialState = {products: [], product: {}}
+const initialState = {all: [], single: {}}
+const ADD_PRODUCT = 'ADD_PRODUCT'
+const ADD_TO_CART = 'ADD_TO_CART'
+
 
 /**
  * ACTION CREATORS
  */
+
 const getProduct = product => ({type: GET_PRODUCT, product})
-const getProducts = products => ({type: GET_PRODUCTS, products})
+const getProducts = products => ({type: GET_PRODUCT, products})
+const addProduct = product => ({type: ADD_PRODUCT, product})
+const addToCart = product => ({type: ADD_TO_CART, product})
+
 
 /**
  * THUNK CREATORS
@@ -39,15 +46,25 @@ export const getProductsThunk = () => {
   }
 }
 
+export const addProductThunk = info => {
+  return async dispatch => {
+    const {data} = await axios.post('/api/products', info)
+    const action = addProduct(data)
+    dispatch(action)
+  }
+}
+
 /**
  * REDUCER
  */
 const ProductReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
-      return {...state, products: action.products}
+      return {...state, all: action.products}
     case GET_PRODUCT:
-      return {...state, product: action.product}
+      return {...state, single: action.product}
+    case ADD_PRODUCT:
+      return {...state, all: [...state.all, action.product]
     default:
       return state
   }

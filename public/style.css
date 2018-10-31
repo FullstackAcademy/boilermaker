@@ -19,3 +19,36 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.product-img {
+  height: 250px;
+  width: 250px;
+}
+
+.product-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 500px;
+  width: 600px;
+}
+
+.product-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.header-nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}

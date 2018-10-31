@@ -14,7 +14,17 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id)
-    res.json(product)
+    res.json(product) 
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/', async (req, res, next) => {
+  try {
+    const newProduct = await Product.create(req.body)
+    if (newProduct) res.status(201).send(newProduct)
+
   } catch (err) {
     next(err)
   }
