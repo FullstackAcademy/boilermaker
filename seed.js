@@ -37,11 +37,16 @@ const users = [
 const products = [
   {
     name: 'apple',
-    price: 1
+    price: 1,
+    imageUrl:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCeE-XUkjXgBWaqNaMprbN58CCXIOo8UxSQickhEYJw2b3Bae2dA'
   },
   {
-    name: 'avacado',
-    price: 3
+    name: 'avocado',
+    price: 3,
+    imageUrl:
+      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/avocado-uses-cut-avocado-1521593581.jpg?crop=1.00xw:0.790xh;0,0.210xh&resize=1200:*'
+    price: 1
   },
   {
     name: 'banana',
