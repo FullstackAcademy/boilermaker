@@ -46,7 +46,6 @@ const products = [
     price: 3,
     imageUrl:
       'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/avocado-uses-cut-avocado-1521593581.jpg?crop=1.00xw:0.790xh;0,0.210xh&resize=1200:*'
-    price: 1
   },
   {
     name: 'banana',
