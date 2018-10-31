@@ -10,14 +10,15 @@ class SingleProduct extends Component {
     return (
       <div>
         {this.props.product.name} --
-        {this.props.product.price}
+        {this.props.product.price} --
+        <img className="product-img" src={this.props.product.imageUrl} />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  product: state.products.product
+  product: state.products.single
 })
 
 const mapDispatchToProps = dispatch => ({

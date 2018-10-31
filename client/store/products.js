@@ -14,7 +14,6 @@ const initialState = {all: [], single: {}}
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const ADD_TO_CART = 'ADD_TO_CART'
 
-
 /**
  * ACTION CREATORS
  */
@@ -24,16 +23,13 @@ const getProducts = products => ({type: GET_PRODUCTS, products})
 const addProduct = product => ({type: ADD_PRODUCT, product})
 const addToCart = product => ({type: ADD_TO_CART, product})
 
-
 /**
  * THUNK CREATORS
  */
 
 export const getSingleProductThunk = id => {
   return async dispatch => {
-    console.log("i'm trying")
-    const {data} = await axios.get('/api/products/' + id)
-    console.log('this is the data', data)
+    const {data} = await axios.get(`/api/products/${id}`)
     const action = getProduct(data)
     dispatch(action)
   }
