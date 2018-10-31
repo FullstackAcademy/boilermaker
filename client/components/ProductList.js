@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getProductsThunk} from '../store/products'
+import {Link} from 'react-router-dom'
 import axios from 'axios'
 
 class ProductList extends Component {
@@ -32,20 +33,22 @@ class ProductList extends Component {
       <div className="product-list">
         {this.props.products.map(product => {
           return (
-            <div className="product-block">
-              <div>
-                <h2>{product.name}</h2>
+            <Link to={'/products/' + product.id} key={product.id}>
+              <div className="product-block">
+                <div>
+                  <h2>{product.name}</h2>
+                </div>
+                <div>
+                  <h3> Price: ${product.price} </h3>
+                </div>
+                <div>
+                  <img className="product-img" src={product.imageUrl} />
+                </div>
+                <button onClick={() => this.addToCart(product.id)}>
+                  Add to cart
+                </button>
               </div>
-              <div>
-                <h3> Price: ${product.price} </h3>
-              </div>
-              <div>
-                <img className="product-img" src={product.imageUrl} />
-              </div>
-              <button onClick={() => this.addToCart(product.id)}>
-                Add to cart
-              </button>
-            </div>
+            </Link>
           )
         })}
       </div>
