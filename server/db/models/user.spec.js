@@ -2,7 +2,7 @@
 
 const {expect} = require('chai')
 const db = require('../index')
-const {User, Cart, CartProduct, Product} = require('./index')
+const {User, Cart, CartProduct, Product, Review} = require('./index')
 
 describe('User model', () => {
   beforeEach(() => {
@@ -66,5 +66,21 @@ describe('cartProduct association table attributes should autofill when a produc
     expect(sampleTable[0].cartId).to.exist
     expect(sampleTable[0].productId).to.exist
     expect(sampleTable[0].quantity).to.equal(2)
+  })
+})
+
+describe('reviews model', () => {
+  it('validates instances min length', async () => {
+    const invalidReview = await Review.create({comment: 'this is <25'})
+    const resultingReview = await Review.findAll()
+    console.log('check123', resultingReview)
+    expect(resultingReview.length).to.be(0)
+
+    const validReview = await Review.create({
+      comment:
+        'this should be over twenty five characters long, please work for me'
+    })
+    const resultingReview2 = await Review.findAll()
+    expect(resultingReview.length).to.be(1)
   })
 })
