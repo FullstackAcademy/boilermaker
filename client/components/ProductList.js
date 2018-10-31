@@ -17,7 +17,7 @@ class ProductList extends Component {
     try {
       const newCartResponse = await axios.post('/api/carts', {})
       const newCart = newCartResponse.data
-      const newProductInCartResponse = await axios.post('api/cartProducts', {
+      const newProductInCartResponse = await axios.post('/api/cartProducts', {
         productId,
         cartId: newCart.id,
         quantity: 1
@@ -33,8 +33,8 @@ class ProductList extends Component {
       <div className="product-list">
         {this.props.products.map(product => {
           return (
-            <Link to={'/products/' + product.id} key={product.id}>
-              <div className="product-block">
+            <div className="product-block">
+              <Link to={'/products/' + product.id} key={product.id}>
                 <div>
                   <h2>{product.name}</h2>
                 </div>
@@ -44,11 +44,11 @@ class ProductList extends Component {
                 <div>
                   <img className="product-img" src={product.imageUrl} />
                 </div>
-                <button onClick={() => this.addToCart(product.id)}>
-                  Add to cart
-                </button>
-              </div>
-            </Link>
+              </Link>
+              <button onClick={() => this.addToCart(product.id)}>
+                Add to cart
+              </button>
+            </div>
           )
         })}
       </div>
@@ -57,7 +57,7 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.products
+  products: state.products.all
 })
 
 const mapDispatchToProps = dispatch => ({

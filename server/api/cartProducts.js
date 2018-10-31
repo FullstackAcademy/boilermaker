@@ -20,6 +20,7 @@ router.post('/', async (req, res, next) => {
     })
     res.status(201).send(newCartProduct)
   } catch (err) {
+    console.log('route went wrong')
     next(err)
   }
 })
