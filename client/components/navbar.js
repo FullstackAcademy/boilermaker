@@ -30,6 +30,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
               <Button component={Link} to="/signup">
                 Signup
               </Button>
+              <Button component={Link} to="/addproduct">
+                Add Product
+              </Button>
               <Button>Cart</Button>
             </div>
           )}

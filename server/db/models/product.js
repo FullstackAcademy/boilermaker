@@ -17,11 +17,7 @@ const Product = db.define('product', {
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCeE-XUkjXgBWaqNaMprbN58CCXIOo8UxSQickhEYJw2b3Bae2dA'
   },
   description: {
-    type: Sequelize.TEXT
-  },
-  quantity: {
-    type: Sequelize.INTEGER,
-    defaultValue: 10
+    type: Sequelize.STRING
   }
 })
 
