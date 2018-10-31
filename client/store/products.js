@@ -20,7 +20,7 @@ const ADD_TO_CART = 'ADD_TO_CART'
  */
 
 const getProduct = product => ({type: GET_PRODUCT, product})
-const getProducts = products => ({type: GET_PRODUCT, products})
+const getProducts = products => ({type: GET_PRODUCTS, products})
 const addProduct = product => ({type: ADD_PRODUCT, product})
 const addToCart = product => ({type: ADD_TO_CART, product})
 
@@ -64,7 +64,7 @@ const ProductReducer = (state = initialState, action) => {
     case GET_PRODUCT:
       return {...state, single: action.product}
     case ADD_PRODUCT:
-      return {...state, all: [...state.all, action.product]
+      return {...state, all: [...state.all, action.product]}
     default:
       return state
   }
