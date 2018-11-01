@@ -14,6 +14,7 @@ class ProductList extends Component {
   }
 
   async addToCart(productId) {
+    //this if sesssion has no cart id
     try {
       const newCartResponse = await axios.post('/api/carts', {})
       const newCart = newCartResponse.data

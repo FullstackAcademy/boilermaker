@@ -6,13 +6,13 @@ import history from '../history'
  */
 const GET_PRODUCT = 'GET_PRODUCT'
 const GET_PRODUCTS = 'GET_PRODUCTS'
-
+const ADD_PRODUCT = 'ADD_PRODUCT'
+const ADD_TO_CART = 'ADD_TO_CART'
 /**
  * INITIAL STATE
  */
 const initialState = {all: [], single: {}}
-const ADD_PRODUCT = 'ADD_PRODUCT'
-const ADD_TO_CART = 'ADD_TO_CART'
+
 
 
 /**

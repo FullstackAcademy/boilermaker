@@ -11,6 +11,16 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:cartId', async (req, res, next) => {
+  try {
+    const productsInCart = await CartProduct.findAll({
+      where: {cartId: req.params.cartId}
+    })
+    res.status(200).send(productsInCart)
+  } catch (err) {
+    next(err)
+  }
+})
 router.post('/', async (req, res, next) => {
   try {
     const newCartProduct = CartProduct.create({
