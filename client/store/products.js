@@ -6,13 +6,13 @@ import history from '../history'
  */
 const GET_PRODUCT = 'GET_PRODUCT'
 const GET_PRODUCTS = 'GET_PRODUCTS'
+const ADD_PRODUCT = 'ADD_PRODUCT'
 
 /**
  * INITIAL STATE
  */
 const initialState = {all: [], single: {}}
-const ADD_PRODUCT = 'ADD_PRODUCT'
-const ADD_TO_CART = 'ADD_TO_CART'
+
 
 /**
  * ACTION CREATORS
@@ -21,7 +21,7 @@ const ADD_TO_CART = 'ADD_TO_CART'
 const getProduct = product => ({type: GET_PRODUCT, product})
 const getProducts = products => ({type: GET_PRODUCTS, products})
 const addProduct = product => ({type: ADD_PRODUCT, product})
-const addToCart = product => ({type: ADD_TO_CART, product})
+
 
 /**
  * THUNK CREATORS
