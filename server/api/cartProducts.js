@@ -23,7 +23,7 @@ router.get('/:cartId', async (req, res, next) => {
 })
 router.post('/', async (req, res, next) => {
   try {
-    const newCartProduct = CartProduct.create({
+    const newCartProduct = await CartProduct.create({
       productId: req.body.productId,
       cartId: req.body.cartId,
       quantity: req.body.quantity
