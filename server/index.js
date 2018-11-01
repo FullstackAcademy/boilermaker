@@ -62,9 +62,8 @@ const createApp = () => {
   )
   app.use((req, res, next) => {
     if (!req.session.cartId) {
-      req.session.cartId = 1
+      req.session.cartId = null
     }
-    // console.log('Session', req.session)
     next()
   })
 

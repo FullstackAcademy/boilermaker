@@ -1,7 +1,6 @@
 const router = require('express').Router()
 module.exports = router
 const {CartProduct} = require('../db/models')
-const session = require('express-session')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -12,12 +11,22 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/session', async (req, res, next) => {
+router.get('/session', (req, res, next) => {
   try {
     // console.log(req.session)
     console.log('cartId', req.session.cartId)
     const cartIdObj = {cartId: req.session.cartId}
     res.send(cartIdObj)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/session1', (req, res, next) => {
+  try {
+    req.session.cartId = req.body.cartId
+    console.log(req.session.cartId, '!!!!!')
+    res.send(req.session)
   } catch (err) {
     next(err)
   }
