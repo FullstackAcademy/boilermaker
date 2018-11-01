@@ -21,6 +21,15 @@ router.get('/:cartId', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/session', async (req, res, next) => {
+  try {
+    res.send(req.session.cartId)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const newCartProduct = await CartProduct.create({

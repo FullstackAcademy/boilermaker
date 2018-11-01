@@ -60,6 +60,14 @@ const createApp = () => {
       saveUninitialized: false
     })
   )
+  app.use((req, res, next) => {
+    if (!req.session.cartId) {
+      req.session.cartId = 1
+    }
+    console.log('Session', req.session)
+    next()
+  })
+
   app.use(passport.initialize())
   app.use(passport.session())
 
