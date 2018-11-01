@@ -64,7 +64,7 @@ const createApp = () => {
     if (!req.session.cartId) {
       req.session.cartId = 1
     }
-    console.log('Session', req.session)
+    // console.log('Session', req.session)
     next()
   })
 
