@@ -52,3 +52,10 @@ form div {
   flex-direction: column;
   justify-content: flex-end;
 }
+
+#add-product-form {
+  display: flex;
+  width: 750px;
+  flex-direction: column;
+  justify-content: center;
+}
