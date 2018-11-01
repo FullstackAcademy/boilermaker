@@ -41,12 +41,15 @@ export const addToCartThunk = productId => {
     try {
       const sessionCartIdObj = await axios.get('/api/cartProducts/session')
       const sessionCartId = sessionCartIdObj.data
+
       console.log('sessionCartId: ', sessionCartId)
-      if (!sessionCartId.cartId){
+      if (!sessionCartId.cartId) {
+        //enters this block when cartId is null
         console.log('we need to make a new cart!')
-        const newCartResponse = await axios.post('/api/carts', {})
+        const newCartResponse = await axios.post('/api/carts', {}) //instantiate a new cart
         const currentCart = newCartResponse.data
-        console.log('what datatype is currentCarts id', typeof currentCart.id)
+        console.log('we got to setting cartId on session')
+        await axios.post('/api/cartProducts/session1', {cartId: currentCart.id})
         const newProductInCartResponse = await axios.post('/api/cartProducts', {
           productId,
           cartId: currentCart.id,
@@ -55,10 +58,9 @@ export const addToCartThunk = productId => {
         const newProductInCart = newProductInCartResponse.data
         const action = addToCart(newProductInCart)
         dispatch(action)
-      }
-      else {
+      } else {
+        //if store.state.contains(productId)
         console.log('we need to add product to an existing cart')
-        console.log('sessionCartId cartId property type ', typeof sessionCartId.cartId)
         const newProductInCartResponse = await axios.post('/api/cartProducts', {
           productId,
           cartId: sessionCartId.cartId,
@@ -69,7 +71,7 @@ export const addToCartThunk = productId => {
         dispatch(action)
       }
     } catch (err) {
-        console.log(err)
+      console.log(err)
     }
   }
   /**
