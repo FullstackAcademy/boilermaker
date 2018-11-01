@@ -49,15 +49,20 @@ const products = [
   },
   {
     name: 'banana',
-    price: 2
+    price: 2,
+    imageUrl:
+      'https://vignette.wikia.nocookie.net/r2d/images/c/c4/Dancing_banana.jpg/revision/latest?cb=20140927181629'
   },
   {
     name: 'strawberry',
-    price: 5
+    price: 5,
+    imageUrl:
+      'https://st4.depositphotos.com/1742172/22214/v/1600/depositphotos_222141284-stock-illustration-cartoon-doodle-strawberry-vector-illustration.jpg'
   },
   {
     name: 'plum',
-    price: 4
+    price: 4,
+    imageUrl: 'http://images.clipartpanda.com/plum-clipart-plum.jpg'
   }
 ]
 
