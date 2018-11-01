@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getProductsThunk} from '../store/products'
+import {getCartProductsThunk} from '../store/cart'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 
@@ -11,23 +12,11 @@ class ProductList extends Component {
 
   componentDidMount() {
     this.props.getProducts()
+    //this will eventually be called with req.session.id
+    this.props.getCartProducts(1)
   }
 
-  async addToCart(productId) {
-    //this if sesssion has no cart id
-    try {
-      const newCartResponse = await axios.post('/api/carts', {})
-      const newCart = newCartResponse.data
-      const newProductInCartResponse = await axios.post('/api/cartProducts', {
-        productId,
-        cartId: newCart.id,
-        quantity: 1
-      })
-      const newProductInCart = newProductInCartResponse.data
-    } catch (err) {
-      console.log(err)
-    }
-  }
+
 
   render() {
     return (
@@ -46,7 +35,7 @@ class ProductList extends Component {
                   <img className="product-img" src={product.imageUrl} />
                 </div>
               </Link>
-              <button onClick={() => this.addToCart(product.id)}>
+              <button onClick={() => this.addToCartThunk(product.id)}>
                 Add to cart
               </button>
             </div>
@@ -62,7 +51,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getProducts: () => dispatch(getProductsThunk())
+  getProducts: () => dispatch(getProductsThunk()),
+  getCartProducts: id => dispatch(getCartProductsThunk(id))
 })
 
 const ConnectedProductList = connect(
