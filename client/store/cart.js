@@ -46,6 +46,7 @@ export const addToCartThunk = productId => {
         console.log('we need to make a new cart!')
         const newCartResponse = await axios.post('/api/carts', {})
         const currentCart = newCartResponse.data
+        console.log('what datatype is currentCarts id', typeof currentCart.id)
         const newProductInCartResponse = await axios.post('/api/cartProducts', {
           productId,
           cartId: currentCart.id,
@@ -57,7 +58,7 @@ export const addToCartThunk = productId => {
       }
       else {
         console.log('we need to add product to an existing cart')
-        console.log('sessionCartId cartId property', sessionCartId.cartId)
+        console.log('sessionCartId cartId property type ', typeof sessionCartId.cartId)
         const newProductInCartResponse = await axios.post('/api/cartProducts', {
           productId,
           cartId: sessionCartId.cartId,
