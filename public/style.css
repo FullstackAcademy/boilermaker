@@ -42,13 +42,20 @@ form div {
 
 .header-nav {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
 }
 
 .navbar {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+
+#add-product-form {
+  display: flex;
+  width: 750px;
+  flex-direction: column;
+  justify-content: center;
 }

@@ -33,7 +33,7 @@ class AddProductForm extends Component {
 
   render() {
     return (
-      <form id="new-campus-form" onSubmit={this.handleSubmit}>
+      <form id="add-product-form" onSubmit={this.handleSubmit}>
         <span>Name:</span>
         <input
           className="form-control"
