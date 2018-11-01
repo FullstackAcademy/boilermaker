@@ -22,23 +22,23 @@ const addToCart = product => ({type: ADD_TO_CART, product})
  */
 
 export const getCartProductsThunk = cartId => {
-  try {
-    return async dispatch => {
+  return async dispatch => {
+    try {
       const {data} = await axios.get(`/api/cartProducts/${cartId}`)
       console.log(cartId)
       console.log('cart products data', data)
       const action = getCartProducts(data)
       dispatch(action)
+    } catch (err) {
+      console.log(err)
     }
-  } catch(err) {
-    console.log(err)
   }
 }
 
 export const addToCartThunk = productId => {
   //this if sesssion has no cart id
-  try {
-    return async dispatch => {
+  return async dispatch => {
+    try {
       const newCartResponse = await axios.post('/api/carts', {})
       const currentCart = newCartResponse.data
       const newProductInCartResponse = await axios.post('/api/cartProducts', {
@@ -49,9 +49,9 @@ export const addToCartThunk = productId => {
       const newProductInCart = newProductInCartResponse.data
       const action = addToCart(newProductInCart)
       dispatch(action)
+    } catch (err) {
+      console.log(err)
     }
-  } catch (err) {
-    console.log(err)
   }
   /**
    * If session has a cartId, we take out the first axios request, and currentCart = cart where id === req.session.cartId
@@ -62,7 +62,7 @@ export const addToCartThunk = productId => {
  * REDUCER
  */
 
-const CartReducer = (state = initialState, action ) => {
+const CartReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_CART_PRODUCTS:
       return [...state, action.products]
