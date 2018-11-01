@@ -1,11 +1,23 @@
 const router = require('express').Router()
 module.exports = router
 const {CartProduct} = require('../db/models')
+const session = require('express-session')
 
 router.get('/', async (req, res, next) => {
   try {
     const cartProducts = await CartProduct.findAll()
     res.status(200).send(cartProducts)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/session', async (req, res, next) => {
+  try {
+    // console.log(req.session)
+    console.log('cartId', req.session.cartId)
+    const cartIdObj = {cartId: req.session.cartId}
+    res.send(cartIdObj)
   } catch (err) {
     next(err)
   }
@@ -22,13 +34,15 @@ router.get('/:cartId', async (req, res, next) => {
   }
 })
 
-router.get('/session', async (req, res, next) => {
-  try {
-    res.send(req.session.cartId)
-  } catch (err) {
-    next(err)
-  }
-})
+// router.get('/session', async (req, res, next) => {
+//   try {
+//     // console.log(req.session)
+//     console.log('cartId', req.session.cartId)
+//     // res.send(req.session.cartId)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 router.post('/', async (req, res, next) => {
   try {
