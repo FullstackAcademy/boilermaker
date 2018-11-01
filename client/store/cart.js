@@ -39,6 +39,10 @@ export const addToCartThunk = productId => {
   //this if sesssion has no cart id
   return async dispatch => {
     try {
+      //
+      const sessionCartIdObj = await axios.get('/api/cartProducts/session')
+      const sessionCartId = sessionCartIdObj.data
+      console.log('retrieved session cart id', sessionCartId)
       const newCartResponse = await axios.post('/api/carts', {})
       const currentCart = newCartResponse.data
       const newProductInCartResponse = await axios.post('/api/cartProducts', {
