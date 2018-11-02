@@ -32,6 +32,20 @@ router.post('/session', (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    const newCartProduct = await CartProduct.create({
+      productId: req.body.productId,
+      cartId: req.body.cartId,
+      quantity: req.body.quantity
+    })
+    res.status(201).send(newCartProduct)
+  } catch (err) {
+    console.log('route went wrong')
+    next(err)
+  }
+})
+
 router.get('/:cartId', async (req, res, next) => {
   try {
     const productsInCart = await CartProduct.findAll({
@@ -53,19 +67,7 @@ router.get('/:cartId', async (req, res, next) => {
 //   }
 // })
 
-router.post('/', async (req, res, next) => {
-  try {
-    const newCartProduct = await CartProduct.create({
-      productId: req.body.productId,
-      cartId: req.body.cartId,
-      quantity: req.body.quantity
-    })
-    res.status(201).send(newCartProduct)
-  } catch (err) {
-    console.log('route went wrong')
-    next(err)
-  }
-})
+
 
 router.put('/:productId', async (req, res, next) => {
   try {
