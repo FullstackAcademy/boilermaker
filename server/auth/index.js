@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
+const Cart = require('../db/models/cart')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -12,6 +13,18 @@ router.post('/login', async (req, res, next) => {
       console.log('Incorrect password for user:', req.body.email)
       res.status(401).send('Wrong username and/or password')
     } else {
+      console.log('GIMMME USER', user)
+
+      console.log('set session Id to user Id', req.session)
+      if (!user.cartId) {
+        //make a post request to Cart and make a cart instance
+        const userNewCart = await Cart.create()
+        user.cartId = userNewCart.cartId
+      } else {
+        //since there's already a cart, dispatch to session
+        // req.session.cartId = user.cartId not working yet, plan is:
+        res.send()
+      }
       req.login(user, err => (err ? next(err) : res.json(user)))
     }
   } catch (err) {
@@ -39,7 +52,10 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
+  console.log('came from get request', req.session)
   res.json(req.user)
 })
 
 router.use('/google', require('./google'))
+
+//when i log in, i want to see their cartId

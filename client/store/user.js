@@ -19,8 +19,13 @@ const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
+ * HELPER FUNCTIONS
+ */
+
+/**
  * THUNK CREATORS
  */
+
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
@@ -30,14 +35,21 @@ export const me = () => async dispatch => {
   }
 }
 
+//create a new function that on login,
+// check if user has a cartId or not.
+// if (!cartId) create a cartId
+// if (cartId) load cart
+
 export const auth = (email, password, method) => async dispatch => {
   let res
   try {
     res = await axios.post(`/auth/${method}`, {email, password})
   } catch (authError) {
+    //if user doesn't exit
     return dispatch(getUser({error: authError}))
   }
 
+  // check the user.cartId
   try {
     dispatch(getUser(res.data))
     history.push('/home')
@@ -45,7 +57,6 @@ export const auth = (email, password, method) => async dispatch => {
     console.error(dispatchOrHistoryErr)
   }
 }
-
 export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
