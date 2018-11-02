@@ -8,14 +8,22 @@ import axios from 'axios'
 class ProductList extends Component {
   constructor(props) {
     super(props)
+    this.state = {}
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
     this.props.getProducts()
-    this.props.getCartProducts(1)
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    this.setState({state: 're-rendered'})
   }
 
   render() {
+    console.log('cartproducts in state', this.props.cartProducts)
+    console.log('this.props.sessioncartid', this.props.sessionCartId)
     return (
       <div className="product-list">
         {this.props.products.map(product => {
@@ -32,13 +40,16 @@ class ProductList extends Component {
                   <img className="product-img" src={product.imageUrl} />
                 </div>
               </Link>
-              <button
-                onClick={() =>
+              <form
+                onSubmit={this.handleSubmit}
+                onClick={() => {
+                  console.log('state on click', this.state)
                   this.props.addCartButton(product.id, this.props.cartProducts)
-                }
+                  this.props.getCartProducts(this.props.sessionCartId)
+                }}
               >
-                Add to cart
-              </button>
+                <button type="submit">Add to cart</button>
+              </form>
             </div>
           )
         })}
@@ -49,7 +60,8 @@ class ProductList extends Component {
 
 const mapStateToProps = state => ({
   products: state.products.all,
-  cartProducts: state.cart
+  cartProducts: state.cart.products,
+  sessionCartId: state.cart.sessionCartId
 })
 
 const mapDispatchToProps = dispatch => ({
