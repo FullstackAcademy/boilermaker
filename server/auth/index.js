@@ -22,7 +22,7 @@ router.post('/login', async (req, res, next) => {
         user.cartId = userNewCart.cartId
       } else {
         //since there's already a cart, dispatch to session
-        // req.session.cartId = user.cartId not working yet, backup plan is :
+        // req.session.cartId = user.cartId not working yet, plan is:
         res.send()
       }
       req.login(user, err => (err ? next(err) : res.json(user)))
