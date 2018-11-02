@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_CART_PRODUCTS = 'GET_CART_PRODUCTS'
 const ADD_TO_CART = 'ADD_TO_CART'
+const UPDATE_CART = 'UPDATE_CART'
 /**
  * INITIAL STATE
  */
@@ -17,10 +18,12 @@ const initialState = []
 
 const getCartProducts = products => ({type: GET_CART_PRODUCTS, products})
 const addToCart = product => ({type: ADD_TO_CART, product})
+const updateCart = product => ({type: UPDATE_CART, product})
 /**
  * THUNK CREATORS
  */
 
+// populate the state with cart products
 export const getCartProductsThunk = cartId => {
   return async dispatch => {
     try {
@@ -35,7 +38,7 @@ export const getCartProductsThunk = cartId => {
   }
 }
 
-export const addToCartThunk = productId => {
+export const addToCartThunk = (productId, cart) => {
   //this if sesssion has no cart id
   return async dispatch => {
     try {
@@ -60,15 +63,30 @@ export const addToCartThunk = productId => {
         dispatch(action)
       } else {
         //if store.state.contains(productId)
-        console.log('we need to add product to an existing cart')
-        const newProductInCartResponse = await axios.post('/api/cartProducts', {
-          productId,
-          cartId: sessionCartId.cartId,
-          quantity: 1
+        const existingCartProductInstance = cart.filter(el => {
+          return el.productId === productId
         })
-        const newProductInCart = newProductInCartResponse.data
-        const action = addToCart(newProductInCart)
-        dispatch(action)
+
+        if (existingCartProductInstance.length) {
+          console.log(existingCartProductInstance)
+          const updated = await axios.put('/api/cartProducts/' + productId, {
+            quantity: existingCartProductInstance[0].quantity + 1
+          })
+          dispatch(updateCart(updated.data))
+        } else {
+          const newProductInCartResponse = await axios.post(
+            '/api/cartProducts',
+            {
+              productId,
+              cartId: sessionCartId.cartId,
+              quantity: 1
+            }
+          )
+
+          const newProductInCart = newProductInCartResponse.data
+          const action = addToCart(newProductInCart)
+          dispatch(action)
+        }
       }
     } catch (err) {
       console.log(err)
@@ -89,6 +107,13 @@ const CartReducer = (state = initialState, action) => {
       return [...state, action.products]
     case ADD_TO_CART:
       return [...state, action.product]
+    case UPDATE_CART:
+      return [
+        ...state.filter(el => {
+          return el.productId !== action.product.productId
+        }),
+        action.product
+      ]
     default:
       return state
   }

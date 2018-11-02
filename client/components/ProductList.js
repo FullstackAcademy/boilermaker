@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getProductsThunk} from '../store/products'
 import {Link} from 'react-router-dom'
-import {addToCartThunk} from '../store/cart'
+import {addToCartThunk, getCartProductsThunk} from '../store/cart'
 import axios from 'axios'
 
 class ProductList extends Component {
@@ -12,6 +12,7 @@ class ProductList extends Component {
 
   componentDidMount() {
     this.props.getProducts()
+    this.props.getCartProducts(1)
   }
 
   // async addToCart(productId) {
@@ -46,7 +47,11 @@ class ProductList extends Component {
                   <img className="product-img" src={product.imageUrl} />
                 </div>
               </Link>
-              <button onClick={() => this.props.addToCart(product.id)}>
+              <button
+                onClick={() =>
+                  this.props.addToCart(product.id, this.props.cartProducts)
+                }
+              >
                 Add to cart
               </button>
             </div>
@@ -58,12 +63,14 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.products.all
+  products: state.products.all,
+  cartProducts: state.cart
 })
 
 const mapDispatchToProps = dispatch => ({
   getProducts: () => dispatch(getProductsThunk()),
-  addToCart: productId => dispatch(addToCartThunk(productId))
+  addToCart: (productId, cart) => dispatch(addToCartThunk(productId, cart)),
+  getCartProducts: cartId => dispatch(getCartProductsThunk(cartId))
 })
 
 const ConnectedProductList = connect(
