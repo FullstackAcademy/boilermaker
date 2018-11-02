@@ -14,7 +14,6 @@ class ProductList extends Component {
 
   componentDidMount() {
     this.props.getProducts()
-    this.props.getCartProducts(1)
   }
 
   handleSubmit(event) {
@@ -23,6 +22,8 @@ class ProductList extends Component {
   }
 
   render() {
+    console.log('cartproducts in state', this.props.cartProducts)
+    console.log('this.props.sessioncartid', this.props.sessionCartId)
     return (
       <div className="product-list">
         {this.props.products.map(product => {
@@ -44,6 +45,7 @@ class ProductList extends Component {
                 onClick={() => {
                   console.log('state on click', this.state)
                   this.props.addCartButton(product.id, this.props.cartProducts)
+                  this.props.getCartProducts(this.props.sessionCartId)
                 }}
               >
                 <button type="submit">Add to cart</button>
@@ -58,7 +60,8 @@ class ProductList extends Component {
 
 const mapStateToProps = state => ({
   products: state.products.all,
-  cartProducts: state.cart
+  cartProducts: state.cart.products,
+  sessionCartId: state.cart.sessionCartId
 })
 
 const mapDispatchToProps = dispatch => ({
