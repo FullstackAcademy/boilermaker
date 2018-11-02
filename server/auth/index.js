@@ -17,17 +17,19 @@ router.post('/login', async (req, res, next) => {
       console.log('GIMMME USER', user)
 
       console.log('set session Id to user Id', req.session)
-      if (!user.cartId) {
+      const allCarts = await Cart.findAll()
+      const ourCart = allCarts.filter(cart => cart.userId === user.id)
+      if (!ourCart) {
         //make a post request to Cart and make a cart instance
         await Cart.create({userId: user.id})
       } else {
         //since there's already a cart, dispatch to session
         // req.session.cartId = user.cartId not working yet, plan is:
-        const cart = await Cart.findOne({
-          where: {userId: user.Id, purchase: false}
-        })
+        // const cart = await Cart.findOne({
+        //   where: {userId: user.id, purchased: false}
+        // })
         const cartProducts = await CartProducts.findAll({
-          where: {cartId: cart.Id}
+          where: {cartId: ourCart[0].id}
         })
         console.log(cartProducts)
         res.send(cartProducts)
