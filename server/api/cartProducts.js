@@ -22,7 +22,7 @@ router.get('/session', (req, res, next) => {
   }
 })
 
-router.post('/session1', (req, res, next) => {
+router.post('/session', (req, res, next) => {
   try {
     req.session.cartId = req.body.cartId
     console.log(req.session.cartId, '!!!!!')
