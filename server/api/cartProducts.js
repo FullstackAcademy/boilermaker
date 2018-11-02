@@ -66,3 +66,20 @@ router.post('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:productId', async (req, res, next) => {
+  try {
+    const toBeModified = await CartProduct.findOne({
+      where: {productId: req.params.productId}
+    })
+    console.log(toBeModified)
+    const updated = toBeModified.update({
+      productId: toBeModified.productId,
+      cartId: toBeModified.cartId,
+      quantity: req.body.quantity
+    })
+    res.send(updated)
+  } catch (err) {
+    next(err)
+  }
+})
