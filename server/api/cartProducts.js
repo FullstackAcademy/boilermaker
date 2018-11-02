@@ -32,6 +32,20 @@ router.post('/session', (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    const newCartProduct = await CartProduct.create({
+      productId: req.body.productId,
+      cartId: req.body.cartId,
+      quantity: req.body.quantity
+    })
+    res.status(201).send(newCartProduct)
+  } catch (err) {
+    console.log('route went wrong')
+    next(err)
+  }
+})
+
 router.get('/:cartId', async (req, res, next) => {
   try {
     const productsInCart = await CartProduct.findAll({
@@ -42,6 +56,7 @@ router.get('/:cartId', async (req, res, next) => {
     next(err)
   }
 })
+
 
 router.post('/', async (req, res, next) => {
   try {
@@ -57,14 +72,15 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+
 router.put('/:productId', async (req, res, next) => {
   try {
     const toBeModified = await CartProduct.findOne({
       where: {productId: req.params.productId}
     })
-    console.log('this is what we want modified', toBeModified)
-    console.log('this is what we want to update with', req.body)
-    const updated = toBeModified.update({
+
+    const updated = await toBeModified.update({
+
       productId: toBeModified.productId,
       cartId: toBeModified.cartId,
       quantity: req.body.quantity
