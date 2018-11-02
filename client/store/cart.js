@@ -24,7 +24,6 @@ const updateCart = product => ({type: UPDATE_CART, product})
  */
 
 const makeCartandAddProduct = async (productId, cart, dispatch) => {
-  console.log('we need to make a new cart!')
   const newCartResponse = await axios.post('/api/carts', {}) //instantiate a new cart
   const currentCart = newCartResponse.data
   await axios.post('/api/cartProducts/session', {cartId: currentCart.id})
@@ -47,25 +46,34 @@ const justAddProductToExistingCart = async (
   sessionCartId
 ) => {
   //Cart is an array of product objects, so existingCartProduct.length should be either 0 or 1
-  const existingCartProduct = cart.filter(el => {
-    return el.productId === productId
-  })
-  if (existingCartProduct.length) {
-    //If product exists, update cartProduct quantity
-    const updated = await axios.put('/api/cartProducts/' + productId, {
-      quantity: existingCartProduct[0].quantity + 1
+  try {
+    const existingCartProduct = cart.filter(el => {
+      return el.productId === productId
     })
-    dispatch(updateCart(updated.data))
-  } else {
-    //If product doesn't exist, make a new cartProduct
-    const newProductInCartResponse = await axios.post('/api/cartProducts', {
-      productId,
-      cartId: sessionCartId.cartId,
-      quantity: 1
-    })
-    const newProductInCart = newProductInCartResponse.data
-    const action = addToCart(newProductInCart)
-    dispatch(action)
+    console.log(
+      'cartproduct instance after filtering, should only contain one product w correct productid',
+      existingCartProduct
+    )
+    if (existingCartProduct.length) {
+      //If product exists, update cartProduct quantity
+      const updated = await axios.put(`/api/cartProducts/${productId}`, {
+        quantity: existingCartProduct[0].quantity + 1
+      })
+      console.log('updated cp instance, quantity should be > 1', updated)
+      dispatch(updateCart(updated.data))
+    } else {
+      //If product doesn't exist, make a new cartProduct
+      const newProductInCartResponse = await axios.post('/api/cartProducts', {
+        productId,
+        cartId: sessionCartId.cartId,
+        quantity: 1
+      })
+      const newProductInCart = newProductInCartResponse.data
+      const action = addToCart(newProductInCart)
+      dispatch(action)
+    }
+  } catch (err) {
+    next(err)
   }
 }
 
@@ -94,8 +102,13 @@ export const addToCartButtonThunk = (productId, cart) => {
       const sessionCartIdObj = await axios.get('/api/cartProducts/session')
       const sessionCartId = sessionCartIdObj.data
       if (!sessionCartId.cartId) {
+        console.log(
+          'making new cart instance and updating session.cartId accordingly (session.cartId not existing previously)'
+        )
         makeCartandAddProduct(productId, cart, dispatch)
       } else {
+        console.log('adding product to existing cart')
+        console.log('cart being passed in', cart)
         justAddProductToExistingCart(productId, cart, dispatch, sessionCartId)
       }
     } catch (err) {

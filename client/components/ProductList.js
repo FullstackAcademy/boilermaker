@@ -8,11 +8,18 @@ import axios from 'axios'
 class ProductList extends Component {
   constructor(props) {
     super(props)
+    this.state = {}
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
     this.props.getProducts()
     this.props.getCartProducts(1)
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    this.setState({state: 're-rendered'})
   }
 
   render() {
@@ -32,13 +39,15 @@ class ProductList extends Component {
                   <img className="product-img" src={product.imageUrl} />
                 </div>
               </Link>
-              <button
-                onClick={() =>
+              <form
+                onSubmit={this.handleSubmit}
+                onClick={() => {
+                  console.log('state on click', this.state)
                   this.props.addCartButton(product.id, this.props.cartProducts)
-                }
+                }}
               >
-                Add to cart
-              </button>
+                <button type="submit">Add to cart</button>
+              </form>
             </div>
           )
         })}
