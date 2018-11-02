@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
 const Cart = require('../db/models/cart')
+const CartProducts = require('../db/models/cartProducts')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {
@@ -18,12 +19,18 @@ router.post('/login', async (req, res, next) => {
       console.log('set session Id to user Id', req.session)
       if (!user.cartId) {
         //make a post request to Cart and make a cart instance
-        const userNewCart = await Cart.create()
-        user.cartId = userNewCart.cartId
+        await Cart.create({userId: user.id})
       } else {
         //since there's already a cart, dispatch to session
         // req.session.cartId = user.cartId not working yet, plan is:
-        res.send()
+        const cart = await Cart.findOne({
+          where: {userId: user.Id, purchase: false}
+        })
+        const cartProducts = await CartProducts.findAll({
+          where: {cartId: cart.Id}
+        })
+        console.log(cartProducts)
+        res.send(cartProducts)
       }
       req.login(user, err => (err ? next(err) : res.json(user)))
     }
