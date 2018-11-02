@@ -43,16 +43,6 @@ router.get('/:cartId', async (req, res, next) => {
   }
 })
 
-// router.get('/session', async (req, res, next) => {
-//   try {
-//     // console.log(req.session)
-//     console.log('cartId', req.session.cartId)
-//     // res.send(req.session.cartId)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
 router.post('/', async (req, res, next) => {
   try {
     const newCartProduct = await CartProduct.create({
@@ -72,7 +62,8 @@ router.put('/:productId', async (req, res, next) => {
     const toBeModified = await CartProduct.findOne({
       where: {productId: req.params.productId}
     })
-    console.log(toBeModified)
+    console.log('this is what we want modified', toBeModified)
+    console.log('this is what we want to update with', req.body)
     const updated = toBeModified.update({
       productId: toBeModified.productId,
       cartId: toBeModified.cartId,

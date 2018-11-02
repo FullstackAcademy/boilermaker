@@ -61,9 +61,11 @@ const createApp = () => {
     })
   )
   app.use((req, res, next) => {
+    // console.log(req.session)
     if (!req.session.cartId) {
       req.session.cartId = null
     }
+    console.log(req.session)
     next()
   })
 
