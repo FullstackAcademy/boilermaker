@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getProductsThunk} from '../store/products'
 import {Link} from 'react-router-dom'
-import {addToCartThunk, getCartProductsThunk} from '../store/cart'
+import {addToCartButtonThunk, getCartProductsThunk} from '../store/cart'
 import axios from 'axios'
 
 class ProductList extends Component {
@@ -14,21 +14,6 @@ class ProductList extends Component {
     this.props.getProducts()
     this.props.getCartProducts(1)
   }
-
-  // async addToCart(productId) {
-  //   try {
-  //     const newCartResponse = await axios.post('/api/carts', {})
-  //     const newCart = newCartResponse.data
-  //     const newProductInCartResponse = await axios.post('/api/cartProducts', {
-  //       productId,
-  //       cartId: newCart.id,
-  //       quantity: 1
-  //     })
-  //     const newProductInCart = newProductInCartResponse.data
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
 
   render() {
     return (
@@ -49,7 +34,7 @@ class ProductList extends Component {
               </Link>
               <button
                 onClick={() =>
-                  this.props.addToCart(product.id, this.props.cartProducts)
+                  this.props.addCartButton(product.id, this.props.cartProducts)
                 }
               >
                 Add to cart
@@ -69,7 +54,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getProducts: () => dispatch(getProductsThunk()),
-  addToCart: (productId, cart) => dispatch(addToCartThunk(productId, cart)),
+  addCartButton: (productId, cart) =>
+    dispatch(addToCartButtonThunk(productId, cart)),
   getCartProducts: cartId => dispatch(getCartProductsThunk(cartId))
 })
 
