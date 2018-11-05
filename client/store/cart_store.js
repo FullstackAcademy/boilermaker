@@ -130,7 +130,7 @@ export const getCartIdThunk = () => {
     try {
       const cartIdObj = await axios.get('/api/cartProducts/session')
       const cartId = cartIdObj.data.cartId //cartId = 1
-      dispatch(getSessionCartId(cartIdObj))
+      dispatch(getSessionCartId(cartId))
     } catch (err) {
       console.log(err)
     }
