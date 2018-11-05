@@ -7,7 +7,6 @@ class Cart extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      products: [],
       productTemps: []
     }
     this.getCartId = this.getCartId.bind(this)
@@ -37,11 +36,9 @@ class Cart extends Component {
     const resultingProducts = this.props.products.map(async product => {
       const singleProduct = await this.getProductInfo(product.productId)
       console.log('singleProduct', singleProduct)
-      return singleProduct
+      this.setState({productTemps: [...this.state.productTemps, singleProduct]})
     })
-    this.setState({
-      productTemps: resultingProducts
-    })
+    console.log('CurrentState:', this.state)
   }
 
   render() {
