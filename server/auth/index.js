@@ -4,6 +4,35 @@ const Cart = require('../db/models/cart_model')
 const CartProducts = require('../db/models/cartProducts_model')
 module.exports = router
 
+/* HELPER FUNCTIONS*/
+async function cartCheckOnLogin(req, res, next, user) {
+  //look for all the cart
+
+  console.log('!!!!! this is the user.id', user.id)
+  const doesCartExist = await Cart.findOne({where: {
+    userId: user.id,
+    purchased: false
+  }})
+  console.log('whats in here?', doesCartExist)
+  let cartToSession
+  if (!doesCartExist) {
+    //THE CART DOESN'T EXIST SO MAKE A NEW CART
+
+    cartToSession = await Cart.create({userId: user.id})
+  } else {
+    //THE CART EXIST SO SET SESSION WITH EXISTING CART
+
+    cartToSession = doesCartExist
+  }
+  //ADD EVERYTHING to session
+  req.session.cartId = cartToSession.id
+  console.log('THIS IS THE REQ.SESSION', req.session)
+  req.login(user, err => (err ? next(err) : res.json({
+    user,
+    cartId: cartToSession.id
+  })))
+}
+
 router.post('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({where: {email: req.body.email}})
@@ -14,27 +43,7 @@ router.post('/login', async (req, res, next) => {
       console.log('Incorrect password for user:', req.body.email)
       res.status(401).send('Wrong username and/or password')
     } else {
-      console.log('GIMMME USER', user)
-
-      console.log('set session Id to user Id', req.session)
-      const allCarts = await Cart.findAll()
-      const ourCart = allCarts.filter(cart => cart.userId === user.id)
-      if (!ourCart) {
-        //make a post request to Cart and make a cart instance
-        await Cart.create({userId: user.id})
-      } else {
-        //since there's already a cart, dispatch to session
-        // req.session.cartId = user.cartId not working yet, plan is:
-        // const cart = await Cart.findOne({
-        //   where: {userId: user.id, purchased: false}
-        // })
-        const cartProducts = await CartProducts.findAll({
-          where: {cartId: ourCart[0].id}
-        })
-        console.log(cartProducts)
-        res.send(cartProducts)
-      }
-      req.login(user, err => (err ? next(err) : res.json(user)))
+      cartCheckOnLogin(req, res, next, user)
     }
   } catch (err) {
     next(err)
@@ -68,3 +77,7 @@ router.get('/me', (req, res) => {
 router.use('/google', require('./google'))
 
 //when i log in, i want to see their cartId
+
+//automatically make a defaultCart in which will be given to the guest user
+//and on checkout it will create a newCart
+// problem with websockets
