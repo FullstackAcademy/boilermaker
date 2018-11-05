@@ -137,6 +137,17 @@ export const getCartIdThunk = () => {
   }
 }
 
+export const getSessionCartIdThunk = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/api/cartProducts/session')
+      dispatch(getSessionCartId(data))
+    } catch(err) {
+      console.log(err)
+    }
+  }
+}
+
 /**
  * REDUCER
  */
@@ -155,7 +166,6 @@ const CartReducer = (state = initialState, action) => {
         action.product
       ]
       return {...state, products: copy}
-
     case GET_SESSION_CART_ID:
       return {...state, sessionCartId: action.cartId}
     default:

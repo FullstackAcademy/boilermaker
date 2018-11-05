@@ -11,8 +11,7 @@ const ADD_PRODUCT = 'ADD_PRODUCT'
 /**
  * INITIAL STATE
  */
-const initialState = {all: [], single: {}}
-
+const initialState = []
 
 /**
  * ACTION CREATORS
@@ -56,11 +55,11 @@ export const addProductThunk = info => {
 const ProductReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
-      return {...state, all: action.products}
+      return action.products
     case GET_PRODUCT:
-      return {...state, single: action.product}
+      return [action.product]
     case ADD_PRODUCT:
-      return {...state, all: [...state.all, action.product]}
+      return [...state.all, action.product]
     default:
       return state
   }

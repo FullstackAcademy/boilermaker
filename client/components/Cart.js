@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getCartProductsThunk, getCartIdThunk} from '../store/cart_store'
+
 import axios from 'axios'
 
 class Cart extends Component {
@@ -12,6 +13,7 @@ class Cart extends Component {
     // this.populatesState = this.populatesState.bind(this)
   }
 
+
   async componentDidMount() {
     this.props.getSession() // state.cart.sessionCartId exists
     this.props.populateCart(this.props.cartId) //now state.cart.products is correct.
@@ -22,6 +24,7 @@ class Cart extends Component {
   //   const cartId = cartIdObj.data.cartId
   //   return cartId
   // }
+
 
   // async getProductInfo(productId) {
   //   const productObj = await axios.get(`/api/products/${productId}`)
@@ -96,7 +99,10 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   populateCart: cartId => dispatch(getCartProductsThunk(cartId)),
+
+
   getSession: () => dispatch(getCartIdThunk())
+
 })
 
 const connectedCart = connect(
