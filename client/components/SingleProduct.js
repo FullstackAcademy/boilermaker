@@ -18,7 +18,7 @@ class SingleProduct extends Component {
 }
 
 const mapStateToProps = state => ({
-  product: state.products.single
+  product: state.products[0]
 })
 
 const mapDispatchToProps = dispatch => ({

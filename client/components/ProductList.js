@@ -8,7 +8,9 @@ import axios from 'axios'
 class ProductList extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      added: false
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -28,40 +30,44 @@ class ProductList extends Component {
     // console.log('cartproducts in state', this.props.cartProducts)
     // console.log('this.props.sessioncartid', this.props.sessionCartId)
     return (
-      <div className="product-list">
-        {this.props.products.map(product => {
-          return (
-            <div className="product-block" key={product.id}>
-              <Link to={'/products/' + product.id} key={product.id}>
-                <div>
-                  <h2>{product.name}</h2>
-                </div>
-                <div>
-                  <h3> Price: ${product.price} </h3>
-                </div>
-                <div>
-                  <img className="product-img" src={product.imageUrl} />
-                </div>
-              </Link>
-              <form
-                onSubmit={this.handleSubmit}
-                onClick={() => {
-                  this.props.addCartButton(product.id, this.props.cartProducts)
-                  this.props.getCartProducts(this.props.sessionCartId)
-                }}
-              >
-                <button type="submit">Add to cart</button>
-              </form>
-            </div>
-          )
-        })}
+      <div> 
+        {this.state.added ? <p>Added to cart!</p> : null}
+        <div className="product-list">
+          {this.props.products.map(product => {
+            return (
+              <div className="product-block" key={product.id}>
+                <Link to={'/products/' + product.id} key={product.id}>
+                  <div>
+                    <h2>{product.name}</h2>
+                  </div>
+                  <div>
+                    <h3> Price: ${product.price} </h3>
+                  </div>
+                  <div>
+                    <img className="product-img" src={product.imageUrl} />
+                  </div>
+                </Link>
+                <form
+                  onSubmit={this.handleSubmit}
+                  onClick={() => {
+                    this.props.addCartButton(product.id, this.props.cartProducts)
+                    this.props.getCartProducts(this.props.sessionCartId)
+                    this.setState({added: true})
+                  }}
+                >
+                  <button type="submit">Add to cart</button>
+                </form>
+              </div>
+            )
+          })}
+        </div>
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  products: state.products.all,
+  products: state.products,
   cartProducts: state.cart.products,
   sessionCartId: state.cart.sessionCartId
 })
