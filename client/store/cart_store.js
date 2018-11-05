@@ -152,7 +152,6 @@ const CartReducer = (state = initialState, action) => {
         action.product
       ]
       return {...state, products: copy}
-
     case GET_SESSION_CART_ID:
       return {...state, sessionCartId: action.cartId}
     default:
