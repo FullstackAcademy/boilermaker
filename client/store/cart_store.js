@@ -123,6 +123,17 @@ export const addToCartButtonThunk = (productId, cart) => {
   }
 }
 
+export const getSessionCartIdThunk = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/api/cartProducts/session')
+      dispatch(getSessionCartId(data))
+    } catch(err) {
+      console.log(err)
+    }
+  }
+}
+
 /**
  * REDUCER
  */

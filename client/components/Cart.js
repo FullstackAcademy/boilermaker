@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getCartProductsThunk} from '../store/cart_store'
+import {getCartProductsThunk, getSessionCartIdThunk} from '../store/cart_store'
 import axios from 'axios'
 
 class Cart extends Component {
@@ -14,15 +14,15 @@ class Cart extends Component {
     this.populatesState = this.populatesState.bind(this)
   }
 
-  async componentDidMount() {
-    const cartId = await this.getCartId()
+    componentDidMount() {
+    const cartId = this.getCartId()
     this.props.populateCart(cartId)
     this.populatesState()
   }
 
-  async getCartId() {
-    const cartIdObj = await axios.get('/api/cartProducts/session')
-    const cartId = cartIdObj.data.cartId
+  getCartId() {
+    const cartId = this.props.getSessionCartId()
+    console.log('current session cart id', cartId)
     return cartId
   }
 
@@ -73,7 +73,8 @@ const mapState = state => ({
 })
 
 const mapDispatch = dispatch => ({
-  populateCart: cartId => dispatch(getCartProductsThunk(cartId))
+  populateCart: cartId => dispatch(getCartProductsThunk(cartId)),
+  getSessionCartId: () => dispatch(getSessionCartIdThunk())
 })
 
 const connectedCart = connect(

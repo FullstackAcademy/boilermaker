@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from '../history'
-import { getCartProductsThunk, getSessionCartId } from './cart'
+import { getCartProductsThunk, getSessionCartId } from './cart_store'
 /**
  * ACTION TYPES
  */
