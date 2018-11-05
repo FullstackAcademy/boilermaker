@@ -28,13 +28,13 @@ const makeCartandAddProduct = async (productId, dispatch) => {
   console.log('case 1: make cart')
   const newCartResponse = await axios.post('/api/carts', {}) //instantiate a new cart
   const currentCart = newCartResponse.data
-  // console.log('got here', currentCart)
+  //first we post the new cartId to session
   await axios.post('/api/cartProducts/session', {
     cartId: currentCart.id
   })
-  const session = await axios.get('/api/cartProducts/session')
-  // console.log('updated session unique123', session.data)
-  dispatch(getSessionCartId(session.data.cartId))
+  // const session = await axios.get('/api/cartProducts/session')
+  // then we update state with the cartId
+  dispatch(getSessionCartId(currentCart.id))
   const newProductInCartResponse = await axios.post('/api/cartProducts', {
     productId,
     cartId: currentCart.id,
@@ -64,12 +64,14 @@ const justAddProductToExistingCart = async (
       /**
        * sessionCartId.cartId is a poor naming convention!
        */
+
       const updated = await axios.put(
         `/api/cartProducts/${sessionCartId.cartId}/${productId}`,
         {
           quantity: existingCartProduct[0].quantity + 1
         }
       )
+
 
       dispatch(updateCart(updated.data))
     } else {
@@ -111,6 +113,7 @@ Otherwise, add the product to existing cart,  --------*/
 export const addToCartButtonThunk = (productId, cart) => {
   return async dispatch => {
     try {
+
       const sessionCartIdObj = await axios.get('/api/cartProducts/session')
       const sessionCartId = sessionCartIdObj.data
       if (!sessionCartId.cartId) {
@@ -119,6 +122,7 @@ export const addToCartButtonThunk = (productId, cart) => {
         dispatch(getSessionCartId(sessionCartId.cartId))
         justAddProductToExistingCart(productId, cart, dispatch, sessionCartId)
       }
+
     } catch (err) {
       console.log(err)
     }
