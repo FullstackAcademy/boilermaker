@@ -13,8 +13,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/session', (req, res, next) => {
   try {
-    // console.log(req.session)
-    console.log('cartId', req.session.cartId)
     const cartIdObj = {cartId: req.session.cartId}
     res.send(cartIdObj)
   } catch (err) {
@@ -25,7 +23,6 @@ router.get('/session', (req, res, next) => {
 router.post('/session', (req, res, next) => {
   try {
     req.session.cartId = req.body.cartId
-    console.log(req.session.cartId, '!!!!!')
     res.send(req.session)
   } catch (err) {
     next(err)
@@ -41,7 +38,6 @@ router.post('/', async (req, res, next) => {
     })
     res.status(201).send(newCartProduct)
   } catch (err) {
-    console.log('route went wrong')
     next(err)
   }
 })
@@ -67,16 +63,18 @@ router.post('/', async (req, res, next) => {
     })
     res.status(201).send(newCartProduct)
   } catch (err) {
-    console.log('route went wrong')
     next(err)
   }
 })
 
 
-router.put('/:productId', async (req, res, next) => {
+router.put('/:cartId/:productId', async (req, res, next) => {
   try {
     const toBeModified = await CartProduct.findOne({
-      where: {productId: req.params.productId}
+      where: {
+        cartId: req.params.cartId,
+        productId: req.params.productId,
+      }
     })
 
     const updated = await toBeModified.update({
