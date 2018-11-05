@@ -12,17 +12,13 @@ class Cart extends Component {
     }
     this.getCartId = this.getCartId.bind(this)
     this.getProductInfo = this.getProductInfo.bind(this)
+    this.populatesState = this.populatesState.bind(this)
   }
 
   async componentDidMount() {
     const cartId = await this.getCartId()
     this.props.populateCart(cartId)
-    const productTemplates = this.props.products.map(async product => {
-      const singleProduct = await this.getProductInfo(product.productId)
-      return singleProduct
-    })
-    console.log('Product templates:', productTemplates)
-    this.setState({productTemps: productTemplates})
+    this.populatesState()
   }
 
   async getCartId() {
@@ -37,12 +33,23 @@ class Cart extends Component {
     return product
   }
 
+  async populatesState() {
+    const resultingProducts = this.props.products.map(async product => {
+      const singleProduct = await this.getProductInfo(product.productId)
+      console.log('singleProduct', singleProduct)
+      return singleProduct
+    })
+    this.setState({
+      productTemps: resultingProducts
+    })
+  }
+
   render() {
+    console.log('current state at time of render', this.state)
     return (
       <div className="cart">
         <h2>Cart</h2>
         {this.state.productTemps.map(product => {
-          console.log(product)
           return <div>{product.name}</div>
         })}
       </div>
