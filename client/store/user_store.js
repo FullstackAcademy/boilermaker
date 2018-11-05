@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from '../history'
-
+import { getCartProductsThunk, getSessionCartId } from './cart'
 /**
  * ACTION TYPES
  */
@@ -51,7 +51,15 @@ export const auth = (email, password, method) => async dispatch => {
 
   // check the user.cartId
   try {
-    dispatch(getUser(res.data))
+    dispatch(getUser(res.data.user))
+    /** we need to update 2 things in store state upon login: 
+      * - Update the array of only products in the particular session's cart
+      * - Update the cart id on session property
+      */
+    dispatch(getCartProductsThunk(res.data.cartId))
+    dispatch(getSessionCartId(res.data.cartId))
+
+    console.log('does res.data get sent?', res.data)
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)

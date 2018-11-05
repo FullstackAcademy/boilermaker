@@ -19,7 +19,7 @@ const initialState = {products: [], sessionCartId: 0}
 const getCartProducts = products => ({type: GET_CART_PRODUCTS, products})
 const addToCart = product => ({type: ADD_TO_CART, product})
 const updateCart = product => ({type: UPDATE_CART, product})
-const getSessionCartId = cartId => ({type: GET_SESSION_CART_ID, cartId})
+export const getSessionCartId = cartId => ({type: GET_SESSION_CART_ID, cartId})
 /*
  HELPING FUNCTIONS
  */
