@@ -14,8 +14,11 @@ class Cart extends Component {
   }
 
 
-  async componentDidMount() {
-    this.props.getSession() // state.cart.sessionCartId exists
+  componentDidMount() {
+    // this.props.getSession() // state.cart.sessionCartId exists
+
+
+
     this.props.populateCart(this.props.cartId) //now state.cart.products is correct.
   }
 
@@ -53,27 +56,28 @@ class Cart extends Component {
             <th>Price</th>
             <th>Quantity:</th>
           </tr>
-          {this.props.allProducts.all
-            .filter(allProduct => {
-              return this.props.products
-                .map(product => product.productId)
-                .includes(allProduct.id)
-            })
-            .map(filteredProduct => {
-              return (
-                <tr>
-                  <td>{filteredProduct.name}</td>
-                  <td>{filteredProduct.price}</td>
-                  <td>
-                    {
-                      this.props.products.filter(
-                        product => product.productId === filteredProduct.id
-                      )[0].quantity
-                    }
-                  </td>
-                </tr>
-              )
-            })}
+          {this.props.cartId !== 0 &&
+            this.props.allProducts.all
+              .filter(allProduct => {
+                return this.props.products
+                  .map(product => product.productId)
+                  .includes(allProduct.id)
+              })
+              .map(filteredProduct => {
+                return (
+                  <tr>
+                    <td>{filteredProduct.name}</td>
+                    <td>{filteredProduct.price}</td>
+                    <td>
+                      {
+                        this.props.products.filter(
+                          product => product.productId === filteredProduct.id
+                        )[0].quantity
+                      }
+                    </td>
+                  </tr>
+                )
+              })}
 
           {/* {this.state.productTemps.map((product, idx) => {
             return (
