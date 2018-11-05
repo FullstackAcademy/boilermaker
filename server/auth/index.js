@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const User = require('../db/models/user')
-const Cart = require('../db/models/cart')
-const CartProducts = require('../db/models/cartProducts')
+const User = require('../db/models/user_model')
+const Cart = require('../db/models/cart_model')
+const CartProducts = require('../db/models/cartProducts_model')
 module.exports = router
 
 router.post('/login', async (req, res, next) => {

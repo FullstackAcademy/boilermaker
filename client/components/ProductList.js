@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getProductsThunk} from '../store/products'
+import {getProductsThunk} from '../store/products_store'
 import {Link} from 'react-router-dom'
-import {addToCartButtonThunk, getCartProductsThunk} from '../store/cart'
+import {addToCartButtonThunk, getCartProductsThunk} from '../store/cart_store'
 import axios from 'axios'
 
 class ProductList extends Component {
@@ -14,7 +14,9 @@ class ProductList extends Component {
 
   componentDidMount() {
     this.props.getProducts()
-    this.props.sessionCartId ? this.props.getCartProducts(this.props.sessionCartId) : null
+    this.props.sessionCartId
+      ? this.props.getCartProducts(this.props.sessionCartId)
+      : null
   }
 
   handleSubmit(event) {
