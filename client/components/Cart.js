@@ -52,15 +52,22 @@ class Cart extends Component {
           </tr>
           {this.props.allProducts.all
             .filter(allProduct => {
-              return this.props.products.forEach(cartProduct => {
-                return cartProduct.productId === allProduct.id
-              })
+              return this.props.products
+                .map(product => product.productId)
+                .includes(allProduct.id)
             })
             .map(filteredProduct => {
               return (
                 <tr>
                   <td>{filteredProduct.name}</td>
                   <td>{filteredProduct.price}</td>
+                  <td>
+                    {
+                      this.props.products.filter(
+                        product => product.productId === filteredProduct.id
+                      )[0].quantity
+                    }
+                  </td>
                 </tr>
               )
             })}
