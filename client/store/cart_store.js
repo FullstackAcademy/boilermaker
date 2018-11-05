@@ -64,9 +64,12 @@ const justAddProductToExistingCart = async (
       /**
        * sessionCartId.cartId is a poor naming convention!
        */
-      const updated = await axios.put(`/api/cartProducts/${sessionCartId.cartId}/${productId}`, {
-        quantity: existingCartProduct[0].quantity + 1
-      })
+      const updated = await axios.put(
+        `/api/cartProducts/${sessionCartId.cartId}/${productId}`,
+        {
+          quantity: existingCartProduct[0].quantity + 1
+        }
+      )
 
       dispatch(updateCart(updated.data))
     } else {
@@ -108,15 +111,26 @@ Otherwise, add the product to existing cart,  --------*/
 export const addToCartButtonThunk = (productId, cart) => {
   return async dispatch => {
     try {
-    const sessionCartIdObj = await axios.get('/api/cartProducts/session')
-    const sessionCartId = sessionCartIdObj.data
-    if (!sessionCartId.cartId) {
-
-      makeCartandAddProduct(productId, dispatch)
-    } else {
-      dispatch(getSessionCartId(sessionCartId.cartId))
-      justAddProductToExistingCart(productId, cart, dispatch, sessionCartId)
+      const sessionCartIdObj = await axios.get('/api/cartProducts/session')
+      const sessionCartId = sessionCartIdObj.data
+      if (!sessionCartId.cartId) {
+        makeCartandAddProduct(productId, dispatch)
+      } else {
+        dispatch(getSessionCartId(sessionCartId.cartId))
+        justAddProductToExistingCart(productId, cart, dispatch, sessionCartId)
+      }
+    } catch (err) {
+      console.log(err)
     }
+  }
+}
+
+export const getCartIdThunk = () => {
+  return async dispatch => {
+    try {
+      const cartIdObj = await axios.get('/api/cartProducts/session')
+      const cartId = cartIdObj.data.cartId //cartId = 1
+      dispatch(getSessionCartId(cartIdObj))
     } catch (err) {
       console.log(err)
     }
