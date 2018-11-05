@@ -44,7 +44,6 @@ class ProductList extends Component {
               <form
                 onSubmit={this.handleSubmit}
                 onClick={() => {
-                  // console.log('state on click', this.state)
                   this.props.addCartButton(product.id, this.props.cartProducts)
                   this.props.getCartProducts(this.props.sessionCartId)
                 }}
