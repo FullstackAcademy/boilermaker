@@ -13,11 +13,8 @@ class Cart extends Component {
     // this.populatesState = this.populatesState.bind(this)
   }
 
-
   componentDidMount() {
     // this.props.getSession() // state.cart.sessionCartId exists
-
-
 
     this.props.populateCart(this.props.cartId) //now state.cart.products is correct.
   }
@@ -27,7 +24,6 @@ class Cart extends Component {
   //   const cartId = cartIdObj.data.cartId
   //   return cartId
   // }
-
 
   // async getProductInfo(productId) {
   //   const productObj = await axios.get(`/api/products/${productId}`)
@@ -56,28 +52,27 @@ class Cart extends Component {
             <th>Price</th>
             <th>Quantity:</th>
           </tr>
-          {this.props.cartId !== 0 &&
-            this.props.allProducts.all
-              .filter(allProduct => {
-                return this.props.products
-                  .map(product => product.productId)
-                  .includes(allProduct.id)
-              })
-              .map(filteredProduct => {
-                return (
-                  <tr>
-                    <td>{filteredProduct.name}</td>
-                    <td>{filteredProduct.price}</td>
-                    <td>
-                      {
-                        this.props.products.filter(
-                          product => product.productId === filteredProduct.id
-                        )[0].quantity
-                      }
-                    </td>
-                  </tr>
-                )
-              })}
+          {this.props.allProducts
+            .filter(allProduct => {
+              return this.props.products
+                .map(product => product.productId)
+                .includes(allProduct.id)
+            })
+            .map(filteredProduct => {
+              return (
+                <tr>
+                  <td>{filteredProduct.name}</td>
+                  <td>{filteredProduct.price}</td>
+                  <td>
+                    {
+                      this.props.products.filter(
+                        product => product.productId === filteredProduct.id
+                      )[0].quantity
+                    }
+                  </td>
+                </tr>
+              )
+            })}
 
           {/* {this.state.productTemps.map((product, idx) => {
             return (
@@ -89,7 +84,18 @@ class Cart extends Component {
             )
           })} */}
         </table>
-        <div>Total:</div>
+        <div>
+          Total:
+          {this.props.products.reduce((acc, current) => {
+            return (
+              acc +
+              this.props.allProducts.filter(
+                product => product.id === current.productId
+              )[0].price *
+                current.quantity
+            )
+          }, 0)}
+        </div>
       </div>
     )
   }
@@ -104,9 +110,7 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   populateCart: cartId => dispatch(getCartProductsThunk(cartId)),
 
-
   getSession: () => dispatch(getCartIdThunk())
-
 })
 
 const connectedCart = connect(
