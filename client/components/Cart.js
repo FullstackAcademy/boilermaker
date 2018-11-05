@@ -46,9 +46,23 @@ class Cart extends Component {
     return (
       <div className="cart">
         <h2>Cart</h2>
-        {this.state.productTemps.map(product => {
-          return <div>{product.name}</div>
-        })}
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity:</th>
+          </tr>
+          {this.state.productTemps.map((product, idx) => {
+            return (
+              <tr>
+                <td>{product.name}</td>
+                <td>{product.price}</td>
+                <td>{this.props.products[idx].quantity}</td>
+              </tr>
+            )
+          })}
+        </table>
+        <div>Total:</div>
       </div>
     )
   }
