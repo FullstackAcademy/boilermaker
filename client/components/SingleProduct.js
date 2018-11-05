@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getSingleProductThunk} from '../store/products'
+import {getSingleProductThunk} from '../store/products_store'
 
 class SingleProduct extends Component {
   componentDidMount() {

@@ -53,6 +53,7 @@ router.get('/:cartId', async (req, res, next) => {
   }
 })
 
+
 router.post('/', async (req, res, next) => {
   try {
     const newCartProduct = await CartProduct.create({
@@ -66,16 +67,18 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+
 router.put('/:cartId/:productId', async (req, res, next) => {
   try {
     const toBeModified = await CartProduct.findOne({
       where: {
         cartId: req.params.cartId,
-        productId: req.params.productId
+        productId: req.params.productId,
       }
     })
 
     const updated = await toBeModified.update({
+
       productId: toBeModified.productId,
       cartId: toBeModified.cartId,
       quantity: req.body.quantity

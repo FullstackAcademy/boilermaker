@@ -1,9 +1,9 @@
 const db = require('../db')
-const User = require('./user')
-const Cart = require('./cart')
-const Product = require('./product')
-const CartProduct = require('./cartProducts')
-const Review = require('./reviews')
+const User = require('./user_model')
+const Cart = require('./cart_model')
+const Product = require('./product_model')
+const CartProduct = require('./cartProducts_model')
+const Review = require('./reviews_model')
 /**
  * associations
  */
