@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getCartProductsThunk, getCartIdThunk} from '../store/cart_store'
+import {
+  getCartProductsThunk,
+  getCartIdThunk,
+  removeItemThunk
+} from '../store/cart_store'
 import {Link} from 'react-router-dom'
 
 import axios from 'axios'
@@ -89,6 +93,16 @@ class Cart extends Component {
                       <button>+</button>
                       <button>-</button>
                     </td>
+                    <td>
+                      <button
+                        onClick={() =>
+                          this.props.removeItem(filteredProduct.id)
+                        }
+                      >
+                        {' '}
+                        Remove{' '}
+                      </button>
+                    </td>
                   </tr>
                 )
               })}
@@ -130,7 +144,9 @@ const mapState = state => ({
 const mapDispatch = dispatch => ({
   populateCart: cartId => dispatch(getCartProductsThunk(cartId)),
 
-  getSession: () => dispatch(getCartIdThunk())
+  getSession: () => dispatch(getCartIdThunk()),
+
+  removeItem: id => dispatch(removeItemThunk(id))
 })
 
 const connectedCart = connect(

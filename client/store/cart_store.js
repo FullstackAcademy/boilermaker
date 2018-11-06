@@ -7,6 +7,7 @@ const GET_CART_PRODUCTS = 'GET_CART_PRODUCTS'
 const ADD_TO_CART = 'ADD_TO_CART'
 const UPDATE_CART = 'UPDATE_CART'
 const GET_SESSION_CART_ID = 'GET_SESSION_CART_ID'
+const REMOVE_ITEM = 'REMOVE_ITEM'
 /**
  * INITIAL STATE
  */
@@ -20,6 +21,7 @@ const getCartProducts = products => ({type: GET_CART_PRODUCTS, products})
 const addToCart = product => ({type: ADD_TO_CART, product})
 const updateCart = product => ({type: UPDATE_CART, product})
 const getSessionCartId = cartId => ({type: GET_SESSION_CART_ID, cartId})
+const removeItem = id => ({type: REMOVE_ITEM, id})
 /*
  HELPING FUNCTIONS
  */
@@ -142,7 +144,20 @@ export const getSessionCartIdThunk = () => {
     try {
       const {data} = await axios.get('/api/cartProducts/session')
       dispatch(getSessionCartId(data))
-    } catch(err) {
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+//Remove Item
+
+export const removeItemThunk = id => {
+  return async dispatch => {
+    try {
+      await axios.delete(`/api/cartProducts/${id}`)
+      dispatch(removeItem(id))
+    } catch (err) {
       console.log(err)
     }
   }
@@ -168,6 +183,13 @@ const CartReducer = (state = initialState, action) => {
       return {...state, products: copy}
     case GET_SESSION_CART_ID:
       return {...state, sessionCartId: action.cartId}
+    case REMOVE_ITEM:
+      return {
+        ...state,
+        products: state.products.filter(
+          product => product.productId !== action.id
+        )
+      }
     default:
       return state
   }
