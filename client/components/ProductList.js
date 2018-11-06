@@ -4,6 +4,21 @@ import {getProductsThunk} from '../store/products_store'
 import {Link} from 'react-router-dom'
 import {addToCartButtonThunk, getCartProductsThunk} from '../store/cart_store'
 import axios from 'axios'
+import PropTypes from 'prop-types'
+import {withStyles} from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary
+  }
+})
 
 class ProductList extends Component {
   constructor(props) {
@@ -27,39 +42,54 @@ class ProductList extends Component {
   }
 
   render() {
+    const {classes} = this.props
+
     // console.log('cartproducts in state', this.props.cartProducts)
     // console.log('this.props.sessioncartid', this.props.sessionCartId)
     return (
-      <div> 
+      <div>
         {this.state.added ? <p>Added to cart!</p> : null}
         <div className="product-list">
-          {this.props.products.map(product => {
-            return (
-              <div className="product-block" key={product.id}>
-                <Link to={'/products/' + product.id} key={product.id}>
-                  <div>
-                    <h2>{product.name}</h2>
-                  </div>
-                  <div>
-                    <h3> Price: ${product.price} </h3>
-                  </div>
-                  <div>
-                    <img className="product-img" src={product.imageUrl} />
-                  </div>
-                </Link>
-                <form
-                  onSubmit={this.handleSubmit}
-                  onClick={() => {
-                    this.props.addCartButton(product.id, this.props.cartProducts)
-                    this.props.getCartProducts(this.props.sessionCartId)
-                    this.setState({added: true})
-                  }}
-                >
-                  <button type="submit">Add to cart</button>
-                </form>
-              </div>
-            )
-          })}
+          <Grid
+            container
+            space={12}
+            style={{padding: 12}}
+            className="all-products"
+            spacing={24}
+          >
+            {this.props.products.map(product => {
+              return (
+                <Grid item xs={8} sm={6} lg={4} xl={3}>
+                  <Paper className={classes.paper}>
+                    <Link to={'/products/' + product.id} key={product.id}>
+                      <div>
+                        <h2>{product.name}</h2>
+                      </div>
+                      <div>
+                        <h3> Price: ${product.price} </h3>
+                      </div>
+                      <div>
+                        <img className="product-img" src={product.imageUrl} />
+                      </div>
+                    </Link>
+                    <form
+                      onSubmit={this.handleSubmit}
+                      onClick={() => {
+                        this.props.addCartButton(
+                          product.id,
+                          this.props.cartProducts
+                        )
+                        this.props.getCartProducts(this.props.sessionCartId)
+                        this.setState({added: true})
+                      }}
+                    >
+                      <button type="submit">Add to cart</button>
+                    </form>
+                  </Paper>
+                </Grid>
+              )
+            })}
+          </Grid>
         </div>
       </div>
     )
@@ -79,9 +109,15 @@ const mapDispatchToProps = dispatch => ({
   getCartProducts: cartId => dispatch(getCartProductsThunk(cartId))
 })
 
+ProductList.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+const styledProductList = withStyles(styles)(ProductList)
+
 const ConnectedProductList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProductList)
+)(styledProductList)
 
 export default ConnectedProductList
