@@ -63,13 +63,12 @@ class ProductList extends Component {
                   <Paper className={classes.paper}>
                     <Link to={'/products/' + product.id} key={product.id}>
                       <div>
-                        <h2>{product.name}</h2>
-                      </div>
-                      <div>
-                        <h3> Price: ${product.price} </h3>
-                      </div>
-                      <div>
                         <img className="product-img" src={product.imageUrl} />
+                      </div>
+                      <div>
+                        <p>
+                          {product.name} - ${product.price}
+                        </p>
                       </div>
                     </Link>
                     <form
