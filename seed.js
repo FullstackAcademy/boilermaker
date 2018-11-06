@@ -36,33 +36,32 @@ const users = [
 
 const products = [
   {
-    name: 'apple',
-    price: 1,
+    name: 'Winter is Coming T-Shirt',
+    price: 15,
     imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCeE-XUkjXgBWaqNaMprbN58CCXIOo8UxSQickhEYJw2b3Bae2dA'
+      'http://gameofthronesmerch.com/media/13839/winter_is_coming_tshirt.jpg'
   },
   {
-    name: 'avocado',
-    price: 3,
-    imageUrl:
-      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/avocado-uses-cut-avocado-1521593581.jpg?crop=1.00xw:0.790xh;0,0.210xh&resize=1200:*'
+    name: 'Targaryen Mug',
+    price: 18,
+    imageUrl: 'http://gameofthronesmerch.com/media/13849/stein.jpg'
   },
   {
-    name: 'banana',
-    price: 2,
-    imageUrl:
-      'https://vignette.wikia.nocookie.net/r2d/images/c/c4/Dancing_banana.jpg/revision/latest?cb=20140927181629'
+    name: 'Character Toy Set',
+    price: 32,
+    imageUrl: 'http://gameofthronesmerch.com/media/13844/funko_pop_vinyls.jpg'
   },
   {
-    name: 'strawberry',
-    price: 5,
+    name: 'Dragon Egg Set',
+    price: 40,
     imageUrl:
-      'https://st4.depositphotos.com/1742172/22214/v/1600/depositphotos_222141284-stock-illustration-cartoon-doodle-strawberry-vector-illustration.jpg'
+      'https://images-na.ssl-images-amazon.com/images/I/51%2BEEsSN-fL._SL160_.jpg'
   },
   {
-    name: 'plum',
-    price: 4,
-    imageUrl: 'http://images.clipartpanda.com/plum-clipart-plum.jpg'
+    name: 'Stark Flashdrive',
+    price: 8,
+    imageUrl:
+      'https://images-na.ssl-images-amazon.com/images/I/41L1kz7AX1L._SL160_.jpg'
   }
 ]
 

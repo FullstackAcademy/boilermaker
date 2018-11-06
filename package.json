@@ -37,7 +37,7 @@
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
-    "@material-ui/core": "^3.3.2",
+    "@material-ui/core": "^3.4.0",
     "axios": "^0.15.3",
     "chalk": "^2.4.1",
     "compression": "^1.7.3",
@@ -45,6 +45,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
+    "material-ui": "^0.20.2",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",

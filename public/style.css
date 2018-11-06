@@ -33,19 +33,29 @@ form div {
   width: 600px;
 }
 
+.all-products {
+  display: flex;
+  flex-direction: row;
+  spacing: 50px;
+}
 .product-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.single-product {
+  height: 400px;
+  width: 375px;
   justify-content: center;
 }
 
-.header-nav {
+/* .header-nav {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-}
+} */
 
 .navbar {
   display: flex;
