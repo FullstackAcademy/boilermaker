@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getCartProductsThunk, getCartIdThunk} from '../store/cart_store'
+import {Link} from 'react-router-dom'
 
 import axios from 'axios'
 
@@ -43,61 +44,80 @@ class Cart extends Component {
   render() {
     console.log('prop.products', this.props.products)
     console.log('our props from redux store', this.props)
-    return (
-      <div className="cart">
-        <h2>Cart</h2>
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity:</th>
-          </tr>
-          {this.props.allProducts
-            .filter(allProduct => {
-              return this.props.products
-                .map(product => product.productId)
-                .includes(allProduct.id)
-            })
-            .map(filteredProduct => {
-              return (
-                <tr>
-                  <td>{filteredProduct.name}</td>
-                  <td>{filteredProduct.price}</td>
-                  <td>
-                    {
-                      this.props.products.filter(
-                        product => product.productId === filteredProduct.id
-                      )[0].quantity
-                    }
-                  </td>
-                </tr>
-              )
-            })}
+    if (!this.props.products.length) {
+      return (
+        <div className="cart">
+          <h2>Your cart is empty!</h2>
+          <Link to="/products">Start Shopping</Link>
+        </div>
+      )
+    } else {
+      return (
+        <div className="cart">
+          <h2>Cart</h2>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity:</th>
+            </tr>
+            {this.props.allProducts
+              .filter(allProduct => {
+                return this.props.products
+                  .map(product => product.productId)
+                  .includes(allProduct.id)
+              })
+              .map(filteredProduct => {
+                return (
+                  <tr>
+                    <td>{filteredProduct.name}</td>
+                    <td>{filteredProduct.price}</td>
+                    <td>
+                      <form>
+                        <label>
+                          <input
+                            type="text"
+                            value={
+                              this.props.products.filter(
+                                product =>
+                                  product.productId === filteredProduct.id
+                              )[0].quantity
+                            }
+                          />
+                        </label>
+                      </form>
+                      <button>+</button>
+                      <button>-</button>
+                    </td>
+                  </tr>
+                )
+              })}
 
-          {/* {this.state.productTemps.map((product, idx) => {
+            {/* {this.state.productTemps.map((product, idx) => {
             return (
               <tr>
-                <td>{product.name}</td>
-                <td>{product.price}</td>
-                <td>{this.props.products[idx].quantity}</td>
+              <td>{product.name}</td>
+              <td>{product.price}</td>
+              <td>{this.props.products[idx].quantity}</td>
               </tr>
-            )
-          })} */}
-        </table>
-        <div>
-          Total:
-          {this.props.products.reduce((acc, current) => {
-            return (
-              acc +
-              this.props.allProducts.filter(
-                product => product.id === current.productId
-              )[0].price *
-                current.quantity
-            )
-          }, 0)}
+              )
+            })} */}
+          </table>
+          <div>
+            Total:
+            {this.props.products.reduce((acc, current) => {
+              return (
+                acc +
+                this.props.allProducts.filter(
+                  product => product.id === current.productId
+                )[0].price *
+                  current.quantity
+              )
+            }, 0)}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
 
