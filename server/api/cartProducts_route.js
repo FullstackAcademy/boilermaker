@@ -53,6 +53,17 @@ router.get('/:cartId', async (req, res, next) => {
   }
 })
 
+router.get('/:cartId/:productId', async (req, res, next) => {
+  try {
+    const productInCart = await CartProduct.findOne({
+      where: {cartId: req.params.cartId, productId: req.params.productId}
+    })
+    res.status(200).send(productInCart)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const newCartProduct = await CartProduct.create({

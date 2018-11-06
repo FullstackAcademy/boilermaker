@@ -1,9 +1,12 @@
+/* eslint-disable react/button-has-type */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {
   getCartProductsThunk,
   getCartIdThunk,
-  removeItemThunk
+  removeItemThunk,
+  decrementQuantityThunk,
+  incrementQuantityThunk
 } from '../store/cart_store'
 import {Link} from 'react-router-dom'
 
@@ -73,6 +76,7 @@ class Cart extends Component {
               })
               .map(filteredProduct => {
                 return (
+                  // eslint-disable-next-line react/jsx-key
                   <tr>
                     <td>{filteredProduct.name}</td>
                     <td>{filteredProduct.price}</td>
@@ -90,8 +94,26 @@ class Cart extends Component {
                           />
                         </label>
                       </form>
-                      <button>+</button>
-                      <button>-</button>
+                      <button
+                        onClick={() =>
+                          this.props.incrementQuantity(
+                            filteredProduct.id,
+                            this.props.cartId
+                          )
+                        }
+                      >
+                        +
+                      </button>
+                      <button
+                        onClick={() =>
+                          this.props.decrementQuantity(
+                            filteredProduct.id,
+                            this.props.cartId
+                          )
+                        }
+                      >
+                        -
+                      </button>
                     </td>
                     <td>
                       <button
@@ -99,8 +121,7 @@ class Cart extends Component {
                           this.props.removeItem(filteredProduct.id)
                         }
                       >
-                        {' '}
-                        Remove{' '}
+                        Remove
                       </button>
                     </td>
                   </tr>
@@ -146,7 +167,13 @@ const mapDispatch = dispatch => ({
 
   getSession: () => dispatch(getCartIdThunk()),
 
-  removeItem: id => dispatch(removeItemThunk(id))
+  removeItem: id => dispatch(removeItemThunk(id)),
+
+  incrementQuantity: (productId, cartId) =>
+    dispatch(incrementQuantityThunk(productId, cartId)),
+
+  decrementQuantity: (productId, cartId) =>
+    dispatch(decrementQuantityThunk(productId, cartId))
 })
 
 const connectedCart = connect(

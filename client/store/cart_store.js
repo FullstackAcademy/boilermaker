@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {AvQueuePlayNext} from 'material-ui/svg-icons'
 
 /**
  * ACTION TYPES
@@ -157,6 +158,60 @@ export const removeItemThunk = id => {
     try {
       await axios.delete(`/api/cartProducts/${id}`)
       dispatch(removeItem(id))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+//Increment Quantity
+
+export const incrementQuantityThunk = (productId, cartId) => {
+  return async dispatch => {
+    try {
+      const productObj = await axios.get(
+        `/api/cartProducts/${cartId}/${productId}`
+      )
+      const product = productObj.data
+      const currentQuantity = product.quantity
+
+      const updated = await axios.put(
+        `/api/cartProducts/${cartId}/${productId}`,
+        {
+          quantity: currentQuantity + 1
+        }
+      )
+
+      dispatch(updateCart(updated.data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+//Decrement Quantity
+
+export const decrementQuantityThunk = (productId, cartId, quantity) => {
+  return async dispatch => {
+    try {
+      const productObj = await axios.get(
+        `/api/cartProducts/${cartId}/${productId}`
+      )
+      const product = productObj.data
+      const currentQuantity = product.quantity
+
+      if (currentQuantity > 1) {
+        const updated = await axios.put(
+          `/api/cartProducts/${cartId}/${productId}`,
+          {
+            quantity: currentQuantity - 1
+          }
+        )
+
+        dispatch(updateCart(updated.data))
+      } else {
+        dispatch(removeItem(product.productId))
+      }
     } catch (err) {
       console.log(err)
     }
