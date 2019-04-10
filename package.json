@@ -48,9 +48,9 @@
     "pg": "^7.9.0",
     "pg-hstore": "^2.3.2",
     "prop-types": "^15.7.2",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-redux": "^5.0.7",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.1",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
@@ -95,10 +95,5 @@
     "supertest": "^4.0.2",
     "webpack": "^4.16.4",
     "webpack-cli": "^3.1.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }

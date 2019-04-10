@@ -47,3 +47,11 @@
 - babel-loader update to 8.0.5 from 8.0.0-beta.4
 
 `npm i enzyme` to fix lodash dependency: [Prototype Polution](https://www.npmjs.com/advisories/782)
+
+
+## Wednesday, April 10th, 2019
+### Dependencies 
+- react-redux update to 7.0.1 from 5.0.7
+    - Found out that as long as react- is 16.4+, the updates should be fine
+- react update to 16.8.6 from 16.4.2
+- react-dom update to 16.8.6 from 16.4.2
