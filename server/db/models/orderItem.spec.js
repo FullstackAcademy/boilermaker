@@ -2,7 +2,7 @@
 
 const {expect} = require('chai')
 const db = require('../index')
-const OrderItem = db.model('OrderItem')
+const OrderItem = db.model('orderItem')
 
 describe('Order Item model', () => {
   beforeEach(() => {
@@ -20,12 +20,18 @@ describe('Order Item model', () => {
         })
       })
 
-      it('returns true if the quantity is a number', () => {
-        expect(item.quantity.to.be.a('number'))
-      })
+      it('requires "quantity"', async () => {
+        item.quantity = null
+        let result, error
 
-      it('returns true if the price is a number', () => {
-        expect(item.price.to.be.a('number'))
+        try {
+          result = await item.validate()
+        } catch (err) {
+          error = err
+        }
+
+        if (result) throw Error('validation should fail when quantity is null')
+        expect(error).to.be.an.instanceOf(Error)
       })
     })
   })
