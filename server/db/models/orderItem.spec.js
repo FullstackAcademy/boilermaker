@@ -7,7 +7,7 @@ const OrderItem = db.model('OrderItem')
 describe('Order Item model', () => {
   beforeEach(() => {
     return db.sync({force: true})
-})
+  })
 
   describe('validate columns', () => {
     describe('validateColumns', () => {
@@ -15,17 +15,17 @@ describe('Order Item model', () => {
 
       beforeEach(async () => {
         item = await OrderItem.create({
-         quantity: 0,
-         price: 1.50
+          quantity: 3,
+          price: 1.5
         })
       })
 
       it('returns true if the quantity is a number', () => {
-        expect(item.quantity.to.be.an('number'))
+        expect(item.quantity.to.be.a('number'))
       })
 
       it('returns true if the price is a number', () => {
-        expect(item.price.to.be.an('number'))
+        expect(item.price.to.be.a('number'))
       })
     })
   })
