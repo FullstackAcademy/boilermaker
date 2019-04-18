@@ -1,21 +1,14 @@
 body {
-  font-family: sans-serif;
-}
+  font-family: sans-serif; }
+  body a {
+    text-decoration: none; }
+  body label {
+    display: block; }
+  body nav a {
+    display: inline-block;
+    margin: 1em; }
+  body form div {
+    margin: 1em;
+    display: inline-block; }
 
-a {
-  text-decoration: none;
-}
-
-label {
-  display: block;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
-form div {
-  margin: 1em;
-  display: inline-block;
-}
+/*# sourceMappingURL=style.css.map*/
