@@ -1,5 +1,5 @@
 'use strict'
-/* global describe beforeEach it */
+/* global describe it */
 
 const seed = require('./seed')
 
