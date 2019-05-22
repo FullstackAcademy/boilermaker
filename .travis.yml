@@ -15,9 +15,11 @@ install:
   - npm ci # faster, goes only from package-lock
 before_script:
   - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+script:
+  - npm test             # test the code
+  - npm run build-client # make the bundle
 
 # before_deploy:
-#   - npm run build-client # make the bundle
 #   - rm -rf node_modules # omit from the tarball, since we skip cleanup
 # deploy:
 #   skip_cleanup: true # prevents travis from deleting the build
