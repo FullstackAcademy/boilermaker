@@ -1,5 +1,6 @@
 import React from 'react'
 import CSVReader from 'react-csv-reader'
+import axios from 'axios'
 
 export default class UploadForm extends React.Component {
   constructor(props) {
@@ -23,6 +24,21 @@ export default class UploadForm extends React.Component {
       })
       console.log('after: ', this.state)
     }
+
+    this.handleSubmit = async () => {
+      console.log('clicked submit')
+      try {
+        await axios.put(`/api/companies/${this.state.companyId}`, {
+          companyId: this.state.companyId,
+          companyName: this.state.companyName,
+          sharePriceDate: this.state.sharePriceDate,
+          sharePrice: this.state.sharePrice,
+          comments: this.state.comments
+        })
+      } catch (err) {
+        console.log('oh no!!', err)
+      }
+    }
   }
 
   render() {
@@ -33,6 +49,7 @@ export default class UploadForm extends React.Component {
           label="Select CSV with secret Death Star statistics"
           onFileLoaded={this.handleForce}
         />
+        <button onClick={this.handleSubmit}>submit</button>
       </div>
     )
   }

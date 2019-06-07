@@ -15,12 +15,14 @@ router.get('/', async (req, res, next) => {
 
 router.put('/:companyId', async (req, res, next) => {
   try {
+    console.log('this is companyId', req.params.companyId)
+    console.log('this is req.body', req.body)
     const updatedCompany = await Companies.update(
       {
-        companyName: req.body.name,
-        sharePriceData: req.sharePriceData,
-        sharePrice: req.sharePrice,
-        comments: req.comments
+        companyName: req.body.companyName,
+        sharePriceDate: req.body.sharePriceDate,
+        sharePrice: req.body.sharePrice,
+        comments: req.body.comments
       },
       {
         where: {
