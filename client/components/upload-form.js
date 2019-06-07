@@ -4,8 +4,14 @@ import CSVReader from 'react-csv-reader'
 export default class UploadForm extends React.Component {
   constructor(props) {
     super(props)
-    this.handleForce = data => {
-      console.log(data)
+    this.state = {
+      data: []
+    }
+    this.handleForce = input => {
+      console.log('before: ', this.state)
+      console.log(input)
+      this.setState({data: input})
+      console.log('after: ', this.state)
     }
   }
 
