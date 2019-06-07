@@ -25,7 +25,8 @@ router.put('/:companyId', async (req, res, next) => {
       {
         where: {
           companyId: req.params.companyId
-        }
+        },
+        individualHooks: true
       }
     )
     return res.status(201).json({
