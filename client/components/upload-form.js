@@ -1,6 +1,7 @@
 import React from 'react'
 import CSVReader from 'react-csv-reader'
 import axios from 'axios'
+import UploadedCompany from './uploaded-company'
 
 export default class UploadForm extends React.Component {
   constructor(props) {
@@ -13,8 +14,6 @@ export default class UploadForm extends React.Component {
       comments: ''
     }
     this.handleForce = input => {
-      console.log('before: ', this.state)
-      console.log(input)
       this.setState({
         companyId: parseInt(input[1][0]),
         companyName: input[1][1],
@@ -22,11 +21,9 @@ export default class UploadForm extends React.Component {
         sharePrice: parseFloat(input[1][3]),
         comments: input[1][4]
       })
-      console.log('after: ', this.state)
     }
 
     this.handleSubmit = async () => {
-      console.log('clicked submit')
       try {
         await axios.put(`/api/companies/${this.state.companyId}`, {
           companyId: this.state.companyId,
@@ -50,6 +47,17 @@ export default class UploadForm extends React.Component {
           onFileLoaded={this.handleForce}
         />
         <button onClick={this.handleSubmit}>submit</button>
+        {this.state.companyName !== '' ? (
+          <UploadedCompany
+            companyName={this.state.companyName}
+            sharePrice={this.state.sharePrice}
+          />
+        ) : (
+          <h3>'upload a company!</h3>
+        )}
+        <div>
+          <h1 />
+        </div>
       </div>
     )
   }

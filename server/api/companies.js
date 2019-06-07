@@ -15,8 +15,6 @@ router.get('/', async (req, res, next) => {
 
 router.put('/:companyId', async (req, res, next) => {
   try {
-    console.log('this is companyId', req.params.companyId)
-    console.log('this is req.body', req.body)
     const updatedCompany = await Companies.update(
       {
         companyName: req.body.companyName,
