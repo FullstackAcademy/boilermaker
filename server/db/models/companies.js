@@ -20,7 +20,13 @@ const Companies = db.define(
       type: Sequelize.DECIMAL
     },
     comments: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      validate: {
+        len: {
+          args: [0, 256],
+          msg: 'Need comments to be between 0-256 characters'
+        }
+      }
     }
   },
   {
