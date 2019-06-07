@@ -20,7 +20,7 @@ router.put('/:companyId', async (req, res, next) => {
         companyName: req.body.name,
         sharePriceData: req.sharePriceData,
         sharePrice: req.sharePrice,
-        comments: comments
+        comments: req.comments
       },
       {
         where: {
