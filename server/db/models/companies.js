@@ -34,7 +34,8 @@ const Companies = db.define(
       beforeUpdate: (instance, options) => {
         if (
           instance.dataValues.sharePrice >=
-          10 * instance._previousDataValues.sharePrice
+            10 * instance._previousDataValues.sharePrice &&
+          instance._previousDataValues.sharePrice !== null
         ) {
           throw new Error('share price is greater than 10 times previous value')
         }

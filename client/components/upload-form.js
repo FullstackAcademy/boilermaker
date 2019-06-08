@@ -2,6 +2,7 @@ import React from 'react'
 import CSVReader from 'react-csv-reader'
 import axios from 'axios'
 import UploadedCompany from './uploaded-company'
+import AllCompanies from './all-companies'
 
 export default class UploadForm extends React.Component {
   constructor(props) {
@@ -11,8 +12,10 @@ export default class UploadForm extends React.Component {
       companyName: '',
       sharePriceDate: '',
       sharePrice: 0,
-      comments: ''
+      comments: '',
+      allCompanies: []
     }
+
     this.handleForce = input => {
       this.setState({
         companyId: parseInt(input[1][0]),
@@ -21,6 +24,20 @@ export default class UploadForm extends React.Component {
         sharePrice: parseFloat(input[1][3]),
         comments: input[1][4]
       })
+    }
+
+    this.componentDidMount = async () => {
+      try {
+        const allCompanies = await axios.get('/api/companies/')
+        const allCompaniesData = allCompanies.data
+        const allCompaniesDataFiltered = allCompaniesData.filter(
+          company => company.companyName
+        )
+        this.setState({allCompanies: allCompaniesDataFiltered})
+        console.log('state is: ', this.state)
+      } catch (err) {
+        console.log('error', err)
+      }
     }
 
     this.handleSubmit = async () => {
@@ -43,7 +60,7 @@ export default class UploadForm extends React.Component {
       <div className="container">
         <CSVReader
           cssClass="react-csv-input"
-          label="Select CSV with secret Death Star statistics"
+          label="Select CSV to upload with company data"
           onFileLoaded={this.handleForce}
         />
         <button onClick={this.handleSubmit}>submit</button>
@@ -53,10 +70,10 @@ export default class UploadForm extends React.Component {
             sharePrice={this.state.sharePrice}
           />
         ) : (
-          <h3>'upload a company!</h3>
+          <h4>'upload a company!</h4>
         )}
         <div>
-          <h1 />
+          <AllCompanies company={this.state.allCompanies} />
         </div>
       </div>
     )

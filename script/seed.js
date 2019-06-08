@@ -18,6 +18,9 @@ async function seed() {
     }),
     Companies.create({
       companyId: 234
+    }),
+    Companies.create({
+      companyId: 345
     })
   ])
 
