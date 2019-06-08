@@ -40,8 +40,6 @@ router.put('/:companyId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log('hitting the route')
-    console.log('req.body is', req.body)
     const newCompany = await Companies.create(req.body)
     res.json(newCompany)
   } catch (err) {

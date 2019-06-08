@@ -8,22 +8,15 @@ export default class UploadForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      companyId: 0,
-      companyName: '',
-      sharePriceDate: '',
-      sharePrice: 0,
-      comments: '',
+      uploaded: [],
       allCompanies: []
     }
 
     this.handleForce = input => {
       this.setState({
-        companyId: parseInt(input[1][0]),
-        companyName: input[1][1],
-        sharePriceDate: input[1][2],
-        sharePrice: parseFloat(input[1][3]),
-        comments: input[1][4]
+        uploaded: input
       })
+      console.log('state is: ', this.state)
     }
 
     this.componentDidMount = async () => {
@@ -39,18 +32,26 @@ export default class UploadForm extends React.Component {
       }
     }
 
-    this.handleSubmit = async () => {
-      try {
-        await axios.put(`/api/companies/${this.state.companyId}`, {
-          companyId: this.state.companyId,
-          companyName: this.state.companyName,
-          sharePriceDate: this.state.sharePriceDate,
-          sharePrice: this.state.sharePrice,
-          comments: this.state.comments
-        })
-      } catch (err) {
-        console.log('oh no!!', err)
-      }
+    this.handleSubmit = () => {
+      this.state.uploaded.map(async company => {
+        try {
+          console.log('the req.body is: ', {
+            companyId: parseInt(company[0]),
+            companyName: company[1],
+            sharePriceDate: company[2],
+            sharePrice: parseFloat(company[3]),
+            comments: company[4]
+          })
+          return await axios.put(`/api/companies/${company[0]}`, {
+            companyName: company[1],
+            sharePriceDate: company[2],
+            sharePrice: parseFloat(company[3]),
+            comments: company[4]
+          })
+        } catch (err) {
+          console.log(err)
+        }
+      })
     }
   }
 
