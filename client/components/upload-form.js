@@ -34,7 +34,6 @@ export default class UploadForm extends React.Component {
           company => company.companyName
         )
         this.setState({allCompanies: allCompaniesDataFiltered})
-        console.log('state is: ', this.state)
       } catch (err) {
         console.log('error', err)
       }
@@ -64,14 +63,14 @@ export default class UploadForm extends React.Component {
           onFileLoaded={this.handleForce}
         />
         <button onClick={this.handleSubmit}>submit</button>
-        {this.state.companyName !== '' ? (
+        {/* {this.state.companyName !== '' ? (
           <UploadedCompany
             companyName={this.state.companyName}
             sharePrice={this.state.sharePrice}
           />
         ) : (
-          <h4>'upload a company!</h4>
-        )}
+          <h4>'upload a CSV!</h4>
+        )} */}
         <div>
           <AllCompanies company={this.state.allCompanies} />
         </div>
