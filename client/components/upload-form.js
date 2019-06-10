@@ -1,8 +1,6 @@
 import React from 'react'
 import CSVReader from 'react-csv-reader'
 import axios from 'axios'
-import UploadedCompany from './uploaded-company'
-import AllCompanies from './all-companies'
 
 export default class UploadForm extends React.Component {
   constructor(props) {
@@ -16,7 +14,6 @@ export default class UploadForm extends React.Component {
       this.setState({
         uploaded: input
       })
-      console.log('state is: ', this.state)
     }
 
     this.componentDidMount = async () => {
@@ -35,14 +32,7 @@ export default class UploadForm extends React.Component {
     this.handleSubmit = () => {
       this.state.uploaded.map(async company => {
         try {
-          console.log('the req.body is: ', {
-            companyId: parseInt(company[0]),
-            companyName: company[1],
-            sharePriceDate: company[2],
-            sharePrice: parseFloat(company[3]),
-            comments: company[4]
-          })
-          return await axios.put(`/api/companies/${company[0]}`, {
+          await axios.put(`/api/companies/${company[0]}`, {
             companyName: company[1],
             sharePriceDate: company[2],
             sharePrice: parseFloat(company[3]),
@@ -64,16 +54,37 @@ export default class UploadForm extends React.Component {
           onFileLoaded={this.handleForce}
         />
         <button onClick={this.handleSubmit}>submit</button>
-        {/* {this.state.companyName !== '' ? (
-          <UploadedCompany
-            companyName={this.state.companyName}
-            sharePrice={this.state.sharePrice}
-          />
+
+        {this.state.uploaded.length !== 0 ? (
+          <div>
+            <h4>Companies Just Uploaded: </h4>
+            <ul>
+              {this.state.uploaded.map(company => (
+                <li key={Math.random()}>
+                  name: {company[1]}, at share price: ${parseFloat(company[3])},
+                  on: {company[2]} with comments: {company[4]} with company Id:
+                  {company[0]}
+                </li>
+              ))}
+            </ul>
+          </div>
         ) : (
-          <h4>'upload a CSV!</h4>
-        )} */}
+          <h4>upload a CSV!</h4>
+        )}
+
         <div>
-          <AllCompanies company={this.state.allCompanies} />
+          <h4>Companies in Database: </h4>
+          <ul>
+            {this.state.allCompanies.map(company => (
+              <li key={Math.random()}>
+                name: {company.companyName}, at share price: ${
+                  company.sharePrice
+                }{' '}
+                on: {company.sharePriceDate} with comments: {company.comments}{' '}
+                with company Id: {company.companyId}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     )

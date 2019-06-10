@@ -5,7 +5,13 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const companies = await Companies.findAll({
-      attributes: ['companyName', 'sharePrice']
+      attributes: [
+        'companyName',
+        'sharePrice',
+        'sharePriceDate',
+        'comments',
+        'companyId'
+      ]
     })
     res.json(companies)
   } catch (err) {
