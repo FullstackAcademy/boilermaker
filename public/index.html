@@ -5,10 +5,20 @@
     <meta name='viewport' content='width=device-width initial-scale=1.0'>
     <title>Boilermaker</title>
     <link rel="stylesheet" href="/style.css" />
+    <link rel="manifest" href="/manifest.json">
     <script defer src="/bundle.js"></script>
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+       window.addEventListener('load', () => {
+         navigator.serviceWorker
+           .register('/serviceWorker.js')
+           .then(reg => console.log('Service Worker: Registered (Pages)'))
+           .catch(err => console.log(`Service Worker: Error: ${err}`));
+       });
+      }
+    </script>
   </body>
 </html>
-
