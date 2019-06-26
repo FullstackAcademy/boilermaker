@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
+var request = require('request')
+var cheerio = require('cheerio')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -14,4 +16,16 @@ router.get('/', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
+})
+
+router.get('/article', async (req, res, next) => {
+  await request(
+    'https://onezero.medium.com/we-already-know-what-our-data-is-worth-48bca5643844',
+    function(error, response, html) {
+      if (!error && response.statusCode == 200) {
+        console.log('we got there!')
+        res.json(html)
+      }
+    }
+  )
 })

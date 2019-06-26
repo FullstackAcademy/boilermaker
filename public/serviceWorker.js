@@ -1,6 +1,6 @@
 const CACHE_NAME = 'static-cache-v1'
 
-const FILES_TO_CACHE = []
+const FILES_TO_CACHE = ['/offline.html']
 
 self.addEventListener('install', evt => {
   console.log('[ServiceWorker] Install')
