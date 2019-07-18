@@ -4,9 +4,8 @@ node_js:
 services:
   - postgresql # starts up postgres
 addons:
-  postgresql: '9.6' # highest available postgres version on Travis
-dist: trusty # uses trusty environment
-sudo: false # when on trusty, uses Docker containers for speed
+  postgresql: '10' # recent postgres version on Travis
+dist: xenial # uses xenial environment
 notifications:
   email:
     on_success: change # default: change (only when going from broken to fixed)
