@@ -18,9 +18,26 @@ from the .travis.yml file.`
 
 const successMessage = `Complete! Run \`git diff .travis.yml\` to check.`
 
+/* Clean up system state changes. */
+const clean = () => {
+  const externalFiles = ['.tmp.key.pem', '.tmp.token.txt', '.tmp.token.enc']
+  externalFiles.forEach(file => {
+    if (fs.existsSync(file)) fs.unlinkSync(file)
+  })
+}
+
 /* Get a specific git remote URL. */
-const getRemoteURL = (name, remotes) =>
-  remotes.filter(remote => remote.name === name)[0].refs.fetch
+const getRemoteURL = (name, remotes) => {
+  try {
+    return remotes.filter(remote => remote.name === name)[0].refs.fetch
+  } catch (err) {
+    console.log(
+      `It appears that the remote ${name} does not exist.`,
+      `Here is the full error:`,
+      err
+    )
+  }
+}
 
 /* Run a command and return its stdout. */
 const getOutputFromCommand = async (command, args) => {
@@ -132,13 +149,24 @@ const main = async () => {
   if (verbose) console.log('Encrypted key base 64 encoded:', keyBase64)
 
   /* Delete temporary files. */
-  fs.unlinkSync('.tmp.key.pem')
-  fs.unlinkSync('.tmp.token.txt')
-  fs.unlinkSync('.tmp.token.enc')
+  clean()
 
   /* Add the encrypted key to the .travis.yml file. */
   const update = updateTravisYAML(appName, keyBase64)
   if (update) console.log(successMessage)
+
+  /* Clean up in the case of unspecified errors. */
+  process.on('uncaughtException', () => {
+    clean()
+    if (verbose) console.log('Cleaned up on error!')
+    process.exit(1)
+  })
+
+  process.on('unhandledRejection', () => {
+    clean()
+    if (verbose) console.log('Cleaned up on error!')
+    process.exit(1)
+  })
 }
 
 if (require.main === module) {
