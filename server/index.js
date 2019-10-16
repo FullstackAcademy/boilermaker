@@ -10,6 +10,7 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const {blueBright} = require('chalk')
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -96,9 +97,15 @@ const createApp = () => {
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () =>
-    console.log(`Mixing it up on port ${PORT}`)
-  )
+  const server = app.listen(PORT, () => {
+    console.log(`
+
+    Listening on port ${PORT}
+
+    ${blueBright(`http://localhost:${PORT}/`)}
+
+`)
+  })
 
   // set up our socket control center
   const io = socketio(server)
