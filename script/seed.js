@@ -1,16 +1,71 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Post} = require('../server/db/models')
+
+const users = [
+  {
+    firstName: 'Pepper',
+    lastName: 'Thief',
+    email: 'pepper@email.com',
+    password: '123',
+    imageUrl:
+      '/Pepper_files/65484711_342054940053253_3436018288716960712_n.jpg',
+    bio: `My name is Pepper and I'm obsessed with creating paper installations. `
+  },
+  {
+    firstName: 'Gingerface',
+    lastName: 'Spiller',
+    email: 'gingerface@email.com',
+    password: '123',
+    imageUrl:
+      '/Gingerface_files/66616515_2048533155252518_9035402003363389255_n.jpg',
+    bio: `I possess the very rare talent of spilling water. When i see the ornaments it creates i feel like God is doing it through me.`
+  },
+  {
+    firstName: 'Irene',
+    lastName: 'Korat',
+    email: 'irene@email.com',
+    password: '123',
+    imageUrl: '/Roon_files/50174048_2287158451606839_4761074576624341_n.jpg'
+  },
+  {
+    firstName: 'Auchentoshen',
+    lastName: 'Bellyroller',
+    email: 'Auchentoshen@email.com',
+    password: '123',
+    imageUrl: '/Osh_files/67301721_367802100815270_71611851719051529_n(1).jpg'
+  }
+]
+
+const posts = [
+  {
+    title: 'Tale about the tail',
+    category: 'literature',
+    textBody: `I saw my tail again today./n I tried to catch it/n All in vain`,
+    userId: 1
+  },
+  {
+    title: 'The art of being pretty',
+    category: 'image',
+    postUrl: '/Roon_files/50174048_2287158451606839_4761074576624341_n.jpg',
+    userId: 3
+  }
+]
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
-
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  await Promise.all(
+    users.map(user => {
+      return User.create(user)
+    })
+  )
+  await Promise.all(
+    posts.map(post => {
+      return Post.create(post)
+    })
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
