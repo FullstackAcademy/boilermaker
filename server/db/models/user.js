@@ -2,32 +2,151 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const User = db.define('user', {
-  email: {
-    type: Sequelize.STRING,
-    unique: true,
-    allowNull: false
-  },
-  password: {
-    type: Sequelize.STRING,
-    // Making `.password` act like a func hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
-    get() {
-      return () => this.getDataValue('password')
+const User = db.define(
+  'user',
+  {
+    firstName: {
+      type: Sequelize.STRING,
+      validate: {
+        validAdd(value) {
+          if (value.match(/[;<>]/)) {
+            throw new Error('First name must not include illegal characters')
+          }
+        },
+        isAlpha: {
+          args: true,
+          msg: 'Must not contain numbers'
+        }
+      }
+    },
+    lastName: {
+      type: Sequelize.STRING,
+      validate: {
+        validAdd(value) {
+          if (value.match(/[;<>]/)) {
+            throw new Error('Last name must not include illegal characters')
+          }
+        },
+        isAlpha: {
+          args: true,
+          msg: 'Must not contain numbers'
+        }
+      }
+    },
+    email: {
+      type: Sequelize.STRING,
+      unique: true,
+      allowNull: false,
+      validate: {
+        isEmail: {
+          args: true,
+          msg: 'Must be valid email'
+        }
+      }
+    },
+    password: {
+      type: Sequelize.STRING,
+      validate: {
+        //simple password check for dev:
+
+        // isAlphanumeric:
+        //   {
+        //     args:true,
+        //     msg: "Password can only contain valid letters and numbers"
+        //   },
+
+        //password check for presentation:
+        validPw(value) {
+          switch (value) {
+            case !value.match(/[0-9]/):
+              throw new Error('Password must include at least one number')
+            case !value.match(/[!@#$%^&*]/):
+              //check which symbols can be used maliciously:
+
+              throw new Error(
+                'Password must include at least one special character'
+              )
+            case !value.match(/[A-Z]/):
+              throw new Error(
+                'Password must include at least one upper case character'
+              )
+            case !value.match(/[a-z]/):
+              throw new Error(
+                'Password must include at least one lower case character'
+              )
+            case value.match(/[;<>]/):
+              throw new Error('Password must not include illegal characters')
+            default:
+          }
+        },
+
+        len: {
+          args: [6, 15],
+          msg: 'Password must be between 6 and 15 characters'
+        }
+      },
+      get() {
+        return () => this.getDataValue('password')
+      }
+    },
+    username: {
+      type: Sequelize.STRING,
+      defaultValue: 'YourUsername',
+      validate: {
+        len: {
+          args: [5, 15],
+          msg: 'Username must be between 5 and 15 characters long'
+        },
+        isAlphanumeric: {
+          args: true,
+          msg: 'Username can only contain valid letters and numbers'
+        }
+      }
+    },
+    country: {
+      type: Sequelize.STRING,
+      defaultValue: '',
+      validate: {
+        validAdd(value) {
+          if (value.match(/[;<>]/)) {
+            throw new Error('Country name must not include illegal characters')
+          }
+        },
+        is: {
+          args: /^[a-z]*$/i,
+          msg: 'Must be valid country'
+        }
+      }
+    },
+    admin: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
+    },
+    salt: {
+      type: Sequelize.STRING,
+      get() {
+        return () => this.getDataValue('salt')
+      }
+    },
+    googleId: {
+      type: Sequelize.STRING
     }
   },
-  salt: {
-    type: Sequelize.STRING,
-    // Making `.salt` act like a function hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
-    get() {
-      return () => this.getDataValue('salt')
+  {
+    hooks: {
+      beforeCreate: user => {
+        user.address = `${user.houseNumber}, ${user.street}, ${user.apt}, ${
+          user.zipcode
+        }, ${user.state}, ${user.country}`
+      },
+      beforeUpdate: user => {
+        user.address = `${user.houseNumber}, ${user.street}, ${user.apt}, ${
+          user.zipcode
+        }, ${user.state}, ${user.country}`
+      }
     }
-  },
-  googleId: {
-    type: Sequelize.STRING
   }
-})
+)
 
 module.exports = User
 
