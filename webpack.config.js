@@ -30,6 +30,15 @@ module.exports = {
         options: {
           limit: 500000
         }
+      },
+      {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            attrs: [':data-src']
+          }
+        }
       }
     ]
   }
