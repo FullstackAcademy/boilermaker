@@ -9,7 +9,7 @@ describe('User model', () => {
     return db.sync({force: true})
   })
 
-  describe('instanceMethods', () => {
+  xdescribe('instanceMethods', () => {
     describe('correctPassword', () => {
       let cody
 
