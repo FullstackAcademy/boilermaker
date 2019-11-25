@@ -58,10 +58,13 @@
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.1",
     "react-router-dom": "^5.0.0",
+    "react-sound": "^1.2.0",
     "react-webcam": "^4.0.0",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.1",
     "sequelize": "^5.3.1",
     "socket.io": "^2.2.0"
   },

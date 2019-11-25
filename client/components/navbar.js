@@ -2,40 +2,41 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {Container, Image, Menu} from 'semantic-ui-react'
+
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn, user}) => (
- 
-  <div>
-    <h1>ALL SIGN</h1>
-    <nav>
-      <div>
+  <Menu fixed="top" inverted>
+    <Container>
+      <Menu.Item as="a" header>
+        <Image
+          size="mini"
+          src={require('../../public/images/circle-cropped.png')}
+          style={{marginRight: '1.5em'}}
+        />
+        AllSign
+      </Menu.Item>
+      <Menu.Item as="a">
         <Link to="/home">Home</Link>
+      </Menu.Item>
+      <Menu.Item as="a">
         <Link to="/learn">Learn Sign Language</Link>
+      </Menu.Item>
+      <Menu.Item as="a">
         <Link to="/practice">Practice Sign Language</Link>
+      </Menu.Item>
+      <Menu.Item as="a">
         <Link to="/interactive">Learn Interactively</Link>
+      </Menu.Item>
+      <Menu.Item as="a">
         <Link to="/leaderboard">High Scores</Link>
+      </Menu.Item>
+      <Menu.Item as="a">
         <Link to="/about">About</Link>
-        
-        {isLoggedIn ? (
-          <span>
-            {/* The navbar will show these links after you log in */}
-            <Link to={`/profile/${user.id}`}>Profile</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-          </span>
-        ) : (
-          <span>
-            {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </span>
-        )}
-      </div>
-    </nav>
-    <hr />
-  </div>
+      </Menu.Item>
+    </Container>
+  </Menu>
 )
 
 /**
@@ -44,7 +45,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.loggedInUser.id || !!state.user.user.admin,
-		user: state.user.loggedInUser || state.user.user
+    user: state.user.loggedInUser || state.user.user
   }
 }
 

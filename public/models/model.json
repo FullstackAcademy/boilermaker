@@ -2,17 +2,17 @@
   "modelTopology": {
     "class_name": "Sequential",
     "config": {
-      "name": "sequential_4",
+      "name": "sequential_20",
       "layers": [
         {
           "class_name": "Sequential",
           "config": {
-            "name": "sequential_1",
+            "name": "sequential_17",
             "layers": [
               {
                 "class_name": "Model",
                 "config": {
-                  "name": "model1",
+                  "name": "model5",
                   "layers": [
                     {
                       "name": "input_1",
@@ -4143,7 +4143,7 @@
                 "class_name": "GlobalAveragePooling2D",
                 "config": {
                   "data_format": "channels_last",
-                  "name": "global_average_pooling2d_GlobalAveragePooling2D1",
+                  "name": "global_average_pooling2d_GlobalAveragePooling2D5",
                   "trainable": true
                 }
               }
@@ -4153,7 +4153,7 @@
         {
           "class_name": "Sequential",
           "config": {
-            "name": "sequential_3",
+            "name": "sequential_19",
             "layers": [
               {
                 "class_name": "Dense",
@@ -4176,7 +4176,7 @@
                   "activity_regularizer": null,
                   "kernel_constraint": null,
                   "bias_constraint": null,
-                  "name": "dense_Dense1",
+                  "name": "dense_Dense9",
                   "trainable": true,
                   "batch_input_shape": [null, 1280],
                   "dtype": "float32"
@@ -4185,7 +4185,7 @@
               {
                 "class_name": "Dense",
                 "config": {
-                  "units": 10,
+                  "units": 6,
                   "activation": "softmax",
                   "use_bias": false,
                   "kernel_initializer": {
@@ -4203,7 +4203,7 @@
                   "activity_regularizer": null,
                   "kernel_constraint": null,
                   "bias_constraint": null,
-                  "name": "dense_Dense2",
+                  "name": "dense_Dense10",
                   "trainable": true
                 }
               }
@@ -4784,12 +4784,12 @@
         {"name": "Conv_1_bn/gamma", "shape": [1280], "dtype": "float32"},
         {"name": "Conv_1_bn/beta", "shape": [1280], "dtype": "float32"},
         {
-          "name": "dense_Dense1/kernel",
+          "name": "dense_Dense9/kernel",
           "shape": [1280, 100],
           "dtype": "float32"
         },
-        {"name": "dense_Dense1/bias", "shape": [100], "dtype": "float32"},
-        {"name": "dense_Dense2/kernel", "shape": [100, 10], "dtype": "float32"},
+        {"name": "dense_Dense9/bias", "shape": [100], "dtype": "float32"},
+        {"name": "dense_Dense10/kernel", "shape": [100, 6], "dtype": "float32"},
         {"name": "bn_Conv1/moving_mean", "shape": [16], "dtype": "float32"},
         {"name": "bn_Conv1/moving_variance", "shape": [16], "dtype": "float32"},
         {
