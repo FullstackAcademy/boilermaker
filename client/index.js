@@ -8,11 +8,17 @@ import App from './app'
 
 // establishes socket connection
 import './socket'
+import {Footer} from './components'
 
 ReactDOM.render(
   <Provider store={store}>
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
+    />
     <Router history={history}>
       <App />
+      <Footer />
     </Router>
   </Provider>,
   document.getElementById('app')
