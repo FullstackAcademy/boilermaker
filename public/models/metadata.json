@@ -3,19 +3,8 @@
   "tmVersion": "2.1.0",
   "packageVersion": "0.8.4",
   "packageName": "@teachablemachine/image",
-  "timeStamp": "2019-11-22T16:40:08.526Z",
+  "timeStamp": "2019-11-22T20:49:09.144Z",
   "userMetadata": {},
   "modelName": "tm-my-image-model",
-  "labels": [
-    "Number 0",
-    "Number 1",
-    "Number 2",
-    "Number 3",
-    "Number 4",
-    "Number 5",
-    "Number 6",
-    "Number 7",
-    "Number 8",
-    "Number 9"
-  ]
+  "labels": ["Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7"]
 }
