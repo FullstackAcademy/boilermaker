@@ -9,29 +9,31 @@ import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn, user}) => (
   <Menu fixed="top" inverted>
     <Container>
-      <Menu.Item as="a" header>
-        <Image
-          size="mini"
-          src={require('../../public/images/circle-cropped.png')}
-          style={{marginRight: '1.5em'}}
-        />
-        <Link to="/home">AllSign</Link>
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Link to="/learn">Learn Sign Language</Link>
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Link to="/practice">Practice Sign Language</Link>
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Link to="/interactive">Learn Interactively</Link>
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Link to="/leaderboard">High Scores</Link>
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Link to="/about">About</Link>
-      </Menu.Item>
+      <Link to="/home">
+        <Menu.Item as="a" header>
+          <Image
+            size="mini"
+            src={require('../../public/images/circle-cropped.png')}
+            style={{marginRight: '1.5em'}}
+          />
+          AllSign
+        </Menu.Item>
+      </Link>
+      <Link to="/learn">
+        <Menu.Item as="a">Learn Sign Language</Menu.Item>
+      </Link>
+      <Link to="/practice">
+        <Menu.Item as="a">Practice Sign Language</Menu.Item>
+      </Link>
+      <Link to="/interactive">
+        <Menu.Item as="a">Learn Interactively</Menu.Item>
+      </Link>
+      <Link to="/leaderboard">
+        <Menu.Item as="a">High Scores</Menu.Item>
+      </Link>
+      <Link to="/about">
+        <Menu.Item as="a">About</Menu.Item>
+      </Link>
     </Container>
   </Menu>
 )

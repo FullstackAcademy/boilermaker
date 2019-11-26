@@ -46,3 +46,6 @@ form div {
 #getstartedimg {
   bottom: 20px;
 }
+a.item {
+  height: 100%;
+}
