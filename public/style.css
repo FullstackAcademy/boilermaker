@@ -19,3 +19,30 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url('./images/Business-background-backgrounds-business-background-image-PixTeller.png');
+}
+
+#footer {
+  position: fixed;
+  bottom: 0mm;
+  width: 100%;
+}
+
+#logo {
+  top: 130px;
+  right: 500px;
+  color: darkcyan;
+  font-style: unset;
+  font-family: fantasy;
+  font-size: x-large;
+  text-align: center;
+  box-sizing: unset;
+}
+#getstartedimg {
+  bottom: 20px;
+}

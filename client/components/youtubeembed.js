@@ -18,7 +18,7 @@ const YoutubeEmbed = () => {
           width: '50%',
           height: '50%'
         }}
-        src="https://www.youtube.com/embed/j5a0jTc9S10"
+        src="https://www.youtube.com/embed/C_ECtXFIdyk"
         frameBorder="0"
       />
     </div>

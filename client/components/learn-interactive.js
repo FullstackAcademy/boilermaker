@@ -4,6 +4,7 @@ import axios from 'axios'
 // import Photo from './photo.js'
 import * as tf from '@tensorflow/tfjs'
 import Webcam from 'react-webcam'
+import {webcam} from '@tensorflow/tfjs-data'
 const html = require('../../public/model.html')
 const template = {__html: html}
 class Interactive extends Component {
@@ -18,13 +19,12 @@ class Interactive extends Component {
   //   this.setState({htmlFile:request})
   // }
   render() {
-
     return (
       <div dangerouslySetInnerHTML={template} />
-    //   <div>
-    //     <Webcam />
-    //         <button type="button" onClick={init}>Start</button>
-    //   </div>
+      //   <div>
+      //     <Webcam />
+      //         <button type="button" onClick={init}>Start</button>
+      //   </div>
     )
   }
 }
@@ -37,7 +37,6 @@ export default Interactive
 //     model = await tf.load(modelURL, metadataURL);
 //     maxPredictions = model.getTotalClasses();
 //     webcam = new tf.Webcam(200, 200, true)
-    
 //     await webcam.setup(); // request access to the webcam
 //     await webcam.play();
 //     window.requestAnimationFrame(loop);
@@ -48,7 +47,7 @@ export default Interactive
 //         }
 // }
 // async function loop() {
-//     webcam.update(); 
+//     webcam.update();
 //     await predict();
 //     window.requestAnimationFrame(loop);
 // }

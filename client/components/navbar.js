@@ -15,10 +15,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
           src={require('../../public/images/circle-cropped.png')}
           style={{marginRight: '1.5em'}}
         />
-        AllSign
-      </Menu.Item>
-      <Menu.Item as="a">
-        <Link to="/home">Home</Link>
+        <Link to="/home">AllSign</Link>
       </Menu.Item>
       <Menu.Item as="a">
         <Link to="/learn">Learn Sign Language</Link>
