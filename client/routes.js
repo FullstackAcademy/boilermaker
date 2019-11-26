@@ -4,6 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Login,
+  Practice,
   Signup,
   Leaderboard,
   UserHome,
@@ -31,6 +32,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/home" component={EntryPage} />
+        <Route path="/practice" component={Practice} />
         <Route path="/learn" component={Learn} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
@@ -40,13 +42,10 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            
+
             <Route path="/home" component={EntryPage} />
             <Route path="/profile/:id/update" component={UpdateUser} />
-            <Route path="/profile/:id/" component = {Profile}/>
-         
-           
-          
+            <Route path="/profile/:id/" component={Profile} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
