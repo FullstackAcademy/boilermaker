@@ -1,19 +1,59 @@
 import React from 'react'
 import {EntryVideo} from './index.js'
+import {
+  Container,
+  Divider,
+  Grid,
+  Header,
+  Icon,
+  Image,
+  Button
+} from 'semantic-ui-react'
+
 const EntryPage = () => {
   return (
-    <div>
-      <div>
-        <span>LOGO IS HERE</span>
-        <span>
-          Learn Sign Language For Free
-          <button type="button">GET STARTED</button>
-        </span>
-      </div>
-      <div>
-        <EntryVideo />
-      </div>
-    </div>
+    <Grid>
+      <Grid.Row columns={5}>
+        <Grid.Column />
+        <Grid.Column />
+        <Grid.Column id="logo">
+          <div>
+            <Image
+              rounded={true}
+              id="getstartedimg"
+              src="https://www.ajc.com/rf/image_inline/Pub/p8/CmgSharedContent/2017/12/04/Images/GettyImages-830954658.jpg"
+            />
+          </div>
+          <strong>Wellcome, Start Learning Sign Today</strong>
+          <div>
+            <Button id="getstartedbutton" color="honeydew">
+              <Icon size="large" name="american sign language interpreting" />
+              Get Started
+            </Button>
+          </div>
+        </Grid.Column>
+        <Grid.Column />
+        <Grid.Column />
+      </Grid.Row>
+
+      <Grid.Row>
+        <Grid.Column width={4}>
+          <p>
+            <span />
+          </p>
+        </Grid.Column>
+        <Grid.Column width={8}>
+          <p>
+            <span />
+          </p>
+        </Grid.Column>
+        <Grid.Column width={4}>
+          <p>
+            <span>Four</span>
+          </p>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
   )
 }
 

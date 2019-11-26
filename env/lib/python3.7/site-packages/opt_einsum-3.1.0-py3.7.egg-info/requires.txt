@@ -1,0 +1,12 @@
+numpy>=1.7
+
+[docs]
+sphinx==1.2.3
+sphinxcontrib-napoleon
+sphinx_rtd_theme
+numpydoc
+
+[tests]
+pytest
+pytest-cov
+pytest-pep8
