@@ -37,7 +37,6 @@ export default Interactive
 //     model = await tf.load(modelURL, metadataURL);
 //     maxPredictions = model.getTotalClasses();
 //     webcam = new tf.Webcam(200, 200, true)
-
 //     await webcam.setup(); // request access to the webcam
 //     await webcam.play();
 //     window.requestAnimationFrame(loop);
