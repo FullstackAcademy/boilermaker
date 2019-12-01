@@ -35,7 +35,7 @@ form div {
 
 #logo {
   top: 130px;
-  right: 500px;
+  right: 50px;
   color: darkcyan;
   font-style: unset;
   font-family: fantasy;
@@ -48,4 +48,18 @@ form div {
 }
 a.item {
   height: 100%;
+}
+
+#getstartedbutton {
+  position: absolute;
+  top: 206px;
+  right: 100px;
+}
+
+button#webcam-button {
+  position: absolute;
+  top: 200px;
+}
+
+#input {
 }
