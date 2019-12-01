@@ -25,7 +25,7 @@ const Interactive = () => {
       }
       console.log(imgSrc)
       const res = await axios.post(
-        'http://allsignpython.herokuapp.com/result',
+        'https://allsignpython.herokuapp.com/result',
         {imgSrc},
         config
       )
