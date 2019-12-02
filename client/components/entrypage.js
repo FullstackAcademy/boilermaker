@@ -1,5 +1,6 @@
 import React from 'react'
 import {Video} from './index.js'
+import {Footer, Navbar} from '../components'
 import {
   Container,
   Divider,
@@ -13,6 +14,7 @@ import {
 const EntryPage = () => {
   return (
     <Grid>
+      <Navbar />
       <Grid.Row>
         <Grid.Column id="logo" width={4}>
           <Image
@@ -27,6 +29,7 @@ const EntryPage = () => {
           </Button>
         </Grid.Column>
       </Grid.Row>
+      <Footer />
     </Grid>
   )
 }

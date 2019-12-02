@@ -30,12 +30,12 @@ form div {
 #footer {
   position: fixed;
   bottom: 0mm;
-  width: 100%;
+  width: 110%;
   height: 400px;
 }
 
 #logo {
-  top: 230px;
+  top: 180px;
   left: 500px;
   color: darkcyan;
   font-style: unset;

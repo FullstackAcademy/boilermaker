@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {Container, Image, Menu} from 'semantic-ui-react'
+import {Dropdown, Container, Image, Menu} from 'semantic-ui-react'
 
 import {logout} from '../store'
 
@@ -48,11 +48,24 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
 
     {isLoggedIn ? (
       <Container id="rightnavbar">
-        <Link id="rightnav" href="#" onClick={handleClick}>
-          <Menu.Item id="rightnav" as="a">
-            Logout
-          </Menu.Item>
-        </Link>
+        <Dropdown
+          icon="settings"
+          text=" Settings"
+          pointing
+          className="link item"
+        >
+          <Dropdown.Menu>
+            <Dropdown.Header>Settings</Dropdown.Header>
+            <Dropdown.Item>About</Dropdown.Item>
+            <Dropdown.Item>
+              {' '}
+              <Link id="dropdownlink" to={`/profile/${user.id}`}>
+                Profile
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item onClick={handleClick}>Logout</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Container>
     ) : (
       <Container id="rightnavbar">

@@ -11,6 +11,8 @@ import {
   Message,
   Segment
 } from 'semantic-ui-react'
+import {Navbar} from '.'
+import {Footer} from './footer'
 
 /**
  * COMPONENT
@@ -19,61 +21,65 @@ const signup = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <Grid textAlign="center" style={{height: '100vh'}} verticalAlign="middle">
-      <Grid.Column id="signupform" style={{maxWidth: 450}}>
-        <Header as="h2" color="teal" textAlign="center">
-          <Image src={require('../../public/images/circle-cropped.png')} /> Sign
-          up to create your account
-        </Header>
-        <Form size="large" onSubmit={handleSubmit}>
-          <Segment stacked id="signupbackground">
-            <Form.Input
-              name="username"
-              fluid
-              icon="user"
-              iconPosition="left"
-              placeholder="Username"
-              type="username"
-            />
-            <Form.Input
-              name="firstName"
-              fluid
-              icon="user"
-              iconPosition="left"
-              placeholder="First Name"
-              type="firstName"
-            />
-            <Form.Input
-              name="lastName"
-              fluid
-              icon="user"
-              iconPosition="left"
-              placeholder="Last Name"
-              type="lastName"
-            />
-            <Form.Input
-              name="email"
-              fluid
-              icon="user"
-              iconPosition="left"
-              placeholder="E-mail address"
-              type="Email"
-            />
-            <Form.Input
-              name="password"
-              fluid
-              icon="lock"
-              iconPosition="left"
-              placeholder="Password"
-              type="password"
-            />
-            <Button type="submit" color="teal" fluid size="large">
-              Sign Up!
-            </Button>
-          </Segment>
-        </Form>
-      </Grid.Column>
-    </Grid>
+    <div>
+      <Navbar />
+      <Grid textAlign="center" style={{height: '100vh'}} verticalAlign="middle">
+        <Grid.Column id="signupform" style={{maxWidth: 450}}>
+          <Header as="h2" color="teal" textAlign="center">
+            <Image src={require('../../public/images/circle-cropped.png')} />{' '}
+            Sign up to create your account
+          </Header>
+          <Form size="large" onSubmit={handleSubmit}>
+            <Segment stacked id="signupbackground">
+              <Form.Input
+                name="username"
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="Username"
+                type="username"
+              />
+              <Form.Input
+                name="firstName"
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="First Name"
+                type="firstName"
+              />
+              <Form.Input
+                name="lastName"
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="Last Name"
+                type="lastName"
+              />
+              <Form.Input
+                name="email"
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="E-mail address"
+                type="Email"
+              />
+              <Form.Input
+                name="password"
+                fluid
+                icon="lock"
+                iconPosition="left"
+                placeholder="Password"
+                type="password"
+              />
+              <Button type="submit" color="teal" fluid size="large">
+                Sign Up!
+              </Button>
+            </Segment>
+          </Form>
+        </Grid.Column>
+      </Grid>
+      <Footer />
+    </div>
   )
 }
 
