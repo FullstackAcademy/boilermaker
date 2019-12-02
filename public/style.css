@@ -35,17 +35,21 @@ form div {
 }
 
 #logo {
-  top: 130px;
-  right: 50px;
+  top: 230px;
+  left: 500px;
   color: darkcyan;
   font-style: unset;
   font-family: fantasy;
   font-size: x-large;
   text-align: center;
   box-sizing: unset;
+  display: flex;
+  position: relative;
+  flex-flow: column-reverse;
 }
 #getstartedimg {
   bottom: 20px;
+  width: 1100px;
 }
 a.item {
   height: 100%;
@@ -53,7 +57,7 @@ a.item {
 
 #getstartedbutton {
   position: absolute;
-  top: 206px;
+  top: 300px;
   right: 100px;
 }
 
@@ -77,4 +81,21 @@ button#webcam-button {
 }
 div.field {
   width: 200px;
+}
+
+#rightnavbar {
+  display: flex;
+  justify-content: flex-end;
+  width: 25%;
+}
+
+#navbar {
+  width: 100%;
+  margin-left: unset !important;
+  margin-right: unset !important;
+}
+
+#welcom {
+  position: relative;
+  bottom: 30px;
 }
