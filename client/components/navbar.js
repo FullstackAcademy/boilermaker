@@ -8,33 +8,72 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn, user}) => (
   <Menu fixed="top" inverted>
-    <Container>
-      <Link to="/home">
-        <Menu.Item as="a" header>
-          <Image
-            size="mini"
-            src={require('../../public/images/circle-cropped.png')}
-            style={{marginRight: '1.5em'}}
-          />
-          AllSign
-        </Menu.Item>
-      </Link>
-      <Link to="/learn">
-        <Menu.Item as="a">Learn Sign Language</Menu.Item>
-      </Link>
-      <Link to="/practice">
-        <Menu.Item as="a">Practice Sign Language</Menu.Item>
-      </Link>
-      <Link to="/interactive">
-        <Menu.Item as="a">Learn Interactively</Menu.Item>
-      </Link>
-      <Link to="/leaderboard">
-        <Menu.Item as="a">High Scores</Menu.Item>
-      </Link>
-      <Link to="/about">
-        <Menu.Item as="a">About</Menu.Item>
-      </Link>
-    </Container>
+    {isLoggedIn ? (
+      <Container>
+        <Link to="/home">
+          <Menu.Item as="a" header>
+            <Image
+              size="mini"
+              src={require('../../public/images/circle-cropped.png')}
+              style={{marginRight: '1.5em'}}
+            />
+            AllSign
+          </Menu.Item>
+        </Link>
+        <Link to="/learn">
+          <Menu.Item as="a">Learn Sign Language</Menu.Item>
+        </Link>
+        <Link to="/practice">
+          <Menu.Item as="a">Practice Sign Language</Menu.Item>
+        </Link>
+        <Link to="/interactive">
+          <Menu.Item as="a">Learn Interactively</Menu.Item>
+        </Link>
+        <Link to="/leaderboard">
+          <Menu.Item as="a">High Scores</Menu.Item>
+        </Link>
+        <Link to="/about">
+          <Menu.Item as="a">About</Menu.Item>
+        </Link>
+        <Link href="#" onClick={handleClick}>
+          <Menu.Item as="a">Logout</Menu.Item>
+        </Link>
+      </Container>
+    ) : (
+      <Container>
+        <Link to="/home">
+          <Menu.Item as="a" header>
+            <Image
+              size="mini"
+              src={require('../../public/images/circle-cropped.png')}
+              style={{marginRight: '1.5em'}}
+            />
+            AllSign
+          </Menu.Item>
+        </Link>
+        <Link to="/learn">
+          <Menu.Item as="a">Learn Sign Language</Menu.Item>
+        </Link>
+        <Link to="/practice">
+          <Menu.Item as="a">Practice Sign Language</Menu.Item>
+        </Link>
+        <Link to="/interactive">
+          <Menu.Item as="a">Learn Interactively</Menu.Item>
+        </Link>
+        <Link to="/leaderboard">
+          <Menu.Item as="a">High Scores</Menu.Item>
+        </Link>
+        <Link to="/about">
+          <Menu.Item as="a">About</Menu.Item>
+        </Link>
+        <Link to="/login">
+          <Menu.Item as="a">Login</Menu.Item>
+        </Link>
+        <Link to="/signup">
+          <Menu.Item as="a">Sign Up</Menu.Item>
+        </Link>
+      </Container>
+    )}
   </Menu>
 )
 
