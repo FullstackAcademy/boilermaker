@@ -5,7 +5,8 @@
  */
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
-export {Login, Signup} from './auth-form'
+export {Signup} from './signup'
+export {Login} from './Login'
 export {default as EntryPage} from './entrypage.js'
 export {default as Video} from './youtubeembed.js'
 export {default as Practice} from './Practice'
