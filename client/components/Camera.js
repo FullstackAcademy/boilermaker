@@ -13,20 +13,24 @@ const WebcamModal = () => {
 
   const capture = React.useCallback(
     async () => {
-      const imgSrc = webcamRef.current.getScreenshot()
-      const config = {
-        headers: {
-          'X-Custom-Header': Math.random(),
-          'Access-Control-Allow-Origin': '*'
+      try {
+        const imgSrc = webcamRef.current.getScreenshot()
+        const config = {
+          headers: {
+            'X-Custom-Header': Math.random(),
+            'Access-Control-Allow-Origin': '*'
+          }
         }
+        console.log(imgSrc)
+        const res = await axios.post(
+          'https://allsignpython.herokuapp.com/result',
+          {imgSrc},
+          config
+        )
+        console.log(res)
+      } catch (error) {
+        console.log(error)
       }
-      console.log(imgSrc)
-      const res = await axios.post(
-        'http://allsignpython.herokuapp.com/result',
-        {imgSrc},
-        config
-      )
-      console.log(res)
     },
     [webcamRef]
   )
