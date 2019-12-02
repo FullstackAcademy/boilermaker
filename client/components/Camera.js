@@ -36,7 +36,7 @@ const WebcamModal = () => {
   )
 
   return (
-    <Modal trigger={<Button id="webcam-button">Show Modal</Button>}>
+    <Modal trigger={<Button id="webcam-button">Start</Button>}>
       <Modal.Header>Submit a Photo</Modal.Header>
       <Modal.Content image>
         <>

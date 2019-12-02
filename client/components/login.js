@@ -11,6 +11,8 @@ import {
   Message,
   Segment
 } from 'semantic-ui-react'
+import {Navbar} from '.'
+import {Footer} from './footer'
 
 /**
  * COMPONENT
@@ -19,41 +21,45 @@ const login = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <Grid textAlign="center" style={{height: '100vh'}} verticalAlign="middle">
-      <Grid.Column id="loginform" style={{maxWidth: 450}}>
-        <Header as="h2" color="teal" textAlign="center">
-          <Image src={require('../../public/images/circle-cropped.png')} />Log-in
-          to your account
-        </Header>
-        <Form size="large" onSubmit={handleSubmit} name={name}>
-          <Segment stacked>
-            <Form.Input
-              name="email"
-              fluid
-              icon="user"
-              iconPosition="left"
-              placeholder="E-mail address"
-              type="Email"
-            />
-            <Form.Input
-              name="password"
-              fluid
-              icon="lock"
-              iconPosition="left"
-              placeholder="Password"
-              type="password"
-            />
+    <div>
+      <Navbar />
+      <Grid textAlign="center" style={{height: '100vh'}} verticalAlign="middle">
+        <Grid.Column id="loginform" style={{maxWidth: 450}}>
+          <Header as="h2" color="teal" textAlign="center">
+            <Image src={require('../../public/images/circle-cropped.png')} />Log-in
+            to your account
+          </Header>
+          <Form size="large" onSubmit={handleSubmit} name={name}>
+            <Segment stacked>
+              <Form.Input
+                name="email"
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="E-mail address"
+                type="Email"
+              />
+              <Form.Input
+                name="password"
+                fluid
+                icon="lock"
+                iconPosition="left"
+                placeholder="Password"
+                type="password"
+              />
 
-            <Button type="submit" color="teal" fluid size="large">
-              Login
-            </Button>
-          </Segment>
-        </Form>
-        <Message>
-          New to us? <a href="#">Sign Up</a>
-        </Message>
-      </Grid.Column>
-    </Grid>
+              <Button type="submit" color="teal" fluid size="large">
+                Login
+              </Button>
+            </Segment>
+          </Form>
+          <Message>
+            New to us? <a href="#">Sign Up</a>
+          </Message>
+        </Grid.Column>
+      </Grid>
+      <Footer />
+    </div>
   )
 }
 
