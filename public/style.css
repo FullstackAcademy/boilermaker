@@ -99,3 +99,13 @@ div.field {
   position: relative;
   bottom: 30px;
 }
+@font-face {
+  font-family: myFirstFont;
+  src: url(GallaudetRegular.ttf);
+}
+
+.signFont {
+  font-size: 200px;
+  color: white;
+  font-family: myFirstFont;
+}
