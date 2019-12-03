@@ -39,6 +39,9 @@ const Interactive = () => {
               <Header as="h3" style={{fontSize: '2em', color: 'white'}}>
                 If your ready to start learning hit the start button.
               </Header>
+              <text className="signFont">
+                If your ready to start learning hit the start button.
+              </text>
               <WebcamModal />
             </Grid.Column>
             <Grid.Column floated="right" width={6}>
