@@ -12,13 +12,18 @@ const WebcamModal = () => {
 
   // Load the image model and setup the webcam
   async function init() {
-    const modelURL = URL + 'model.json'
-    const metadataURL = URL + 'metadata.json'
-
+    // const uploadModel = document.getElementById('upload-model');
+    // const uploadWeights = document.getElementById('upload-weights');
+    // const uploadMetadata = document.getElementById('upload-metadata');
+    // console.log(uploadModel)
+    // model = await tmImage.loadFromFiles(uploadModel.files[0], uploadWeights.files[0], uploadMetadata.files[0])
     // load the model and metadata
     // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
     // or files from your local hard drive
     // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+    const modelURL = URL + 'model.json'
+    const metadataURL = URL + 'metadata.json'
+
     model = await tmImage.load(modelURL, metadataURL)
     maxPredictions = model.getTotalClasses()
 
@@ -31,16 +36,10 @@ const WebcamModal = () => {
 
     // append elements to the DOM
     document.getElementById('webcam-container').appendChild(webcam.canvas)
-    labelContainer = document.getElementById('label-container')
-    for (let i = 0; i < maxPredictions; i++) {
-      // and class labels
-      labelContainer.appendChild(document.createElement('div'))
-    }
   }
 
   async function loop() {
     webcam.update() // update the webcam frame
-    await predict()
     window.requestAnimationFrame(loop)
   }
 
@@ -48,25 +47,46 @@ const WebcamModal = () => {
   async function predict() {
     // predict can take in an image, video or canvas html element
     const prediction = await model.predict(webcam.canvas)
-    for (let i = 0; i < maxPredictions; i++) {
-      const classPrediction =
-        prediction[i].className + ': ' + prediction[i].probability.toFixed(2)
-      labelContainer.childNodes[i].innerHTML = classPrediction
+  }
+  async function handleTest() {
+    const handSign = await model.predict(webcam.canvas)
+    console.log(handSign[0].probability)
+    if (handSign[0].probability < 1 && handSign[0].probability > 0.7) {
+      alert('That is 0')
+    } else if (handSign[1].probability < 1 && handSign[1].probability > 0.7) {
+      alert('That is 1')
+    } else if (handSign[2].probability < 1 && handSign[2].probability > 0.7) {
+      alert('That is 2')
+    } else if (handSign[3].probability < 1 && handSign[3].probability > 0.7) {
+      alert('That is 3')
+    } else if (handSign[4].probability < 1 && handSign[4].probability > 0.7) {
+      alert('That is 4')
+    } else if (handSign[5].probability < 1 && handSign[5].probability > 0.7) {
+      alert('That is 5')
+    } else if (handSign[6].probability < 1 && handSign[6].probability > 0.7) {
+      alert('That is 6')
+    } else if (handSign[7].probability < 1 && handSign[7].probability > 0.7) {
+      alert('That is 7')
+    } else if (handSign[8].probability < 1 && handSign[8].probability > 0.7) {
+      alert('That is 8')
     }
   }
+
   return (
-    <Modal trigger={<Button id="webcam-button">Start</Button>}>
+    <Modal onOpen={init} trigger={<Button id="webcam-button">Start</Button>}>
       <Modal.Header>Submit a Photo</Modal.Header>
       <Modal.Content image>
         <>
           <div id="webcam-container" />
-          <div id="label-container" />
         </>
         <Modal.Description>
           <Header>Make the displayed hand sign</Header>
           <p>Please keep the hand used to sign in the box for the photo</p>
-          <p>Is it okay to use this photo?</p>
-          <Button onClick={init}>Start</Button>
+          {/* <input id='upload-model' type='file'/> 
+         <input id='upload-weights' type='file'/>
+          <input id='upload-metadata' type='file'/> */}
+          {/* <Button onClick={init}>Start</Button> */}
+          <Button onClick={handleTest}>Test</Button>
         </Modal.Description>
       </Modal.Content>
     </Modal>

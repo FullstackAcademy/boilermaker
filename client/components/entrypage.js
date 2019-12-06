@@ -1,5 +1,6 @@
 import React from 'react'
 import {Video} from './index.js'
+import Sound from 'react-sound'
 import {Footer, Navbar} from '../components'
 import {
   Container,
