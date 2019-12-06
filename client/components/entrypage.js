@@ -23,7 +23,7 @@ const EntryPage = () => {
             id="getstartedimg"
             src="https://www.ajc.com/rf/image_inline/Pub/p8/CmgSharedContent/2017/12/04/Images/GettyImages-830954658.jpg"
           />
-          <strong id="welcom"> Wellcome, Start Learning Sign Today</strong>
+          <strong id="welcom"> Welcome, Start Learning Sign Today</strong>
           <Button id="getstartedbutton">
             <Icon size="large" name="american sign language interpreting" />
             Get Started

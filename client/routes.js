@@ -14,7 +14,8 @@ import {
   Interactive,
   About,
   Profile,
-  UpdateUser
+  UpdateUser,
+  multipleC
 } from './components'
 import {me} from './store'
 
@@ -33,13 +34,14 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/home" component={EntryPage} />
-        <Route path="/practice" component={Practice} />
+        <Route path="/practice" component={multipleC} />
         <Route path="/learn" component={Learn} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/about" component={About} />
         <Route path="/interactive" component={Interactive} />
         <Route path="/leaderboard" component={Leaderboard} />
+        <Route path="/multiple" component={multipleC} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
