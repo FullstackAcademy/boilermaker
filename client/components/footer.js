@@ -10,6 +10,7 @@ import {
   Menu,
   Segment
 } from 'semantic-ui-react'
+import {Z_FIXED} from 'zlib'
 
 export const Footer = () => {
   return (
@@ -17,7 +18,12 @@ export const Footer = () => {
       <Segment
         inverted
         vertical
-        style={{margin: '5em 0em 0em', padding: '5em 0em'}}
+        style={{
+          margin: '3em 0em 0em',
+          padding: '0em 0em',
+          position: 'absolute',
+          attached: 'bottom'
+        }}
       >
         <Container textAlign="center">
           <Grid divided inverted stackable>

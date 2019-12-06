@@ -28,10 +28,12 @@ form div {
 }
 
 #footer {
-  position: fixed;
-  bottom: 0mm;
-  width: 110%;
-  height: 400px;
+  position: absolute;
+  top: 100%;
+  width: 105%;
+  height: 200px;
+  margin: 0;
+  padding: 0;
 }
 
 #logo {
@@ -113,3 +115,23 @@ div.field {
 #quizform {
   color: aliceblue;
 }
+
+#multipleChoice {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  top: 40%;
+  left: 40%;
+}
+
+#choices {
+  align-self: center;
+  background-color: gray;
+  color: white;
+}
+
+/* .ui.button {
+  align-self: center;
+} */

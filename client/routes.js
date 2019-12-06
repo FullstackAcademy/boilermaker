@@ -34,7 +34,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/home" component={EntryPage} />
-        <Route path="/practice" component={Practice} />
+        <Route path="/practice" component={multipleC} />
         <Route path="/learn" component={Learn} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
