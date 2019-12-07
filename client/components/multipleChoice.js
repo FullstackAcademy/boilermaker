@@ -47,40 +47,39 @@ class multipleC extends Component {
         'Z'
       ],
       gesture: [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24,
-        25,
-        26
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z'
       ],
-      // letter: ['A', 'B', 'C', 'D', 'E'],
-      // gesture: [],
       answer: '',
       choices: [0, 0, 0, 0],
       questionType: '',
       type: '',
-      score: 0
+      score: 0,
+      totalQuest: -1
     }
     this.populate = this.populate.bind(this)
     this.onClick = this.onClick.bind(this)
@@ -90,20 +89,6 @@ class multipleC extends Component {
   }
 
   populate(score = 0) {
-    // if (!this.state.gesture.length) {
-    //   function importAll(r) {
-    //     let images = {}
-    //     console.log('images', images)
-    //     r.keys().map((item, index) => {
-    //       images[item.replace('../../', '')] = r(item)
-    //     })
-    //     return images
-    //   }
-    //   console.log('hit')
-    //   debugger
-
-    //   console.log('require')
-    // }
     let types = ['letter', 'gesture']
     let index
     let choices = this.state.choices.slice()
@@ -114,7 +99,7 @@ class multipleC extends Component {
     let questionType = types.filter(e => {
       return e !== type
     })[0]
-    // console.log('TYPE', questionType)
+
     if (type === 'gesture') {
       index = Math.floor(Math.random() * (letter.length - 1))
       answer = gesture[index]
@@ -132,7 +117,6 @@ class multipleC extends Component {
       index = Math.floor(Math.random() * (this.state.letter.length - 1))
       answer = letter[index]
       for (let i = 0; i < this.state.choices.length; i++) {
-        // console.log(i)
         index = Math.floor(Math.random() * (letter.length - 1))
         if (
           !choices.includes(this.state.letter[index]) &&
@@ -146,6 +130,8 @@ class multipleC extends Component {
       index = Math.floor(Math.random() * choices.length)
       choices.splice(index, 1, answer)
     }
+    let totalQuest = this.state.totalQuest
+    totalQuest++
     this.setState({
       letter,
       gesture,
@@ -153,33 +139,45 @@ class multipleC extends Component {
       choices,
       questionType,
       type,
-      score
+      score,
+      totalQuest
     })
   }
   onClick(val) {
     let score = this.state.score
     if (val == this.state.answer) {
       score++
-      alert('Hell yea brother')
+      //alert('Hell yea brother')
     } else {
-      alert('Not quite my guy')
+      //alert('Not quite my guy')
     }
+
     this.populate(score)
   }
 
   render() {
-    console.log(this.state)
     return this.state.type ? (
       <div>
         <Navbar />
         <div id="multipleChoice">
+          <h1>
+            Your score: {this.state.score}/{this.state.totalQuest}
+          </h1>
           <h2>What {this.state.type} is this?</h2>
           <h1>
-            {
+            {this.state.questionType !== 'gesture' ? (
               this.state[this.state.questionType][
                 this.state[this.state.type].indexOf(this.state.answer)
               ]
-            }
+            ) : (
+              <p className="signFont">
+                {
+                  this.state[this.state.questionType][
+                    this.state[this.state.type].indexOf(this.state.answer)
+                  ]
+                }
+              </p>
+            )}
           </h1>
           <div id="quiz">
             {this.state.choices.map(e => {
@@ -194,7 +192,7 @@ class multipleC extends Component {
                     {this.state.questionType === 'gesture' ? (
                       e
                     ) : (
-                      <img src={e} className="ui small image" />
+                      <p className="signFontSmall">{e}</p>
                     )}
                   </Button>
                 </div>
@@ -214,28 +212,5 @@ class multipleC extends Component {
     )
   }
 }
-// type="button"
-// key={e}
-// val={e}
-// onClick={() => this.onClick(e)}
 
 export default multipleC
-{
-  /* <div className="ui segments">
-  <div class="ui segment">
-    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">top</font></font></p>
-  </div>
-  <div class="ui segment">
-    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Middle</font></font></p>
-  </div>
-  <div class="ui segment">
-    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Middle</font></font></p>
-  </div>
-  <div class="ui segment">
-    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Middle</font></font></p>
-  </div>
-  <div class="ui segment">
-    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">bottom</font></font></p>
-  </div>
-</div> */
-}
