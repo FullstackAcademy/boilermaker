@@ -16,6 +16,7 @@ export const Footer = () => {
   return (
     <div id="footer">
       <Segment
+        id="footerseg"
         inverted
         vertical
         style={{
