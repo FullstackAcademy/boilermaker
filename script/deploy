@@ -2,7 +2,7 @@
 
 # Hello, welcome to a bash script.
 
-# This bash script deploys your boilermaker application.
+# This bash script deploys your music-muze application.
 
 # On the terminal you run individual
 # bash commands, and this file strings a bunch of commands together.
@@ -23,7 +23,7 @@ set -e
 function cleanup_at_exit {
   # return to your master branch
   git checkout master
-  
+
   # remove the deploy branch
   git branch -D deploy
 }
