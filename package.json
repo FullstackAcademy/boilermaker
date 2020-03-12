@@ -16,6 +16,7 @@
     "prepare": "if [ -d .git ]; then npm-merge-driver install; fi",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
+    "react-start": "react-scripts start",
     "seed": "node script/seed.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
@@ -47,6 +48,7 @@
     "express": "^4.16.4",
     "express-session": "^1.17.0",
     "history": "^4.10.1",
+    "mapbox-gl": "^1.3.1",
     "morgan": "^1.9.1",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
@@ -57,6 +59,7 @@
     "react-dom": "^16.13.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.1.1",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
@@ -103,5 +106,17 @@
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11",
     "yaml": "^1.8.2"
-  }
+  },
+  "browserslist": {
+"production": [
+">0.2%",
+"not dead",
+"not op_mini all"
+],
+"development": [
+"last 1 chrome version",
+"last 1 firefox version",
+"last 1 safari version"
+]
+}
 }
