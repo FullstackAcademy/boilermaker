@@ -11,18 +11,26 @@ import {me, fetchToken} from './store'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
-    this.props.fetchToken()
+    if (!this.props.isAuthorized) {
+      this.props.fetchToken()
+    }
   }
 
   render() {
     const {isLoggedIn} = this.props
+    const {isAuthorized} = this.props
+
+    console.log('is authorized', isAuthorized)
 
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/map" component={Map} />
+        {isAuthorized && (
+          <Route path="/map" render={() => <Map {...this.props} />} />
+        )}
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -43,7 +51,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAuthorized: !!state.authToken
   }
 }
 

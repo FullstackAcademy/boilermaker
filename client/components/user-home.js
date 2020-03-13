@@ -7,6 +7,9 @@ import {connect} from 'react-redux'
  */
 export const UserHome = props => {
   const {email} = props
+  const {isAuthorized} = this.props
+
+  console.log('is authorized', isAuthorized)
 
   return (
     <div>
@@ -20,7 +23,8 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    email: state.user.email,
+    isAuthorized: !!state.authToken
   }
 }
 

@@ -15,25 +15,38 @@ class MapGl extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.mapboxToken) {
-      console.log('hey no token!!')
-      //this.fetchToken()
+    if (!this.props.isAuthorized) {
+      console.log('we are going to fetch the token')
+      this.props.fetchToken()
     } else {
       mapboxgl.accessToken = this.props.mapboxToken
-      console.log('mapboxgl', mapboxgl)
-    }
 
-    const map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [this.state.lng, this.state.lat],
-      zoom: this.state.zoom
-    })
+      const map = new mapboxgl.Map({
+        container: this.mapContainer,
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [this.state.lng, this.state.lat],
+        zoom: this.state.zoom
+      })
+
+      map.on('move', () => {
+        this.setState({
+          lng: map.getCenter().lng.toFixed(4),
+          lat: map.getCenter().lat.toFixed(4),
+          zoom: map.getZoom().toFixed(2)
+        })
+      })
+    }
   }
 
   render() {
     return (
       <div>
+        <div className="sidebarStyle">
+          <div>
+            Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{' '}
+            {this.state.zoom}
+          </div>
+        </div>
         <div ref={el => (this.mapContainer = el)} className="mapContainer" />
       </div>
     )
@@ -45,6 +58,7 @@ class MapGl extends Component {
  */
 const mapState = state => {
   return {
+    isAuthorized: !!state.authToken,
     mapboxToken: state.authToken
   }
 }

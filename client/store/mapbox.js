@@ -9,7 +9,7 @@ const GOT_TOKEN = 'GOT_TOKEN'
 /**
  * INITIAL STATE
  */
-const defaultState = {}
+const defaultState = null
 
 /**
  * ACTION CREATORS
