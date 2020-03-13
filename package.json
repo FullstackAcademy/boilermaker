@@ -45,6 +45,7 @@
     "axios": "^0.19.2",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^6.1.1",
+    "dotenv": "^8.2.0",
     "express": "^4.16.4",
     "express-session": "^1.17.0",
     "history": "^4.10.1",
