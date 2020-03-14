@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
  */
 export const UserHome = props => {
   const {email} = props
-  const {isAuthorized} = this.props
+  const {isAuthorized} = props
 
   console.log('is authorized', isAuthorized)
 

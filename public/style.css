@@ -20,23 +20,47 @@ form div {
   display: inline-block;
 }
 
+.mapboxContainer {
+  display: flex;
+  max-height: 400px;
+  flex-direction: column;
+  position: relative;
+}
+
+.sidebarContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 12px;
+  background-color: #404040;
+  color: #ffffff;
+  padding: 6px;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.optionsContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 12px;
+  color: #404040;
+  padding: 6px;
+  font-weight: bold;
+  z-index: 2;
+}
+
 .mapContainer {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-}
-
-.sidebarStyle {
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 12px;
-  background-color: #404040;
-  color: #ffffff;
-  z-index: 1 !important;
-  padding: 6px;
-  font-weight: bold;
+  display: flex;
+  min-height: 400px;
+  z-index: 1;
 }
