@@ -8,8 +8,10 @@ import LocationCityIcon from '@material-ui/icons/LocationCityRounded'
 import {parseLLZ, locationToMapState} from './utils'
 import {filterOptions, locationOptions, defaultLocation} from './defaults'
 
+import {fetchEvents} from '../store'
+
 const MyLocationCityIcon = styled(LocationCityIcon)({
-  color: '#B9B7B7'
+  color: 'black'
 })
 
 const MapboxGLMap = ({isAuthorized, mapboxToken, fetchToken}) => {
@@ -93,7 +95,6 @@ const MapboxGLMap = ({isAuthorized, mapboxToken, fetchToken}) => {
           <div className="filterContainer">
             <SimpleMenu
               icon={MyLocationCityIcon}
-              color="secondary"
               options={Object.keys(locationOptions)}
               handleFilter={handleCity}
             />
@@ -112,4 +113,11 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(MapboxGLMap)
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchEvents() {
+      dispatch(fetchEvents())
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(MapboxGLMap)

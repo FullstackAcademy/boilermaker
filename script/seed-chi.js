@@ -10,7 +10,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6293817, 41.8884073]
+        longitude: -87.6293817,
+        latitude: 41.8884073
       },
       num_stars: 4,
       amenities: 'Pool, Free Wi-Fi'
@@ -22,7 +23,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6293817, 41.8884073]
+        longitude: -87.6293817,
+        latitude: 41.8884073
       },
       num_stars: 4.5,
       amenities: 'Free Wi-Fi'
@@ -34,7 +36,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6321275, 41.889857]
+        longitude: -87.6321275,
+        latitude: 41.889857
       },
       num_stars: 4.5,
       amenities: '24 hour Gym, Paid Wi-Fi'
@@ -46,7 +49,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6290507, 41.8873346]
+        longitude: -87.6290507,
+        latitude: 41.8873346
       },
       num_stars: 4,
       amenities: 'Free Wi-Fi'
@@ -58,7 +62,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6264413, 41.8881029]
+        longitude: -87.6264413,
+        latitude: 41.8881029
       },
       num_stars: 3.5,
       amenities: '24 hour Gym'
@@ -70,7 +75,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6260713, 41.8883059]
+        longitude: -87.6260713,
+        latitude: 41.8883059
       },
       num_stars: 3.5,
       amenities: '24 hour Gym'
@@ -82,7 +88,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6339368, 41.8861737]
+        longitude: -87.6339368,
+        latitude: 41.8861737
       },
       num_stars: 3.5,
       amenities: 'Free Wi-Fi'
@@ -94,7 +101,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.634366, 41.8843845]
+        longitude: -87.634366,
+        latitude: 41.8843845
       },
       num_stars: 3.5,
       amenities: 'Paid Wi-Fi, Dogs Allowed'
@@ -106,7 +114,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.634366, 41.8843845]
+        longitude: -87.634366,
+        latitude: 41.8843845
       },
       num_stars: 3.5,
       amenities: 'Paid Wi-Fi'
@@ -118,7 +127,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.634366, 41.8843845]
+        longitude: -87.634366,
+        latitude: 41.8843845
       },
       num_stars: 2,
       amenities: 'Accepts Credit Cards'
@@ -130,7 +140,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6307182, 41.8974821]
+        longitude: -87.6307182,
+        latitude: 41.8974821
       },
       num_stars: 4,
       amenities: 'Paid Wi-Fi'
@@ -142,7 +153,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6307182, 41.8974821]
+        longitude: -87.6307182,
+        latitude: 41.8974821
       },
       num_stars: 3.5,
       amenities: 'Pool, 24 hour Gym, Paid Wi-Fi'
@@ -154,7 +166,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6307182, 41.8974821]
+        longitude: -87.6307182,
+        latitude: 41.8974821
       },
       num_stars: 3.5,
       amenities: '24 hour Gym, Paid Wi-Fi'
@@ -166,7 +179,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6296546, 41.8997095]
+        longitude: -87.6296546,
+        latitude: 41.8997095
       },
       num_stars: 3.5,
       amenities: 'Free Wif-Fi'
@@ -178,7 +192,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.640199, 41.8813272]
+        longitude: -87.640199,
+        latitude: 41.8813272
       },
       num_stars: 4,
       amenities: 'Free Wif-Fi'
@@ -192,7 +207,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6503527, 41.9134555]
+        longitude: -87.6503527,
+        latitude: 41.9134555
       },
       cuisine: 'New American',
       price: 4
@@ -204,7 +220,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6270254, 41.8912974]
+        longitude: -87.6270254,
+        latitude: 41.8912974
       },
       cuisine: 'New American',
       price: 3
@@ -216,7 +233,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6307428, 41.9022287]
+        longitude: -87.6307428,
+        latitude: 41.9022287
       },
       cuisine: 'Mexican',
       price: 3
@@ -228,7 +246,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-73.998509, 40.71423]
+        longitude: -73.998509,
+        latitude: 40.71423
       },
       cuisine: 'Korean/Mexican',
       price: 2
@@ -240,7 +259,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6508765, 41.9189836]
+        longitude: -87.6508765,
+        latitude: 41.9189836
       },
       cuisine: 'Spanish',
       price: 4
@@ -252,7 +272,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.7187281, 41.919094]
+        longitude: -87.7187281,
+        latitude: 41.919094
       },
       cuisine: 'American',
       price: 4
@@ -264,7 +285,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6396717, 41.89835]
+        longitude: -87.6396717,
+        latitude: 41.89835
       },
       cuisine: 'Southern',
       price: 3
@@ -276,7 +298,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6725025, 41.8984125]
+        longitude: -87.6725025,
+        latitude: 41.8984125
       },
       cuisine: 'Italian',
       price: 2
@@ -288,7 +311,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6982452, 41.8392942]
+        longitude: -87.6982452,
+        latitude: 41.8392942
       },
       cuisine: 'American',
       price: 2
@@ -300,7 +324,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6339857, 41.891873]
+        longitude: -87.6339857,
+        latitude: 41.891873
       },
       cuisine: 'Cocktails',
       price: 3
@@ -312,7 +337,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6333197, 41.8817877]
+        longitude: -87.6333197,
+        latitude: 41.8817877
       },
       cuisine: 'Vietnamese',
       price: 4
@@ -324,7 +350,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6344459, 41.8879907]
+        longitude: -87.6344459,
+        latitude: 41.8879907
       },
       cuisine: 'British',
       price: 2
@@ -336,7 +363,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6267487, 41.8769669]
+        longitude: -87.6267487,
+        latitude: 41.8769669
       },
       cuisine: 'Japanese',
       price: 3
@@ -348,7 +376,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6372443, 41.8881524]
+        longitude: -87.6372443,
+        latitude: 41.8881524
       },
       cuisine: 'Cheese',
       price: 4
@@ -360,7 +389,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6324809, 41.8898032]
+        longitude: -87.6324809,
+        latitude: 41.8898032
       },
       cuisine: 'Vietnamese',
       price: 1
@@ -374,7 +404,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.614038, 41.8675726]
+        longitude: -87.614038,
+        latitude: 41.8675726
       },
       age_range: 'All'
     },
@@ -385,7 +416,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6089769, 41.866337]
+        longitude: -87.6089769,
+        latitude: 41.866337
       },
       age_range: 'All'
     },
@@ -396,7 +428,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6191745, 41.866265]
+        longitude: -87.6191745,
+        latitude: 41.866265
       },
       age_range: 'All'
     },
@@ -407,7 +440,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.5830659, 41.7905726]
+        longitude: -87.5830659,
+        latitude: 41.7905726
       },
       age_range: 'All'
     },
@@ -418,7 +452,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6259073, 41.8795885]
+        longitude: -87.6259073,
+        latitude: 41.8795885
       },
       age_range: 'All'
     },
@@ -429,7 +464,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6254979, 41.8826612]
+        longitude: -87.6254979,
+        latitude: 41.8826612
       },
       age_range: 'All'
     },
@@ -440,7 +476,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6304219, 41.8763008]
+        longitude: -87.6304219,
+        latitude: 41.8763008
       },
       age_range: 'All'
     },
@@ -451,7 +488,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.5827403, 41.7798608]
+        longitude: -87.5827403,
+        latitude: 41.7798608
       },
       age_range: 'All'
     },
@@ -462,7 +500,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6252732, 41.8988124]
+        longitude: -87.6252732,
+        latitude: 41.8988124
       },
       age_range: 'All'
     },
@@ -473,7 +512,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6575267, 41.9484424]
+        longitude: -87.6575267,
+        latitude: 41.9484424
       },
       age_range: 'All'
     },
@@ -484,7 +524,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.5968324, 41.7911832]
+        longitude: -87.5968324,
+        latitude: 41.7911832
       },
       age_range: 'All'
     },
@@ -495,7 +536,8 @@ var data = {
         city: 'Chicago',
         state: 'IL',
         phone: '123-456-7890',
-        location: [-87.6385693, 41.9655364]
+        longitude: -87.6385693,
+        latitude: 41.9655364
       },
       age_range: 'All'
     }

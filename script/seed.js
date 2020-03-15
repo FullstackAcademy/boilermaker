@@ -12,6 +12,8 @@ const dataCHI = require('./seed-chi')
 async function runSeed() {
   console.log('seeding...')
   try {
+    await db.sync({force: true})
+    console.log('db synced!')
     await seedUser()
     await seedCity('New York', dataNY)
     await seedCity('Chicago', dataCHI)

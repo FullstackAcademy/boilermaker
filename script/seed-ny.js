@@ -10,7 +10,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.007624, 40.705137]
+        longitude: -74.007624,
+        latitude: 40.705137
       },
       num_stars: 4,
       amenities: 'Pool, Free Wi-Fi'
@@ -22,7 +23,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.999542, 40.715317]
+        longitude: -73.999542,
+        latitude: 40.715317
       },
       num_stars: 4.5,
       amenities: 'Free Wi-Fi'
@@ -34,7 +36,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.017241, 40.705417]
+        longitude: -74.017241,
+        latitude: 40.705417
       },
       num_stars: 4.5,
       amenities: '24 hour Gym, Paid Wi-Fi'
@@ -46,7 +49,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.010273, 40.704581]
+        longitude: -74.010273,
+        latitude: 40.704581
       },
       num_stars: 4,
       amenities: 'Free Wi-Fi'
@@ -58,7 +62,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.009301, 40.715076]
+        longitude: -74.009301,
+        latitude: 40.715076
       },
       num_stars: 3.5,
       amenities: '24 hour Gym'
@@ -70,7 +75,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.01235, 40.703961]
+        longitude: -74.01235,
+        latitude: 40.703961
       },
       num_stars: 3.5,
       amenities: '24 hour Gym'
@@ -82,7 +88,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.993624, 40.713427]
+        longitude: -73.993624,
+        latitude: 40.713427
       },
       num_stars: 3.5,
       amenities: 'Free Wi-Fi'
@@ -94,7 +101,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.015841, 40.714985]
+        longitude: -74.015841,
+        latitude: 40.714985
       },
       num_stars: 3.5,
       amenities: 'Paid Wi-Fi, Dogs Allowed'
@@ -106,7 +114,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.010392, 40.711597]
+        longitude: -74.010392,
+        latitude: 40.711597
       },
       num_stars: 3.5,
       amenities: 'Paid Wi-Fi'
@@ -118,7 +127,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.995231, 40.717873]
+        longitude: -73.995231,
+        latitude: 40.717873
       },
       num_stars: 2,
       amenities: 'Accepts Credit Cards'
@@ -130,7 +140,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.007108, 40.707894]
+        longitude: -74.007108,
+        latitude: 40.707894
       },
       num_stars: 4,
       amenities: 'Paid Wi-Fi'
@@ -142,7 +153,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.013997, 40.709102]
+        longitude: -74.013997,
+        latitude: 40.709102
       },
       num_stars: 3.5,
       amenities: 'Pool, 24 hour Gym, Paid Wi-Fi'
@@ -154,7 +166,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.989568, 40.731131]
+        longitude: -73.989568,
+        latitude: 40.731131
       },
       num_stars: 3.5,
       amenities: '24 hour Gym, Paid Wi-Fi'
@@ -166,7 +179,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.008922, 40.715681]
+        longitude: -74.008922,
+        latitude: 40.715681
       },
       num_stars: 3.5,
       amenities: 'Free Wif-Fi'
@@ -178,7 +192,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.01394, 40.70963]
+        longitude: -74.01394,
+        latitude: 40.70963
       },
       num_stars: 4,
       amenities: 'Free Wif-Fi'
@@ -192,7 +207,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.01394, 40.705137]
+        longitude: -74.01394,
+        latitude: 40.705137
       },
       cuisine: 'French',
       price: 4
@@ -204,7 +220,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.009567, 40.716526]
+        longitude: -74.009567,
+        latitude: 40.716526
       },
       cuisine: 'Seafood',
       price: 3
@@ -216,7 +233,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.008929, 40.718977]
+        longitude: -74.008929,
+        latitude: 40.718977
       },
       cuisine: 'Indian',
       price: 3
@@ -228,7 +246,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.998509, 40.71423]
+        longitude: -73.998509,
+        latitude: 40.71423
       },
       cuisine: 'Chinese',
       price: 2
@@ -240,7 +259,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.0089, 40.718679]
+        longitude: -74.0089,
+        latitude: 40.718679
       },
       cuisine: 'Korean',
       price: 4
@@ -252,7 +272,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.010846, 40.708475]
+        longitude: -74.010846,
+        latitude: 40.708475
       },
       cuisine: 'Steakhouses, American',
       price: 4
@@ -264,7 +285,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.984152, 40.726096]
+        longitude: -73.984152,
+        latitude: 40.726096
       },
       cuisine: 'Greek',
       price: 3
@@ -276,7 +298,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.997761, 40.714601]
+        longitude: -73.997761,
+        latitude: 40.714601
       },
       cuisine: 'Shanghainese, Dim Sum',
       price: 2
@@ -288,7 +311,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.990565, 40.717719]
+        longitude: -73.990565,
+        latitude: 40.717719
       },
       cuisine: 'German, Austrian',
       price: 2
@@ -300,7 +324,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.007724, 40.716403]
+        longitude: -74.007724,
+        latitude: 40.716403
       },
       cuisine: 'Japanese',
       price: 3
@@ -312,7 +337,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.003242, 40.724014]
+        longitude: -74.003242,
+        latitude: 40.724014
       },
       cuisine: 'Thai',
       price: 4
@@ -324,7 +350,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.992662, 40.725495]
+        longitude: -73.992662,
+        latitude: 40.725495
       },
       cuisine: 'Italian',
       price: 2
@@ -336,7 +363,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.989756, 40.721266]
+        longitude: -73.989756,
+        latitude: 40.721266
       },
       cuisine: 'Spanish, Latin American',
       price: 3
@@ -348,7 +376,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.003875, 40.729269]
+        longitude: -74.003875,
+        latitude: 40.729269
       },
       cuisine: 'New American, French',
       price: 4
@@ -360,7 +389,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.998626, 40.716544]
+        longitude: -73.998626,
+        latitude: 40.716544
       },
       cuisine: 'Vietnamese',
       price: 1
@@ -374,7 +404,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.995315, 40.716291]
+        longitude: -73.995315,
+        latitude: 40.716291
       },
       age_range: 'All'
     },
@@ -385,7 +416,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.003602, 40.707119]
+        longitude: -74.003602,
+        latitude: 40.707119
       },
       age_range: 'All'
     },
@@ -396,7 +428,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.01312, 40.709329]
+        longitude: -74.01312,
+        latitude: 40.709329
       },
       age_range: 'All'
     },
@@ -407,7 +440,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.013157, 40.709189]
+        longitude: -74.013157,
+        latitude: 40.709189
       },
       age_range: 'All'
     },
@@ -418,7 +452,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.014334, 40.704531]
+        longitude: -74.014334,
+        latitude: 40.704531
       },
       age_range: 'All'
     },
@@ -429,7 +464,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.0130686, 40.70103]
+        longitude: -74.0130686,
+        latitude: 40.70103
       },
       age_range: 'All'
     },
@@ -440,7 +476,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.99819, 40.715323]
+        longitude: -73.99819,
+        latitude: 40.715323
       },
       age_range: 'All'
     },
@@ -451,7 +488,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.992104, 40.729373]
+        longitude: -73.992104,
+        latitude: 40.729373
       },
       age_range: 'All'
     },
@@ -462,7 +500,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.987708, 40.74461]
+        longitude: -73.987708,
+        latitude: 40.74461
       },
       age_range: 'All'
     },
@@ -473,7 +512,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.999144, 40.724918]
+        longitude: -73.999144,
+        latitude: 40.724918
       },
       age_range: 'All'
     },
@@ -484,7 +524,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.996563, 40.702225]
+        longitude: -73.996563,
+        latitude: 40.702225
       },
       age_range: 'All'
     },
@@ -495,7 +536,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-74.040317, 40.699297]
+        longitude: -74.040317,
+        latitude: 40.699297
       },
       age_range: 'All'
     },
@@ -506,7 +548,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.998649, 40.732204]
+        longitude: -73.998649,
+        latitude: 40.732204
       },
       age_range: 'All'
     },
@@ -517,7 +560,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.987995, 40.733615]
+        longitude: -73.987995,
+        latitude: 40.733615
       },
       age_range: 'All'
     },
@@ -528,7 +572,8 @@ var data = {
         city: 'New York',
         state: 'NY',
         phone: '123-456-7890',
-        location: [-73.99087, 40.733274]
+        longitude: -73.99087,
+        latitude: 40.733274
       },
       age_range: 'All'
     }
