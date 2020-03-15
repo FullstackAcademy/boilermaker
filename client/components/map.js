@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {connect} from 'react-redux'
 import mapboxgl from 'mapbox-gl'
 import {styled} from '@material-ui/styles'
@@ -13,96 +13,92 @@ const MyLocationCityIcon = styled(LocationCityIcon)({
   color: '#B9B7B7'
 })
 
-class MapGl extends Component {
-  constructor(props) {
-    super(props)
-    this.state = defaultMapState
-    this.renderMap = this.renderMap.bind(this)
-    this.handleCity = this.handleCity.bind(this)
-    this.handleFilterList = this.handleFilterList.bind(this)
-    this.map = null
-  }
+const MapboxGlMap = ({isAuthorized, mapboxToken, fetchToken}) => {
+  const [map, setMap] = useState(null) // default state for map, ability to update
+  const mapContainer = useRef(null) // default DOM element for mapContainer
+  const [mapState, setMapState] = useState(defaultMapState) // keep track of llz
 
-  newMap() {
-    this.map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [this.state.lng, this.state.lat],
-      zoom: this.state.zoom
-    })
-
-    this.map.on('move', () => {
-      this.setState({
-        lng: this.map.getCenter().lng.toFixed(4),
-        lat: this.map.getCenter().lat.toFixed(4),
-        zoom: this.map.getZoom().toFixed(2)
+  useEffect(() => {
+    // similar to component did mount
+    const initializeMap = ({setMap, mapContainer}) => {
+      if (!isAuthorized) {
+        console.log('we are going to fetch the token')
+        fetchToken()
+      } else {
+        mapboxgl.accessToken = mapboxToken
+      }
+      const map = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+        center: [0, 0],
+        zoom: 5
       })
-    })
-  }
 
-  handleCity(key) {
+      map.on('move', () => {
+        setMapState({
+          key: mapState.key,
+          lng: map.getCenter().lng.toFixed(4),
+          lat: map.getCenter().lat.toFixed(4),
+          zoom: map.getZoom().toFixed(2)
+        })
+      })
+
+      map.on('load', () => {
+        setMap(map) // update state to be current map
+        map.resize()
+      })
+    }
+
+    if (!map) {
+      initializeMap(setMap, mapContainer)
+    } else {
+      console.log('mapState is', mapState)
+    } // if no map initialize it
+  }, [map, mapState]) // only run this effect when map has changed
+
+  function handleCity(cityKey) {
     console.log('inside of handleCity we received key', key)
 
     const {lat, lng, z} = parseLLZ(cityOptions[key])
+
     console.log('set map to', lat, lng, z)
 
-    this.setState({
-      lng: lng,
-      lat: lat,
-      zoom: z
-    })
+    setMapState({cityKey, lat, lng, z}) // update lat, lon, z
 
-    this.newMap()
+    // get & SET new map
   }
 
-  handleFilterList() {}
-
-  renderMap() {}
-
-  componentDidMount() {
-    if (!this.props.isAuthorized) {
-      console.log('we are going to fetch the token')
-      this.props.fetchToken()
-    } else {
-      mapboxgl.accessToken = this.props.mapboxToken
-    }
-
-    newMap()
+  function handleFilterList(key) {
+    console.log('received key', key)
   }
 
-  render() {
-    return (
-      <div>
-        <div className="sidebarContainer">
-          Longitude: {this.state.lng} | Latitude: {this.state.lat} | Zoom:{' '}
-          {this.state.zoom}
-        </div>
-        <div className="mapboxContainer">
-          <div className="optionsContainer">
-            <div className="filterContainer">
-              <SimpleMenu
-                icon={FilterListIcon}
-                options={filterOptions}
-                handleFilter={this.handleFilterList}
-              />
-            </div>
-            <div className="filterContainer">
-              <SimpleMenu
-                icon={MyLocationCityIcon}
-                color="secondary"
-                options={Object.keys(cityOptions)}
-                handleFilter={this.handleCity}
-              />
-            </div>
-          </div>
-          <div
-            ref={el => (this.mapContainer = el)}
-            className="mapContainer"
-          ></div>
-        </div>
+  return (
+    <div>
+      <div className="sidebarContainer">
+        Longitude: {lng} | Latitude: {lat} | Zoom: {z}
       </div>
-    )
-  }
+      <div className="mapboxContainer">
+        <div className="optionsContainer">
+          <div className="filterContainer">
+            <SimpleMenu
+              icon={FilterListIcon}
+              options={filterOptions}
+              handleFilter={handleFilterList}
+            />
+          </div>
+          <div className="filterContainer">
+            <SimpleMenu
+              icon={MyLocationCityIcon}
+              color="secondary"
+              options={Object.keys(cityOptions)}
+              handleFilter={handleCity}
+            />
+          </div>
+        </div>
+        <div ref={el => (mapContainer.current = el)} className="mapContainer" />
+      </div>
+    </div>
+  )
 }
 
 /**
@@ -115,4 +111,5 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(MapGl)
+export default MapboxGlMap
+//export default connect(mapState)(MapboxGlMap)
