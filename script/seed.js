@@ -1,20 +1,10 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
-
-async function seed() {
-  await db.sync({force: true})
-  console.log('db synced!')
-
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
-
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
-}
+const seedUser = require('./seed-user')
+const seedCity = require('./seed-city')
+const dataNY = require('./seed-ny')
+const dataCHI = require('./seed-chi')
 
 // We've separated the `seed` function from the `runSeed` function.
 // This way we can isolate the error handling and exit trapping.
@@ -22,7 +12,9 @@ async function seed() {
 async function runSeed() {
   console.log('seeding...')
   try {
-    await seed()
+    await seedUser()
+    await seedCity('New York', dataNY)
+    await seedCity('Chicago', dataCHI)
   } catch (err) {
     console.error(err)
     process.exitCode = 1
@@ -41,4 +33,4 @@ if (module === require.main) {
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = seedUser

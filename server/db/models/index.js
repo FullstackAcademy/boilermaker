@@ -1,4 +1,12 @@
 const User = require('./user')
+const Place = require('./place')
+const Hotel = require('./hotel')
+const Restaurant = require('./restaurant')
+const Activity = require('./activity')
+
+Hotel.belongsTo(Place)
+Restaurant.belongsTo(Place)
+Activity.belongsTo(Place)
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -14,5 +22,9 @@ const User = require('./user')
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
-  User
+  User,
+  Hotel,
+  Restaurant,
+  Activity,
+  Place
 }

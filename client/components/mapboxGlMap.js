@@ -50,7 +50,9 @@ const MapboxGLMap = ({isAuthorized, mapboxToken, fetchToken}) => {
     }
 
     console.log(
-      'use effect is running outside initialization with location',
+      'use effect is running outside initialization with map',
+      map,
+      'location',
       location
     )
 
@@ -58,9 +60,8 @@ const MapboxGLMap = ({isAuthorized, mapboxToken, fetchToken}) => {
       initializeMap({setMap, mapContainer})
     } else if (map && location !== mapState.location) {
       const newMapState = locationToMapState(location)
-      setMapState(newMapState)
-      console.log('map state is', mapState, 'get map for', newMapState)
-      initializeMap({setMap, mapContainer})
+      setMapState(newMapState) // update state to point to new locatin
+      initializeMap({setMap, mapContainer}) // update map for new location
     }
   }, [map, location])
 
