@@ -5,11 +5,19 @@ import {styled} from '@material-ui/styles'
 import SimpleMenu from './simple-menu'
 import FilterListIcon from '@material-ui/icons/FilterListRounded'
 import LocationCityIcon from '@material-ui/icons/LocationCityRounded'
-import {parseLLZ, locationToMapState, getBoundsFromMap} from './utils'
+import {
+  parseLLZ,
+  locationToMapState,
+  filtersToMapState,
+  getBoundsFromMap,
+  getBoundedEvents,
+  getMarkersFromEvents
+} from './utils'
 import {
   filterOptions,
   locationOptions,
   defaultLocation,
+  defaultFilters,
   defaultBounds
 } from './defaults'
 
@@ -28,7 +36,10 @@ const MapboxGLMap = ({
 }) => {
   const [map, setMap] = useState(null)
   const [location, setLocation] = useState(defaultLocation)
-  const [mapState, setMapState] = useState(locationToMapState(defaultLocation))
+  const [filters, setFilters] = useState(defaultFilters)
+  const [mapState, setMapState] = useState(
+    filtersToMapState(locationToMapState(defaultLocation))
+  )
   const [mapBounds, setMapBounds] = useState(defaultBounds)
   const mapContainer = useRef(null)
 
@@ -41,10 +52,13 @@ const MapboxGLMap = ({
       mapboxgl.accessToken = mapboxToken
     }
 
-    const initializeMap = ({setMap, mapContainer}) => {
+    const initializeMap = ({setMap, mapContainer, events}) => {
       const locationMapState = locationToMapState(location)
+      const filtersMapState = filtersToMapState(locationMapState, filters)
 
       console.log('location map state', locationMapState)
+      console.log('filters map state', filtersMapState)
+      console.log('use effect inside init has events', events)
 
       const map = new mapboxgl.Map({
         container: mapContainer.current,
@@ -55,37 +69,54 @@ const MapboxGLMap = ({
 
       map.on('move', () => {
         setMapState(locationMapState)
-        const bounds = getBoundsFromMap(map)
-        setMapBounds(bounds)
-        //console.log('map is moving updating bounds', bounds)
-        // update bounds, local state
+        const bounds = getBoundsFromMap
+        setMapBounds(getBoundsFromMap(map))
+
+        const boundedEvents = getBoundedEvents(events, bounds)
+        if (boundedEvents.length) {
+          const markers = getMarkersFromEvents(boundedEvents)
+          markers.forEach(marker => marker.addTo(map))
+        }
       })
 
       map.on('load', () => {
         setMap(map)
         const bounds = getBoundsFromMap(map)
-        fetchEvents(bounds)
-        // map.resize()
-      })
+        setMapBounds(getBoundsFromMap(map))
 
-      console.log('use effect inside init has events', events)
+        // render all markers on load
+        if (events.length) {
+          const markers = getMarkersFromEvents(events)
+          markers.forEach(marker => marker.addTo(map))
+        }
+      })
     }
 
     console.log('use effect outside init has location', location)
 
     if (!map) {
-      initializeMap({setMap, mapContainer})
+      initializeMap({setMap, mapContainer, events})
     } else if (map && location !== mapState.location) {
       const newMapState = locationToMapState(location)
       setMapState(newMapState) // update state to point to new locatin
-      initializeMap({setMap, mapContainer}) // update map for new location
+      initializeMap({setMap, mapContainer, events}) // update map for new location
+    } else if (map && filters !== mapState.filters) {
+      console.log('filters are', filters)
+      console.log('map state filters are', mapState.filters)
+      //const newMapState = filtersToMapState(filters)
+      //setMapState(newMapState) // update state to have new filters
+      //initializeMap({setMap, mapContainer, events})
     }
 
     // load events
-  }, [map, location])
+  }, [map, location, filters])
 
   function handleFilterList(key) {
-    console.log('received key', key)
+    console.log('received filter key', key)
+
+    setFilters(prevState => {
+      return {...prevState, filters: prevState.filters.push[key]}
+    })
   }
 
   function handleCity(key) {
@@ -94,11 +125,13 @@ const MapboxGLMap = ({
     setLocation(key)
   }
 
+  console.log('bounded events are ', getBoundedEvents(events, mapBounds))
   return (
     <div>
       <div className="sidebarContainer">
         Longitude: {mapState.lng} | Latitude: {mapState.lat} | Zoom:
-        {mapState.zoom} | MinLat: {mapBounds.minLat}
+        {mapState.zoom} | Event Count:
+        {getBoundedEvents(events, mapBounds).length}
       </div>
       <div className="mapboxContainer">
         <div className="optionsContainer">
@@ -127,7 +160,8 @@ const mapStateToProps = state => {
   return {
     isAuthorized: !!state.authToken,
     mapboxToken: state.authToken,
-    events: state.events
+    events: state.events,
+    markers: state.markers
   }
 }
 

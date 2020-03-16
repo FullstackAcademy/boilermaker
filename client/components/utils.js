@@ -1,4 +1,5 @@
-import {locationOptions} from './defaults'
+import {locationOptions, defaultFilters} from './defaults'
+import {Marker} from '../components'
 
 export const parseLLZ = dataLLZ => {
   const [lat, lng, zoom] = dataLLZ.split(';').map(s => +s)
@@ -23,6 +24,13 @@ export const locationToMapState = location => {
   }
 }
 
+export const filtersToMapState = (
+  locationMapState,
+  filters = defaultFilters
+) => {
+  return {...locationMapState, filters}
+}
+
 export const getBoundsFromMap = map => {
   var bounds = map.getBounds()
   console.log('bounds', bounds, 'sw', bounds.getSouthWest())
@@ -35,4 +43,23 @@ export const getBoundsFromMap = map => {
     minLng: sw.lng.toFixed(4),
     maxLng: ne.lng.toFixed(4)
   }
+}
+
+export const getBoundedEvents = (events, bounds) => {
+  const boundedEvents = events.filter(
+    event =>
+      event.place.longitude >= bounds.minLng &&
+      event.place.longitude <= bounds.maxLng &&
+      event.place.latitude >= bounds.minLat &&
+      event.place.latitude <= bounds.maxLat
+  )
+  return boundedEvents
+}
+
+export const getMarkersFromEvents = events => {
+  const eventMarkers = events.map(event =>
+    Marker('music', [event.place.longitude, event.place.latitude])
+  )
+  console.log('markers from events', eventMarkers)
+  return eventMarkers
 }

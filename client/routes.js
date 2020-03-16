@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, Map} from './components'
-import {me, fetchToken} from './store'
+import {Login, Signup, UserHome, Map, Marker} from './components'
+import {me, fetchToken, fetchEvents} from './store'
 
 /**
  * COMPONENT
@@ -14,6 +14,7 @@ class Routes extends Component {
     if (!this.props.isAuthorized) {
       this.props.fetchToken()
     }
+    this.props.fetchEvents()
   }
 
   render() {
@@ -21,6 +22,7 @@ class Routes extends Component {
     const {isAuthorized} = this.props
 
     console.log('is authorized', isAuthorized)
+    console.log('events', this.props.events)
 
     return (
       <Switch>
@@ -52,7 +54,8 @@ const mapState = state => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    isAuthorized: !!state.authToken
+    isAuthorized: !!state.authToken,
+    events: state.events
   }
 }
 
@@ -63,6 +66,9 @@ const mapDispatch = dispatch => {
     },
     fetchToken() {
       dispatch(fetchToken())
+    },
+    fetchEvents() {
+      dispatch(fetchEvents())
     }
   }
 }

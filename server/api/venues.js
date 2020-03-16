@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Activity} = require('../db/models')
+const {Place} = require('../db/models')
 
 module.exports = router
 
@@ -10,9 +10,14 @@ router.get('/', async (req, res, next) => {
     let minLng = +req.query.minLng
     let maxLng = +req.query.maxLng
 
-    const venues = await Activity.bbQuery(minLat, maxLat, minLng, maxLng)
+    let places
+    if (minLat && maxLat && minLng && maxLng) {
+      places = await Place.bbQuery(minLat, maxLat, minLng, maxLng)
+    } else {
+      places = await Place.findAll()
+    }
 
-    res.json(venues)
+    res.json(places)
   } catch (err) {
     next(err)
   }

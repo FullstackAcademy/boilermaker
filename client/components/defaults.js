@@ -1,5 +1,7 @@
 export const filterOptions = ['Genre', 'Radius', 'Date/Time']
 
+export const defaultFilters = {Genre: [], Radius: null, 'Date/Time': null}
+
 export const locationOptions = {
   'New York': '40.7831;-73.9712;11',
   'San Francisco': '37.77;-122.43;11',

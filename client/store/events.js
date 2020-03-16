@@ -9,7 +9,7 @@ const GOT_EVENTS = 'GOT_EVENTS'
 /**
  * INITIAL STATE
  */
-const defaultEvents = {}
+const defaultEvents = []
 
 /**
  * ACTION CREATORS
@@ -24,7 +24,7 @@ export const fetchEvents = ({
   maxLat,
   minLng,
   maxLng
-}) => async dispatch => {
+} = {}) => async dispatch => {
   try {
     const {data} = await axios.get(
       `/api/events?minLat=${minLat}&maxLat=${maxLat}&minLng=${minLng}&maxLng=${maxLng}`

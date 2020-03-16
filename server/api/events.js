@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Activity} = require('../db/models')
+const {Activity, Place} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -9,7 +9,12 @@ router.get('/', async (req, res, next) => {
     let minLng = +req.query.minLng
     let maxLng = +req.query.maxLng
 
-    const events = await Activity.bbQuery(minLat, maxLat, minLng, maxLng)
+    let events
+    if (minLat && maxLat && minLng && maxLng) {
+      events = await Activity.bbQuery(minLat, maxLat, minLng, maxLng)
+    } else {
+      events = await Activity.findAll({include: [{model: Place}]})
+    }
 
     res.json(events)
   } catch (err) {
