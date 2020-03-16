@@ -19,9 +19,16 @@ const gotEvents = events => ({type: GOT_EVENTS, events})
 /**
  * THUNK CREATORS
  */
-export const fetchEvents = () => async dispatch => {
+export const fetchEvents = ({
+  minLat,
+  maxLat,
+  minLng,
+  maxLng
+}) => async dispatch => {
   try {
-    const {data} = await axios.get('/events')
+    const {data} = await axios.get(
+      `/api/events?minLat=${minLat}&maxLat=${maxLat}&minLng=${minLng}&maxLng=${maxLng}`
+    )
     dispatch(gotEvents(data))
   } catch (err) {
     console.error(err)

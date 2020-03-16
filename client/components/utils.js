@@ -22,3 +22,17 @@ export const locationToMapState = location => {
     zoom
   }
 }
+
+export const getBoundsFromMap = map => {
+  var bounds = map.getBounds()
+  console.log('bounds', bounds, 'sw', bounds.getSouthWest())
+  var sw = bounds.getSouthWest()
+  var ne = bounds.getNorthEast()
+
+  return {
+    minLat: sw.lat.toFixed(4),
+    maxLat: ne.lat.toFixed(4),
+    minLng: sw.lng.toFixed(4),
+    maxLng: ne.lng.toFixed(4)
+  }
+}

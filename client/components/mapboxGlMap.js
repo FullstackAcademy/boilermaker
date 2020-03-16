@@ -5,8 +5,13 @@ import {styled} from '@material-ui/styles'
 import SimpleMenu from './simple-menu'
 import FilterListIcon from '@material-ui/icons/FilterListRounded'
 import LocationCityIcon from '@material-ui/icons/LocationCityRounded'
-import {parseLLZ, locationToMapState} from './utils'
-import {filterOptions, locationOptions, defaultLocation} from './defaults'
+import {parseLLZ, locationToMapState, getBoundsFromMap} from './utils'
+import {
+  filterOptions,
+  locationOptions,
+  defaultLocation,
+  defaultBounds
+} from './defaults'
 
 import {fetchEvents} from '../store'
 
@@ -14,10 +19,17 @@ const MyLocationCityIcon = styled(LocationCityIcon)({
   color: 'black'
 })
 
-const MapboxGLMap = ({isAuthorized, mapboxToken, fetchToken}) => {
+const MapboxGLMap = ({
+  isAuthorized,
+  mapboxToken,
+  fetchToken,
+  fetchEvents,
+  events
+}) => {
   const [map, setMap] = useState(null)
   const [location, setLocation] = useState(defaultLocation)
   const [mapState, setMapState] = useState(locationToMapState(defaultLocation))
+  const [mapBounds, setMapBounds] = useState(defaultBounds)
   const mapContainer = useRef(null)
 
   useEffect(() => {
@@ -43,20 +55,23 @@ const MapboxGLMap = ({isAuthorized, mapboxToken, fetchToken}) => {
 
       map.on('move', () => {
         setMapState(locationMapState)
+        const bounds = getBoundsFromMap(map)
+        setMapBounds(bounds)
+        //console.log('map is moving updating bounds', bounds)
+        // update bounds, local state
       })
 
       map.on('load', () => {
         setMap(map)
+        const bounds = getBoundsFromMap(map)
+        fetchEvents(bounds)
         // map.resize()
       })
+
+      console.log('use effect inside init has events', events)
     }
 
-    console.log(
-      'use effect is running outside initialization with map',
-      map,
-      'location',
-      location
-    )
+    console.log('use effect outside init has location', location)
 
     if (!map) {
       initializeMap({setMap, mapContainer})
@@ -65,6 +80,8 @@ const MapboxGLMap = ({isAuthorized, mapboxToken, fetchToken}) => {
       setMapState(newMapState) // update state to point to new locatin
       initializeMap({setMap, mapContainer}) // update map for new location
     }
+
+    // load events
   }, [map, location])
 
   function handleFilterList(key) {
@@ -80,8 +97,8 @@ const MapboxGLMap = ({isAuthorized, mapboxToken, fetchToken}) => {
   return (
     <div>
       <div className="sidebarContainer">
-        Longitude: {mapState.lng} | Latitude: {mapState.lat} | Zoom:{' '}
-        {mapState.zoom}
+        Longitude: {mapState.lng} | Latitude: {mapState.lat} | Zoom:
+        {mapState.zoom} | MinLat: {mapBounds.minLat}
       </div>
       <div className="mapboxContainer">
         <div className="optionsContainer">
@@ -109,14 +126,15 @@ const MapboxGLMap = ({isAuthorized, mapboxToken, fetchToken}) => {
 const mapStateToProps = state => {
   return {
     isAuthorized: !!state.authToken,
-    mapboxToken: state.authToken
+    mapboxToken: state.authToken,
+    events: state.events
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchEvents() {
-      dispatch(fetchEvents())
+    fetchEvents(minLat, maxLat, minLng, maxLng) {
+      dispatch(fetchEvents(minLat, maxLat, minLng, maxLng))
     }
   }
 }
