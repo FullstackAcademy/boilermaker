@@ -56,9 +56,12 @@ const MapboxGLMap = ({
       const locationMapState = locationToMapState(location)
       const filtersMapState = filtersToMapState(locationMapState, filters)
 
+      console.log('map state is', mapState)
       console.log('location map state', locationMapState)
       console.log('filters map state', filtersMapState)
       console.log('use effect inside init has events', events)
+
+      console.log('filters in effect are', mapState.filters)
 
       const map = new mapboxgl.Map({
         container: mapContainer.current,
@@ -68,7 +71,7 @@ const MapboxGLMap = ({
       })
 
       map.on('move', () => {
-        setMapState(locationMapState)
+        setMapState(filtersMapState)
         const bounds = getBoundsFromMap
         setMapBounds(getBoundsFromMap(map))
 
@@ -97,14 +100,15 @@ const MapboxGLMap = ({
     if (!map) {
       initializeMap({setMap, mapContainer, events})
     } else if (map && location !== mapState.location) {
-      const newMapState = locationToMapState(location)
+      const newMapState = filtersToMapState(locationToMapState(location))
       setMapState(newMapState) // update state to point to new locatin
       initializeMap({setMap, mapContainer, events}) // update map for new location
     } else if (map && filters !== mapState.filters) {
       console.log('filters are', filters)
-      console.log('map state filters are', mapState.filters)
-      //const newMapState = filtersToMapState(filters)
-      //setMapState(newMapState) // update state to have new filters
+      console.log('map state is', mapState)
+      const newMapState = filtersToMapState(mapState, filters)
+      setMapState(newMapState)
+
       //initializeMap({setMap, mapContainer, events})
     }
 
@@ -138,7 +142,7 @@ const MapboxGLMap = ({
           <div className="filterContainer">
             <SimpleMenu
               icon={FilterListIcon}
-              options={filterOptions}
+              options={Object.keys(filterOptions)}
               handleFilter={handleFilterList}
             />
           </div>

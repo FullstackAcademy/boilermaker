@@ -1,4 +1,8 @@
-export const filterOptions = ['Genre', 'Radius', 'Date/Time']
+export const filterOptions = {
+  Genre: ['Rock', 'Pop', 'Hip Hop', 'Electronic'],
+  Radius: null,
+  'Date/Time': null
+}
 
 export const defaultFilters = {Genre: [], Radius: null, 'Date/Time': null}
 

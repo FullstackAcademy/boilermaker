@@ -407,7 +407,8 @@ var data = {
         longitude: -73.995315,
         latitude: 40.716291
       },
-      age_range: 'All'
+      age_range: 'All',
+      genre: 'Rock'
     },
     {
       name: 'South Street Seaport',
@@ -419,7 +420,8 @@ var data = {
         longitude: -74.003602,
         latitude: 40.707119
       },
-      age_range: 'All'
+      age_range: 'All',
+      genre: 'Pop'
     },
     {
       name: 'Ground Zero',
@@ -431,7 +433,8 @@ var data = {
         longitude: -74.01312,
         latitude: 40.709329
       },
-      age_range: 'All'
+      age_range: 'All',
+      genre: 'Electronic'
     },
     {
       name: 'National September 11th Memorial & Museum',
@@ -443,7 +446,8 @@ var data = {
         longitude: -74.013157,
         latitude: 40.709189
       },
-      age_range: 'All'
+      age_range: 'All',
+      genre: 'Electronic'
     },
     {
       name: 'Battery Park',
@@ -455,7 +459,8 @@ var data = {
         longitude: -74.014334,
         latitude: 40.704531
       },
-      age_range: 'All'
+      age_range: 'All',
+      genre: 'Pop'
     },
     {
       name: 'Staten Island Ferry Whitehall Terminal',
@@ -467,7 +472,8 @@ var data = {
         longitude: -74.0130686,
         latitude: 40.70103
       },
-      age_range: 'All'
+      age_range: 'All',
+      genre: 'Rock'
     },
     {
       name: 'Chinatown Ice Cream Factory',
@@ -479,7 +485,8 @@ var data = {
         longitude: -73.99819,
         latitude: 40.715323
       },
-      age_range: 'All'
+      age_range: 'All',
+      genre: 'Electronic'
     },
     {
       name: 'Blue Man Group',
@@ -491,7 +498,8 @@ var data = {
         longitude: -73.992104,
         latitude: 40.729373
       },
-      age_range: 'All'
+      age_range: 'All',
+      genre: 'Pop'
     },
     {
       name: "Scott's Pizza Tours",
@@ -503,7 +511,8 @@ var data = {
         longitude: -73.987708,
         latitude: 40.74461
       },
-      age_range: 'All'
+      age_range: 'All',
+      genre: 'Rock'
     },
     {
       name: 'Apple Store',
