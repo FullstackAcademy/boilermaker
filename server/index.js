@@ -9,6 +9,9 @@ const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
+const webpack = require('webpack')
+const webpackMiddleware = require('webpack-dev-middleware')
+const webpackConfig = require('../webpack.config.js')
 const socketio = require('socket.io')
 module.exports = app
 
@@ -66,6 +69,23 @@ const createApp = () => {
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
+
+  // webpack dev middleware
+  const outputPath = path.resolve(__dirname, './public')
+  app.use(
+    webpackMiddleware(
+      webpack({
+        ...webpackConfig,
+        output: {
+          filename: 'bundle.js',
+          pathinfo: false
+        }
+      }),
+      {
+        publicPath: '/'
+      }
+    )
+  )
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
