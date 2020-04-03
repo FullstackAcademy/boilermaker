@@ -71,7 +71,10 @@ const createApp = () => {
   app.use('/api', require('./api'))
 
   // webpack dev middleware
-  const outputPath = path.resolve(__dirname, './public')
+  //   This middleware will match requests to GET /bundle.js
+  //   An advantage to using this middleware is if webpack is
+  //   in the middle of a compilation the request will not
+  //   return content until the fresh bundle is availble.
   app.use(
     webpackMiddleware(
       webpack({
