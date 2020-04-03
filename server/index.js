@@ -75,20 +75,25 @@ const createApp = () => {
   //   An advantage to using this middleware is if webpack is
   //   in the middle of a compilation the request will not
   //   return content until the fresh bundle is availble.
-  app.use(
-    webpackMiddleware(
-      webpack({
-        ...webpackConfig,
-        output: {
-          filename: 'bundle.js',
-          pathinfo: false
+  //
+  //   In production, the bundle will be generated and stored in the
+  //   public/ directory.
+  if (process.env.NODE_ENV === 'development') {
+    app.use(
+      webpackMiddleware(
+        webpack({
+          ...webpackConfig,
+          output: {
+            filename: 'bundle.js',
+            pathinfo: false
+          }
+        }),
+        {
+          publicPath: '/'
         }
-      }),
-      {
-        publicPath: '/'
-      }
+      )
     )
-  )
+  }
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
