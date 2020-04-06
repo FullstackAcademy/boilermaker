@@ -1,6 +1,6 @@
 node_modules
-public/bundle.js
-public/bundle.js.map
+public/*bundle.js
+public/*bundle.js.map
 secrets.js
 .DS_Store
 npm-debug.log
