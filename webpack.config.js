@@ -1,3 +1,4 @@
+const path = require('path')
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
@@ -13,7 +14,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  devtool: 'source-map',
+  devtool: 'cheap-module-eval-source-map',
   watchOptions: {
     ignored: /node_modules/
   },
@@ -21,6 +22,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?$/,
+        include: path.resolve(__dirname, 'client'),
         exclude: /node_modules/,
         loader: 'babel-loader'
       }
