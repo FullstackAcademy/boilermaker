@@ -9,9 +9,6 @@ const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
-const webpack = require('webpack')
-const webpackMiddleware = require('webpack-dev-middleware')
-const webpackConfig = require('../webpack.config.js')
 const socketio = require('socket.io')
 module.exports = app
 
@@ -79,6 +76,11 @@ const createApp = () => {
   //   In production, the bundle will be generated and stored in the
   //   public/ directory.
   if (process.env.NODE_ENV === 'development') {
+    // These dependencies are only installed as development dependencies and attempting to
+    // require them will throw an error in production.
+    const webpack = require('webpack')
+    const webpackMiddleware = require('webpack-dev-middleware')
+    const webpackConfig = require('../webpack.config.js')
     app.use(
       webpackMiddleware(
         webpack({
