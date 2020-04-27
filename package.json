@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
-    "node": ">= 7.0.0"
+    "node": "~12.11.1"
   },
   "main": "index.js",
   "scripts": {
