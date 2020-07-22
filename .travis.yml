@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - node # uses most recent stable node version
+  - 12 # uses version 12
 services:
   - postgresql # starts up postgres
 addons:
@@ -15,9 +15,8 @@ install:
 before_script:
   - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
-  - npm test             # test the code
+  - npm test # test the code
   - npm run build-client # make the bundle
-
 # before_deploy:
 #   - rm -rf node_modules # omit from the tarball, since we skip cleanup
 # deploy:
