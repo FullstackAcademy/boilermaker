@@ -1,4 +1,4 @@
-# Updates to Boilermaker
+# Updates to LetsTrend
 
 ## Tuesday, April 9th, 2019
 

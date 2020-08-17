@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
+import {Login, Signup, UserHome, StylePage} from './components'
 import {me} from './store'
+import {useRadioGroup} from '@material-ui/core'
 
 /**
  * COMPONENT
@@ -24,7 +25,8 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route exact path="/" component={UserHome} />
+            <Route path="/style" component={StylePage} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

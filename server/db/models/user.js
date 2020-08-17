@@ -26,6 +26,30 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  address: {
+    type: Sequelize.STRING,
+    defaultValue: '123 10th St, Ny Ny 11249',
+    allowNull: false
+  },
+  imageUrl: {
+    type: Sequelize.TEXT,
+    defaultValue:
+      'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-alt-512.png'
+  },
+  firstName: {
+    type: Sequelize.STRING,
+    defaultValue: 'Jonah',
+    allowNull: false
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    defaultValue: 'Hill',
+    allowNull: false
   }
 })
 
