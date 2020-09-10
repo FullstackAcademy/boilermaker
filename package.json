@@ -1,5 +1,5 @@
 {
-  "name": "boilermaker",
+  "name": "studentregistration",
   "version": "2.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
@@ -7,6 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
+    "windows-start-dev": "set NODE_ENV=development&&npm run build-client-watch & NODE_ENV='development' npm run start-server",
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
