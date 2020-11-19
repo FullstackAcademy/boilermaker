@@ -1,5 +1,5 @@
 {
-  "name": "boilermaker",
+  "name": "Bundles",
   "version": "2.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
@@ -46,6 +46,7 @@
     "connect-session-sequelize": "^6.0.0",
     "express": "^4.16.4",
     "express-session": "^1.15.1",
+    "faker": "^5.1.0",
     "history": "^4.9.0",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",

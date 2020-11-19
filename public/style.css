@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  background-color: #181617;
 }
 
 a {
@@ -11,11 +12,36 @@ label {
 }
 
 nav a {
-  display: inline-block;
-  margin: 1em;
+  display: flex;
+  margin: 2em;
+  justify-content: center;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.container {
+  padding: 20px;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container h1 {
+  color: plum;
+  font-size: 10em;
+  font-weight: 900;
+  text-shadow: 3px 3px 4px rgb(219, 11, 11);
+}
+
+.links {
+  text-decoration: none;
+  color: plum;
+  font-size: 1em;
+  font-weight: 900;
+  text-shadow: 3px 3px 4px rgb(219, 11, 11);
 }

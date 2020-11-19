@@ -2,12 +2,9 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const User = db.define('user', {
+const Vendor = db.define('vendor', {
   userName: {
-    type: Sequelize.STRING,
-    validate: {
-      notEmpty: true
-    }
+    type: Sequelize.STRING
   },
   firstName: {
     type: Sequelize.STRING,
@@ -39,7 +36,7 @@ const User = db.define('user', {
   address: {
     type: Sequelize.STRING
   },
-  paymentInfo: {
+  bankInfo: {
     type: Sequelize.STRING
   },
   salt: {
@@ -53,13 +50,33 @@ const User = db.define('user', {
   },
   isVendor: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: true
   },
-  userRating: {
+  vendorRating: {
     type: Sequelize.DECIMAL(10, 2),
     validate: {
       notEmpty: true,
       min: 3.0
+    }
+  },
+  vendorAveragePrice: {
+    type: Sequelize.STRING
+  },
+  vendorType: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isIn: {
+        args: [
+          [
+            'Makeup',
+            'Hair Stylist',
+            'Aesthetician',
+            'Loctician',
+            'Hair Braiding'
+          ]
+        ]
+      }
     }
   },
   profilePic: {
@@ -67,17 +84,17 @@ const User = db.define('user', {
   }
 })
 
-module.exports = User
+module.exports = Vendor
 
-User.prototype.correctPassword = function(candidatePwd) {
-  return User.encryptPassword(candidatePwd, this.salt()) === this.password()
+Vendor.prototype.correctPassword = function(candidatePwd) {
+  return Vendor.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
-User.generateSalt = function() {
+Vendor.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64')
 }
 
-User.encryptPassword = function(plainText, salt) {
+Vendor.encryptPassword = function(plainText, salt) {
   return crypto
     .createHash('RSA-SHA256')
     .update(plainText)
@@ -85,15 +102,15 @@ User.encryptPassword = function(plainText, salt) {
     .digest('hex')
 }
 
-const setSaltAndPassword = user => {
-  if (user.changed('password')) {
-    user.salt = User.generateSalt()
-    user.password = User.encryptPassword(user.password(), user.salt())
+const setSaltAndPassword = vendor => {
+  if (vendor.changed('password')) {
+    vendor.salt = Vendor.generateSalt()
+    vendor.password = Vendor.encryptPassword(vendor.password(), vendor.salt())
   }
 }
 
-User.beforeCreate(setSaltAndPassword)
-User.beforeUpdate(setSaltAndPassword)
-User.beforeBulkCreate(users => {
-  users.forEach(setSaltAndPassword)
+Vendor.beforeCreate(setSaltAndPassword)
+Vendor.beforeUpdate(setSaltAndPassword)
+Vendor.beforeBulkCreate(vendors => {
+  vendors.forEach(setSaltAndPassword)
 })
