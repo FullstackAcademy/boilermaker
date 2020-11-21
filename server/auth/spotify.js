@@ -4,6 +4,8 @@ const SpotifyStrategy = require('passport-spotify').Strategy
 const {User} = require('../db/models')
 module.exports = router
 
+console.log(process.env)
+
 if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   console.log('Spotify client ID / secret not found. Skipping Spotify OAuth.')
 } else {
