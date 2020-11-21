@@ -4,11 +4,12 @@ const SpotifyStrategy = require('passport-spotify').Strategy
 const {User} = require('../db/models')
 module.exports = router
 
-console.log(process.env)
+// console.log(process.env)
 
 if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   console.log('Spotify client ID / secret not found. Skipping Spotify OAuth.')
 } else {
+  console.log(process.env.REDIRECT_URI)
   const spotifyConfig = {
     clientID: process.env.SPOTIFY_CLIENT_ID,
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
@@ -18,25 +19,23 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   const strategy = new SpotifyStrategy(
     spotifyConfig,
     (accessToken, refreshToken, expires_in, profile, done) => {
-      User.findOrCreate(
-        {
-          email: profile.email,
-          spotifyId: profile.id
+      User.findOrCreate({
+        defaults: {
+          email: profile._json.email
         },
-        function(err, user) {
-          return done(err, user)
-        }
-      )
+        where: {spotifyId: profile.id}
+      })
+        .then(([user]) => done(null, user))
+        .catch(done)
     }
   )
 
   passport.use(strategy)
 
   router.get(
-    '/spotify',
+    '/',
     passport.authenticate('spotify', {
-      scope: ['user-read-email', 'user-read-private'],
-      showDialog: true
+      scope: ['user-read-email', 'user-read-private']
     }),
     (req, res) => {
       // The request will be redirected to spotify for authentication, so this
@@ -48,8 +47,13 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
     '/callback',
     passport.authenticate('spotify', {failureRedirect: '/login'}),
     (req, res) => {
-      // Successful authentication, redirect home.
-      res.redirect('/')
+      console.log(res)
+      try {
+        // Successful authentication, redirect home.
+        res.redirect('/home')
+      } catch (error) {
+        console.log(error)
+      }
     }
   )
 }

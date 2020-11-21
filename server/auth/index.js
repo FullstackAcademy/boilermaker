@@ -38,9 +38,11 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
+router.use('/spotify', require('./spotify'))
+
 router.get('/me', (req, res) => {
+  console.log(req.user)
   res.json(req.user)
 })
 
 router.use('/google', require('./google'))
-router.use('/spotify', require('./spotify'))
