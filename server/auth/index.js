@@ -41,7 +41,7 @@ router.post('/logout', (req, res) => {
 router.use('/spotify', require('./spotify'))
 
 router.get('/me', (req, res) => {
-  console.log(req.user)
+  //there is a user here if they are logged in
   res.json(req.user)
 })
 

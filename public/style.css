@@ -9,6 +9,9 @@ a {
 label {
   display: block;
 }
+nav {
+  color: whitesmoke;
+}
 
 nav a {
   display: inline-block;
@@ -18,4 +21,22 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+#flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.nav-name {
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+.nav-name:hover {
+  background-color: #1db954;
+  color: whitesmoke;
+  text-decoration: none;
 }

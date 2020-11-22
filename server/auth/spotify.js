@@ -9,7 +9,6 @@ module.exports = router
 if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   console.log('Spotify client ID / secret not found. Skipping Spotify OAuth.')
 } else {
-  console.log(process.env.REDIRECT_URI)
   const spotifyConfig = {
     clientID: process.env.SPOTIFY_CLIENT_ID,
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
@@ -19,6 +18,7 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   const strategy = new SpotifyStrategy(
     spotifyConfig,
     (accessToken, refreshToken, expires_in, profile, done) => {
+      console.log('the data', profile)
       User.findOrCreate({
         defaults: {
           email: profile._json.email
@@ -47,7 +47,6 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
     '/callback',
     passport.authenticate('spotify', {failureRedirect: '/login'}),
     (req, res) => {
-      console.log(res)
       try {
         // Successful authentication, redirect home.
         res.redirect('/home')
