@@ -1,14 +1,26 @@
 import React from 'react'
 import {ListGroup} from 'react-bootstrap'
+import {connect} from 'react-redux'
+import {fetchPlaylists} from '../store/playlists'
 
-const Playlists = props => {
-  return (
-    <>
-      <ListGroup>
-        <ListGroup.Item>Playlist 1</ListGroup.Item>
-      </ListGroup>
-    </>
-  )
+class Playlists extends React.Component {
+  render() {
+    return (
+      <>
+        <ListGroup>
+          <ListGroup.Item>Playlist 1</ListGroup.Item>
+        </ListGroup>
+      </>
+    )
+  }
 }
 
-export default Playlists
+const mapState = state => ({
+  playlists: state.playlists
+})
+
+const mapDispatch = dispatch => ({
+  getPlaylists: userId => dispatch(fetchPlaylists(userId))
+})
+
+export default connect(mapState, mapDispatch)(Playlists)

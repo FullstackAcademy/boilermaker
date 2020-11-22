@@ -2,6 +2,9 @@ const passport = require('passport')
 const router = require('express').Router()
 const SpotifyStrategy = require('passport-spotify').Strategy
 const {User} = require('../db/models')
+
+const spotifyApi = require('./spotify-player')
+
 module.exports = router
 
 // console.log(process.env)
@@ -18,10 +21,19 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   const strategy = new SpotifyStrategy(
     spotifyConfig,
     (accessToken, refreshToken, expires_in, profile, done) => {
-      console.log('the data', profile)
+      spotifyApi.setCredentials({
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        redirectUri: spotifyConfig.callbackURL,
+        clientId: spotifyConfig.clientID,
+        clientSecret: spotifyConfig.clientSecret
+      })
+
       User.findOrCreate({
         defaults: {
-          email: profile._json.email
+          email: profile._json.email,
+          accessToken: accessToken,
+          refreshToken: refreshToken
         },
         where: {spotifyId: profile.id}
       })
@@ -35,7 +47,17 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   router.get(
     '/',
     passport.authenticate('spotify', {
-      scope: ['user-read-email', 'user-read-private']
+      scope: [
+        'user-read-email',
+        'user-read-private',
+        'user-modify-playback-state',
+        'playlist-modify-public',
+        'playlist-modify-private',
+        'playlist-read-private',
+        'playlist-read-collaborative',
+        'user-read-playback-state',
+        'user-library-modify'
+      ]
     }),
     (req, res) => {
       // The request will be redirected to spotify for authentication, so this
