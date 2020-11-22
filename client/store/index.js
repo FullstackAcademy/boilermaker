@@ -7,7 +7,7 @@ import playlist from './playlists'
 
 const reducer = combineReducers({
   user,
-  playlist
+  playlists: playlist
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

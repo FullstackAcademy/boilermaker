@@ -15,7 +15,7 @@ const initialState = {}
 /**
  * ACTION CREATORS
  */
-const getPlaylists = playlists => ({type: GET_USER, playlists})
+const getPlaylists = playlists => ({type: GET_PlAYLISTS, playlists})
 export const removePlaylists = () => ({type: REMOVE_PlAYLISTS})
 
 /**

@@ -8,7 +8,8 @@ import {
   UserHome,
   Song,
   DropdownMood,
-  Duration
+  Duration,
+  Playlists
 } from './components'
 import {me} from './store'
 import {Dropdown} from 'react-bootstrap'
@@ -32,7 +33,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={DropdownMood} />
+            <Route path="/home" component={Playlists} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
