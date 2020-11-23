@@ -2,17 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {
-  Login,
-  Signup,
-  UserHome,
-  Song,
-  DropdownMood,
-  Duration,
-  Playlists
-} from './components'
+import {Login, Signup, Main} from './components'
 import {me} from './store'
-import {Dropdown} from 'react-bootstrap'
 
 /**
  * COMPONENT
@@ -33,7 +24,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={Playlists} />
+            <Route path="/home" component={Main} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
