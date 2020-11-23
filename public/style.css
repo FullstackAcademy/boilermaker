@@ -2,12 +2,33 @@ body {
   font-family: sans-serif;
 }
 
+body {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 a {
   text-decoration: none;
 }
 
 label {
   display: block;
+}
+nav {
+  color: whitesmoke;
 }
 
 nav a {
@@ -18,4 +39,33 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+#flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.nav-name {
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+.nav-name:hover {
+  background-color: #1db954;
+  color: whitesmoke;
+  text-decoration: none;
+}
+
+/*
+ * Cover
+ */
+.cover {
+  padding: 0 1.5rem;
+}
+.cover .btn-lg {
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
 }

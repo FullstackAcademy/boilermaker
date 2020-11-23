@@ -3,11 +3,17 @@
   <head>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width initial-scale=1.0'>
-    <title>Boilermaker</title>
+    <title>Stream</title>
     <link rel="stylesheet" href="/style.css" />
     <script defer src="/bundle.js"></script>
   </head>
   <body>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script>
+      window.onSpotifyWebPlaybackSDKReady = () => {
+        // You can now initialize Spotify.Player and use the SDK
+      };
+      </script>
     <div id="app"></div>
   </body>
 </html>

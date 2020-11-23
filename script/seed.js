@@ -1,7 +1,28 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Mood} = require('../server/db/models')
+
+const intention = [
+  {
+    name: 'Affirmation'
+  },
+  {
+    name: 'Chakra'
+  },
+  {
+    name: 'Joy'
+  },
+  {
+    name: 'Love'
+  },
+  {
+    name: 'Manifestation'
+  },
+  {
+    name: 'Relaxation'
+  }
+]
 
 async function seed() {
   await db.sync({force: true})
@@ -11,8 +32,9 @@ async function seed() {
     User.create({email: 'cody@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'})
   ])
+  const intentions = await Mood.bulkCreate(intention)
 
-  console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${users.length} users and ${intentions.length} moods`)
   console.log(`seeded successfully`)
 }
 
