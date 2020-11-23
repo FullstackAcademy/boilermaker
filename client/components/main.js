@@ -1,5 +1,5 @@
 import React from 'react'
-import {Playlists, DropdownMood, Duration} from './index'
+import {Playlists, DropdownMood, Duration, MeditationPlaylist} from './index'
 import {fetchPlaylists} from '../store/playlists'
 import {connect} from 'react-redux'
 import {fetchIntentions} from '../store/intentions'
@@ -19,6 +19,7 @@ class Main extends React.Component {
   handleClick(searchValue) {}
 
   render() {
+    console.log(this.props.user.spotifyId)
     return (
       <div className="flex-coloumn justify-content-center">
         <DropdownMood
@@ -26,10 +27,20 @@ class Main extends React.Component {
           moods={this.props.intentions}
           getTrack={this.props.getTrack}
         />
-        <Playlists
-          id={this.props.user.spotifyId}
-          playlists={this.props.playlists}
-        />
+        {this.props.track.id ? (
+          <MeditationPlaylist
+            currentPlaylist={this.props.track}
+            playlists={
+              <Playlists
+                playlists={this.props.playlists}
+                className="m-1"
+                postPlaylist={this.props.postPlaylist}
+              />
+            }
+          />
+        ) : (
+          ''
+        )}
       </div>
     )
   }
@@ -38,13 +49,15 @@ class Main extends React.Component {
 const mapState = state => ({
   user: state.user,
   playlists: state.playlists,
-  intentions: state.intentions
+  intentions: state.intentions,
+  track: state.track
 })
 
 const mapDispatch = dispatch => ({
   getPlaylists: userId => dispatch(fetchPlaylists(userId)),
   getIntentions: () => dispatch(fetchIntentions()),
-  getTrack: value => dispatch(fetchTrack(value))
+  getTrack: value => dispatch(fetchTrack(value)),
+  postPlaylist: playlist => dispatch(sendPlaylist(playlist))
 })
 
 export default connect(mapState, mapDispatch)(Main)

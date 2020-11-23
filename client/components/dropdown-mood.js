@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Button} from 'react-bootstrap'
+import {Button, Card} from 'react-bootstrap'
 
 //mini medi:
 // Joy Happiness
@@ -33,32 +33,34 @@ class DropdownMood extends React.Component {
   render() {
     return (
       <div className="flex-row justify-content-center">
-        <form className="" onSubmit={this.handleSubmit}>
-          <label
-            htmlFor="mood"
-            className="align-self-center m-1"
-            style={{fontWeight: 'bold'}}
-          >
-            How do you want to feel?
-          </label>
-          <select
-            className="m-1"
-            id="meditation-mood-selector"
-            title="mood"
-            name="mood"
-            onChange={this.handleChange}
-            value={this.state.intention}
-          >
-            <option value="all">---</option>
-            {this.props.moods.map(mood => (
-              <option key={mood.id}>{mood.name}</option>
-            ))}
-          </select>
-          <Button type="submit" variant="success">
-            Find me a Meditation!
-          </Button>
-        </form>
-        {/* <iframe
+        <Card>
+          <Card.Body>
+            <form className="" onSubmit={this.handleSubmit}>
+              <label
+                htmlFor="mood"
+                className="align-self-center m-1 form-control"
+                style={{fontWeight: 'bold'}}
+              >
+                How do you want to feel?
+              </label>
+              <select
+                className="m-1 form-control"
+                id="meditation-mood-selector"
+                title="mood"
+                name="mood"
+                onChange={this.handleChange}
+                value={this.state.intention}
+              >
+                <option value="all">---</option>
+                {this.props.moods.map(mood => (
+                  <option key={mood.id}>{mood.name}</option>
+                ))}
+              </select>
+              <Button type="submit" variant="success">
+                Find me a Meditation!
+              </Button>
+            </form>
+            {/* <iframe
         src="https://open.spotify.com/embed/playlist/0eAa4FyRTpxpkKsq6GynFG"
         width="300"
         height="380"
@@ -66,6 +68,8 @@ class DropdownMood extends React.Component {
         allowTransparency="true"
         allow="encrypted-media"
       /> */}
+          </Card.Body>
+        </Card>
       </div>
     )
   }

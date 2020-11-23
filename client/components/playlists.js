@@ -1,11 +1,11 @@
 import React from 'react'
 import {Dropdown, Spinner, DropdownButton} from 'react-bootstrap'
 
-const Playlists = ({playlists, id}) => {
+const Playlists = ({playlists}) => {
   if (!playlists[0]) return <Spinner animation="border" />
 
   return (
-    <div>
+    <>
       <DropdownButton variant="secondary" title="Add to Playlist">
         <Dropdown.Item>New Playlist</Dropdown.Item>
         {playlists.map(playlist => (
@@ -13,7 +13,7 @@ const Playlists = ({playlists, id}) => {
           <Dropdown.Item key={playlist.id}>{playlist.name}</Dropdown.Item>
         ))}
       </DropdownButton>
-    </div>
+    </>
   )
 }
 
