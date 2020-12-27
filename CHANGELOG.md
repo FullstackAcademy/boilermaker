@@ -1,5 +1,9 @@
 # Updates to Boilermaker
 
+## December 28th, 2020
+
+* removed sockets from boilermaker
+
 ## Tuesday, April 9th, 2019
 
 ### Dependencies
