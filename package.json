@@ -2,9 +2,6 @@
   "name": "boilermaker",
   "version": "2.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
-  "engines": {
-    "node": "~12.11.1"
-  },
   "main": "index.js",
   "scripts": {
     "build-client": "webpack",
@@ -100,7 +97,6 @@
     "simple-git": "^1.121.0",
     "supertest": "^4.0.2",
     "webpack": "^4.16.4",
-    "webpack-cli": "^3.1.0",
-    "yaml": "^1.6.0"
+    "webpack-cli": "^3.1.0"
   }
 }
