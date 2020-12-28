@@ -1,8 +1,10 @@
 # Updates to Boilermaker
 
-## December 28th, 2020
+## Monday, December 28th, 2020
 
 * removed sockets from boilermaker
+* removed travis.yml and travis.cli related content from boilermaker
+* pg update from 7.9.0 to 8.5.1 (node 14 capable)
 
 ## Tuesday, April 9th, 2019
 
