@@ -40,8 +40,7 @@ git merge boilermaker/master
 
 Now that you've got the code, follow these steps to get acclimated:
 
-* Update project name and description in `package.json` and
-  `.travis.yml` files
+* Update project name and description in `package.json`
 * `npm install`
 * Create two postgres databases (`MY_APP_NAME` should match the `name`
   parameter in `package.json`):
@@ -104,13 +103,12 @@ From there, just follow your bliss.
 
 ## Deployment
 
-Ready to go world wide? Here's a guide to deployment! There are two
-supported ways to deploy in Boilermaker:
+Ready to go world wide? Here's a guide to deployment! It is ready to be deployed to heroku at any moment.
+Supported way to deploy in Boilermaker:
 
-* automatically, via continuous deployment with Travis.
-* "manually", from your local machine via the `deploy` script.
+* "manually" deploy from your local machine via the `deploy` script.
 
-Either way, you'll need to set up your deployment server to start.
+You'll need to set up your deployment server to start.
 The steps below are also covered in the CI/CD workshop.
 
 ### Heroku
@@ -132,61 +130,6 @@ The steps below are also covered in the CI/CD workshop.
 
   1.  `heroku git:remote your-app-name` You'll need to be a
       collaborator on the app.
-
-### Travis
-
-_**NOTE**_ that this step assumes that Travis-CI is already testing your code.
-Continuous Integration is not about testing per se – it's about _continuously
-integrating_ your changes into the live application, instead of periodically
-_releasing_ new versions. CI tools can not only test your code, but then
-automatically deploy your app. This is known as Continuous Deployment.
-Boilermaker comes with a `.travis.yml` configuration almost ready for
-continuous deployment; follow these steps to the job.
-
-1.  Run the following commands to create a new branch:
-
-```
-git checkout master
-git pull
-git checkout -b f/travis-deploy
-```
-
-2.  Run the following script to finish configuring `travis.yml` :
-    `npm run heroku-token`
-    This will use your `heroku` CLI (that you configured previously, if
-    not then see [above](#Heroku)) to generate an authentication token. It
-    will then use `openssl` to encrypt this token using a public key that
-    Travis has generated for you. It will then update your `.travis.yml`
-    file with the encrypted value to be sent with the `secure` key under
-    the `api_key`.
-3.  Run the following commands to commit these changes
-
-```
-git add .travis.yml
-git commit -m 'travis: activate deployment'
-git push -u origin f/travis-deploy
-```
-
-4.  Make a Pull Request for the new branch, get it approved, and merge it into
-    the master branch.
-
-_**NOTE**_ that this script depends on your local `origin` Git remote matching
-your GitHub URL, and your local `heroku` remote matching the name of your
-Heroku app. This is only an issue if you rename your GitHub organization,
-repository name or Heroku app name. You can update these values using
-`git remote` and its related commands.
-
-#### Travis CLI
-
-There is a procedure to complete the above steps by installing the official
-[Travis CLI tools][travis-cli]. This requires a recent Ruby, but this step
-should not be, strictly speaking, necessary. Only explore this option when the
-above has failed.
-
-[travis-cli]: https://github.com/travis-ci/travis.rb#installation
-
-That's it! From now on, whenever `master` is updated on GitHub, Travis
-will automatically push the app to Heroku for you.
 
 ### Cody's own deploy script
 
