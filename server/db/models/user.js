@@ -1,6 +1,7 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const jwt = require('jsonwebtoken')
 
 const User = db.define('user', {
   email: {
@@ -28,6 +29,25 @@ const User = db.define('user', {
     type: Sequelize.STRING
   }
 })
+
+User.prototype.generateToken = function() {
+  return jwt.sign({id: this.id}, process.env.JWT)
+}
+
+User.findByToken = async function(token) {
+  try {
+    const {id} = await jwt.verify(token, process.env.JWT)
+    const user = User.findByPk(id)
+    if (!user) {
+      throw 'nooo'
+    }
+    return user
+  } catch (ex) {
+    const error = Error('bad token')
+    error.status = 401
+    throw error
+  }
+}
 
 module.exports = User
 
