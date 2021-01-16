@@ -1,10 +1,8 @@
 import axios from 'axios'
 import history from '../history'
 
-//constant for storing token
+const storage = () => window.localStorage
 const TOKEN = 'token'
-//shortcut for localStorage
-const storage = window.localStorage
 
 /**
  * ACTION TYPES
@@ -27,14 +25,14 @@ const removeUser = () => ({type: REMOVE_USER})
  * THUNK CREATORS
  */
 export const me = () => async dispatch => {
-  const token = localStorage.getItem(TOKEN)
+  const token = storage().getItem(TOKEN)
   if (token) {
     const res = await axios.get('/auth/me', {
       headers: {
         authorization: token
       }
     })
-    dispatch(getUser(res.data))
+    return dispatch(getUser(res.data))
   }
 }
 
@@ -42,7 +40,7 @@ export const auth = (email, password, method) => async dispatch => {
   let res
   try {
     res = await axios.post(`/auth/${method}`, {email, password})
-    storage.setItem(TOKEN, res.data.token)
+    storage().setItem(TOKEN, res.data.token)
     dispatch(me())
   } catch (authError) {
     return dispatch(getUser({error: authError}))
@@ -50,7 +48,7 @@ export const auth = (email, password, method) => async dispatch => {
 }
 
 export const logout = () => {
-  localStorage.removeItem(TOKEN)
+  storage().removeItem(TOKEN)
   history.push('/login')
   return {
     type: REMOVE_USER
