@@ -3,7 +3,6 @@ const isDev = process.env.NODE_ENV === 'development'
 module.exports = {
   mode: isDev ? 'development' : 'production',
   entry: [
-    '@babel/polyfill', // enables async-await
     './client/index.js'
   ],
   output: {
@@ -22,7 +21,12 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            '@babel/preset-react'
+          ]
+        }
       }
     ]
   }
