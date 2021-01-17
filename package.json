@@ -11,12 +11,15 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' JWT=shh npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/register --require esm ",
-    "test:dev": "npm run test -- --watch"
+    "test": "NODE_ENV=test JWT=a_secret mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" --require @babel/register --require esm ",
+    "test:dev": "npm run test -- --watch",
+    "test:dev:models": "npm run test:dev -- --grep=model",
+    "test:dev:routes": "npm run test:dev -- --grep=route"
   },
   "author": "Fullstack Academy of Code",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "compression": "^1.7.3",
     "express": "^4.16.4",
     "history": "^4.9.0",
