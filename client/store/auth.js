@@ -7,19 +7,12 @@ const TOKEN = 'token'
 /**
  * ACTION TYPES
  */
-const GET_USER = 'GET_USER'
-const REMOVE_USER = 'REMOVE_USER'
-
-/**
- * INITIAL STATE
- */
-const defaultUser = {}
+const SET_AUTH = 'SET_AUTH'
 
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
-const removeUser = () => ({type: REMOVE_USER})
+const setAuth = auth => ({type: SET_AUTH, auth})
 
 /**
  * THUNK CREATORS
@@ -32,18 +25,18 @@ export const me = () => async dispatch => {
         authorization: token
       }
     })
-    return dispatch(getUser(res.data))
+    return dispatch(setAuth(res.data))
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
+export const authenticate = (email, password, method) => async dispatch => {
   let res
   try {
     res = await axios.post(`/auth/${method}`, {email, password})
     storage().setItem(TOKEN, res.data.token)
     dispatch(me())
   } catch (authError) {
-    return dispatch(getUser({error: authError}))
+    return dispatch(setAuth({error: authError}))
   }
 }
 
@@ -51,19 +44,18 @@ export const logout = () => {
   storage().removeItem(TOKEN)
   history.push('/login')
   return {
-    type: REMOVE_USER
+    type: SET_AUTH,
+    auth: {}
   }
 }
 
 /**
  * REDUCER
  */
-export default function(state = defaultUser, action) {
+export default function(state = {}, action) {
   switch (action.type) {
-    case GET_USER:
-      return action.user
-    case REMOVE_USER:
-      return defaultUser
+    case SET_AUTH:
+      return action.auth
     default:
       return state
   }
