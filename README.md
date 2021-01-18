@@ -109,6 +109,7 @@ Supported way to deploy in Boilermaker:
       name in mind.
   2.  `heroku addons:create heroku-postgresql:hobby-dev` to add
       ("provision") a postgres database to your heroku dyno
+  3.  `heroku config:set JWT=<your secret here!>` to set a secret for JWT signing 
 
 * **If you already have a Heroku app...**
 
