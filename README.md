@@ -62,6 +62,8 @@ createdb $MY_APP_NAME-test
     Github! Otherwise, _prying eyes_ will find your secret API keys!
   * It might look like this:
 
+TODO - add github oauth and remove google
+
 ```
 process.env.GOOGLE_CLIENT_ID = 'hush hush'
 process.env.GOOGLE_CLIENT_SECRET = 'pretty secret'
@@ -70,34 +72,20 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
 
 ### OAuth
 
+TODO - add github oauth and remove google
+
 * To use OAuth with Google, complete the steps above with a real client
   ID and client secret supplied from Google
   * You can get them from the [Google APIs dashboard][google-apis].
 
 [google-apis]: https://console.developers.google.com/apis/credentials
 
-## Linting
-
-Linters are fundamental to any project. They ensure that your code
-has a consistent style, which is critical to writing readable code.
-
-Boilermaker comes with a working linter (ESLint, with
-`eslint-config-fullstack`) "out of the box." However, everyone has
-their own style, so we recommend that you and your team work out yours
-and stick to it. Any linter rule that you object to can be "turned
-off" in `.eslintrc.json`. You may also choose an entirely different
-config if you don't like ours:
-
-* [Standard style guide](https://standardjs.com/)
-* [Airbnb style guide](https://github.com/airbnb/javascript)
-* [Google style guide](https://google.github.io/styleguide/jsguide.html)
-
 ## Start
 
-Running `npm run start-dev` will make great things happen!
+Running `npm run start:dev` will make great things happen!
 
-If you want to run the server and/or `webpack` separately, you can also
-`npm run start-server` and `npm run build-client`.
+- start:dev will both start your server and build your client side files using webpack
+- start:dev:logger is the same as start:dev, but you will see your SQL queries (can be helpful for debugging)
 
 From there, just follow your bliss.
 
@@ -106,10 +94,6 @@ From there, just follow your bliss.
 Ready to go world wide? Here's a guide to deployment! It is ready to be deployed to heroku at any moment.
 Supported way to deploy in Boilermaker:
 
-* "manually" deploy from your local machine via the `deploy` script.
-
-You'll need to set up your deployment server to start.
-The steps below are also covered in the CI/CD workshop.
 
 ### Heroku
 
@@ -131,38 +115,5 @@ The steps below are also covered in the CI/CD workshop.
   1.  `heroku git:remote your-app-name` You'll need to be a
       collaborator on the app.
 
-### Cody's own deploy script
-
-Your local copy of the application can be pushed up to Heroku at will,
-using Boilermaker's handy deployment script:
-
-1.  Make sure that all your work is fully committed and merged into your
-    master branch on Github.
-2.  If you currently have an existing branch called "deploy", delete
-    it now (`git branch -d deploy`). We will use a dummy branch
-    with the name `deploy` (see below), so and the script below will error if a
-    branch with that name already exists.
-3.  `npm run deploy`
-    _ this will cause the following commands to happen in order:
-    _ `git checkout -b deploy`: checks out a new branch called
-    `deploy`. Note that the name `deploy` here is not magical, but it needs
-    to match the name of the branch we specify when we push to our `heroku`
-    remote.
-    _ `webpack -p`: webpack will run in "production mode"
-    _ `git add -f public/bundle.js public/bundle.js.map`: "force" add
-    these files which are listed in `.gitignore`.
-    _ `git commit --allow-empty -m 'Deploying'`: create a commit, even
-    if nothing changed
-    _ `git push --force heroku deploy:master`: push your local
-    `deploy` branch to the `master` branch on `heroku`
-    _ `git checkout master`: return to your master branch
-    _ `git branch -D deploy`: remove the deploy branch
 
 Now, you should be deployed!
-
-Why do all of these steps? The big reason is because we don't want our
-production server to be cluttered up with dev dependencies like
-`webpack`, but at the same time we don't want our development
-git-tracking to be cluttered with production build files like
-`bundle.js`! By doing these steps, we make sure our development and
-production environments both stay nice and clean!

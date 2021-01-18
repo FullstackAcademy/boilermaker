@@ -13,11 +13,6 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
-    // Making `.password` act like a func hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
-    get() {
-      return () => this.getDataValue('password')
-    }
   },
   googleId: {
     type: Sequelize.STRING
@@ -30,7 +25,7 @@ module.exports = User
  * instanceMethods
  */
 User.prototype.correctPassword = function(candidatePwd) {
-  return bcrypt.compare(candidatePwd, this.password());
+  return bcrypt.compare(candidatePwd, this.password);
 }
 
 User.prototype.generateToken = function() {
@@ -42,7 +37,7 @@ User.prototype.generateToken = function() {
  */
 User.authenticate = async function({ email, password }){
     const user = await this.findOne({where: {email}})
-    if (!user || !user.correctPassword(password)) {
+    if (!user || !(await user.correctPassword(password))) {
       const error = Error('Incorrect username/password');
       error.status = 401;
       throw error;
@@ -70,7 +65,7 @@ User.findByToken = async function(token) {
  */
 const hashPassword = async(user) => {
   if (user.changed('password')) {
-    user.password = bcrypt.hash(user.password, SALT_ROUNDS);
+    user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
   }
 }
 

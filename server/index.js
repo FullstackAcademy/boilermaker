@@ -1,7 +1,3 @@
-const { db } = require('./db')
-const PORT = process.env.PORT || 8080
-const app = require('./app')
-
 /**
  * In your development environment, you can keep all of your
  * app's secret API keys in a file called `secrets.js`, in your project
@@ -10,7 +6,17 @@ const app = require('./app')
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
-if (process.env.NODE_ENV !== 'production') require('../secrets')
+try {
+  require('../secrets')
+}
+catch(ex){
+  console.log(ex.message);
+  console.log('if you are in your development environment, you can add a secrets.js file where environment variables can be set, if you are in a production environment, make sure to set environment variables');
+}
+
+const { db } = require('./db')
+const PORT = process.env.PORT || 8080
+const app = require('./app')
 
 const init = async () => {
   try {
