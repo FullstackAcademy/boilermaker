@@ -1,7 +1,6 @@
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
-const compression = require('compression')
 const app = express()
 module.exports = app
 
@@ -10,14 +9,17 @@ app.use(morgan('dev'))
 
 // body parsing middleware
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
 
-// compression middleware
-app.use(compression())
+//use ejs renderer in order to pass data html files
+app.engine('html', require('ejs').renderFile);
 
 // auth and api routes
 app.use('/auth', require('./auth'))
 app.use('/api', require('./api'))
+
+const githubURL = process.env.GITHUB_CLIENT_ID ? `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}` : null;
+
+app.get('/', (req, res)=> res.render(path.join(__dirname, '..', 'public/index.html'), { githubURL }));
 
 // static file-serving middleware
 app.use(express.static(path.join(__dirname, '..', 'public')))
@@ -35,7 +37,7 @@ app.use((req, res, next) => {
 
 // sends index.html
 app.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public/index.html'))
+  res.render(path.join(__dirname, '..', 'public/index.html'), { githubURL });
 })
 
 // error handling endware

@@ -29,6 +29,9 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
+      {
+        window.githubURL && <a href={window.githubURL}>Login / Register Via Github </a>
+      }
     </div>
   )
 }

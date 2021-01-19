@@ -62,23 +62,18 @@ createdb $MY_APP_NAME-test
     Github! Otherwise, _prying eyes_ will find your secret API keys!
   * It might look like this:
 
-TODO - add github oauth and remove google
 
 ```
-process.env.GOOGLE_CLIENT_ID = 'hush hush'
-process.env.GOOGLE_CLIENT_SECRET = 'pretty secret'
-process.env.GOOGLE_CALLBACK = '/auth/google/callback'
+process.env.GITHUB_CLIENT_ID = 'the client id'
+process.env.GITHUB_CLIENT_SECRET = 'the client secret'
 ```
 
 ### OAuth
 
-TODO - add github oauth and remove google
 
-* To use OAuth with Google, complete the steps above with a real client
-  ID and client secret supplied from Google
-  * You can get them from the [Google APIs dashboard][google-apis].
+* To use OAuth with Github, register an OAUTH app with github in order to obtain client_id and client_secret, the callback url should be set to http://localhost:8080/auth/github/callback
 
-[google-apis]: https://console.developers.google.com/apis/credentials
+[github-oauth]: https://docs.github.com/en/developers/apps/authorizing-oauth-apps 
 
 ## Start
 
@@ -110,6 +105,7 @@ Supported way to deploy in Boilermaker:
   2.  `heroku addons:create heroku-postgresql:hobby-dev` to add
       ("provision") a postgres database to your heroku dyno
   3.  `heroku config:set JWT=<your secret here!>` to set a secret for JWT signing 
+  4.  if you are using github oauth, you'll need to register another OAUTH app with github with the appropriate callback url and set the environment variables for GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET 
 
 * **If you already have a Heroku app...**
 
