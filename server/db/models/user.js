@@ -1,6 +1,10 @@
-const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
+const axios = require('axios');
+
+const SALT_ROUNDS = 5;
 
 const User = db.define('user', {
   email: {
@@ -10,22 +14,9 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
-    // Making `.password` act like a func hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
-    get() {
-      return () => this.getDataValue('password')
-    }
   },
-  salt: {
-    type: Sequelize.STRING,
-    // Making `.salt` act like a function hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
-    get() {
-      return () => this.getDataValue('salt')
-    }
-  },
-  googleId: {
-    type: Sequelize.STRING
+  githubId: {
+    type: Sequelize.INTEGER
   }
 })
 
@@ -35,36 +26,86 @@ module.exports = User
  * instanceMethods
  */
 User.prototype.correctPassword = function(candidatePwd) {
-  return User.encryptPassword(candidatePwd, this.salt()) === this.password()
+  return bcrypt.compare(candidatePwd, this.password);
+}
+
+User.prototype.generateToken = function() {
+  return jwt.sign({id: this.id}, process.env.JWT)
 }
 
 /**
  * classMethods
  */
-User.generateSalt = function() {
-  return crypto.randomBytes(16).toString('base64')
+User.authenticate = async function({ email, password }){
+    const user = await this.findOne({where: {email}})
+    if (!user || !(await user.correctPassword(password))) {
+      const error = Error('Incorrect username/password');
+      error.status = 401;
+      throw error;
+    }
+    return user.generateToken();
+};
+
+User.findByToken = async function(token) {
+  try {
+    const {id} = await jwt.verify(token, process.env.JWT)
+    const user = User.findByPk(id)
+    if (!user) {
+      throw 'nooo'
+    }
+    return user
+  } catch (ex) {
+    const error = Error('bad token')
+    error.status = 401
+    throw error
+  }
 }
 
-User.encryptPassword = function(plainText, salt) {
-  return crypto
-    .createHash('RSA-SHA256')
-    .update(plainText)
-    .update(salt)
-    .digest('hex')
+User.authenticateGithub = async function(code){
+  //step 1: exchange code for token
+  let response = await axios.post('https://github.com/login/oauth/access_token', {
+    client_id: process.env.GITHUB_CLIENT_ID,
+    client_secret: process.env.GITHUB_CLIENT_SECRET,
+    code
+  }, {
+    headers: {
+      accept: 'application/json'
+    }
+  });
+  const { data } = response;
+  if(data.error){
+    const error = Error(data.error);
+    error.status = 401;
+    throw error;
+  }
+  //step 2: use token for user info
+  response = await axios.get('https://api.github.com/user', {
+    headers: {
+      authorization: `token ${ data.access_token }`
+    }
+  });
+  const { email, id } = response.data;
+
+  //step 3: either find user or create user
+  let user = await User.findOne({ where: { githubId: id, email } });
+  if(!user){
+    user = await User.create({ email, githubId: id });
+  }
+  //step 4: return jwt token
+  return user.generateToken();
 }
 
 /**
  * hooks
  */
-const setSaltAndPassword = user => {
+const hashPassword = async(user) => {
   if (user.changed('password')) {
-    user.salt = User.generateSalt()
-    user.password = User.encryptPassword(user.password(), user.salt())
+    user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
   }
 }
 
-User.beforeCreate(setSaltAndPassword)
-User.beforeUpdate(setSaltAndPassword)
+User.beforeCreate(hashPassword)
+User.beforeUpdate(hashPassword)
 User.beforeBulkCreate(users => {
-  users.forEach(setSaltAndPassword)
+  users.forEach(hashPassword)
 })
