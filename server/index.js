@@ -10,6 +10,7 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+const {blueBright, magenta, yellow} = require('chalk')
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -86,19 +87,49 @@ const createApp = () => {
     res.sendFile(path.join(__dirname, '..', 'public/index.html'))
   })
 
-  // error handling endware
+  // custom error handling
   app.use((err, req, res, next) => {
-    console.error(err)
-    console.error(err.stack)
+    // just in case
+    if (!err.stack || !err.message) {
+      next(err)
+    }
+
+    // clean up the trace to just relevant info
+    const cleanTrace = err.stack
+      .split('\n')
+      .filter(line => {
+        // comment out the next two lines for full (verbose) stack traces
+        const projectFile = line.indexOf(__dirname) > -1 // omit built-in Node code
+        const nodeModule = line.indexOf('node_modules') > -1 // omit npm modules
+        return projectFile && !nodeModule
+      })
+      .join('\n')
+
+    // colorize and format the output
+    console.log(
+      magenta(`
+    >>>>> Error: ${err.message} <<<<<
+
+${yellow(cleanTrace)}
+    `)
+    )
+
+    // send back error status
     res.status(err.status || 500).send(err.message || 'Internal server error.')
   })
 }
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () =>
-    console.log(`Mixing it up on port ${PORT}`)
-  )
+  const server = app.listen(PORT, () => {
+    console.log(`
+
+    Mixing it up on port ${PORT}
+
+    ${blueBright(`http://localhost:${PORT}/`)}
+
+`)
+  })
 
   // set up our socket control center
   const io = socketio(server)
