@@ -23,7 +23,7 @@ set -e
 function cleanup_at_exit {
   # return to your master branch
   git checkout master
-  
+
   # remove the deploy branch
   git branch -D deploy
 }
@@ -37,7 +37,7 @@ git checkout -b deploy
 webpack -p
 
 # "force" add the otherwise gitignored build files
-git add -f public/bundle.js public/bundle.js.map
+git add -f public/*
 
 # create a commit, even if nothing changed
 git commit --allow-empty -m 'Deploying'

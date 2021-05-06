@@ -1,3 +1,4 @@
+const pathLib = require('path')
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
@@ -7,8 +8,10 @@ module.exports = {
     './client/index.js'
   ],
   output: {
-    path: __dirname,
-    filename: './public/bundle.js'
+    chunkFilename: '[name].bundle.js',
+    filename: 'bundle.js',
+    path: pathLib.join(__dirname, 'public'),
+    publicPath: '/'
   },
   resolve: {
     extensions: ['.js', '.jsx']
