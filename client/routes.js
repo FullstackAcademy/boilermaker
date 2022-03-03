@@ -28,7 +28,7 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
   }
-
+  //DELETE ME!!! to confim cahnges
   render() {
     const {isLoggedIn} = this.props
 
