@@ -98,10 +98,8 @@ main {
   max-width: 5ch;
 }
 
-#subtotal {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.delete-pizza {
+  cursor: pointer;
 }
 
 .navLink {

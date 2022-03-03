@@ -52,7 +52,7 @@ class Cart extends React.Component {
             <tr>
               <th>Item</th>
               <th>Quantity</th>
-              <th>Price</th>
+              <th>Subtotal</th>
               <th />
             </tr>
           </thead>
@@ -71,26 +71,21 @@ class Cart extends React.Component {
                       onChange={this.changeQuantity}
                     />
                   </td>
-                  <td>{pizza.quantity * pizza.price}</td>
-                  <td onClick={() => this.deletePizza(pizza.id)}>delete</td>
+                  <td>${Math.round(pizza.quantity * pizza.price * 100) / 100}</td>
+                  <td className="delete-pizza" onClick={() => this.deletePizza(pizza.id)}>delete</td>
                 </tr>
               )
             })}
-          </tbody>
-        </Table>
-        <div id="subtotal">
-          <p>Subtotal: </p>
-          <p>
-            $
+            <tr><td>Total: </td><td/><td>$
             {pizzas.length > 0
               ? Math.round(
                   pizzas.reduce((prev, pizza) => {
                     return prev + pizza.quantity * pizza.price
                   }, 0) * 100
                 ) / 100
-              : 0}
-          </p>
-        </div>
+              : 0}</td><td/></tr>
+          </tbody>
+        </Table>
       </div>
     )
   }
