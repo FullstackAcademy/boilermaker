@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button';
 import {updateCart, deletePizza} from '../store/cart'
 
 class Cart extends React.Component {
@@ -45,6 +46,7 @@ class Cart extends React.Component {
     return this.loading ? (
       <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png" />
     ) : (
+      <div id="cart-page">
       <div className="cart">
         <h1>Cart</h1>
         <Table striped border hover>
@@ -86,6 +88,11 @@ class Cart extends React.Component {
               : 0}</td><td/></tr>
           </tbody>
         </Table>
+      </div>
+        <div id="checkout-section">
+          <div />
+          <Button variant="success">Checkout!</Button>
+        </div>
       </div>
     )
   }

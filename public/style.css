@@ -102,6 +102,12 @@ main {
   cursor: pointer;
 }
 
+#checkout-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .navLink {
   padding: 0 25px 0 !important;
   font-size: 20px;
