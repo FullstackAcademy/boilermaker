@@ -43,7 +43,10 @@ class SinglePizza extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.pizza !== this.props.pizza) {
+    if (
+      prevProps.pizza !== this.props.pizza ||
+      prevProps.cart !== this.props.cart
+    ) {
       this.setState({
         ...this.props.pizza,
         quantity: 1
@@ -64,7 +67,7 @@ class SinglePizza extends React.Component {
         </form>
       </div>
     ) : !this.inCart ? (
-      <form className="single-pizza">
+      <form className="single-pizza" onSubmit={this.handleSubmit}>
         <img src={pizza.imageUrl} />
         <h1>{pizza.name}</h1>
         <p>{pizza.description}</p>
