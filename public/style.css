@@ -36,7 +36,7 @@ body {
   padding: 0;
   margin: 0;
   width: 100vw;
-  background-image: url('https://pbs.twimg.com/media/DmFbEO7W0AIci5f?format=jpg&name=large');
+  /* background-image: url('https://pbs.twimg.com/media/DmFbEO7W0AIci5f?format=jpg&name=large'); */
 }
 
 nav {
@@ -85,6 +85,13 @@ main {
 .nav-buttons > * {
   padding: 0 10px 0;
   font-family: monospace;
+}
+
+.cart {
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  margin: 0 700px 0 700px;
 }
 
 .cart-item-quantity {

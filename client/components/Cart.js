@@ -42,7 +42,6 @@ class Cart extends React.Component {
 
   render() {
     const pizzas = this.state.cart.length > 0 ? this.state.cart : []
-    console.log(pizzas)
     return this.loading ? (
       <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png" />
     ) : (
@@ -58,27 +57,25 @@ class Cart extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {pizzas.length > 0
-              ? pizzas.map(pizza => {
-                  return (
-                    <tr key={pizza.id}>
-                      <td>{pizza.name}</td>
-                      <td>
-                        <input
-                          type="number"
-                          name={pizza.id}
-                          className="cart-item-quantity"
-                          value={pizza.quantity}
-                          min="1"
-                          onChange={this.changeQuantity}
-                        />
-                      </td>
-                      <td>{pizza.quantity * pizza.price}</td>
-                      <td onClick={() => this.deletePizza(pizza.id)}>delete</td>
-                    </tr>
-                  )
-                })
-              : ''}
+            {pizzas.map(pizza => {
+              return (
+                <tr key={pizza.id}>
+                  <td>{pizza.name}</td>
+                  <td>
+                    <input
+                      type="number"
+                      name={pizza.id}
+                      className="cart-item-quantity"
+                      value={pizza.quantity}
+                      min="1"
+                      onChange={this.changeQuantity}
+                    />
+                  </td>
+                  <td>{pizza.quantity * pizza.price}</td>
+                  <td onClick={() => this.deletePizza(pizza.id)}>delete</td>
+                </tr>
+              )
+            })}
           </tbody>
         </Table>
         <div id="subtotal">
@@ -86,9 +83,11 @@ class Cart extends React.Component {
           <p>
             $
             {pizzas.length > 0
-              ? pizzas.reduce((prev, pizza) => {
-                  return prev + pizza.quantity * pizza.price
-                }, 0)
+              ? Math.round(
+                  pizzas.reduce((prev, pizza) => {
+                    return prev + pizza.quantity * pizza.price
+                  }, 0) * 100
+                ) / 100
               : 0}
           </p>
         </div>
