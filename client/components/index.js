@@ -5,4 +5,13 @@
  */
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
-export {Login, Signup} from './auth-form'
+// export { Login, Signup } from './auth-form'
+
+import {Login, Signup} from './auth-form'
+import AllPizzas from './AllPizzas'
+import SinglePizza from './SinglePizza'
+import Cart from './Cart'
+// import LoginForm from './LoginForm';
+// import SignUpForm from './SignUpForm';
+
+export {Login, Signup, AllPizzas, SinglePizza, Cart}

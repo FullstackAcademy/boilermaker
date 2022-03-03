@@ -69,3 +69,11 @@ export default function(state = defaultUser, action) {
       return state
   }
 }
+
+// export const setUsers = () => {};
+
+// export const fetchUsers = () => {};
+
+// export default function usersReducer() {
+//   return null;
+// }
