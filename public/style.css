@@ -154,3 +154,7 @@ main {
   color: green;
   padding-top: 20%;
 }
+
+.formContainer {
+  padding: 110 0 50 0;
+}
