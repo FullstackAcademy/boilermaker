@@ -83,9 +83,11 @@ class Cart extends React.Component {
           <p>
             $
             {pizzas.length > 0
-              ? pizzas.reduce((prev, pizza) => {
-                  return prev + pizza.quantity * pizza.price
-                }, 0)
+              ? Math.round(
+                  pizzas.reduce((prev, pizza) => {
+                    return prev + pizza.quantity * pizza.price
+                  }, 0) * 100
+                ) / 100
               : 0}
           </p>
         </div>
