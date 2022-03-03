@@ -3,6 +3,10 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
+
 /**
  * COMPONENT
  */
@@ -10,27 +14,44 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
-    </div>
+    <Card>
+      <div className="formContainer">
+        <Form onSubmit={handleSubmit} name={name} className="container">
+          {/* {name === 'signup' ?
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Name</Form.Label>
+              <Form.Control name="name" type="text" placeholder="Enter Name" />
+              <Form.Control name="lastName" type="text" placeholder="Enter last name" />
+            </Form.Group>
+            :
+            null
+          } */}
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              name="email"
+              type="text"
+              placeholder="Enter email"
+              required
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="Password"
+              required
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            {displayName}
+          </Button>
+          {error && error.response && <div> {error.response.data} </div>}
+        </Form>
+      </div>
+    </Card>
   )
 }
 
