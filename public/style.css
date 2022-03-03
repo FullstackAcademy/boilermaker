@@ -91,6 +91,7 @@ main {
   display: flex;
   align-content: center;
   flex-direction: column;
+  margin: 0 700px 0 700px;
 }
 
 .cart-item-quantity {
