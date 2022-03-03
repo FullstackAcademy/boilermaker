@@ -58,27 +58,25 @@ class Cart extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {pizzas.length > 0
-              ? pizzas.map(pizza => {
-                  return (
-                    <tr key={pizza.id}>
-                      <td>{pizza.name}</td>
-                      <td>
-                        <input
-                          type="number"
-                          name={pizza.id}
-                          className="cart-item-quantity"
-                          value={pizza.quantity}
-                          min="1"
-                          onChange={this.changeQuantity}
-                        />
-                      </td>
-                      <td>{pizza.quantity * pizza.price}</td>
-                      <td onClick={() => this.deletePizza(pizza.id)}>delete</td>
-                    </tr>
-                  )
-                })
-              : ''}
+            {pizzas.map(pizza => {
+              return (
+                <tr key={pizza.id}>
+                  <td>{pizza.name}</td>
+                  <td>
+                    <input
+                      type="number"
+                      name={pizza.id}
+                      className="cart-item-quantity"
+                      value={pizza.quantity}
+                      min="1"
+                      onChange={this.changeQuantity}
+                    />
+                  </td>
+                  <td>{pizza.quantity * pizza.price}</td>
+                  <td onClick={() => this.deletePizza(pizza.id)}>delete</td>
+                </tr>
+              )
+            })}
           </tbody>
         </Table>
         <div id="subtotal">
