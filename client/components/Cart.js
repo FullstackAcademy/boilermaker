@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button';
 import {updateCart, deletePizza} from '../store/cart'
 
 class Cart extends React.Component {
@@ -45,6 +46,7 @@ class Cart extends React.Component {
     return this.loading ? (
       <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png" />
     ) : (
+      <div id="cart-page">
       <div className="cart">
         <h1>Cart</h1>
         <Table striped border hover>
@@ -52,7 +54,7 @@ class Cart extends React.Component {
             <tr>
               <th>Item</th>
               <th>Quantity</th>
-              <th>Price</th>
+              <th>Subtotal</th>
               <th />
             </tr>
           </thead>
@@ -71,25 +73,25 @@ class Cart extends React.Component {
                       onChange={this.changeQuantity}
                     />
                   </td>
-                  <td>{pizza.quantity * pizza.price}</td>
-                  <td onClick={() => this.deletePizza(pizza.id)}>delete</td>
+                  <td>${Math.round(pizza.quantity * pizza.price * 100) / 100}</td>
+                  <td className="delete-pizza" onClick={() => this.deletePizza(pizza.id)}>delete</td>
                 </tr>
               )
             })}
-          </tbody>
-        </Table>
-        <div id="subtotal">
-          <p>Subtotal: </p>
-          <p>
-            $
+            <tr><td>Total: </td><td/><td>$
             {pizzas.length > 0
               ? Math.round(
                   pizzas.reduce((prev, pizza) => {
                     return prev + pizza.quantity * pizza.price
                   }, 0) * 100
                 ) / 100
-              : 0}
-          </p>
+              : 0}</td><td/></tr>
+          </tbody>
+        </Table>
+      </div>
+        <div id="checkout-section">
+          <div />
+          <Button variant="success">Checkout!</Button>
         </div>
       </div>
     )

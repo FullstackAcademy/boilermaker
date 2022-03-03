@@ -9,7 +9,6 @@ import {
   Redirect
 } from 'react-router-dom'
 import PropTypes from 'prop-types'
-// import {Login, Signup, UserHome} from './components'
 import {
   Login,
   Signup,
@@ -19,16 +18,12 @@ import {
   UserHome
 } from './components'
 import {me} from './store'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Container from 'react-bootstrap/Container'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
   }
-  //DELETE ME!!! to confim cahnges
   render() {
     const {isLoggedIn} = this.props
 

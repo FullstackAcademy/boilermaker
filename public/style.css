@@ -98,10 +98,14 @@ main {
   max-width: 5ch;
 }
 
-#subtotal {
+.delete-pizza {
+  cursor: pointer;
+}
+
+#checkout-section {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .navLink {
