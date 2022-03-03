@@ -46,10 +46,12 @@
     "chalk": "^2.4.1",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^6.0.0",
+    "css-loader": "^6.6.0",
     "express": "^4.16.4",
     "express-session": "^1.15.1",
     "history": "^4.9.0",
     "morgan": "^1.9.1",
+    "node-sass": "^7.0.1",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
     "pg": "^8.3.2",
@@ -63,8 +65,10 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "sass-loader": "^12.6.0",
     "sequelize": "^5.3.1",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.2.0",
+    "style-loader": "^3.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -103,8 +107,8 @@
     "redux-mock-store": "^1.5.3",
     "simple-git": "^1.121.0",
     "supertest": "^4.0.2",
-    "webpack": "^4.16.4",
-    "webpack-cli": "^3.1.0",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2",
     "yaml": "^1.6.0"
   }
 }
