@@ -30,10 +30,6 @@ export class AllPizzas extends React.Component {
       <img src="https://fullstackacademy.slack.com/files/U02CSK206LS/F034UU5EYAJ/image.png" />
     ) : (
       <div>
-        {/* <CarouselSlide /> */}
-        {/* <div className="carousel">
-          <CarouselSlide pizzas={pizzas} />
-        </div> */}
         <div className="allpizzas">
           {pizzas.map(pizza => {
             return <PizzaCard key={pizza.id} pizza={pizza} />
