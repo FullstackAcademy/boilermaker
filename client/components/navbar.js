@@ -5,13 +5,20 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>BOILERMAKER</h1>
+  <div id="nav">
     <nav>
       {isLoggedIn ? (
         <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
+          <Link className="navLink" to="/home">
+            Home
+          </Link>
+          <Link className="navLink" to="/pizzas">
+            Pizzas
+          </Link>
+          <Link className="navLink" to="/cart">
+            Cart
+          </Link>
+
           <a href="#" onClick={handleClick}>
             Logout
           </a>
@@ -19,18 +26,18 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link className="navLink" to="/login">
+            Login
+          </Link>
+          <Link className="navLink" to="/signup">
+            Sign Up
+          </Link>
         </div>
       )}
     </nav>
-    <hr />
   </div>
 )
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id
@@ -47,9 +54,6 @@ const mapDispatch = dispatch => {
 
 export default connect(mapState, mapDispatch)(Navbar)
 
-/**
- * PROP TYPES
- */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
