@@ -4,7 +4,7 @@
  * having to figure out which file they belong to!
  */
 export {default as Navbar} from './navbar'
-export {default as UserHome} from './user-home'
+export {default as UserHome} from './HomePage'
 // export { Login, Signup } from './auth-form'
 
 import {Login, Signup} from './auth-form'
