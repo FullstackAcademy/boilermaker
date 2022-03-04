@@ -2,59 +2,56 @@ import React from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
-import { DropdownButton, Dropdown, Row, Col, FloatingLabel } from "react-bootstrap";
+import {  Row, Col, FloatingLabel, InputGroup } from "react-bootstrap";
 
+
+///notes => handleSUbmit for both different forms 
+// handleorder to the actual checkout
 
 class Checkout extends React.Component {
-
   render() {
-  return (
-    <div>
-    <div className="shippingaddress">
-      <Form>
-        <Form.Label>Shipping Address</Form.Label>
-        <Form.Group>
-          <FloatingLabel label="Email address"> 
-            <Form.Control
-              name="email"
-              type="text"
-              placeholder="Enter email"
-              required
-            />
-            </FloatingLabel>
-        </Form.Group>
-
-         <Form.Group>
-          <FloatingLabel label="Street Address">
-           
-        
-          <Form.Control 
-          name="streetaddress"
-          type="text"
-          placeholder="Enter you Address"
-          required
-          />
-            </FloatingLabel>
-        </Form.Group>
-        <Row>
-          <Col>
-        <Form.Group>
-          <FloatingLabel label="Postal/Zip Code">
-          <Form.Control 
-          name="postal/zip/code"
-          type="text"
-          placeholder="Postal/Zip Code"
-          required
-          />
-          </FloatingLabel>
-        </Form.Group>
-        </Col>
-
-        <Col>
-        <Form.Group>
-          <FloatingLabel label="City">
-            
-          
+    return (
+      <Card id="checkoutcard">
+        <div id='totalform'>
+          <div className="shippingaddress">
+            <Form >
+              <Form.Label column="lg" lg={5}>Shipping Address</Form.Label>
+              <Form.Group>
+                <FloatingLabel label="Email address" className="label" id="topinput"> 
+                <Form.Control
+                name="email"
+                type="text"
+                placeholder="Enter email"
+                required
+                />
+                </FloatingLabel>
+              </Form.Group>
+              <Form.Group>
+                <FloatingLabel label="Street Address" className="label">
+                  <Form.Control 
+                    name="streetaddress"
+                    type="text"
+                    placeholder="Enter you Address"
+                    required
+                  />
+                </FloatingLabel>
+              </Form.Group>
+                <Row>
+                  <Col>
+                  <Form.Group>
+                    <FloatingLabel label="Postal/Zip Code" className="label">
+                      <Form.Control 
+                        name="postal/zip/code"
+                        type="text"
+                        placeholder="Postal/Zip Code"
+                        required
+                      />
+                    </FloatingLabel>
+                  </Form.Group>
+                  </Col>
+                  <Col>
+                    <Form.Group>
+                      <FloatingLabel label="City" className="label">
           <Form.Control 
           name="city"
           type="text"
@@ -64,13 +61,9 @@ class Checkout extends React.Component {
           </FloatingLabel>
         </Form.Group>
         </Col>
-
-
         <Col>
         <Form.Group>
-          <FloatingLabel label="State">
-        
-          
+          <FloatingLabel label="State" className="label">
           <Form.Control 
           name="state"
           type="text"
@@ -86,14 +79,14 @@ class Checkout extends React.Component {
           </Button>
       </Form>
       </div>
-
-      <div>
-      <Form title="Payment Informtion">
-         <Form.Label>Payment Information</Form.Label>
+     
+      <div id="cardinfo">
+      <Form title="Payment Informtion" >
+         <Form.Label column="lg" lg={5}>Payment Information</Form.Label>
         <Row>
           <Col>
-        <Form.Group>
-          <FloatingLabel label="Name on Card">
+        <Form.Group >
+          <FloatingLabel label="Name on Card" className="label" id="bottominput">
             <Form.Control
               name="cardname"
               type="text"
@@ -104,16 +97,24 @@ class Checkout extends React.Component {
         </Form.Group>
         </Col>
         <Col>
-        <DropdownButton id="dropdown-basic-button" title="Card">
+        <Form.Select variant="outline-secondary" size="lg" required className="label">
+          <option value='1'>Visa</option>
+          <option value='2'>MasterCard</option>
+          <option value='3'>Amex</option>
+          <option value='4'>Discover</option>
+        </Form.Select>
+      
+        {/* <DropdownButton id="dropdown-basic-button" title="Card" variant="outline-secondary">
           <Dropdown.Item>Visa</Dropdown.Item>
           <Dropdown.Item>MasterCard</Dropdown.Item>
           <Dropdown.Item>Amex</Dropdown.Item>
-        </DropdownButton>
+        </DropdownButton> */}
+    
         </Col>
         </Row>
 
         <Form.Group>
-          <FloatingLabel label="Credit Card No.">
+          <FloatingLabel label="Credit Card No." className="label">
             <Form.Control
               name="cardnumber"
               type="number"
@@ -125,7 +126,7 @@ class Checkout extends React.Component {
         <Row>
           <Col>
         <Form.Group>
-          <FloatingLabel label="CVC">
+          <FloatingLabel label="CVC" className="label">
             <Form.Control
               name="cvc"
               type="text"
@@ -137,7 +138,7 @@ class Checkout extends React.Component {
         </Col>
         <Col>
         <Form.Group>
-          <FloatingLabel label="Exp. Date">
+          <FloatingLabel label="Exp. Date" className="label">
             <Form.Control
               name="exp"
               type="Date"
@@ -152,24 +153,17 @@ class Checkout extends React.Component {
             Save
           </Button>
       </Form>
+     
       
     </div>
     </div>
+
+    <Button variant="primary" type="Submit" size='lg'>Confirm Order</Button>
+     </Card>
+     
+    
   )
   }
 }
 
 export default Checkout
-// class Checkout extends React.Component {
-
-//   render() {
-//     return (
-//       <div>
-//         <h1>hello</h1>
-
-//       </div>
-//     )
-//   }
-// }
-
-// export default Checkout
