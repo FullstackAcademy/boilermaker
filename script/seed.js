@@ -104,7 +104,14 @@ const fakeUsers = [
     lastName: 'Blow',
     password: 'password',
     email: 'daviddfh3@gmail.com'
+  },
+  {
+    firstName: 'The',
+    lastName: 'Admin',
+    password: 'password',
+    email: 'admin@admin.com'
   }
+
 ]
 
 const fakeOrders = [

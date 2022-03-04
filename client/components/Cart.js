@@ -5,6 +5,7 @@ import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button';
 import {updateCart, deletePizza} from '../store/cart'
 
+
 class Cart extends React.Component {
   constructor(props) {
     super(props)

@@ -1,6 +1,7 @@
 const User = require('./user')
 const Order = require('./order')
 const Pizza = require('./pizza')
+const OrderItem = require('./orderItem')
 const db = require('../db')
 
 /**
@@ -11,6 +12,8 @@ const db = require('../db')
  */
 User.hasMany(Order)
 Order.belongsTo(User)
+OrderItem.belongsTo(Order)
+Order.hasMany(OrderItem)
 
 Pizza.belongsToMany(Order, {through: 'pizzaOrders'})
 Order.belongsToMany(Pizza, {through: 'pizzaOrders'})
