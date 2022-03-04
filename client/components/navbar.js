@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Badge from '@mui/material/Badge';
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, cartSize}) => (
   <div id="nav">
     <nav>
       {isLoggedIn ? (
@@ -15,17 +17,17 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link className="navLink" to="/pizzas">
             Pizzas
           </Link>
-          <Link className="navLink" to="/cart">
-            Cart
-          </Link>
-         
           <Link className="navLink" to="/checkout">
             testCheckOut
           </Link>
-
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          <Link className="navLink" to="/cart">
+            <Badge badgeContent={cartSize} color="success" >
+              <ShoppingCartIcon color="primary" />
+            </Badge>
+          </Link>
         </div>
       ) : (
         <div>
@@ -50,7 +52,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    cartSize: state.cart.length
   }
 }
 
