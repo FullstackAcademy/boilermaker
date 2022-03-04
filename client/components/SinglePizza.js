@@ -81,7 +81,7 @@ class SinglePizza extends React.Component {
           onChange={this.handleChange}
         />
         <div className="nav-buttons">
-          <Link to="/">
+          <Link to="/pizzas">
             <button type="button">Back</button>
           </Link>
           <input type="submit" value="Add to Cart" />
