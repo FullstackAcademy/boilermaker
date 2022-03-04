@@ -73,7 +73,7 @@ class PizzaCard extends React.Component {
             <Card.Title>{pizza.name}</Card.Title>
             <Card.Text>{pizza.description}</Card.Text>
             <Card.Text>{pizza.price}</Card.Text>
-            <OverlayTrigger trigger="click" placement="right" overlay={this.state.showOverlay ? popover : <div />} >
+            <OverlayTrigger trigger="click" placement="bottom" overlay={this.state.showOverlay ? popover : <div />} >
               <Button variant="danger" onClick={this.handleSubmit}>
                 Add to Cart
               </Button>

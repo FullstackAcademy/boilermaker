@@ -9,7 +9,7 @@ class Cart extends React.Component {
     super(props)
     this.loading = true
     this.state = {
-      cart: this.props.cart
+      cart: this.props.cart,
     }
     this.changeQuantity = this.changeQuantity.bind(this)
     this.deletePizza = this.deletePizza.bind(this)
