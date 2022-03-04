@@ -1,22 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect } from 'react'
 import Carousel from 'react-bootstrap/Carousel'
-import {fetchPizzas} from '../store/pizzas'
-import {connect, useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
+import { Link, useHistory } from 'react-router-dom'
 
-export class CarouselSlide extends React.Component {
-  constructor(props) {
-    super(props)
 
-    this.loading = true
-  }
-  componentDidMount() {
-    this.loading = false
-    this.props.fetchPizzas()
-  }
-  render() {
-    const pizzas = this.props.pizzas
-    return (
-      <div className="carousel">
+const CarouselSlide = props => {
+  const {pizzas} = props
+   const history = useHistory()
+  return (
+    <div className="carousel">
         <Carousel fade controls={false}>
           {pizzas.map(pizza => {
             return (
@@ -25,28 +17,68 @@ export class CarouselSlide extends React.Component {
                 className="carosuelImage"
                 key={pizza.id}
               >
+               
                 <img className="carouselslide" src={pizza.imageUrl} />
+                
               </Carousel.Item>
             )
           })}
         </Carousel>
       </div>
-    )
-  }
-}
-const mapState = state => {
-  return {
-    pizzas: state.pizzas
-  }
+  )
 }
 
-const mapDispatch = dispatch => {
-  return {
-    fetchPizzas: () => dispatch(fetchPizzas())
-  }
-}
+export default CarouselSlide
 
-export default connect(mapState, mapDispatch)(CarouselSlide)
+
+
+
+
+// export class CarouselSlide extends React.Component {
+//   constructor(props) {
+//     super(props)
+
+//     this.loading = true
+//   }
+//   componentDidMount() {
+//     this.loading = false
+//     this.props.fetchPizzas()
+//   }
+//   render() {
+//     const pizzas = this.props.pizzas
+//     const history = useHistory()
+//     return (
+//       <div className="carousel">
+//         <Carousel fade controls={false}>
+//           {pizzas.map(pizza => {
+//             return (
+//               <Carousel.Item
+//                 interval={1000}
+//                 className="carosuelImage"
+//                 key={pizza.id}
+//               >
+//                 <img className="carouselslide" src={pizza.imageUrl} onChange={() => history.push(`/pizza.id`)}/>
+//               </Carousel.Item>
+//             )
+//           })}
+//         </Carousel>
+//       </div>
+//     )
+//   }
+// }
+// const mapState = state => {
+//   return {
+//     pizzas: state.pizzas
+//   }
+// }
+
+// const mapDispatch = dispatch => {
+//   return {
+//     fetchPizzas: () => dispatch(fetchPizzas())
+//   }
+// }
+
+// export default connect(mapState, mapDispatch)(CarouselSlide)
 
 // changed
 // import React, {useState, useEffect } from 'react'

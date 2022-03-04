@@ -13,7 +13,7 @@ export const UserHome = props => {
       <div>
         <h3>Welcome, {email}</h3>
       </div>
-      <CarouselSlide />
+      <button type="button">Check Your History</button>
     </div>
   )
 }

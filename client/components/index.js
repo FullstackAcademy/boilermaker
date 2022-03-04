@@ -12,9 +12,10 @@ import AllPizzas from './AllPizzas'
 import SinglePizza from './SinglePizza'
 import Cart from './Cart'
 import HomePage from './HomePage'
+import Checkout from './Checkout'
 
 
 // import LoginForm from './LoginForm';
 // import SignUpForm from './SignUpForm';
 
-export {Login, Signup, AllPizzas, SinglePizza, Cart, HomePage}
+export {Login, Signup, AllPizzas, SinglePizza, Cart, HomePage, Checkout}
