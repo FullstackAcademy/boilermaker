@@ -10,6 +10,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
+import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 
 const Navbar = ({handleClick, isLoggedIn, cartSize}) => (
   <div id="nav">
@@ -25,6 +26,7 @@ const Navbar = ({handleClick, isLoggedIn, cartSize}) => (
             Pizzas
           </Link>
           <Link className="navLink" to="/checkout">
+            <PointOfSaleIcon />
             testCheckOut
           </Link>
           <Link className="navLink" to="/cart">
