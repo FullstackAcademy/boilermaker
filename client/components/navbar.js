@@ -2,10 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-<<<<<<< HEAD
-import { logout } from '../store'
-// import Navbar from 'react-bootstrap/Navbar'
-=======
 import {logout} from '../store'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
@@ -15,7 +11,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import AirplaneTicketIcon from '@mui/icons-material/AirplaneTicket';
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
->>>>>>> 76d88d206c2f3041181123a8777133f34f1305dc
 
 const Navbar = ({handleClick, isLoggedIn, cartSize}) => (
   <div id="nav">
@@ -30,13 +25,6 @@ const Navbar = ({handleClick, isLoggedIn, cartSize}) => (
             <LocalPizzaIcon />
             Pizzas
           </Link>
-<<<<<<< HEAD
-          <Link className="navLink" to="/cart">
-            Cart
-          </Link>
-
-=======
->>>>>>> 76d88d206c2f3041181123a8777133f34f1305dc
           <Link className="navLink" to="/checkout">
             <PointOfSaleIcon />
             testCheckOut
