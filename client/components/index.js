@@ -4,14 +4,18 @@
  * having to figure out which file they belong to!
  */
 export {default as Navbar} from './navbar'
-export {default as UserHome} from './HomePage'
+export {default as UserHome} from './ViewUserPage'
 // export { Login, Signup } from './auth-form'
 
 import {Login, Signup} from './auth-form'
 import AllPizzas from './AllPizzas'
 import SinglePizza from './SinglePizza'
 import Cart from './Cart'
+import HomePage from './HomePage'
+import Checkout from './Checkout'
+
+
 // import LoginForm from './LoginForm';
 // import SignUpForm from './SignUpForm';
 
-export {Login, Signup, AllPizzas, SinglePizza, Cart}
+export {Login, Signup, AllPizzas, SinglePizza, Cart, HomePage, Checkout}

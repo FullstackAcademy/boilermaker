@@ -25,13 +25,16 @@ form div {
  * but feel free to change me to your heart's content!
  */
 
+
+
 * {
   box-sizing: border-box;
   font-family: arial, sans-serif;
 }
 
 body {
-  background: linear-gradient(#ffffff, #c0c0c0);
+  background: linear-gradient(#c0c0c0, #c0c0c0);
+  /* background: linear-gradient(#c0c0c0); */
   height: 100vh;
   padding: 0;
   margin: 0;
@@ -46,6 +49,7 @@ nav {
   display: flex;
   height: 80px;
   padding: 10px;
+  margin-bottom: 70px;
 }
 
 main {
@@ -117,33 +121,49 @@ main {
 .navLinkHeader {
   font-size: 50px !important;
   font-family: monospace;
+  
 }
 
 .view {
   background-image: url('https://pbs.twimg.com/media/DmFbEO7W0AIci5f?format=jpg&name=large');
 }
-.carouselslide {
-  width: 200px;
-  height: 600px;
 
-  margin: auto;
+
+
+.carousel {
+  /* background-color: black; */
+  margin-left: 30%;
+  /* margin-right: 5%; */
+  /* padding-left: 50%; */
+ padding-right: 10%;
+ margin-top: 10%;
+  position: absolute;
+
+ 
+  
+  
 }
-.carosuelImage {
-  background-color: bl;
+
+
+.carouselslide {
+
+  /* margin-top: 40%; */
+  width: 100px; 
+  height: 500px;
+
 }
+
+
 
 .carosuelImage > img {
-  margin-bottom: 10%;
-  width: 50%;
-  margin-left: 45%;
+  
+  width: 100%;
   border-radius: 55px 55px 55px 55px;
   box-shadow: 10px 10px 5px;
-  border: 2px;
-
-  /* opacity: 0.9; */
+  border: 2px; 
 }
-
-.carouselcontent {
+/* possible use for content in carousel if we decide */
+/* .carouselcontent {
   right: 0;
   text-align: right;
   margin-left: 750px;
@@ -157,8 +177,202 @@ main {
 .carouselcontent > p {
   color: green;
   padding-top: 20%;
-}
+} */
 
 .formContainer {
   padding: 110 0 50 0;
+}
+.homeheader {
+  padding-bottom: 5%;
+
+}
+.hometext {
+  position: absolute;
+  box-sizing: border-box;
+  /* margin-bottom: 100%; */
+  bottom: 55%;
+  margin-right: 60%;
+  padding-left: 10%;
+
+}
+
+
+/* pizza-outline = #dd8126
+pizza-border = orange
+pizza-bg-color = #ffeb3b
+slice-line-color = #e8d83a
+pepperoni-color = #ea5353
+pepperoni-color-dark = darken(pepperoni-color, 20%)
+olive-color = #455a64
+olive-color-dark = darken(olive-color, 20%)
+basil-color = #4caf50 */
+
+.icon {
+  
+
+  /* position: absolute; */
+ 
+  /* box-sizing: border-box; */
+  position: absolute;
+   box-sizing: border-box;
+  bottom: 55%;
+  /* margin-bottom: 100%; */
+  margin-right: 60%;
+  padding-left: 10%;
+  
+
+
+ 
+  
+}
+.icon > .pizza-container {
+  
+  padding-bottom: 50%;
+  
+
+  /* flex-basis: 200%; */
+ 
+}
+
+.pizza-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  padding-bottom: 100%;
+ 
+
+  
+}
+
+.pizza {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  background-color: #ffeb3b;
+  border-radius: 50%;
+  border: 4px solid orange;
+  box-shadow: 0 0 0px 10px #dd8126;
+  margin-left: 10%;
+  margin-bottom: 30%;
+}
+
+  .pizza:before {
+    content: '';
+    position: absolute;
+    width: 250px;
+    height: 265px;
+    margin-top: 15%;
+    margin-right: 100%;
+    
+    /* background-color: linear-gradient(#ffffff, ); */
+    background-color: #c0c0c0;
+    
+    
+    transform: rotate(45deg);
+    left: 66%;
+    z-index: 20;
+  }
+
+
+  .pizza:after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 50px;
+    background-color: #ffeb3b;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 15px -10px #ffeb3b;
+    transform: translateX(3px) translateY(-1px);
+    animation: chorreo 4s ease-out infinite;
+    margin-left: 50%;
+    margin-bottom: 50%;
+}
+
+  .basil {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+    .leaf {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background-color: #4caf50;
+      z-index: 13;
+      border-radius: 100px 0;
+      box-shadow: 50px 100px #4caf50 , 150px 120px #4caf50 , 130px 40px #4caf50 , 200px 250px #4caf50 , 250px 300px #4caf50 , 300px 100px #4caf50 , 350px 200px #4caf50 , 35px 280px #4caf50 , 150px 320px #4caf50 , 130px 40px #4caf50 , 100px 200px #4caf50 , 250px 60px #4caf50 , 230px 160px #4caf50
+    }
+  .onions {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 12;
+    background-image: radial-gradient(circle at 10px 0px, transparent 6px, #d2d2d2 5px, #f5f5f5 11px, transparent 13px), radial-gradient(circle at 0px 10px, transparent 6px, #d2d2d2 5px, #f5f5f5 11px, transparent 13px);
+    background-size: 80px 90px, 150px 150px;
+  }
+  .olives {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 11;
+    transform: rotate(25deg);
+    background-image: radial-gradient(circle at 70px 70px, #455a64 3px, #455a64 9px, transparent 10px);
+    background-size: 100px 100px;
+  }
+  
+  .pepperonis {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    /* overflow: hidden; */
+    transform: rotate(15deg);
+    z-index: 10;
+    background-image: radial-gradient(circle at 40px 40px, #ea5353 14px, #aa2f2f 16px, transparent 18px);
+    background-size: 80px 80px;
+  }
+  .slices {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+  }
+    .slice {
+      width: 1px;
+      height: 100%;
+      background-color: #e8d83a
+    }
+    .slice-1 {
+      transform: rotate(45deg)
+    }
+    .slice-2 {
+      transform: rotate(90deg)
+    }
+    .slice-3 {
+      transform: rotate(135deg)
+    }
+    .slice-4 {
+      transform: rotate(180deg)
+    }
+  
+@keyframes chorreo {
+  from {
+    height: 50% 
+  }
+  to {
+    height: 100px
+  }
+     /* 50% { height: 100px} */
+
+ 
+ 
+   
 }
