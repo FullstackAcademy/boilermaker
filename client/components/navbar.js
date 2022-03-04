@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout} from '../store'
+import { logout } from '../store'
+// import Navbar from 'react-bootstrap/Navbar'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div id="nav">
@@ -18,7 +19,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link className="navLink" to="/cart">
             Cart
           </Link>
-         
+
           <Link className="navLink" to="/checkout">
             testCheckOut
           </Link>

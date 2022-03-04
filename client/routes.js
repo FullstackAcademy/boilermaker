@@ -17,7 +17,9 @@ import {
   Cart,
   UserHome,
   HomePage,
-  Checkout
+  Checkout,
+  CheckoutSuccess,
+  // notFoundpage
 } from './components'
 import {me} from './store'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -37,7 +39,9 @@ class Routes extends Component {
             <Route exact path="/pizzas" component={AllPizzas} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout" component={Checkout} />
+            <Route exact path="/checkoutsuccess" component={CheckoutSuccess} />
             <Route exact path="/:id" component={SinglePizza} />
+            {/* <Route exact path="/*" component={notFoundpage} /> */}
              <Redirect to="/userhome" />
           </Switch>
         ) : (
@@ -46,8 +50,9 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/pizzas" component={AllPizzas} />
+            {/* <Route path="/*" component={notFoundpage} /> */}
             {/* <Redirect to='/' /> */}
-            
+
           </Switch>
         )}
       </div>
