@@ -31,7 +31,6 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: true
   },
-
   lastName: {
     type: Sequelize.STRING,
     allowNull: true
@@ -39,6 +38,22 @@ const User = db.define('user', {
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  address: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  city: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  provinceOrState: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  postalZipCode: {
+    type: Sequelize.INTEGER,
+    allowNull: true
   }
 })
 
@@ -72,6 +87,12 @@ User.beforeUpdate(setSaltAndPassword)
 User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPassword)
 })
+
+
+
+
+
+
 
 // const jwt = require('jsonwebtoken');
 // const bcrypt = require('bcrypt');

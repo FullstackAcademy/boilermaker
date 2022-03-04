@@ -1,8 +1,10 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Pizza = db.define('pizza', {
-  name: {
+
+const OrderItem = db.define('orderItem', {
+
+   name: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
@@ -12,7 +14,7 @@ const Pizza = db.define('pizza', {
   description: {
     type: Sequelize.TEXT
   },
-  price: {
+  salePrice: {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
     validate: {
@@ -24,7 +26,10 @@ const Pizza = db.define('pizza', {
     type: Sequelize.TEXT,
     defaultValue:
       'https://pbs.twimg.com/profile_banners/628621903/1478015350/600x200'
+  },
+  quantity: {
+    type: Sequelize.INTEGER
   }
 })
 
-module.exports = Pizza
+module.exports = OrderItem

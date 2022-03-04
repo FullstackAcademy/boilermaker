@@ -131,29 +131,17 @@ main {
 
 
 .carousel {
-  /* background-color: black; */
   margin-left: 30%;
-  /* margin-right: 5%; */
-  /* padding-left: 50%; */
- padding-right: 10%;
- margin-top: 10%;
+  padding-right: 10%;
+  margin-top: 10%;
   position: absolute;
-
-
-
-
 }
 
-
 .carouselslide {
-
-  /* margin-top: 40%; */
-  width: 100px;
+  width: 100px; 
   height: 500px;
 
 }
-
-
 
 .carosuelImage > img {
 
@@ -162,26 +150,16 @@ main {
   box-shadow: 10px 10px 5px;
   border: 2px;
 }
-/* possible use for content in carousel if we decide */
-/* .carouselcontent {
-  right: 0;
-  text-align: right;
-  margin-left: 750px;
-  margin-bottom: 200px;
-}
-.carouselcontent > h3 {
-  color: red;
-  font-family: 'Lucida Sans';
-  padding-bottom: 10%;
-}
-.carouselcontent > p {
-  color: green;
-  padding-top: 20%;
-} */
 
 .formContainer {
   padding: 110 0 50 0;
 }
+
+
+
+/* Css home page stuff */
+
+
 .homeheader {
   padding-bottom: 5%;
 
@@ -197,16 +175,6 @@ main {
 }
 
 
-/* pizza-outline = #dd8126
-pizza-border = orange
-pizza-bg-color = #ffeb3b
-slice-line-color = #e8d83a
-pepperoni-color = #ea5353
-pepperoni-color-dark = darken(pepperoni-color, 20%)
-olive-color = #455a64
-olive-color-dark = darken(olive-color, 20%)
-basil-color = #4caf50 */
-
 .icon {
 
 
@@ -214,9 +182,8 @@ basil-color = #4caf50 */
 
   /* box-sizing: border-box; */
   position: absolute;
-   box-sizing: border-box;
+  box-sizing: border-box;
   bottom: 55%;
-  /* margin-bottom: 100%; */
   margin-right: 60%;
   padding-left: 10%;
 
@@ -225,6 +192,7 @@ basil-color = #4caf50 */
 
 
 }
+
 .icon > .pizza-container {
 
   padding-bottom: 50%;
@@ -370,9 +338,40 @@ basil-color = #4caf50 */
   to {
     height: 100px
   }
-     /* 50% { height: 100px} */
+   
+}
 
+/* CssCheckout stuff */
 
+#checkoutcard {
+  padding: 100px;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+#totalform {
+ display: flex;
+  flex-direction: column
+}
+#cardinfo {
+ display: flex;
+ flex-direction: column;
+ flex-wrap: wrap;
+margin-bottom: 10%;
+margin-top: 10%;
+}
 
-
+#shippingaddress {
+  display: flex;
+ flex-direction: column;
+ flex-wrap: wrap;
+}
+ 
+.label {
+  padding-bottom: 20px;
+}
+#topinput{
+  margin-top: 20px;
+}
+#bottominput {
+  margin-top: 20px;
 }
