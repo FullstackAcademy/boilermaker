@@ -121,7 +121,7 @@ main {
 .navLinkHeader {
   font-size: 50px !important;
   font-family: monospace;
-  
+
 }
 
 .view {
@@ -139,16 +139,16 @@ main {
  margin-top: 10%;
   position: absolute;
 
- 
-  
-  
+
+
+
 }
 
 
 .carouselslide {
 
   /* margin-top: 40%; */
-  width: 100px; 
+  width: 100px;
   height: 500px;
 
 }
@@ -156,11 +156,11 @@ main {
 
 
 .carosuelImage > img {
-  
+
   width: 100%;
   border-radius: 55px 55px 55px 55px;
   box-shadow: 10px 10px 5px;
-  border: 2px; 
+  border: 2px;
 }
 /* possible use for content in carousel if we decide */
 /* .carouselcontent {
@@ -208,10 +208,10 @@ olive-color-dark = darken(olive-color, 20%)
 basil-color = #4caf50 */
 
 .icon {
-  
+
 
   /* position: absolute; */
- 
+
   /* box-sizing: border-box; */
   position: absolute;
    box-sizing: border-box;
@@ -219,19 +219,19 @@ basil-color = #4caf50 */
   /* margin-bottom: 100%; */
   margin-right: 60%;
   padding-left: 10%;
-  
 
 
- 
-  
+
+
+
 }
 .icon > .pizza-container {
-  
+
   padding-bottom: 50%;
-  
+
 
   /* flex-basis: 200%; */
- 
+
 }
 
 .pizza-container {
@@ -240,9 +240,9 @@ basil-color = #4caf50 */
   justify-content: center;
   margin-top: 50px;
   padding-bottom: 100%;
- 
 
-  
+
+
 }
 
 .pizza {
@@ -264,11 +264,11 @@ basil-color = #4caf50 */
     height: 265px;
     margin-top: 15%;
     margin-right: 100%;
-    
+
     /* background-color: linear-gradient(#ffffff, ); */
     background-color: #c0c0c0;
-    
-    
+
+
     transform: rotate(45deg);
     left: 66%;
     z-index: 20;
@@ -326,7 +326,7 @@ basil-color = #4caf50 */
     background-image: radial-gradient(circle at 70px 70px, #455a64 3px, #455a64 9px, transparent 10px);
     background-size: 100px 100px;
   }
-  
+
   .pepperonis {
     position: absolute;
     width: 400px;
@@ -362,17 +362,17 @@ basil-color = #4caf50 */
     .slice-4 {
       transform: rotate(180deg)
     }
-  
+
 @keyframes chorreo {
   from {
-    height: 50% 
+    height: 50%
   }
   to {
     height: 100px
   }
      /* 50% { height: 100px} */
 
- 
- 
-   
+
+
+
 }
