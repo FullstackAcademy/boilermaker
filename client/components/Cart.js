@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button';
 import {updateCart, deletePizza} from '../store/cart'
@@ -92,8 +93,13 @@ class Cart extends React.Component {
       </div>
         <div id="checkout-section">
           <div />
+<<<<<<< HEAD
           <Link to="/checkout">
           <Button variant="success">Checkout!</Button>
+=======
+          <Link to="/checkout" >
+            <Button variant="success">Checkout!</Button>
+>>>>>>> 7e40c20f7b9ab58c53da79ee81f11a6dfd911e2e
           </Link>
         </div>
       </div>

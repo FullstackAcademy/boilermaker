@@ -121,7 +121,7 @@ main {
 .navLinkHeader {
   font-size: 50px !important;
   font-family: monospace;
-  
+
 }
 
 .view {
@@ -135,20 +135,33 @@ main {
   padding-right: 10%;
   margin-top: 10%;
   position: absolute;
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 7e40c20f7b9ab58c53da79ee81f11a6dfd911e2e
 }
 
 .carouselslide {
+<<<<<<< HEAD
   width: 100px; 
+=======
+
+  /* margin-top: 40%; */
+  width: 100px;
+>>>>>>> 7e40c20f7b9ab58c53da79ee81f11a6dfd911e2e
   height: 500px;
 
 }
 
 .carosuelImage > img {
-  
+
   width: 100%;
   border-radius: 55px 55px 55px 55px;
   box-shadow: 10px 10px 5px;
-  border: 2px; 
+  border: 2px;
 }
 
 .formContainer {
@@ -176,15 +189,40 @@ main {
 
 
 .icon {
+<<<<<<< HEAD
+=======
+
+
+  /* position: absolute; */
+
+  /* box-sizing: border-box; */
+>>>>>>> 7e40c20f7b9ab58c53da79ee81f11a6dfd911e2e
   position: absolute;
   box-sizing: border-box;
   bottom: 55%;
   margin-right: 60%;
   padding-left: 10%;
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> 7e40c20f7b9ab58c53da79ee81f11a6dfd911e2e
 }
 
 .icon > .pizza-container {
+<<<<<<< HEAD
   padding-bottom: 50%;
+=======
+
+  padding-bottom: 50%;
+
+
+  /* flex-basis: 200%; */
+
+>>>>>>> 7e40c20f7b9ab58c53da79ee81f11a6dfd911e2e
 }
 
 .pizza-container {
@@ -193,9 +231,9 @@ main {
   justify-content: center;
   margin-top: 50px;
   padding-bottom: 100%;
- 
 
-  
+
+
 }
 
 .pizza {
@@ -217,7 +255,15 @@ main {
     height: 265px;
     margin-top: 15%;
     margin-right: 100%;
+<<<<<<< HEAD
     background-color: #c0c0c0;
+=======
+
+    /* background-color: linear-gradient(#ffffff, ); */
+    background-color: #c0c0c0;
+
+
+>>>>>>> 7e40c20f7b9ab58c53da79ee81f11a6dfd911e2e
     transform: rotate(45deg);
     left: 66%;
     z-index: 20;
@@ -275,7 +321,7 @@ main {
     background-image: radial-gradient(circle at 70px 70px, #455a64 3px, #455a64 9px, transparent 10px);
     background-size: 100px 100px;
   }
-  
+
   .pepperonis {
     position: absolute;
     width: 400px;
@@ -311,10 +357,10 @@ main {
     .slice-4 {
       transform: rotate(180deg)
     }
-  
+
 @keyframes chorreo {
   from {
-    height: 50% 
+    height: 50%
   }
   to {
     height: 100px
@@ -322,6 +368,7 @@ main {
    
 }
 
+<<<<<<< HEAD
 /* CssCheckout stuff */
 
 #checkoutcard {
@@ -355,4 +402,9 @@ margin-top: 10%;
 }
 #bottominput {
   margin-top: 20px;
+=======
+
+
+
+>>>>>>> 7e40c20f7b9ab58c53da79ee81f11a6dfd911e2e
 }
