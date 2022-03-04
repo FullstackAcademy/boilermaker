@@ -25,16 +25,6 @@ const Navbar = ({handleClick, isLoggedIn, cartSize}) => (
             <LocalPizzaIcon />
             Pizzas
           </Link>
-<<<<<<< HEAD
-          <Link className="navLink" to="/cart">
-            Cart
-          </Link>
-         
-          {/* <Link className="navLink" to="/checkout">
-            testCheckOut
-          </Link> */}
-
-=======
           <Link className="navLink" to="/checkout">
             <PointOfSaleIcon />
             testCheckOut
@@ -45,7 +35,6 @@ const Navbar = ({handleClick, isLoggedIn, cartSize}) => (
             </Badge>
             Cart
           </Link>
->>>>>>> 7e40c20f7b9ab58c53da79ee81f11a6dfd911e2e
           <a href="#" onClick={handleClick}>
             <LogoutIcon />
             Logout
