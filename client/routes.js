@@ -15,7 +15,9 @@ import {
   AllPizzas,
   SinglePizza,
   Cart,
-  UserHome
+  UserHome,
+  HomePage,
+  Checkout
 } from './components'
 import {me} from './store'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -31,17 +33,21 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={UserHome} />
-            {/* <Redirect to="/home" /> */}
-            <Route path="/pizzas" component={AllPizzas} />
+            <Route path="/userhome" component={UserHome} />
+            <Route exact path="/pizzas" component={AllPizzas} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/:id" component={SinglePizza} />
+             <Redirect to="/userhome" />
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Login} />
+            <Route path="/home" exact component={HomePage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/pizzas" component={AllPizzas} />
+            {/* <Redirect to='/' /> */}
+            
           </Switch>
         )}
       </div>
