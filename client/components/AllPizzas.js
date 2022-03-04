@@ -11,8 +11,7 @@ import CarouselSlide from './Carousel'
 export class AllPizzas extends React.Component {
   constructor(props) {
     super(props)
-
-    this.loading = true
+    this.loading = true;
   }
 
   componentDidMount() {
@@ -21,7 +20,7 @@ export class AllPizzas extends React.Component {
   }
   componentDidUpdate(prevprops) {
     if (prevprops.pizzas !== this.props.pizzas) {
-      console.log('we updated the component')
+      console.log('updated AllPizzas');
     }
   }
   render() {
