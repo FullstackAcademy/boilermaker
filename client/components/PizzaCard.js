@@ -1,6 +1,8 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import Popover from 'react-bootstrap/Popover'
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import {addCart} from '../store/cart'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
@@ -30,12 +32,20 @@ import {connect} from 'react-redux'
 //   )
 // }
 
+const popover = (
+  <Popover id="popover-basic">
+    <Popover.Body>
+      Added pizza to the shopping cart!
+    </Popover.Body>
+  </Popover>
+);
+
 class PizzaCard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      ...this.props.pizza,
-      quantity: 1
+      pizza: {...this.props.pizza, quantity: 1 },
+      showOverlay: false
     }
     this.inCart = false
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -43,12 +53,12 @@ class PizzaCard extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.addCart(this.state)
+    this.props.addCart(this.state.pizza)
     this.inCart = true
-    this.setState({
-      ...this.props.pizza,
-      quantity: 1
-    })
+    this.setState({pizza: {...this.props.pizza, quantity: 1 }, showOverlay: true});
+    setTimeout(() => {
+      this.setState({showOverlay: false})
+    }, 5000);
   }
 
   render() {
@@ -63,9 +73,11 @@ class PizzaCard extends React.Component {
             <Card.Title>{pizza.name}</Card.Title>
             <Card.Text>{pizza.description}</Card.Text>
             <Card.Text>{pizza.price}</Card.Text>
-            <Button variant="danger" onClick={this.handleSubmit}>
-              Add to Cart
-            </Button>
+            <OverlayTrigger trigger="click" placement="right" overlay={this.state.showOverlay ? popover : <div />} >
+              <Button variant="danger" onClick={this.handleSubmit}>
+                Add to Cart
+              </Button>
+            </OverlayTrigger >
           </Card.Body>
         </Card>
       </div>
