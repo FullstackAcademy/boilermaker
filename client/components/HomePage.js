@@ -6,7 +6,7 @@ import {fetchPizzas} from '../store/pizzas'
 
 import {Link} from 'react-router-dom'
 
-export const UserHome = props => {
+export const HomePage = props => {
   const {email} = props
   return (
     <div>
@@ -24,8 +24,8 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+export default connect(mapState)(HomePage)
 
-UserHome.propTypes = {
+HomePage.propTypes = {
   email: PropTypes.string
 }

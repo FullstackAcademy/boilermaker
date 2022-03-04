@@ -15,7 +15,8 @@ import {
   AllPizzas,
   SinglePizza,
   Cart,
-  UserHome
+  UserHome,
+  HomePage
 } from './components'
 import {me} from './store'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -39,9 +40,11 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Login} />
+            <Route path="/home" exact component={HomePage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Redirect to='/home' />
+            
           </Switch>
         )}
       </div>
