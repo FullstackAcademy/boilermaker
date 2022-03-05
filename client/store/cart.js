@@ -1,8 +1,13 @@
+import { me } from './user';
+import axios from 'axios';
+
+//ACTION TYPES
 const ADD_CART = 'ADD_CART'
 const UPDATE_CART = 'UPDATE_CART'
 const DELETE_PIZZA = 'DELETE_PIZZA'
 
-export const addCart = pizza => {
+//ACTION CREATORS
+const _addCart = pizza => {
   return {
     type: ADD_CART,
     pizza
@@ -20,6 +25,23 @@ export const deletePizza = id => {
   return {
     type: DELETE_PIZZA,
     id
+  }
+}
+
+//THUNK CREATORS
+export const addCart = (pizza) => {
+  return async (dispatch) => {
+    try {
+      const {data: user} = await axios.get('/auth/me');
+      const { data: result } = await axios.post(`/api/users/${user.id}`, pizza);
+      if (result) {
+        dispatch(_addCart(pizza));
+      } else {
+        throw new Error('Failed to add order item to the cart');
+      }
+    } catch (error) {
+      console.log('Failed to add pizza to the cart');
+    }
   }
 }
 
