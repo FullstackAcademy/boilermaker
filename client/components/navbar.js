@@ -25,10 +25,10 @@ const Navbar = ({handleClick, isLoggedIn, cartSize}) => (
             <LocalPizzaIcon />
             Pizzas
           </Link>
-          <Link className="navLink" to="/checkout">
+          {/* <Link className="navLink" to="/checkout">
             <PointOfSaleIcon />
             testCheckOut
-          </Link>
+          </Link> */}
           <Link className="navLink" to="/cart">
             <Badge badgeContent={cartSize} color="success" >
               <ShoppingCartIcon color="primary" />

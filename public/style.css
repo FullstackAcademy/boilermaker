@@ -63,11 +63,37 @@ main {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+  height: 30%;
+   
+}
+.pizzacard {
+  align-content: center;
+  align-items: stretch; /*stretches all cards same height*/
+  width: 350px; /*or whatever size card you want*/
+  /* border: 2px solid red; use this to map out box */
+  padding: 10px;
+  height: 10%;
+  justify-content: space-between;
+
+}
+.cardtext {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 1; /* number of lines to show */
+   -webkit-box-orient: vertical;
+
+}
+.my-image{
+  height : 350px !important;
+  width: 318px !important
 }
 
-.allpizzas > * {
+/* .allpizzas > * {
   padding: 10px;
-}
+} */
 
 .single-pizza {
   display: flex;
@@ -140,6 +166,8 @@ main {
 .carouselslide {
   width: 100px; 
   height: 500px;
+  margin-right: 100px;
+  margin-bottom: 20px;
 
 }
 
@@ -176,30 +204,15 @@ main {
 
 
 .icon {
-
-
-  /* position: absolute; */
-
-  /* box-sizing: border-box; */
   position: absolute;
   box-sizing: border-box;
   bottom: 55%;
   margin-right: 20%;
-  
   margin-left: 20%;
-
-
-
-
 }
 
 .icon > .pizza-container {
-
   padding-bottom: 50%;
-
-
-  /* flex-basis: 200%; */
-
 }
 
 .pizza-container {
@@ -208,6 +221,7 @@ main {
   justify-content: center;
   margin-top: 50px;
   padding-bottom: 100%;
+  
 
 
 
@@ -215,8 +229,6 @@ main {
 
 .pizza {
   position: relative;
-  /* width: 400px;
-  height: 400px; */
   width: 100px;
   height: 100px;
   background-color: #ffeb3b;
@@ -225,21 +237,17 @@ main {
   box-shadow: 0 0 0px 10px #dd8126;
   margin-left: 10%;
   margin-bottom: 30%;
+
 }
 
   .pizza:before {
     content: '';
     position: absolute;
-    /* width: 250px; */
-    /* height: 265px; */
     width: 62.5px;
     height: 66.25px;
     margin-top: 15%;
     margin-right: 100%;
-    /* background-color: linear-gradient(#ffffff, ); */
     background-color: #c0c0c0;
-
-
     transform: rotate(45deg);
     left: 66%;
     z-index: 20;
@@ -249,8 +257,6 @@ main {
   .pizza:after{
     content: '';
     position: absolute;
-    /* width: 10px;
-    height: 50px; */
     width: 2.5px;
     height: 12.5px;
     background-color: #ffeb3b;
@@ -264,8 +270,6 @@ main {
 
   .basil {
     position: absolute;
-    /* width: 400px;
-    height: 400px; */
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -284,16 +288,7 @@ main {
       /*box-shadow: 50px 100px #4caf50 , 150px 120px #4caf50 , 130px 40px #4caf50 , 200px 250px #4caf50 , 250px 300px #4caf50 , 300px 100px #4caf50 , 350px 200px #4caf50 , 35px 280px #4caf50 , 150px 320px #4caf50 , 130px 40px #4caf50 , 100px 200px #4caf50 , 250px 60px #4caf50 , 230px 160px #4caf50 */
       box-shadow: 12.5px 25px #4caf50 , 27.5px 30px #4caf50 , 32.5px 10px #4caf50 , 50px 62.5px #4caf50 , 62.5px 75px #4caf50 , 75px 25px #4caf50 , 87.5px 50px #4caf50 , 8.75px 70px #4caf50 , 37.5px 80px #4caf50 , 32.5px 10px #4caf50 , 25px 50px #4caf50 , 62.5px 15px #4caf50 , 57.5px 40px #4caf50
     }
-  /* .onions {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    overflow: hidden;
-    z-index: 12;
-    background-image: radial-gradient(circle at 10px 0px, transparent 6px, #d2d2d2 5px, #f5f5f5 11px, transparent 13px), radial-gradient(circle at 0px 10px, transparent 6px, #d2d2d2 5px, #f5f5f5 11px, transparent 13px);
-    background-size: 80px 90px, 150px 150px;
-  } */
+
 .onions {
   position: absolute;
     width: 100px;
@@ -302,21 +297,9 @@ main {
     overflow: hidden;
     z-index: 12;
     background-image: radial-gradient(circle at 2.5px 0px, transparent 2.5px, #d2d2d2 1.25px, #f5f5f5 2.75px, transparent 3.25px), radial-gradient(circle at 0px 2.5px, transparent 3px, #d2d2d2 2.5px, #f5f5f5 5.5px, transparent 6.5px);
-    /* background-image: radial-gradient(circle at 5px 0px, transparent 3px, #d2d2d2 2.5px, #f5f5f5 5.5px, transparent 6.5px), radial-gradient(circle at 0px 5px, transparent 3px, #d2d2d2 2.5px, #f5f5f5 5.5px, transparent 6.5px); */
     background-size: 20px 22.5px, 37.5px 37.5px;
-    /* background-size: 40px 45px 75px 75px; */
 }
-  /* .olives {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    overflow: hidden;
-    z-index: 11;
-    transform: rotate(25deg);
-    background-image: radial-gradient(circle at 70px 70px, #455a64 3px, #455a64 9px, transparent 10px);
-    background-size: 100px 100px;
-  } */
+ 
   .olives {
     position: absolute;
     width: 100px;
@@ -329,17 +312,6 @@ main {
     background-size: 25px 25px;
   }
 
-  /* .pepperonis {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    overflow: hidden; 
-    transform: rotate(15deg);
-    z-index: 10;
-    background-image: radial-gradient(circle at 40px 40px, #ea5353 14px, #aa2f2f 16px, transparent 18px);
-    background-size: 80px 80px;
-  } */
   .pepperonis {
     position: absolute;
     width: 100px;
@@ -357,6 +329,7 @@ main {
     width: 100%;
     height: 100%;
     justify-content: center;
+   
   }
     .slice {
       width: 1px;

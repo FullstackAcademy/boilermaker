@@ -2,14 +2,11 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 
-/**
- * COMPONENT
- */
+
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
