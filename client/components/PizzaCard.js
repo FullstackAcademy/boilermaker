@@ -6,6 +6,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import {addCart} from '../store/cart'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
 // const PizzaCard = props => {
 //   const {pizza} = props
@@ -50,6 +51,7 @@ class PizzaCard extends React.Component {
     this.inCart = false
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+  
 
   handleSubmit(event) {
     event.preventDefault()
@@ -63,6 +65,9 @@ class PizzaCard extends React.Component {
 
   render() {
     const {pizza} = this.props
+    const {isLoggedIn} = this.props
+
+    console.log('logged', isLoggedIn)
     return (
       <div>
         <Card style={{width: '18rem'}}>
@@ -73,22 +78,39 @@ class PizzaCard extends React.Component {
             <Card.Title>{pizza.name}</Card.Title>
             <Card.Text>{pizza.description}</Card.Text>
             <Card.Text>{pizza.price}</Card.Text>
-            <OverlayTrigger trigger="click" placement="bottom" overlay={this.state.showOverlay ? popover : <div />} >
+            {isLoggedIn ? (
+              <OverlayTrigger trigger="click" placement="bottom" overlay={this.state.showOverlay ? popover : <div />} >
               <Button variant="danger" onClick={this.handleSubmit}>
                 Add to Cart
               </Button>
             </OverlayTrigger >
+
+            ) : <Button variant="danger" type='button'>
+              Add to wishlist
+              </Button>}
+            
           </Card.Body>
         </Card>
       </div>
     )
   }
 }
+const mapState = state => {
+  return {
+    isLoggedIn: !!state.user.id
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
     addCart: pizza => dispatch(addCart(pizza))
+    
   }
 }
 
-export default connect(null, mapDispatchToProps)(PizzaCard)
+
+export default connect(mapState, mapDispatchToProps)(PizzaCard)
+
+PizzaCard.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired
+}

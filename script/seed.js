@@ -36,12 +36,12 @@ const fakePizzas = [
       'https://pbs.twimg.com/media/EVQJm7sX0AAb6Y8?format=jpg&name=medium'
   },
   {
-    name: 'Detriot Pepperoni',
+    name: 'Pepperoni Dreams',
     description:
       'Detroit square pizza with a caramelized cheddar cheese crust, zesty tomato sauce and thick cut pepperoni cups.',
     price: 17.99,
-    imageUrl:
-      'https://pbs.twimg.com/media/D3pJeD3WAAAgjaI?format=jpg&name=small'
+    imageUrl: 'https://pbs.twimg.com/media/EIs2eGhXUAAtCxs?format=jpg&name=4096x4096'
+      //'https://pbs.twimg.com/media/D3pJeD3WAAAgjaI?format=jpg&name=small'
   },
 
   {
@@ -83,7 +83,179 @@ const fakePizzas = [
     price: 17.99,
     imageUrl:
       'https://pbs.twimg.com/media/FMvAzoQXEAA0SIV?format=jpg&name=small'
-  }
+  },
+  {
+    name: 'nutella',
+    description: 'goodshit',
+    price: 9.99,
+    imageUrl: '	https://pbs.twimg.com/media/Cgl86ZVXEAAJaO9?format=jpg&name=medium'
+  },
+  {
+    name: 'the burn',
+    description: 'burnt shit',
+    price: 90.00,
+    imageUrl: 'https://pbs.twimg.com/media/DEnl9TLVwAAmWq5?format=jpg&name=medium'
+
+  },
+  {
+    name: 'Mellow Mushroom',
+    description: 'ricotta' ,
+    price: 10.99,
+    imageUrl: 'https://pbs.twimg.com/media/DMWFsdqWAAEYK2s?format=jpg&name=medium'
+
+  },
+  {
+    name: 'Margarita, hold the Margarita',
+    description: 'smaller one',
+    price: 0.05,
+    imageUrl: '	https://pbs.twimg.com/media/EWOcWiXXQAIkdkQ?format=jpg&name=medium'
+
+  },
+  {
+    name: 'greens',
+    description: 'seeds',
+    price: 99.99,
+    imageUrl: '	https://pbs.twimg.com/media/DhMFibnXcAEIN5h?format=jpg&name=4096x4096'
+  //'https://pbs.twimg.com/media/DhMFibnXcAEIN5h?format=jpg&name=900x900'
+
+  },
+  {
+    name: 'on a plate',
+    description: 'resturant',
+    price: 9.99,
+    imageUrl: 'https://pbs.twimg.com/media/DhMFj_wWsAAJ0fs?format=jpg&name=4096x4096'
+
+  },
+  {
+    name: 'have no idea',
+    description: 'chicken?',
+    price: 9.89,
+    imageUrl: 'https://pbs.twimg.com/media/DgTqDsfW0AY8vdH?format=jpg&name=4096x4096'
+
+  },
+  {
+    name: 'what is pizza',
+    description: 'salad',
+    price: 20.99,
+    imageUrl: 'https://pbs.twimg.com/media/EoAQGMXW8A4CddJ?format=jpg&name=medium'
+
+  },
+  {
+    name: 'beef',
+    description: 'small neoplitan',
+    price: 9.99,
+    imageUrl: 'https://pbs.twimg.com/media/EoSRxOyWEAY-Fdz?format=jpg&name=medium'
+
+  },
+  {
+    name: 'visit califonia',
+    description: 'artichoke hearts',
+    price: 10.99,
+    imageUrl: 'https://pbs.twimg.com/media/FH1NA0qVEAQ3Xg2?format=jpg&name=large'
+
+  },
+  {
+    name: 'The Chicago',
+    description: 'made in chicago',
+    price: 20.99,
+    imageUrl: '	https://pbs.twimg.com/media/FMcz1TEWQAwjAI1?format=jpg&name=medium'
+
+  },
+  {
+    name: 'white deepdish',
+    description: 'white cheese',
+    price: 10.99,
+    imageUrl: 'https://pbs.twimg.com/media/FMdg_lYXMAE0jd6?format=jpg&name=medium'
+
+  },
+  {
+    name: 'tomato detroit',
+    description: 'tomatos, ricotta, balsmic',
+    price: 20.99,
+    imageUrl: 'https://pbs.twimg.com/media/FMY_EACWYAU7bnC?format=jpg&name=large'
+
+  },
+  {
+    name: 'the classic',
+    description: 'sauce and cheese',
+    price: 99.99,
+    imageUrl: 'https://pbs.twimg.com/media/FM82sB-XIAYiOJz?format=jpg&name=medium'
+
+  },
+  {
+    name: 'why?',
+    description: 'why even bother explianing this, the only reason why you would get this is if you have no taste buds',
+    price: 0.01,
+    imageUrl: '	https://pbs.twimg.com/media/FMubWr4XIAIwRJW?format=jpg&name=large'
+
+  },
+  {
+    name: 'striaght to your heart',
+    description: 'knee high cheese',
+    price: 50.00,
+    imageUrl: 'https://pbs.twimg.com/media/FMZzOxDVIAA2AtR?format=jpg&name=large'
+  },
+  {
+    name: 'Tie Dye Pie',
+    description: 'Vodka Sauce, tomato sauce, fresh mozz and basil pesto',
+    price: 20.00,
+    imageUrl: '	https://pbs.twimg.com/media/Do3jc53WwAE45-_?format=jpg&name=large'
+  },
+  {
+    name: 'something simple',
+    description: 'fresh mozzeralla and secret sauce',
+    price: 10.00,
+    imageUrl: '	https://pbs.twimg.com/media/CVGRRK6UsAAowut?format=jpg&name=small'
+  },
+  {
+    name: "the greek",
+    description: 'Greek inspired pizza, sourdough crust, sauce, raw spinach sprinkled with a little dill & oregano, feta and mozz, layer of garlic roasted sliced eggplant, Kalamata olive, peperoncini, artichoke heart, more mozz & feta and a liberal amount of pepper flakes.',
+    price: 60.99,
+    imageUrl: 'https://pbs.twimg.com/media/FM0RDFrVcAAioPX?format=jpg&name=large'
+  },
+  {
+    name: 'meatball parm',
+    description: 'home made meatballs, with cooked saue and peccorino romano',
+    price: 33.99,
+    imageUrl: 'https://pbs.twimg.com/media/Dd31sGEUwAEzaD9?format=jpg&name=large'
+  },
+
+  {
+    name: 'Trenton-Style Mustard Pie',
+    description: 'mustard, with a blend of red suace topped with fresh mozzerella',
+    price: 10.99,
+    imageUrl: 'https://pbs.twimg.com/media/Dqcuf71WwAAi18r?format=jpg&name=medium'
+  },
+  {
+    name: 'gum drop meatballs',
+    description: 'cheese crusted edge, with meatballs peccorino and chedder cheese',
+    price: 10.99,
+    imageUrl: 'https://pbs.twimg.com/media/Dc70NKtWAAMols7?format=jpg&name=large'
+  },
+  // {
+  //   name:
+  //   description:
+  //   price:
+  //   imageUrl: 
+  // },
+  // {
+  //   name:
+  //   description:
+  //   price:
+  //   imageUrl: 
+  // },
+  // {
+  //   name:
+  //   description:
+  //   price:
+  //   imageUrl: 
+  // },
+  // {
+  //   name:
+  //   description:
+  //   price:
+  //   imageUrl: 
+  // }
 ]
 
 const fakeUsers = [

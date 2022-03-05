@@ -33,9 +33,11 @@ render(){
         </h5>
       </div>
         <div className="icon">
-          <Link to="/pizzas">
+          <Link to="/pizzas" >
+            
           <div className="pizza-container">
-            <div className="pizza">
+        
+            <div className="pizza" id="hvr-sink">
               <div className="basil">
                 <div className="leaf"></div>
                 </div>
@@ -49,7 +51,9 @@ render(){
                 <div className="slice slice-4"></div>
               </div>
             </div>
+           
           </div>
+          
           </Link>
         </div>
         </div>
