@@ -24,6 +24,10 @@ const Pizza = db.define('pizza', {
     type: Sequelize.TEXT,
     defaultValue:
       'https://pbs.twimg.com/profile_banners/628621903/1478015350/600x200'
+  },
+  cityOfPizza: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
 })
 
