@@ -262,10 +262,10 @@ const fakePizzas = [
     cityOfPizza: 'Detroit'
   },
   // {
-  //   name:
-  //   description:
-  //   price:
-  //   imageUrl: 
+  //   name: 'vegan',
+  //   description: 'idc',
+  //   price: 20.00,
+  //   imageUrl: x.toString()
   // },
   // {
   //   name:
@@ -288,6 +288,13 @@ const fakePizzas = [
 ]
 
 const fakeUsers = [
+  {
+    firstName: 'mainAdmin',
+    lastName: 'mainAdmin',
+    password: '123',
+    email: 'Admin',
+    isAdmin: true
+  },
   {
     firstName: 'David',
     lastName: 'Dunham',

@@ -11,10 +11,11 @@ import cartReducer from './cart'
 // const reducer = combineReducers({user})
 
 const reducer = combineReducers({
+  user,
   pizzas: pizzasReducer,
   pizza: pizzaReducer,
   cart: cartReducer,
-  user
+  
 
   // users: usersReducer,
   // orders: ordersReducer,

@@ -2,8 +2,6 @@ import React from 'react'
 import { Dropdown } from 'react-bootstrap'
 
 
-
-
 const FilterPizzas = (props) => {
   const {pizzaCities, setSelected} = props
   pizzaCities.unshift('All')

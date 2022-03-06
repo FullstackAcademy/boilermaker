@@ -13,16 +13,7 @@ const AuthForm = props => {
   return (
     <Card>
       <div className="formContainer">
-        <Form onSubmit={handleSubmit} name={name} className="container">
-          {/* {name === 'signup' ?
-            <Form.Group className="mb-3" controlId="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control name="name" type="text" placeholder="Enter Name" />
-              <Form.Control name="lastName" type="text" placeholder="Enter last name" />
-            </Form.Group>
-            :
-            null
-          } */}
+        <Form onSubmit={handleSubmit} name={name || ''} className="container">
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -172,3 +163,16 @@ AuthForm.propTypes = {
 
 // export const Login = connect(mapLogin, mapDispatch)(AuthForm)
 // export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+
+
+
+
+  // {name === 'signup' ?
+  //           <Form.Group className="mb-3" controlId="name">
+  //             <Form.Label>Name</Form.Label>
+  //             <Form.Control name="name" type="text" placeholder="Enter Name" />
+  //             <Form.Control name="lastName" type="text" placeholder="Enter last name" />
+  //           </Form.Group>
+  //           :
+  //           null
+  //         } 

@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import {connect, useDispatch, useSelector } from 'react-redux'
-import {fetchPizzas} from '../store/pizzas'
 import PizzaCard from './PizzaCard'
 import FilterPizzas from './FilterPizzas'
 import axios from 'axios'
@@ -24,24 +22,18 @@ const AllPizzas = () => {
     }
     getPizzas()
   }, [])
-
+  
   const pizzaCities = Array.from(new Set(pizzas.map((el) => {
     return el.cityOfPizza
   })))
 
   const pizzasToShow = pizzas.filter((pizza) => {
     if(typeFilter && typeFilter !== 'All') {
-      
       return pizza.cityOfPizza === typeFilter
-      
     }
     return true
   })
 
-  console.log( pizzasToShow)
-  
- 
- 
   return (
       <div>
         <FilterPizzas pizzaCities={pizzaCities} setSelected={setTypeFilter} />
