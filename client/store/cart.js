@@ -37,7 +37,7 @@ const _deletePizza = id => {
 export const getCart = (user) => {
   return async (dispatch) => {
     try {
-      const { data: cart } = await axios.get(`/api/users/${user.id}`);
+      const { data: cart } = await axios.get(`/api/orderItems?userId=${user.id}`);
       dispatch(_getCart(cart));
     } catch (error) {
       console.error("Failed to retrieve the user's cart", error);
@@ -45,20 +45,13 @@ export const getCart = (user) => {
   }
 }
 
-export const addCart = (pizza) => {
+export const addCart = (newPizza) => {
   return async (dispatch) => {
     try {
       const { data: user } = await axios.get('/auth/me');
-      if (user) {
-        const { data: newOrderItem } = await axios.post(`/api/users/${user.id}`, pizza);
-        if (newOrderItem) {
-          dispatch(_addCart(newOrderItem));
-        }
-      } else {
-        const { data: newOrderItem } = await axios.post('/api/orderItems', pizza);
-        if (newOrderItem) {
-          dispatch(_addCart(newOrderItem));
-        }
+      const { data: newOrderItem } = await axios.post('/api/orderItems', {user, newPizza});
+      if (newOrderItem) {
+        dispatch(_addCart(newOrderItem));
       }
     } catch (error) {
       console.error('Failed to add pizza to the cart', error);
