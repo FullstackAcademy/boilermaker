@@ -2,6 +2,7 @@ const router = require('express').Router()
 
 router.use('/users', require('./users'))
 router.use('/pizzas', require('./pizzas'))
+router.use('/orderItems', require('./orderItems'))
 // router.use('/orders', require('./'))
 
 router.use((req, res, next) => {
