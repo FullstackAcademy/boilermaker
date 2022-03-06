@@ -67,7 +67,7 @@ class PizzaCard extends React.Component {
 }
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.auth.id
   }
 }
 const mapDispatchToProps = dispatch => {

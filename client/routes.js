@@ -19,6 +19,7 @@ import {
   HomePage,
   Checkout,
   CheckoutSuccess,
+  AdminPage
   // notFoundpage
 } from './components'
 import {me} from './store'
@@ -35,7 +36,7 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/userhome" component={UserHome} />
+            <Route path="/userhome" component={AdminPage} />
             <Route path="/pizzas" component={AllPizzas} />
             <Route  path="/cart" component={Cart} />
             <Route  path="/checkout" component={Checkout} />
@@ -77,7 +78,7 @@ class Routes extends Component {
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.auth.id
   }
 }
 

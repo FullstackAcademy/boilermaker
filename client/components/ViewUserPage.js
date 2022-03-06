@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import CarouselSlide from './Carousel'
-import { fetchPizzas } from '../store/pizzas'
+// import CarouselSlide from './Carousel'
+// import { fetchPizzas } from '../store/pizzas'
 import EditUserPage from './EditUserPage'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
@@ -10,14 +10,15 @@ import Button from 'react-bootstrap/Button'
 import {Link} from 'react-router-dom'
 
 export const UserHome = props => {
-  const { email, firstName } = props
+  const { email } = props
+  console.log(props)
   const [openEdit, setOpenEdit] = useState(false)
 
   return (
     <div>
       <Card className="text-center" style ={{}}>
         <Card.Body>
-          <Card.Title>Welcome, {firstName}</Card.Title>
+          <Card.Title>Welcome, </Card.Title>
           <Card.Text>
             your email is {email}
           </Card.Text>
@@ -33,14 +34,14 @@ export const UserHome = props => {
 
 const mapState = state => {
   return {
-    email: state.user.email,
-    firstName: state.user.firstName
+    email: state.auth.email,
+    // firstName: state.user.firstName
   }
 }
 
 export default connect(mapState)(UserHome)
 
 UserHome.propTypes = {
-  firstName: PropTypes.string,
+  // firstName: PropTypes.string,
   email: PropTypes.string
 }

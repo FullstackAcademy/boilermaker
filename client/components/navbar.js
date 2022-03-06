@@ -67,7 +67,7 @@ const Navbar = ({handleClick, isLoggedIn, cartSize}) => (
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id,
+    isLoggedIn: !!state.auth.id,
     cartSize: state.cart.length
   }
 }
