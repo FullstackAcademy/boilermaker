@@ -1,37 +1,36 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { Dropdown } from 'react-bootstrap'
 
 
 
 
 const FilterPizzas = (props) => {
-  
-  const {pizzas} = props
-   console.log('filtering...', pizzas)
+  const {pizzaCities, setSelected} = props
+  pizzaCities.unshift('All')
   return (
-   
     <div>
       <Dropdown>
         <Dropdown.Toggle variant='success' id='filterdropdown'>
           <p>selection</p>
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          {pizzas.map((pizza) => {
+          {pizzaCities.map((city, i) => {
             return (
                <Dropdown.Item
-            key={pizza.id}
-            value={pizza.cityOfPizza}
+            key={i}
+            value={city}
+            onClick={(event) => {
+              console.log(event.target.text)
+              setSelected(event.target.text)
+            }}
             >
-              {pizza.cityOfPizza}
+              {city}
             </Dropdown.Item>
             )
-           
           })}
         </Dropdown.Menu>
       </Dropdown>
-      
     </div>
-
   )
 }
 

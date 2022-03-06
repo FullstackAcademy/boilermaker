@@ -58,7 +58,7 @@ class PizzaCard extends React.Component {
             </OverlayTrigger >
             ) : <Button variant="danger" type='button'>
               Add to wishlist
-              </Button>}
+              </Button> }
           </Card.Body>
         </Card>
       </div>
