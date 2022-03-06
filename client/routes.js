@@ -36,7 +36,7 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/userhome" component={AdminPage} />
+            <Route path="/userhome" component={HomePage} />
             <Route path="/pizzas" component={AllPizzas} />
             <Route  path="/cart" component={Cart} />
             <Route  path="/checkout" component={Checkout} />
