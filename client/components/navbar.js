@@ -25,10 +25,10 @@ const Navbar = ({handleClick, isLoggedIn, cartSize}) => (
             <LocalPizzaIcon />
             Pizzas
           </Link>
-          <Link className="navLink" to="/checkout">
+          {/* <Link className="navLink" to="/checkout">
             <PointOfSaleIcon />
             testCheckOut
-          </Link>
+          </Link> */}
           <Link className="navLink" to="/cart">
             <Badge badgeContent={cartSize} color="success" >
               <ShoppingCartIcon color="primary" />
@@ -67,7 +67,7 @@ const Navbar = ({handleClick, isLoggedIn, cartSize}) => (
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id,
+    isLoggedIn: !!state.auth.id,
     cartSize: state.cart.length
   }
 }

@@ -19,6 +19,7 @@ import {
   HomePage,
   Checkout,
   CheckoutSuccess,
+  AdminPage
   // notFoundpage
 } from './components'
 import {me} from './store'
@@ -31,28 +32,28 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
-
     return (
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/userhome" component={UserHome} />
-            <Route exact path="/pizzas" component={AllPizzas} />
+            <Route exact path="/userhome" component={UserHome} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/checkoutsuccess" component={CheckoutSuccess} />
+              <Route exact path="/pizzas" component={AllPizzas} />
             <Route exact path="/:id" component={SinglePizza} />
             {/* <Route exact path="/*" component={notFoundpage} /> */}
-             <Redirect to="/userhome" />
+            <Redirect to="/userhome" />
           </Switch>
         ) : (
           <Switch>
-            <Route path="/home" exact component={HomePage} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/pizzas" component={AllPizzas} />
+            <Route exact path="/home" component={HomePage} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/pizzas" component={AllPizzas} />
+            <Route exact path="/:id" component={SinglePizza} />
             {/* <Route path="/*" component={notFoundpage} /> */}
-            {/* <Redirect to='/' /> */}
+            <Redirect to='/home' />
 
           </Switch>
         )}
@@ -76,7 +77,7 @@ class Routes extends Component {
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.auth.id
   }
 }
 
@@ -95,44 +96,4 @@ Routes.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired
 }
 
-/* <Navbar.Brand href="/">Menu</Navbar.Brand>
-            <Nav className="me-auto">
-              <Nav.Link href="/">Login</Nav.Link>
-              <Nav.Link href="/cart">Cart</Nav.Link>
-            </Nav> */
 
-// <Router>
-//   <div>
-//     {/* <nav>That's Amore!</nav> */}
-//     <Navbar bg="success" variant="dark">
-//       <Container>
-//         <Navbar.Brand>
-//           <Link to="/">
-//             <span className="navLinkHeader">Thats Amore </span>
-//           </Link>
-//         </Navbar.Brand>
-//         <Nav fill variant="tabs" defaultActiveKey="/home">
-//           <Link className="navLink" to="/login">
-//             Log In
-//           </Link>
-//           <Link className="navLink" to="/signup">
-//             Sign up
-//           </Link>
-//           <Link className="navLink" to="/cart">
-//             Cart
-//           </Link>
-//         </Nav>
-//       </Container>
-//     </Navbar>
-//     <main>
-//       {/* <h1>Pizzas For Sale</h1> */}
-//       <Switch>
-//         <Route exact path="/" component={AllPizzas} />
-//         <Route exact path="/cart" component={Cart} />
-//         <Route exact path="/login" component={Login} />
-//         <Route exact path="/signup" component={Signup} />
-//         <Route exact path="/:id" component={SinglePizza} />
-//       </Switch>
-//     </main>
-//   </div>
-// </Router>

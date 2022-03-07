@@ -2,30 +2,18 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 
-/**
- * COMPONENT
- */
+
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
     <Card>
       <div className="formContainer">
-        <Form onSubmit={handleSubmit} name={name} className="container">
-          {/* {name === 'signup' ?
-            <Form.Group className="mb-3" controlId="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control name="name" type="text" placeholder="Enter Name" />
-              <Form.Control name="lastName" type="text" placeholder="Enter last name" />
-            </Form.Group>
-            :
-            null
-          } */}
+        <Form onSubmit={handleSubmit} name={name || ''} className="container">
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -66,7 +54,7 @@ const mapLogin = state => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: state.user.error
+    error: state.auth.error
   }
 }
 
@@ -74,7 +62,7 @@ const mapSignup = state => {
   return {
     name: 'signup',
     displayName: 'Sign Up',
-    error: state.user.error
+    error: state.auth.error
   }
 }
 
@@ -175,3 +163,16 @@ AuthForm.propTypes = {
 
 // export const Login = connect(mapLogin, mapDispatch)(AuthForm)
 // export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+
+
+
+
+  // {name === 'signup' ?
+  //           <Form.Group className="mb-3" controlId="name">
+  //             <Form.Label>Name</Form.Label>
+  //             <Form.Control name="name" type="text" placeholder="Enter Name" />
+  //             <Form.Control name="lastName" type="text" placeholder="Enter last name" />
+  //           </Form.Group>
+  //           :
+  //           null
+  //         } 
