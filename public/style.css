@@ -393,3 +393,14 @@ margin-top: 10%;
 #bottominput {
   margin-top: 20px;
 }
+
+
+#babypic {
+  height: 500px;
+  width: 500px;
+
+}
+.checkout-success {
+  align-content: center;
+  margin-left: 35%;
+}

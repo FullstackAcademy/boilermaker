@@ -24,7 +24,7 @@ render(){
       <div className="hometext">
         <h3 className="homeheader">Pizza is not just food</h3>
         <h5>
-          Welcome to Its Amore! where we believe in the power of pizza.
+          Welcome to Pie Pal! where we believe in the power of pizza.
           For many, pizza is not just food but a way of life. 
           ... more description
           ... more description

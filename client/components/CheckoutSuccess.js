@@ -15,6 +15,7 @@ const CheckoutSuccess = (props) => {
 
   return (
     <div className="checkout-success">
+      <img id="babypic" src="https://pbs.twimg.com/media/DXYvb89VwAIn7tH?format=jpg&name=4096x4096" alt="tank you" />
       <div>
         <h1>Order confirmed</h1>
         <h2>Your Pizzas are on the way!</h2>
