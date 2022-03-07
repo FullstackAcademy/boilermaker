@@ -4,7 +4,6 @@ module.exports = router;
 
 //GET /api/orderItems?orderId={int}
 //Get all the order items associated with a given order.
-
 router.get('/', async (req, res, next) => {
   try {
     if (req.query.orderId) {
@@ -19,7 +18,6 @@ router.get('/', async (req, res, next) => {
 
 //GET /api/orderItems/cart?userId={int}
 //On login, retrieve the cart items associated with the user.
-//Admin view (without req.query) => Get all order items.
 router.get('/cart', async (req, res, next) => {
   try {
     if (req.query.userId) {
