@@ -271,19 +271,19 @@ const fakePizzas = [
   //   name:
   //   description:
   //   price:
-  //   imageUrl: 
+  //   imageUrl:
   // },
   // {
   //   name:
   //   description:
   //   price:
-  //   imageUrl: 
+  //   imageUrl:
   // },
   // {
   //   name:
   //   description:
   //   price:
-  //   imageUrl: 
+  //   imageUrl:
   // }
 ]
 
@@ -317,7 +317,8 @@ const fakeUsers = [
     firstName: 'The',
     lastName: 'Admin',
     password: 'password',
-    email: 'admin@admin.com'
+    email: 'admin@admin.com',
+
   }
 
 ]
@@ -391,7 +392,7 @@ module.exports = seed
 //     price: 999.99,
 //     imageUrl:
 //       'https://pbs.twimg.com/media/Dwecl7tVsAUcmX4?format=jpg&name=medium',
-      
+
 //   },
 //   {
 //     name: 'Artichoke',
@@ -602,24 +603,24 @@ module.exports = seed
 //   //   name:
 //   //   description:
 //   //   price:
-//   //   imageUrl: 
+//   //   imageUrl:
 //   // },
 //   // {
 //   //   name:
 //   //   description:
 //   //   price:
-//   //   imageUrl: 
+//   //   imageUrl:
 //   // },
 //   // {
 //   //   name:
 //   //   description:
 //   //   price:
-//   //   imageUrl: 
+//   //   imageUrl:
 //   // },
 //   // {
 //   //   name:
 //   //   description:
 //   //   price:
-//   //   imageUrl: 
+//   //   imageUrl:
 //   // }
 // ]
