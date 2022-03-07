@@ -40,7 +40,7 @@ class Routes extends Component {
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/checkoutsuccess" component={CheckoutSuccess} />
-              <Route exact path="/pizzas" component={AllPizzas} />
+            <Route exact path="/pizzas" component={AllPizzas} />
             <Route exact path="/:id" component={SinglePizza} />
             {/* <Route exact path="/*" component={notFoundpage} /> */}
             <Redirect to="/userhome" />

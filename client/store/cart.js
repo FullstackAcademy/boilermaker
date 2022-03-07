@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from './index';
 
 //ACTION TYPES
 const GET_CART = 'GET_CART'
@@ -7,7 +8,7 @@ const UPDATE_CART = 'UPDATE_CART'
 const DELETE_PIZZA = 'DELETE_PIZZA'
 
 //ACTION CREATORS
-const _getCart = cart => {
+export const getCart = cart => {
   return {
     type: GET_CART,
     cart
@@ -34,21 +35,26 @@ const _deletePizza = id => {
 }
 
 //THUNK CREATORS
-export const getCart = (user) => {
-  return async (dispatch) => {
-    try {
-      const { data: cart } = await axios.get(`/api/orderItems?userId=${user.id}`);
-      dispatch(_getCart(cart));
-    } catch (error) {
-      console.error("Failed to retrieve the user's cart", error);
-    }
-  }
-}
+
+//NOTE: MOVED TEMPORARILY (MAYBE) TO THE ViewUserPage COMPONENT HOOK. WHENEVER THE HOME PAGE LOADS, THE CART IS RETRIEVED. HOWEVER, WE WANT TO GET THE CART DURING THE LOGIN PROCESS.
+// export const getCart = (userId) => {
+//   return async (dispatch) => {
+//     try {
+//       const { data: cart } = await axios.get(`/api/orderItems?userId=${userId}`);
+//       dispatch(_getCart(cart));
+//     } catch (error) {
+//       console.error("Failed to retrieve the user's cart", error);
+//     }
+//   }
+// }
 
 export const addCart = (newPizza) => {
   return async (dispatch) => {
     try {
-      const { data: user } = await axios.get('/auth/me');
+      // const { data: user } = await axios.get('/auth/thisUser');
+      const user = store.getState().user;
+      console.log('user', user);
+      console.log(user);
       const { data: newOrderItem } = await axios.post('/api/orderItems', {user, newPizza});
       if (newOrderItem) {
         dispatch(_addCart(newOrderItem));

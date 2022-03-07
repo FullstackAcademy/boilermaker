@@ -49,6 +49,14 @@ router.get('/me', async (req, res, next) => {
   }
 });
 
+router.get('/thisUser', (req, res, next) => {
+  try {
+    res.json(req.user);
+  } catch (error) {
+    next(error);
+  }
+})
+
 router.use('/google', require('./google'))
 
 
