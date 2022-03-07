@@ -209,7 +209,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getCart: () => dispatch(getCart())
+    getCart: (cart) => dispatch(getCart(cart))
   }
 }
 
