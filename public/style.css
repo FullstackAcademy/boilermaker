@@ -1,4 +1,4 @@
-body {
+/* body {
   font-family: sans-serif;
 }
 
@@ -18,4 +18,394 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+} */
+
+/*
+ * Hi! I'm your stylesheet! I've got some sensible defaults here,
+ * but feel free to change me to your heart's content!
+ */
+
+
+
+* {
+  box-sizing: border-box;
+  font-family: arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(#c0c0c0, #c0c0c0);
+  /* background: linear-gradient(#c0c0c0); */
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  /* background-image: url('https://pbs.twimg.com/media/DmFbEO7W0AIci5f?format=jpg&name=large'); */
+}
+
+nav {
+  align-items: center;
+  background-color: #333333;
+  color: #c0c0c0;
+  display: flex;
+  height: 80px;
+  padding: 10px;
+  margin-bottom: 70px;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.allpizzas {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+  height: 30%;
+
+}
+.pizzacard {
+  align-content: center;
+  align-items: stretch; /*stretches all cards same height*/
+  width: 350px; /*or whatever size card you want*/
+  /* border: 2px solid red; */
+  padding: 10px;
+  height: 10%;
+  justify-content: space-between;
+}
+
+.pizzacard-object {
+  overflow: hidden;
+}
+
+.cardtext {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 1; /* number of lines to show */
+   -webkit-box-orient: vertical;
+
+}
+.my-image{
+  height : 350px !important;
+  /* width: 318px !important */
+  width: 400px !important;
+}
+
+/* .allpizzas > * {
+  padding: 10px;
+} */
+
+.single-pizza {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.single-pizza > * {
+  font-family: monospace;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.nav-buttons > * {
+  padding: 0 10px 0;
+  font-family: monospace;
+}
+
+.cart {
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  margin: 0 700px 0 700px;
+}
+
+.cart-item-quantity {
+  max-width: 5ch;
+}
+
+.delete-pizza {
+  cursor: pointer;
+}
+
+#checkout-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.navLink {
+  padding: 0 25px 0 !important;
+  font-size: 20px;
+  font-family: monospace;
+}
+
+.navLinkHeader {
+  font-size: 50px !important;
+  font-family: monospace;
+
+}
+
+.view {
+  background-image: url('https://pbs.twimg.com/media/DmFbEO7W0AIci5f?format=jpg&name=large');
+}
+
+
+
+.carousel {
+  margin-left: 30%;
+  padding-right: 10%;
+  margin-top: 10%;
+  position: absolute;
+}
+
+.carouselslide {
+  width: 100px;
+  height: 500px;
+  margin-right: 100px;
+  margin-bottom: 20px;
+
+}
+
+.carosuelImage > img {
+
+  width: 100%;
+  border-radius: 55px 55px 55px 55px;
+  box-shadow: 10px 10px 5px;
+  border: 2px;
+}
+
+.formContainer {
+  padding: 110 0 50 0;
+}
+
+
+
+/* Css home page stuff */
+
+
+.homeheader {
+  padding-bottom: 5%;
+
+}
+.hometext {
+  position: absolute;
+  box-sizing: border-box;
+  /* margin-bottom: 100%; */
+  bottom: 55%;
+  margin-right: 60%;
+  padding-left: 10%;
+
+}
+
+
+.icon {
+  position: absolute;
+  box-sizing: border-box;
+  bottom: 55%;
+  margin-right: 20%;
+  margin-left: 20%;
+}
+
+.icon > .pizza-container {
+  padding-bottom: 50%;
+}
+
+.pizza-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  padding-bottom: 100%;
+
+
+
+
+}
+
+.pizza {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: #ffeb3b;
+  border-radius: 50%;
+  border: 4px solid orange;
+  box-shadow: 0 0 0px 10px #dd8126;
+  margin-left: 10%;
+  margin-bottom: 30%;
+
+}
+
+  .pizza:before {
+    content: '';
+    position: absolute;
+    width: 62.5px;
+    height: 66.25px;
+    margin-top: 15%;
+    margin-right: 100%;
+    background-color: #c0c0c0;
+    transform: rotate(45deg);
+    left: 66%;
+    z-index: 20;
+  }
+
+
+  .pizza:after{
+    content: '';
+    position: absolute;
+    width: 2.5px;
+    height: 12.5px;
+    background-color: #ffeb3b;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 15px -10px #ffeb3b;
+    transform: translateX(3px) translateY(-1px);
+    animation: chorreo 4s ease-out infinite;
+    margin-left: 50%;
+    margin-bottom: 50%;
+}
+
+  .basil {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+    .leaf {
+      position: absolute;
+      /* width: 25px;
+      height: 25px; */
+      width: 6.25px;
+      height: 6.25px;
+      background-color: #4caf50;
+      z-index: 13;
+      /* border-radius: 100px 0; */
+      border-radius: 25px 0;
+      /*box-shadow: 50px 100px #4caf50 , 150px 120px #4caf50 , 130px 40px #4caf50 , 200px 250px #4caf50 , 250px 300px #4caf50 , 300px 100px #4caf50 , 350px 200px #4caf50 , 35px 280px #4caf50 , 150px 320px #4caf50 , 130px 40px #4caf50 , 100px 200px #4caf50 , 250px 60px #4caf50 , 230px 160px #4caf50 */
+      box-shadow: 12.5px 25px #4caf50 , 27.5px 30px #4caf50 , 32.5px 10px #4caf50 , 50px 62.5px #4caf50 , 62.5px 75px #4caf50 , 75px 25px #4caf50 , 87.5px 50px #4caf50 , 8.75px 70px #4caf50 , 37.5px 80px #4caf50 , 32.5px 10px #4caf50 , 25px 50px #4caf50 , 62.5px 15px #4caf50 , 57.5px 40px #4caf50
+    }
+
+.onions {
+  position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 12;
+    background-image: radial-gradient(circle at 2.5px 0px, transparent 2.5px, #d2d2d2 1.25px, #f5f5f5 2.75px, transparent 3.25px), radial-gradient(circle at 0px 2.5px, transparent 3px, #d2d2d2 2.5px, #f5f5f5 5.5px, transparent 6.5px);
+    background-size: 20px 22.5px, 37.5px 37.5px;
+}
+
+  .olives {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 11;
+    transform: rotate(25deg);
+    background-image: radial-gradient(circle at 17.5px 17.5px, #455a64 1.25px, #455a64 2.25px, transparent 2.5px);
+    background-size: 25px 25px;
+  }
+
+  .pepperonis {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    /* overflow: hidden; */
+    transform: rotate(15deg);
+    z-index: 10;
+    background-image: radial-gradient(circle at 10px 10px, #ea5353 3.5px, #aa2f2f 4px, transparent 4.5px);
+    background-size: 20px 20px;
+  }
+  .slices {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+
+  }
+    .slice {
+      width: 1px;
+      height: 100%;
+      background-color: #e8d83a
+    }
+    .slice-1 {
+      transform: rotate(45deg)
+    }
+    .slice-2 {
+      transform: rotate(90deg)
+    }
+    .slice-3 {
+      transform: rotate(135deg)
+    }
+    .slice-4 {
+      transform: rotate(180deg)
+    }
+
+@keyframes chorreo {
+  from {
+    height: 70%
+  }
+  to {
+    height: 25px
+  }
+
+}
+
+/* CssCheckout stuff */
+
+#checkoutcard {
+  padding: 100px;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+#totalform {
+ display: flex;
+  flex-direction: column
+}
+#cardinfo {
+ display: flex;
+ flex-direction: column;
+ flex-wrap: wrap;
+margin-bottom: 10%;
+margin-top: 10%;
+}
+
+#shippingaddress {
+  display: flex;
+ flex-direction: column;
+ flex-wrap: wrap;
+}
+
+.label {
+  padding-bottom: 20px;
+}
+#topinput{
+  margin-top: 20px;
+}
+#bottominput {
+  margin-top: 20px;
+}
+
+
+#babypic {
+  height: 500px;
+  width: 500px;
+
+}
+.checkout-success {
+  align-content: center;
+  margin-left: 35%;
 }
