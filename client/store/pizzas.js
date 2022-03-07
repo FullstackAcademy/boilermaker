@@ -11,6 +11,8 @@ export const setPizzas = pizzas => {
   }
 }
 
+
+
 // THUNKS
 
 export const fetchPizzas = () => {

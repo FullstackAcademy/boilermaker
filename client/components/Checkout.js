@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import {  Row, Col, FloatingLabel, InputGroup } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 
 ///notes => handleSUbmit for both different forms 
@@ -157,8 +158,9 @@ class Checkout extends React.Component {
       
     </div>
     </div>
-
+    <Link to="/checkoutsuccess">
     <Button variant="primary" type="Submit" size='lg'>Confirm Order</Button>
+    </Link>
      </Card>
      
     
