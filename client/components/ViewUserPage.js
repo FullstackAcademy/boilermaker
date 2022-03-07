@@ -4,6 +4,7 @@ import {connect, useDispatch} from 'react-redux'
 // import CarouselSlide from './Carousel'
 // import { fetchPizzas } from '../store/pizzas'
 import EditUserPage from './EditUserPage'
+import OrderHistory from './OrderHistory'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import AdminPage from './AdminPage'
@@ -41,7 +42,8 @@ export const UserHome = props => {
           <Button type='button' variant="primary">Check Your History</Button>
           <Button onClick={()=>setOpenEdit(!openEdit)}>Click me to edit this user</Button>
         </Card.Body>
-        { openEdit === true ? <EditUserPage /> : null }
+          {openEdit === true ? <EditUserPage /> : null}
+          {/* <OrderHistory /> */}
       </Card>
     </div>
   )
