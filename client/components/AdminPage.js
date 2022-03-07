@@ -11,7 +11,7 @@ class AdminPage extends React.Component {
 
   render() {
     const users = this.props.users
-    console.log(this.props)
+    
     return (
       <div>
         hello

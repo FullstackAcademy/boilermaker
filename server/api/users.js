@@ -14,7 +14,6 @@ userRouter.get('/', requireToken, isAdmin, async (req, res, next) => {
     })
     // console.log(users)
    res.json(users)
-    
   } catch (err) {
     console.error(err)
   }

@@ -36,15 +36,14 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/userhome" component={UserHome} />
-            <Route path="/pizzas" component={AllPizzas} />
-            <Route  path="/cart" component={Cart} />
-            <Route  path="/checkout" component={Checkout} />
-            <Route  path="/checkoutsuccess" component={CheckoutSuccess} />
-            <Route  path="/:id" component={SinglePizza} />
+            <Route exact path="/userhome" component={UserHome} />
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout" component={Checkout} />
+            <Route exact path="/checkoutsuccess" component={CheckoutSuccess} />
+              <Route exact path="/pizzas" component={AllPizzas} />
+            <Route exact path="/:id" component={SinglePizza} />
             {/* <Route exact path="/*" component={notFoundpage} /> */}
             <Redirect to="/userhome" />
-             
           </Switch>
         ) : (
           <Switch>

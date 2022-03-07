@@ -106,7 +106,7 @@ User.findByToken = async function (token) {
     const { id } = await jwt.verify(token, process.env.SESSION_SECRET);
     const user = User.findByPk(id);
     if (!user) {
-      console.log('fuck you')
+      console.log("you're not a user")
     }
     return user;
   } catch (ex) {

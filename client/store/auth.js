@@ -26,6 +26,9 @@ export const me = () => async dispatch => {
         authorization: token,
       }
     });
+    // console.log('me', res.data)
+    // history.push('/pizzas')
+    // isAdmin? 
     return dispatch(getUser(res.data));
   }
 };
@@ -35,13 +38,14 @@ export const auth =
     let res;
     try {
       res = await axios.post(`/auth/${method}`, { email, password });
+
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(me());
     } catch (authError) {
       return dispatch(getUser({ error: authError }));
     }
       try {
-    dispatch(getUser(res.data))
+    dispatch(getUser(res.data.token))
     history.push('/userhome')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
