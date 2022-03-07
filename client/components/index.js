@@ -13,6 +13,7 @@ import SinglePizza from './SinglePizza'
 import Cart from './Cart'
 import HomePage from './HomePage'
 import CheckoutSuccess from './CheckoutSuccess'
+import notFoundPage from './notFoundpage'
 import Checkout from './Checkout'
 import AdminPage from './AdminPage'
 
@@ -20,4 +21,4 @@ import AdminPage from './AdminPage'
 // import LoginForm from './LoginForm';
 // import SignUpForm from './SignUpForm';
 
-export {Login, Signup, AllPizzas, SinglePizza, Cart, HomePage, Checkout, CheckoutSuccess, AdminPage}
+export {Login, Signup, AllPizzas, SinglePizza, Cart, HomePage, Checkout, CheckoutSuccess, AdminPage, notFoundPage}
