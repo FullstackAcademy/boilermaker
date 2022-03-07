@@ -4,7 +4,6 @@ import {Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchPizzas} from '../store/pizzas'
 
-
 class HomePage extends React.Component {
   constructor(props) {
     super(props)
@@ -25,18 +24,18 @@ render(){
         <h3 className="homeheader">Pizza is not just food</h3>
         <h5>
           Welcome to Pie Pal! where we believe in the power of pizza.
-          For many, pizza is not just food but a way of life. 
+          For many, pizza is not just food but a way of life.
           ... more description
           ... more description
           .. more description
-          
+
         </h5>
       </div>
         <div className="icon">
           <Link to="/pizzas" >
-            
+
           <div className="pizza-container">
-        
+
             <div className="pizza" id="hvr-sink">
               <div className="basil">
                 <div className="leaf"></div>
@@ -51,26 +50,26 @@ render(){
                 <div className="slice slice-4"></div>
               </div>
             </div>
-           
+
           </div>
-          
+
           </Link>
         </div>
         </div>
-      
+
     </div>
   )
   }
 }
 const mapState = state => {
   return {
-    pizzas: state.pizzas
+    pizzas: state.pizzas,
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    fetchPizzas: () => dispatch(fetchPizzas())
+    fetchPizzas: () => dispatch(fetchPizzas()),
   }
 }
 
@@ -101,19 +100,19 @@ export default connect(mapState, mapDispatch)(HomePage)
 //         <h3>Pizza is not just food its a way of life</h3>
 //         <h4>
 //           Welcome to Its Amore! where we believe in the power of pizza.
-//           For many, pizza is not just food but a way of life. 
+//           For many, pizza is not just food but a way of life.
 //           ... more description
 //           ... more description
 //           .. more description
 //         </h4>
-        
+
 //       </div>
 //       <CarouselSlide />
 //       <div>
 //          <button type="button" onClick={} >Current Vendors</button>
 //       </div>
 //     </div>
-   
+
 //   )
 // }
 
@@ -131,8 +130,8 @@ export default connect(mapState, mapDispatch)(HomePage)
 
 
 // Welcome to Its Amore! where we believe in the power of pizza.
-//           For many, pizza is not just food but a way of life. While many 
-//           who join are resturants 
-          
-//           Here at 
+//           For many, pizza is not just food but a way of life. While many
+//           who join are resturants
+
+//           Here at
 //           It's Amore! our goal is to not only provide thi

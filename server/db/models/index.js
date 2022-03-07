@@ -28,5 +28,6 @@ module.exports = {
   db,
   User,
   Pizza,
-  Order
+  Order,
+  OrderItem
 }

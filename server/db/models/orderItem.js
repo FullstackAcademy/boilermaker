@@ -14,7 +14,7 @@ const OrderItem = db.define('orderItem', {
   description: {
     type: Sequelize.TEXT
   },
-  salePrice: {
+  price: {
     type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
     validate: {

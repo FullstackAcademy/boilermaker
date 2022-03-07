@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button';
-import {updateCart, deletePizza} from '../store/cart'
+import {updateOrderItem, deletePizza} from '../store/cart'
 
 
 class Cart extends React.Component {
@@ -23,7 +23,7 @@ class Cart extends React.Component {
       return pizza.id === pizzaId
     })[0]
     targetPizza.quantity = event.target.value
-    this.props.updateCart(targetPizza)
+    this.props.updateOrderItem(targetPizza)
   }
 
   deletePizza(id) {
@@ -110,7 +110,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateCart: pizza => dispatch(updateCart(pizza)),
+    updateOrderItem: pizza => dispatch(updateOrderItem(pizza)),
     deletePizza: id => dispatch(deletePizza(id))
   }
 }

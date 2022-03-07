@@ -1,5 +1,7 @@
 import axios from 'axios'
 import history from '../history'
+import { getCart } from './cart';
+import store from './index'
 
 const TOKEN = 'token'
 
@@ -28,7 +30,7 @@ export const me = () => async dispatch => {
     });
     // console.log('me', res.data)
     // history.push('/pizzas')
-    // isAdmin? 
+    // isAdmin?
     return dispatch(getUser(res.data));
   }
 };
@@ -44,9 +46,9 @@ export const auth =
     } catch (authError) {
       return dispatch(getUser({ error: authError }));
     }
-      try {
-    dispatch(getUser(res.data.token))
-    history.push('/userhome')
+    try {
+      dispatch(getUser(res.data.token));
+      history.push('/userhome');
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
@@ -93,12 +95,12 @@ export default function(state = defaultUser, action) {
 //     });
 //     return dispatch(getUser(res.data || defaultUser));
 //   }
-    
+
 //   } catch (err) {
 //      console.error(err)
 //   }
 
-  
+
 // };
 
 

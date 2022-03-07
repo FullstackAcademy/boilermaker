@@ -25,7 +25,7 @@ class PizzaCard extends React.Component {
     this.inCart = false
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  
+
 
   handleSubmit(event) {
     event.preventDefault()
@@ -42,7 +42,7 @@ class PizzaCard extends React.Component {
     console.log('logged', isLoggedIn)
     return (
       <div className='pizzacard'>
-        <Card style={{width: '20rem'}}>
+        <Card style={{width: '20rem'}} className="pizzacard-object">
           <Link to={`/${pizza.id}`}>
             <Card.Img variant="top" src={pizza.imageUrl} className='my-image'/>
           </Link>
@@ -67,13 +67,13 @@ class PizzaCard extends React.Component {
 }
 const mapState = state => {
   return {
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.user.id
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
     addCart: pizza => dispatch(addCart(pizza))
-    
+
   }
 }
 

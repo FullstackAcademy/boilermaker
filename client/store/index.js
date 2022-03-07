@@ -12,12 +12,12 @@ import userReducer from './users'
 // const reducer = combineReducers({user})
 
 const reducer = combineReducers({
-  auth,
+  user: auth,
   users: userReducer,
   pizzas: pizzasReducer,
   pizza: pizzaReducer,
   cart: cartReducer,
-  
+
 
   // users: usersReducer,
   // orders: ordersReducer,
