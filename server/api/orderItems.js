@@ -2,10 +2,25 @@ const router = require('express').Router()
 const {OrderItem, Order, User} = require('../db/models')
 module.exports = router;
 
-//GET /api/orderItems?userId={int}
+//GET /api/orderItems?orderId={int}
+//Get all the order items associated with a given order.
+
+router.get('/', async (req, res, next) => {
+  try {
+    if (req.query.orderId) {
+      const order = await Order.findByPk(req.query.orderId);
+      const items = await order.getOrderItems();
+      res.send(items);
+    }
+  } catch (error) {
+    next(error);
+  }
+})
+
+//GET /api/orderItems/cart?userId={int}
 //On login, retrieve the cart items associated with the user.
 //Admin view (without req.query) => Get all order items.
-router.get('/', async (req, res, next) => {
+router.get('/cart', async (req, res, next) => {
   try {
     if (req.query.userId) {
       const userId = req.query.userId;
@@ -14,9 +29,6 @@ router.get('/', async (req, res, next) => {
       const cart = pendingOrders[0];
       const cartItems = await cart.getOrderItems();
       res.send(cartItems);
-    } else {
-      const allOrderItems = await OrderItem.findAll();
-      res.send(allOrderItems);
     }
   } catch (error) {
     next(error);

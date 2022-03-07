@@ -2,8 +2,8 @@ const router = require('express').Router();
 const { User, Order } = require('../db/models')
 module.exports = router;
 
-//GET /api/orders?userId={int}
-router.get('/', async (req, res, next) => {
+//GET /api/orders/cart?userId={int}
+router.get('/cart', async (req, res, next) => {
   try {
     if (req.query.userId) {
       const userId = req.query.userId;

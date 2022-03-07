@@ -20,7 +20,7 @@ export const UserHome = props => {
   useEffect(() => {
     async function loadCart() {
       try {
-        const { data: cart } = await axios.get(`/api/orderItems?userId=${props.user.id}`);
+        const { data: cart } = await axios.get(`/api/orderItems/cart?userId=${props.user.id}`);
         dispatch(getCart(cart));
       } catch (error) {
         console.error("Failed to retrieve the user's cart", error);

@@ -21,7 +21,7 @@ class Checkout extends React.Component {
     const user = this.props.user;
       try {
         if (user) {
-          const { data: userOrder } = await axios.get(`/api/orders?userId=${user.id}`);
+          const { data: userOrder } = await axios.get(`/api/orders/cart?userId=${user.id}`);
           const newStatus = {status: 'Complete'};
           const { data: newOrder } = await axios.put(`/api/orders/${userOrder.id}`, newStatus);
           if (newOrder) {
