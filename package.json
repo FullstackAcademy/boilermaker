@@ -98,7 +98,7 @@
     "react-test-renderer": "^16.4.2",
     "redux-devtools-extension": "^2.13.5",
     "redux-mock-store": "^1.5.3",
-    "simple-git": "^1.121.0",
+    "simple-git": "^3.5.0",
     "supertest": "^4.0.2",
     "webpack": "^4.16.4",
     "webpack-cli": "^3.1.0",
