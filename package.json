@@ -1,6 +1,6 @@
 {
-  "name": "boilermaker",
-  "version": "2.0.0",
+  "name": "boilerplate",
+  "version": "0.0.1",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
     "node": "~12.11.1"
@@ -38,7 +38,17 @@
       "git add"
     ]
   },
-  "author": "Fullstack Academy of Code",
+  "contributors": [{
+    "name": "Chiara Marcial Martínez",
+    "email": "contact@cofuente.io",
+    "url": "https://cofuente.io"
+    },
+    {
+    "name": "Mab Benedetto",
+    "email": "benedettomab@gmail.com",
+    "url": "https://outpt.net"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.0",
