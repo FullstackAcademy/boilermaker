@@ -1,13 +1,13 @@
-# Boilerplate Full Stack Application
+# N.E.R.P. Boilerplate
 
 ---
 
-Changes to be made to adapt this boilerplate as your own:
-[ ] change the `name` field in package.json to match your project name
-[ ] create a database with the same name as the `name` field you adapted in package.json by executing the following steps:
+### Changes to be made to adapt this boilerplate as your own:
 
-1.  using the `psql` command in the command line to open the postgresql shell.
-1.  execute the following command at prompt:
-    `CREATE DATABASE ${name};` (don't forget the semicolon!)
-1.  check if the database is there by using: `\l` (no semi necessary).
-    Exit the shell with `\q`
+* [ ] Change the `name` field in `package.json` to match your project name.
+* [ ] Create a database with the same name by executing the following steps:
+  1.  type `psql` into the command in the command line to open the postgresql shell
+  1.  execute the following command at the prompt, don't forget the semicolon at the end:
+      `CREATE DATABASE ${name};`
+  1.  check if the above command succeeded by using: `\l` (no semicolon necessary) you should see a list of all available databases including your own, exit the shell with `\q`
+* [ ] Replace `N.E.R.P. BOILERPLATE` in line 9 of `client/components/navbar.js` and line 6 of `public/index.html` to match your project name.
