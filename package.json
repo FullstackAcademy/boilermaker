@@ -38,15 +38,16 @@
       "git add"
     ]
   },
-  "contributors": [{
-    "name": "Chiara Marcial Martínez",
-    "email": "contact@cofuente.io",
-    "url": "https://cofuente.io"
+  "contributors": [
+    {
+      "name": "Chiara Marcial Martínez",
+      "email": "contact@cofuente.io",
+      "url": "https://cofuente.io"
     },
     {
-    "name": "Mab Benedetto",
-    "email": "benedettomab@gmail.com",
-    "url": "https://outpt.net"
+      "name": "Mab Benedetto",
+      "email": "benedettomab@gmail.com",
+      "url": "https://outpt.net"
     }
   ],
   "license": "MIT",
