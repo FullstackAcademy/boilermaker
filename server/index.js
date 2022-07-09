@@ -88,16 +88,17 @@ const createApp = () => {
 
   // error handling endware
   app.use((err, req, res, next) => {
-    console.error(err)
-    console.error(err.stack)
+    console.error(err) // eslint-disable-line no-console
+    console.error(err.stack) // eslint-disable-line no-console
     res.status(err.status || 500).send(err.message || 'Internal server error.')
   })
 }
 
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () =>
-    console.log(`Mixing it up on port ${PORT}`)
+  const server = app.listen(
+    PORT,
+    () => console.log(`Mixing it up on port ${PORT}`) // eslint-disable-line no-console
   )
 
   // set up our socket control center

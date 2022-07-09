@@ -31,6 +31,7 @@ const getRemoteURL = (name, remotes) => {
   try {
     return remotes.filter(remote => remote.name === name)[0].refs.fetch
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.log(
       `It appears that the remote ${name} does not exist.`,
       `Here is the full error:`,
@@ -95,7 +96,7 @@ const updateTravisYAML = (app, key) => {
   const travis = fs.readFileSync('.travis.yml', 'utf8')
   const doc = YAML.parseDocument(travis)
   if (doc.has('before_deploy')) {
-    return console.log(idempotenceMessage)
+    return console.log(idempotenceMessage) // eslint-disable-line no-console
   }
   doc.set('before_deploy', ['rm -rf node_modules'])
   doc.set(
@@ -128,14 +129,14 @@ const main = async () => {
   const herokuTokenOut = await getOutputFromCommand('heroku', ['auth:token'])
   const herokuTokenStr = herokuTokenOut.toString('utf-8')
   const herokuToken = herokuTokenStr.slice(0, herokuTokenStr.length - 1)
-  if (verbose) console.log('Received Heroku token', herokuToken.toString())
+  if (verbose) console.log('Received Heroku token', herokuToken.toString()) // eslint-disable-line no-console
 
   /* Download the repo's public key supplied by Travis. */
   const travisURL = `https://api.travis-ci.org/repos/${fullName}/key`
   const travisResponse = await axios.get(travisURL)
   const key = travisResponse.data.key
   const keyBuffer = Buffer.from(key, 'utf-8')
-  if (verbose) console.log('Received Travis pubkey:\n', keyBuffer.toString())
+  if (verbose) console.log('Received Travis pubkey:\n', keyBuffer.toString()) // eslint-disable-line no-console
 
   /* Write files for use with openssl */
   fs.writeFileSync('.tmp.key.pem', key)
@@ -146,25 +147,25 @@ const main = async () => {
 
   /* Encode the encrypted data in base64. */
   const keyBase64 = fs.readFileSync('.tmp.token.enc').toString('base64')
-  if (verbose) console.log('Encrypted key base 64 encoded:', keyBase64)
+  if (verbose) console.log('Encrypted key base 64 encoded:', keyBase64) // eslint-disable-line no-console
 
   /* Delete temporary files. */
   clean()
 
   /* Add the encrypted key to the .travis.yml file. */
   const update = updateTravisYAML(appName, keyBase64)
-  if (update) console.log(successMessage)
+  if (update) console.log(successMessage) // eslint-disable-line no-console
 
   /* Clean up in the case of unspecified errors. */
   process.on('uncaughtException', () => {
     clean()
-    if (verbose) console.log('Cleaned up on error!')
+    if (verbose) console.log('Cleaned up on error!') // eslint-disable-line no-console
     process.exit(1)
   })
 
   process.on('unhandledRejection', () => {
     clean()
-    if (verbose) console.log('Cleaned up on error!')
+    if (verbose) console.log('Cleaned up on error!') // eslint-disable-line no-console
     process.exit(1)
   })
 }

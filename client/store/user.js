@@ -26,7 +26,7 @@ export const me = () => async dispatch => {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
   } catch (err) {
-    console.error(err)
+    console.error(err) // eslint-disable-line no-console
   }
 }
 
@@ -42,7 +42,7 @@ export const auth = (email, password, method) => async dispatch => {
     dispatch(getUser(res.data))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
-    console.error(dispatchOrHistoryErr)
+    console.error(dispatchOrHistoryErr) // eslint-disable-line no-console
   }
 }
 
@@ -52,7 +52,7 @@ export const logout = () => async dispatch => {
     dispatch(removeUser())
     history.push('/login')
   } catch (err) {
-    console.error(err)
+    console.error(err) // eslint-disable-line no-console
   }
 }
 
