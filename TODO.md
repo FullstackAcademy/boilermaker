@@ -2,7 +2,7 @@
 
 * [x] make sure `start` script works as expected, update script as necessary
 * [x] make sure `start-dev` script works as expected, update script as necessary
-* [ ] make sure `start-server` script works as expected, update script as necessary
+* [x] make sure `start-server` script works as expected, update script as necessary
 * [x] make sure `test` script works as expected, update script as necessary
 * [x] make sure `seed` script works as expected, update script as necessary
 * [ ] make sure `lint` & `lint-fix` scripts work as expected, update as necessary
