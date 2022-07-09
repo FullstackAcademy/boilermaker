@@ -22,6 +22,7 @@
 * [ ] add commitizen friendly badge to the README
 * [ ] update templates in `.github` as you'd like issues to be reported and labeled
 * [ ] test and update config in `.editorconfig`
+* [ ] add dependabot to this repo and document instructions
 * [ ] optimize to pass lighthouse tests
 * [x] run npm audit
 * [ ] add google auth to the app and document for future use
