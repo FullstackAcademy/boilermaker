@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Some boilerplate code to get you started in the NERP stack- Node, Express, React, and Postgres.",
   "engines": {
-    "node": "~12.11.1"
+    "node": "14.17.0"
   },
   "main": "index.js",
   "scripts": {
