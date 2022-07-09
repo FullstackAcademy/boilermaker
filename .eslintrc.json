@@ -3,5 +3,10 @@
   "extends": ["fullstack", "prettier", "prettier/react"],
   "rules": {
     "semi": 0
+  },
+  "settings": {
+    "react": {
+      "version": "16.14"
+    }
   }
 }
