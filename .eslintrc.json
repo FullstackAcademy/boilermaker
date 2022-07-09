@@ -2,7 +2,8 @@
   "root": true,
   "extends": ["fullstack", "prettier", "prettier/react"],
   "rules": {
-    "semi": 0
+    "semi": 0,
+    "no-console": 1
   },
   "settings": {
     "react": {
