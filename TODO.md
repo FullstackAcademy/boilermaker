@@ -26,4 +26,8 @@
 * [ ] add google auth to the app and document for future use
 * [ ] consider moving `redux-logger` from dependencies to dev dependencies
 * [ ] consider removing `socket.io` from dependencies
-* [ ] consider removing `simple-git` from dependencies
+* [ ] consider removing `pg-hstore` from dependencies
+* [ ] consider removing `pg` from dependencies
+* [ ] consider removing `npm-merge-driver` from dev dependencies
+* [ ] consider removing `react-test-renderer` from dev dependencies
+* [ ] consider removing `simple-git` from dev dependencies
