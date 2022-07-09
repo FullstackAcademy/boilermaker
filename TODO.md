@@ -5,8 +5,8 @@
 * [x] make sure `start-server` script works as expected, update script as necessary
 * [x] make sure `test` script works as expected, update script as necessary
 * [x] make sure `seed` script works as expected, update script as necessary
-* [ ] make sure `lint` & `lint-fix` scripts work as expected, update as necessary
-* [ ] update linting config in `.eslintrc.js`
+* [x] make sure `lint` & `lint-fix` scripts work as expected, update as necessary
+* [x] update linting config in `.eslintrc.js`
 * [ ] make sure `prepare` script works as expected, update script as necessary
 * [ ] make sure `deploy` script works as expected, update script as necessary
 * [ ] update `README.md` with instructions and syntax for `secrets.js`
