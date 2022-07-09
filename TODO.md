@@ -9,6 +9,7 @@
 * [ ] update linting config in `.eslintrc.js`
 * [ ] make sure `prepare` script works as expected, update script as necessary
 * [ ] make sure `deploy` script works as expected, update script as necessary
+* [ ] update `README.md` with instructions and syntax for `secrets.js`
 * [ ] update travis deploy in `.travis.yml` (specifically the node version, postgresql, etc.)
 * [ ] make sure `heroku-token` script works as expected, update script as necessary
 * [ ] make sure `prettify` script works as expected, update script as necessary

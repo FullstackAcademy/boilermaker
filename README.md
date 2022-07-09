@@ -2,7 +2,7 @@
 
 ---
 
-### Changes to be made to adapt this boilerplate as your own:
+### To adapt this boilerplate as your own:
 
 * [ ] Change the `name` field in `package.json` to match your project name.
 * [ ] Create a database with the same name by executing the following steps:
@@ -13,3 +13,8 @@
   * note: if you intend to use this boilerplate's testing framework, you will also need to make a second database titled `${name}_test`
 * [ ] Replace `N.E.R.P. BOILERPLATE` in line 9 of `client/components/navbar.js` to match your project name.
 * [ ] Replace `N.E.R.P. BOILERPLATE` in line 6 of `public/index.html` to match your project name.
+* [ ] Add the necessary environmental variables to `secrets.js` using the following syntax:
+
+```js
+const secrets = 'blah blah'
+```
