@@ -23,7 +23,7 @@
 * [ ] update templates in `.github` as you'd like issues to be reported and labeled
 * [ ] test and update config in `.editorconfig`
 * [ ] optimize to pass lighthouse tests
-* [ ] run npm audit
+* [x] run npm audit
 * [ ] add google auth to the app and document for future use
 * [ ] consider moving `redux-logger` from dependencies to dev dependencies
 * [ ] consider removing `socket.io` from dependencies
