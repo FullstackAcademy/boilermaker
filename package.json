@@ -1,7 +1,7 @@
 {
-  "name": "boilermaker",
+  "name": "technical-project",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "My technical project on natural language processing",
   "engines": {
     "node": "~12.11.1"
   },
@@ -55,6 +55,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-predictive-text": "^1.2.7",
     "react-redux": "^7.0.1",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
